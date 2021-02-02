@@ -13,11 +13,11 @@
     <header>
        <ul>
          <li>
-             <a href="/mypage">
-<!-- 
-                <% if (typeof user !== 'undefined') { %>
-                    <img src="images/account.jpg" class='aimg' alt="" >  
-                  <% } %> -->
+             <a href="mypage.php">
+
+                <!-- <% if (typeof user !== 'undefined') { %> -->
+                    <img src="../images/account.jpg" class='aimg' alt="" >  
+                  <!-- <% } %> -->
             </a>
         </li>
          <li><a href="shops.php">Shop</a></li>

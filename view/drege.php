@@ -19,18 +19,18 @@
         </ul>
      </header>
     <h1>日記登録</h1>
-    <% if (typeof user !== 'undefined') { %>
+    <!-- <% if (typeof user !== 'undefined') { %>
         <span class="login-user"><%= user.name %>さんとしてログインしています</span>
-    <% } %>
+    <% } %> -->
 <br>
 <br>
     <a href="/myprofile">店舗登録情報</a>
     <a href="/frege">新しいお花の登録</a>
 <br>
 <br>
-    <form action="/d_insert" method="POST" enctype="multipart/form-data">
+    <form action="action/d_insert.php" method="POST">
         
-        <input type="file" name="image"><br>
+        <!-- <input type="file" name="image"><br> -->
         タイトル<input type="text" name="title"><br>
         タグ<input type="text" name="tag"><br>
         テキスト<textarea name="text" ></textarea><br>
@@ -40,7 +40,7 @@
 
 <h2>画像表示</h2>
 
-<% items.forEach((item) => { %>
+<!-- <% items.forEach((item) => { %>
  <div class='diary-card'>
      <div class="update"><a href="/diaryEdit/<%=item.id%>">編集</a></div>
      <div class="delete"><a href="/diaryDelete/<%=item.id%>">削除</a></div>
@@ -51,6 +51,6 @@
     <img src="<%= item.image %>" alt="" style='width:300px'>
     <h2><%= item.name %></h2> 
 </div>
-<% }) %>
+<% }) %> -->
 </body>
 </html>
