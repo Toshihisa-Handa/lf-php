@@ -110,7 +110,6 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
             </ul>
          </header>
 
-
      <div class="main">
         <h1>日記登録</h1>
         <form  method="POST" enctype="multipart/form-data">
@@ -142,14 +141,14 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     <h2>日記一覧</h2>
 
     <div class="diary-container">
-        <!-- <% items.forEach((item) => { %>
+    <?php for($i = 0; $i <count($images); $i++): ?>
           
             <div class="dcard">
             <div class='diary-card'>
                 <a href="/diary/<%=item.id%>">
-                    <img src="<%= item.image %>" alt="" >
-                    <h3><%= item.title%></h3>               
-                    <p class='dtext'><%= item.text%></p>
+                    <img src="../upload/<?= $images[$i]['image']; ?>" alt="" >
+                    <h3><?= $images[$i]['title']; ?></h3>               
+                    <p class='dtext'><?= $images[$i]['text']; ?></p>
                 </a>
                 <div class="option">
                     <div class="update"><a href="/diaryEdit/<%=item.id%>">編集</a></div>
@@ -158,7 +157,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
                 
            </div>
         </div>
-        <% }) %> -->
+        <?php endfor; ?>
     </div>
   </div>
 
