@@ -17,9 +17,9 @@
          <div class='nav-right'>
          <li><div id='search'>検索</div></li>
          <!-- <% if (typeof user == 'undefined') { %> -->
-         <li class='log'><a href="/login" class='hlink'>Login</a></li>
+         <li class='log'><a href="login.php" class='hlink'>Login</a></li>
          <!-- <% } else{%> -->
-         <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
+         <li class='log'><a href="logout.php" class='hlink'>Logout</a></li>
          <!-- <% } %> -->
          <li class='account_img' >
             <a href="mypage.php">

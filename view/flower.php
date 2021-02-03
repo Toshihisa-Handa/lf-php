@@ -1,7 +1,8 @@
-<?php include('favicon.php') ?>
+<?php include('../common/favicon.php') ?>
 
     <title>花詳細</title>
     <?php include('../common/style.php') ?>
+
     <link rel="stylesheet" href="../css/flower.css">
 
 </head>
@@ -15,23 +16,23 @@
     <?php include('../common/header-nav-leftIcon.php') ?>
 
       <div class='nav-right'>
-<!--     
-      <% if (typeof user == 'undefined') { %>
+    
+      <!-- <% if (typeof user == 'undefined') { %>
       <li class='log'><a href="/login" class='hlink'>Login</a></li>
       <% } else{%>
       <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
-      <% } %> -->
+      <% } %>
       <li class='account_img' >
          <a href="/mypage">
-            <!-- <% if (typeof user !== 'undefined' ) { %>
+            <% if (typeof user !== 'undefined' ) { %>
                 <% if(sitems[0].account_img=== null){%>
                     <img src="../images/account3.png" class='aimg' alt="" >  
               <% }else{ %>
                 <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
               <% } %>
-              <% } %> -->
+              <% } %>
         </a>
-    </li>
+    </li> -->
  </div>
 
     </ul>
@@ -49,7 +50,7 @@
     <main class="main">
       <!-- メインコンテンツ -->
       <div><img src="<%= item.image %>" alt=""class='diaryImg'></div>
-      <!-- <h3 class='dfont'><%=item.name%></h3>
+      <h3 class='dfont'><%=item.name%></h3>
     <p class='dfont2'>店舗：<%=item.shopname%></p>
     <p class='dfont2'>価格：<%=item.price%>円（税込）</p>
     <p class='dfont2'>特徴：<%=item.feature%></p>
@@ -66,7 +67,7 @@
                   <div class="dccomment"><%= fitem.fcomment %></div>
                 </div> 
                 <% }); %>
-    <% } %> -->
+    <% } %>
 
    
   </div>

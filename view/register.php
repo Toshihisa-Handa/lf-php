@@ -2,7 +2,7 @@
 
     <title>新規登録</title>
     <?php include('../common/style.php') ?>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="../css/login.css">
 
 </head>
 <body>
@@ -58,7 +58,7 @@
           <p class="error"><%= noUser %></p>
       <% } %> -->
       <div class="rlink">
-        <a href="/login"><span class='underbar'>&nbsp;&nbsp;ログインの方はこちらへ</span></a>
+        <a href="login.php"><span class='underbar'>&nbsp;&nbsp;ログインの方はこちらへ</span></a>
       </div>
     </div>
   </div>

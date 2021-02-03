@@ -44,7 +44,7 @@
        
   
       <div class='login-card'>
-        <!-- <form action="/login" method="post">
+        <form action="/login" method="post">
             <span class="label">E-mail</span><input class='linput' type="email" name="email" class="input" required><br>
             <br>
             <span class="label">Password</span><input class='linput' type="password" name="password" class="input" required><br>
@@ -53,9 +53,9 @@
         </form>
         <% if (typeof noUser !== 'undefined') { %>
           <p class="error"><%= noUser %></p>
-      <% } %> -->
+      <% } %>
       <div class="rlink">
-        <a href="/register"><span class='underbar'>&nbsp;&nbsp;新規御登録の方はこちらへ</span></a>
+        <a href="register.php"><span class='underbar'>&nbsp;&nbsp;新規御登録の方はこちらへ</span></a>
       </div>
     </div>
   </div>
