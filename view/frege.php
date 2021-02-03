@@ -1,3 +1,80 @@
+<?php  
+
+$name = $_POST['name'];
+$price = $_POST['price'];
+$feature = $_POST['feature'];
+$tag = $_POST['tag'];
+$title = $_POST['title'];
+$text = $_POST['text'];
+
+
+//DB接続
+try{
+  $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
+} catch(PDOException $e) {
+  //ここでエラー時の内容を確認できるようになる。これがないとerror500が出るだけ
+  print "エラー！" . $e->getMessage() . "<br/>";
+  die('終了します');
+}
+
+//画像処理
+if($_SERVER['REQUEST_METHOD'] != 'POST'){
+  //画像を取得
+    
+    //2．データ登録SQL作成
+  //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
+  $stmt = $pdo->prepare("SELECT* FROM flower ORDER BY created_at DESC");//日付で登録が新しいものが上になる様に抽出
+  $status = $stmt->execute();
+  $images = $stmt->fetchAll();//今までなかった記述。画像のアップロード特有
+  
+  
+  
+  }else{
+    //POSTデータ取得
+    //ここのFILESで[]されているimageはinput type=fileタグのname部分の名称
+    $imgname = date("Ymd") . random_int(1, 999999) . $_FILES['image']['name'];//ここのnameはアップロードされたファイルのファイル名
+
+  
+    //指定フォルダに画像を保存
+    $save = '../upload/' . basename($imgname);//保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+    move_uploaded_file($_FILES['image']['tmp_name'], $save);//指定した保存先へ保存
+  
+  //３．データ登録SQL作成
+  //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
+  $stmt = $pdo->prepare("INSERT INTO flower(name, price, feature, tag, text, created_at, user_id, image)VALUES(:name,:price,:feature,:tag,:text,sysdate(),1,:imgname);
+  ");
+  $stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $stmt->bindValue(':price', $price, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT
+  $stmt->bindValue(':text', $text, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+  $stmt->bindValue(':imgname', $imgname, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $status = $stmt->execute();
+  
+  
+  //４．データ登録処理後（基本コピペ使用でOK)
+  if($status==false){
+    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
+    $error = $stmt->errorInfo();
+    exit("SQLError:".$error[2]);//エラーが起きたらエラーの2番目の配列から取ります。ここは考えず、これを使えばOK
+                               // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
+  }else{
+    //５．index.phpへリダイレクト(エラーがなければindex.phpt)
+    header('Location: frege.php');//Location:の後ろの半角スペースは必ず入れる。
+    exit();
+  
+  }
+    
+  }
+
+
+
+
+
+?>
+
+
+
 <?php include('favicon.php') ?>
 
     <title>花登録</title>
@@ -43,10 +120,10 @@
 
     <div class="main">
         <h1>花登録</h1>
-        <form action="/f_insert" method="POST" enctype="multipart/form-data">
+        <form  method="POST" enctype="multipart/form-data">
             <div id='attachment'>
                 <label>
-                    <input type="file" name="file" class="fileinput">花の登録
+                    <input type="file" name="image" class="fileinput">花の登録
                   </label>
                   <span class="filename">選択されていません</span>
               </div><br>
@@ -81,15 +158,15 @@
     <h2>花一覧</h2>
     <div class="flower-container">
         
-        <!-- <% items.forEach((item) => { %>
+    <?php for($i = 0; $i <count($images); $i++): ?>
          <div class="fcard">
             <div class='flower-card'>
-                <a href="/flower/<%=item.id%>">
-                <img src="<%= item.image %>" alt="">
-                <h3><%= item.name%></h3>
-                <div class='fprice'><%= item.price%>円（税別）</div>
-                <div class='ffeature'><%= item.feature%></div>
-                <div class='ffeature'><%= item.tag%></div>
+                <a href="flower.php/<?= $images[$i]['id']; ?>">
+                <img src="../upload/<?= $images[$i]['image']; ?>" alt="">
+                <h3><?= $images[$i]['name']; ?></h3>
+                <div class='fprice'><?= $images[$i]['price']; ?>円（税別）</div>
+                <div class='ffeature'><?= $images[$i]['feature']; ?></div>
+                <div class='ffeature'><?= $images[$i]['tag']; ?></div>
           
             </a>
            </div>
@@ -98,7 +175,7 @@
             <div class="delete"><a href="/flowerDelete/<%=item.id%>">削除</a></div>
         </div>
         </div>
-           <% }) %> -->
+        <?php endfor; ?>
         </div>
 
 
