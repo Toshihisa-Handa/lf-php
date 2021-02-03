@@ -45,7 +45,7 @@
        
   
       <div class='login-card'>
-        <form action="/register" method="post" class="board-form">
+        <form action="../action/register_act.php" method="post" class="board-form">
           <span class="label ">User Name</span><input type="text" name="name" class="input linput2" placeholder="例：花田かすみ" required><br>
           <br>
           <span class="label">E-mail</span><input type="email" name="email" class="input linput2" placeholder="例：hanadaxxxxx@gmail.com" required><br>
