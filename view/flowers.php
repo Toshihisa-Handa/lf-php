@@ -1,3 +1,43 @@
+<?php  
+
+$name = $_POST['name'];
+$price = $_POST['price'];
+$feature = $_POST['feature'];
+$tag = $_POST['tag'];
+$title = $_POST['title'];
+$text = $_POST['text'];
+
+
+//DB接続
+try{
+  $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
+} catch(PDOException $e) {
+  //ここでエラー時の内容を確認できるようになる。これがないとerror500が出るだけ
+  print "エラー！" . $e->getMessage() . "<br/>";
+  die('終了します');
+}
+
+
+    //2．データ登録SQL作成
+  //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
+  $stmt = $pdo->prepare("SELECT* FROM flower ORDER BY created_at DESC");//日付で登録が新しいものが上になる様に抽出
+  $status = $stmt->execute();
+  $result = $stmt->fetchAll();//今までなかった記述。画像のアップロード特有
+  
+  
+  
+
+
+
+
+?>
+
+
+
+
+
+
+
 <?php include('favicon.php') ?>
 
     <title>花一覧</title>
@@ -59,19 +99,19 @@
     <div class="flowerList">
        
         <div class="flower-container">
-            <!-- <% items.forEach((item) => { %>
+        <?php for($i = 0; $i <count($result); $i++): ?>
              <div class="fcard">
                 <div class='flower-card'>
-                    <a href="/flower/<%=item.id%>">
-                    <img src="<%= item.image %>" alt="">
-                    <h3 class='fsname'><%= item.name%></h3>
-                    <div class='fprice'><%= item.price%>円（税込）</div>
-                    <div class='ffeature'><%= item.feature%></div>
+                    <a href="flower.php/<?= $result[$i]['id']; ?>">
+                    <img src="../upload/<?= $result[$i]['image']; ?>" alt="">
+                    <h3 class='fsname'><?= $result[$i]['name']; ?></h3>
+                    <div class='fprice'><?= $result[$i]['price']; ?>円（税込）</div>
+                    <div class='ffeature'><?= $result[$i]['feature']; ?></div>
                 </a>
                </div>
-               <h2 class='fname'><%= item.shopname %></h2>
+               <!-- <h2 class='fname'><?= $result[$i]['shopname']; ?></h2> -->
             </div>
-               <% }) %> -->
+            <?php endfor; ?>
             </div>
   </div>
 </div>
