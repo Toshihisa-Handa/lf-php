@@ -1,4 +1,4 @@
-<?php include('favicon.php') ?>
+<?php include('../common/favicon.php') ?>
 
     <title>ログイン</title>
     <?php include('../common/style.php') ?>
@@ -44,16 +44,16 @@
        
   
       <div class='login-card'>
-        <form action="/login" method="post">
+        <form action="../action/login_act.php" method="post">
             <span class="label">E-mail</span><input class='linput' type="email" name="email" class="input" required><br>
             <br>
             <span class="label">Password</span><input class='linput' type="password" name="password" class="input" required><br>
             <br>
             <button class="lbutton" type="submit" class="submit">login</button>
         </form>
-        <% if (typeof noUser !== 'undefined') { %>
+        <!-- <% if (typeof noUser !== 'undefined') { %>
           <p class="error"><%= noUser %></p>
-      <% } %>
+      <% } %> -->
       <div class="rlink">
         <a href="register.php"><span class='underbar'>&nbsp;&nbsp;新規御登録の方はこちらへ</span></a>
       </div>

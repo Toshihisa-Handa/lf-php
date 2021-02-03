@@ -1,4 +1,9 @@
-<?php include('../common/favicon.php') ?>
+<?php 
+session_start();
+include('../common/funcs.php');
+loginCheck();
+include('../common/favicon.php') 
+?>
     <title>Life flower</title>
     <?php include('../common/style.php') ?>
     <link rel="stylesheet" href="../css/top.css">

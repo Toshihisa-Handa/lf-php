@@ -25,7 +25,7 @@ function h($str)
 //手打ち入力でログイン後のページにログインせずに行ってもエラーになるようにしている） 
 function loginCheck(){
     if( !isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid']!=session_id()){
-      echo 'Login Error!';
+      echo 'ログインして下さい!'."\n";
       exit();
     }
     else{//elseの記述は元のコードではなく新規記述
