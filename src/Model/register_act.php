@@ -4,6 +4,11 @@ $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
+//正規表現を設定し該当しない登録を外す
+$pattern = "^[a-zA-Z0-9.!#$%&'*+\/=?^{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+if(preg_match($pattern,$email)){
+
+
 
 
 //DB接続
@@ -40,7 +45,9 @@ try{
   }
     
   
-
+}else{//正規表現で外れた場合はDBに登録されない
+  header('Location: ../view/register.php');//Location:の後ろの半角スペースは必ず入れる。
+}
 
 
 
