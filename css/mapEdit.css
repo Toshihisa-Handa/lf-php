@@ -1,0 +1,141 @@
+        .grid-box{
+          display:grid;
+          grid-template-rows: 0 110px auto 30px auto 100px ;
+          grid-template-columns: 1fr 1fr 3fr 1fr 1fr 2fr 1fr;
+          grid-template-areas:
+              "header  header header header header header header"
+              "...      ...    ...    ...  ... ... ..."
+              "...      main   main    main    ... nav ..."
+              "...      ...    ...    ...    ... ... ...";
+            }
+      
+      /* ヘッダー */
+      header{
+          grid-area:header;
+          /* background: rgba(177, 212, 238,0.3); */
+          position: fixed;
+          width: 100%;
+          
+      }
+      
+      .main{
+          grid-area:main;
+          margin-bottom:30px;
+      
+      }
+      
+      /* lineエリア＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+  
+      /* main2エリア＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+      
+      .nav{
+          grid-area:nav;
+          margin-top: 30px;
+      }
+      .nav p{
+        font-size: 2rem;
+        text-decoration: underline;
+      }
+      
+      .nav p:hover{
+        opacity: 0.7;
+      }
+      
+      /* インプットタグのcss */
+      .inframe{
+          display: flex;
+          margin-bottom: 20px;
+      
+      }
+      .inframe div{
+        font-size: 2rem;
+        line-height: 6rem;
+        padding:0 10px 0 10px;
+      }
+      
+      .inputs{
+          width: 60%;
+          display: inline-block;
+          min-height: 40px;
+          padding: 4px 8px;
+          line-height: 1.5;
+          color: #222;
+          vertical-align: top;
+          background: #fff;
+          border: 1px solid #e6e6e6;
+          border-radius: 4px;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          font-size: 2rem;
+      }
+      
+      .txt{
+          width: 60%;
+          height: 250px;
+          display: inline-block;
+          min-height: 40px;
+          padding: 4px 8px;
+          line-height: 1.5;
+          color: #222;
+          vertical-align: top;
+          background: #fff;
+          border: 1px solid #e6e6e6;
+          border-radius: 4px;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          font-size: 2rem;
+      }
+      
+      
+      
+      
+      /* 画像アップのcss */
+      #attachment label {
+       /* ボタン部分の見た目（任意） */
+       display: inline-block;
+       position: relative;
+       background: rgb(146, 214, 226);
+       color:#fff;
+       font-size: 16px;
+       padding: 10px 18px;
+       border-radius: 4px;
+       transition: all 0.3s;
+      }
+      #attachment label:hover {
+       background: #888;
+       transition: all 0.4s;
+      }
+      #attachment label input {
+       /* 今回のポイント */
+       position: absolute;
+       left:0;
+       top:0;
+       opacity: 0;
+       width: 100%;
+       height: 100%;
+      }
+      #attachment .filename {
+       font-weight: 16px;
+       margin:0 0 0 10px;
+      }
+      
+      .sends{
+       margin-left:30%;
+          width: 150px;
+          padding: 7px;
+          /* border: 2px solid #a9defd; */
+          border:none;
+          font-size: 1.6rem;
+          background: rgba(165, 215, 238, 0.3);
+      }
+      
+.editform{
+    display: flex;
+    width: 80%;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgb(182, 175, 175);
+    justify-content: space-between;
+}
+      

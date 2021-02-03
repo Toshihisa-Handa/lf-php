@@ -1,40 +1,46 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>トップページ</title>
-    <link rel="stylesheet" href="../css/style.css">
+<?php include('../common/favicon.php') ?>
+
+    <title>日記詳細</title>
+    <?php include('../common/style.php') ?>
     <link rel="stylesheet" href="../css/diary.css">
+
 </head>
+
 <body>
 <div class="main-glid">
 
 
-    <header>
-       <ul>
-         <li>
-             <a href="/mypage">
-                <!-- <% if (typeof user !== 'undefined') { %> -->
-                    <img src="../images/account.jpg" class='aimg' alt="" >  
-                  <!-- <% } %> -->
-            </a>
-        </li>
-        <li><a href="top.php">Home</a></li>
-            <li><a href="shops.php">Shop</a></li>
-            <li><a href="diarys.php">Diary</a></li>
-            <li><a href="flowers.php">Flower</a></li>
-         <!-- <% if (typeof user == 'undefined') { %>
-         <li><a href="/login">Login</a></li>
-         <% } else{%>
-         <li><a href="/logout">Logout</a></li>
-         <% } %> -->
-       </ul>
-    </header>
+  <header>
+    <ul>
+      
+    <?php include('../common/header-nav-leftIcon.php') ?>
+
+      <div class='nav-right'>
+     
+      <!-- <% if (typeof user == 'undefined') { %> -->
+      <li class='log'><a href="/login" class='hlink'>Login</a></li>
+      <!-- <% } else{%> -->
+      <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
+      <!-- <% } %> -->
+      <li class='account_img' >
+         <a href="/mypage">
+            <!-- <% if (typeof user !== 'undefined' ) { %>
+                <% if(sitems[0].account_img=== null){%>
+                    <img src="../images/account3.png" class='aimg' alt="" >  
+              <% }else{ %>
+                <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
+              <% } %>
+              <% } %> -->
+        </a>
+    </li>
+ </div>
+
+    </ul>
+ </header>
 
 
    <div class="title1">
-       <h1>diary</h1>
+       <h1 class='topTitle'>diary</h1>
    </div>
 
 </div>
@@ -45,22 +51,21 @@
     <main class="main">
       <!-- メインコンテンツ -->
       <div><img class='diaryImg' src="<%= item.image %>"></div>
-      <!-- <h2><%=item.title%></h2>
-      <h3><%=item.tag%></h3>
-      <p class='diaryText'><%=item.text%></p>
-      <div id='cbtn'><span class='btnClick'>▶︎</span>コメント（<%=ditems.length %>）</div>
+      <!-- <h2 class='dfont'><%=item.title%></h2>
+      <p class='diaryText dfont2'><%=item.text%></p>
+      <div id='cbtn'><span class='btnClick'>▶︎</span>コメント（<%=ditems.length %>）</div> -->
  
       <div class="dcomment">
-        <% if (ditems.length) { %>
+        <!-- <% if (ditems.length) { %>
                   <% ditems.forEach(function(ditem) { %>
                    <div class="comment-box">
-                    <div class="dcname"><%= ditem.user_name %></div>             
+                    <div class="dcname "><%= ditem.user_name %></div>             
                     <div class='dccreatedAt'> <%= ditem.created_at %></div>       
                     <div class="dccomment"><%= ditem.dcomment %></div>
                   </div> 
                   <% }); %>
-         <% } %>
-     </div> -->
+         <% } %> -->
+     </div>
     </main>
     <div class="sidebar">
       <div class="sidebar__item">
@@ -75,15 +80,29 @@
         
       </div>
     </div>
+  
   </div>
 </div>
 
-     <footer>
-         <h3>Copyright  second-cube</h3>
-     </footer>
+<!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+<div class="footer-glid">
+  <footer>
+      <h3 class='topSubtitle'>Copyright  second-cube</h3>
+  </footer>
 
+  <!-- フッターナビ -->
+  <div class='Fnav web ' >
+  <ul class='navs'>
+  <li ><a href="/map" ><img class='navimg' src="../images/map-24.png" alt=""></a><a href="/map" class='Fnav-link hlink'>Map</a></li>
+  <li ><a href="/shops" ><img class='navimg' src="../images/shop-24.png" alt=""></a><a href="/shops" class='Fnav-link hlink'>Shop</a></li>
+  <li ><a href="/diarys" ><img class='navimg' src="../images/script-24.png" alt=""></a><a href="/diarys" class='Fnav-link hlink'>Diary</a></li>
+  <li ><a href="/flowers" ><img class='navimg' src="../images/flower-24.png" alt=""></a><a href="/flowers" class='Fnav-link hlink'>Flower</a></li>
+  <!-- <li><div id='search'>検索</div></li> -->
 
-
+  </ul>
+  </div>
+</div>
+<!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
 
 
@@ -93,6 +112,7 @@
  const hideComment = document.querySelector('.dcomment')
    cbtn.onclick = function(){
      hideComment.classList.toggle('dcomment')
+    // alert('hit')
  }
 
 </script>

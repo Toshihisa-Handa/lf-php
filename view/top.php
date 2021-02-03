@@ -1,33 +1,39 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>トップページ</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/style.css">
+<?php include('../common/favicon.php') ?>
+    <title>Life flower</title>
+    <?php include('../common/style.php') ?>
     <link rel="stylesheet" href="../css/top.css">
+    <link rel="stylesheet" href="../css/responsive.css">
 </head>
+
 <body>
 <div class="grid-box">
+
+
     <header>
        <ul>
-         <li>
-             <a href="mypage.php">
 
-                <!-- <% if (typeof user !== 'undefined') { %> -->
-                    <img src="../images/account.jpg" class='aimg' alt="" >  
-                  <!-- <% } %> -->
-            </a>
-        </li>
-         <li><a href="shops.php">Shop</a></li>
-         <li><a href="diarys.php">Diary</a></li>
-         <li><a href="flowers.php">Flower</a></li>
+         <li><a href="top.php" ><img src="images/lf-logo-gray.png" alt="" class='logo' ></a></li>
+         <?php include('../common/header-nav.php') ?>
+         <div class='nav-right'>
+         <li><div id='search'>検索</div></li>
          <!-- <% if (typeof user == 'undefined') { %> -->
-         <li><a href="login.php">Login</a></li>
+         <li class='log'><a href="/login" class='hlink'>Login</a></li>
          <!-- <% } else{%> -->
-         <li><a href="logout.php">Logout</a></li>
+         <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
          <!-- <% } %> -->
+         <li class='account_img' >
+            <a href="mypage.php">
+               <!-- <% if (typeof user !== 'undefined' ) { %> -->
+                   <!-- <% if(sitems[0].account_img=== null){%> -->
+                       <img src="../images/account3.png" class='aimg' alt="" >  
+                 <!-- <% }else{ %>
+                   <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
+                 <% } %>
+                 <% } %> -->
+           </a>
+       </li>
+    </div>
+
        </ul>
     </header>
 
@@ -36,12 +42,20 @@
             <p class='mainSubtitle'>日々に彩り＋</p>
     </div>
     <div class='title1'>
-          <h1>いつもの場所に花を飾りませんか</h1>       
+          <h1 class='topTitle'>いつもの場所に花を飾りませんか</h1> 
+               
     </div>
 
     <div class="tips1">
-        <h3>Life Flower で花をもっと身近に<br>
-            日常に一輪挿しの彩りを</h3>
+        <h3 class='topSubtitle'>Life Flower で花をもっと身近に<br>
+            日常に花の彩りを<br>
+            外出自粛が続く昨今、今だからこそ<br>
+            いつもの日常にプラスの色彩を加えてみませんか<br>
+            普段通るあの道のあのお店、一体どんなところなんだろう<br>
+            そんな疑問を解決するためにLife flowerは生まれました
+
+        </h3>
+        
     </div>
 </div>
 
@@ -52,15 +66,18 @@
     </div>
 
     <div class='title2'>
-      <h1>使い方</h1>
+      <h1 class='topTitle'>使い方</h1>
     </div>
 
     <div class="tips2">
-        <h3>現在地周辺のお花屋さんを簡単に検索<br>
-            気になるお店はフォロー可能<br>
-            販売している商品だけでなく、そのお店の日常の投稿も併せて閲覧<br>
-            お気に入りのお店を見つけてください。<br>
-            お花がちょっとでも身近になった方は、ぜひ、一度直接店舗へ遊びへ行ってみてください。</h3>
+        <h3 class='topSubtitle'>現在地周辺のお花屋さんを簡単に検索<br>
+            販売している商品だけでなく、そのお店の日常も併せて閲覧<br>
+            お気に入りのお店を見つけてください<br>
+            これまで身近にあったけど、入れなかったあのお店、<br>
+            Life flowerで覗いてみませんか<br>
+            お花の詳細ページからご購入も可能です<br>
+            お花が少しでも身近になった方は、本サイトを飛び出し、<br>
+            ぜひ一度店舗へ遊びに行ってみてください</h3>
     </div>
 
 
@@ -71,11 +88,11 @@
 
 
     <div class='link1'>
-      <h1><a href="/shops"><span class='underbar'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
+      <h1><a href="/shops"><span class='underbar topTitle'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
     </div>
 
     <div class='title3'>
-      <h1>News</h1>
+      <h1 class='topTitle'>News</h1>
     </div>
 </div>
 
@@ -87,18 +104,15 @@
     </div>
 
     <div class="right1">
-        <h1>FRIDA'S</h1>
-        <h3>お店の情報、お店の情報、お店の情報、<br>
-            お店の情報、お店の情報、お店の情報、お店の情報、<br>
-            お店の情報、お店の情報</h3>
+        <h1 class='topTitle2'>Flower shop Geek</h1>
+        <h3 class='topSubtitle2'>10月1日よりOPENしました。<br>秋のベラドンナ入荷しました。<br>発色がよくほのかに香ります。<br>お近くお通りの際に是非覗いてみて下さい。
+        </h3>
     </div>
 
 
     <div class='left2'>
-        <h1>Sun Flowers</h1>
-        <h3>お店の情報、お店の情報、お店の情報、<br>
-            お店の情報、お店の情報、お店の情報、お店の情報、<br>
-            お店の情報、お店の情報</h3>
+        <h1 class='topTitle2'>Sun Flowers</h1>
+        <h3 class='topSubtitle2'>10月1日よりOPENしました。<br>四季折々の素敵なお花を毎日用意してお待ちしています。<br>贈り物用のアレンジメントも得意です。</h3>
     </div>
 
     <div class="right2">
@@ -107,18 +121,27 @@
 
 
 
-  
-
-     <footer>
-         <h3>Copyright  second-cube</h3>
+<!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+     <footer >
+         <h3 class='topSubtitle'>Copyright  second-cube</h3>
      </footer>
     </div>
+<!-- フッターナビ -->
+<div class='Fnav web ' >
+    <ul class='navs'>
+      <li ><a href="/map" ><img class='navimg' src="../images/map-24.png" alt=""></a><a href="/map" class='Fnav-link hlink'>Map</a></li>
+      <li ><a href="/shops" ><img class='navimg' src="../images/shop-24.png" alt=""></a><a href="/shops" class='Fnav-link hlink'>Shop</a></li>
+      <li ><a href="/diarys" ><img class='navimg' src="../images/script-24.png" alt=""></a><a href="/diarys" class='Fnav-link hlink'>Diary</a></li>
+      <li ><a href="/flowers" ><img class='navimg' src="../images/flower-24.png" alt=""></a><a href="/flowers" class='Fnav-link hlink'>Flower</a></li>
+      <!-- <li><div id='search'>検索</div></li> -->
+
+    </ul>
+</div>
+
+<!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
 
-
-
-
-
+<!-- 
 <script>
  const search = document.querySelector('#search')
  const hideSearch = document.querySelector('.search')
@@ -127,6 +150,6 @@
     // alert('hit')
  }
 
-</script>
+</script> -->
 </body>
 </html>

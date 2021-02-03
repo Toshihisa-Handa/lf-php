@@ -1,44 +1,47 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>トップページ</title>
-    <link rel="stylesheet" href="../css/style.css">
+<?php include('favicon.php') ?>
+
+    <title>花詳細</title>
+    <?php include('../common/style.php') ?>
     <link rel="stylesheet" href="../css/flower.css">
+
 </head>
 
 <body>
 <div class="main-glid">
 
+  <header>
+    <ul>
+      
+    <?php include('../common/header-nav-leftIcon.php') ?>
 
-    <header>
-       <ul>
-         <li>
-             <a href="/mypage">
-                <!-- <% if (typeof user !== 'undefined') { %>
-                    <img src="../images/account.jpg" class='aimg' alt="" >  
-                  <% } %> -->
-            </a>
-        </li>
-        <li><a href="top.php">Home</a></li>
-            <li><a href="shops.php">Shop</a></li>
-            <li><a href="diarys.php">Diary</a></li>
-            <li><a href="flowers.php">Flower</a></li>
-         <!-- <% if (typeof user == 'undefined') { %>
-         <li><a href="/login">Login</a></li>
-         <% } else{%>
-         <li><a href="/logout">Logout</a></li>
-         <% } %> -->
-       </ul>
-    </header>
+      <div class='nav-right'>
+<!--     
+      <% if (typeof user == 'undefined') { %>
+      <li class='log'><a href="/login" class='hlink'>Login</a></li>
+      <% } else{%>
+      <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
+      <% } %> -->
+      <li class='account_img' >
+         <a href="/mypage">
+            <!-- <% if (typeof user !== 'undefined' ) { %>
+                <% if(sitems[0].account_img=== null){%>
+                    <img src="../images/account3.png" class='aimg' alt="" >  
+              <% }else{ %>
+                <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
+              <% } %>
+              <% } %> -->
+        </a>
+    </li>
+ </div>
+
+    </ul>
+ </header>
 
 
    <div class="title1">
-       <h1>Flower</h1>
+       <h1 class='topTitle'>Flower</h1>
    </div>
-
-</div>
+  </div>
 
 
 <div class="editar-area">
@@ -46,16 +49,16 @@
     <main class="main">
       <!-- メインコンテンツ -->
       <div><img src="<%= item.image %>" alt=""class='diaryImg'></div>
-      <!-- <h3 class='flowerName'><%=item.name%></h3>
-    <p>店舗：<%=item.shopname%></p>
-    <p>価格：<%=item.price%>円（税抜き）</p>
-    <p>特徴：<%=item.feature%></p>
-    <p class='diaryText'><%=item.text%></p>
-    <div id='cbtn'><span class='btnClick'>▶︎</span>コメント（<%=fitems.length %>）</div> -->
+      <!-- <h3 class='dfont'><%=item.name%></h3>
+    <p class='dfont2'>店舗：<%=item.shopname%></p>
+    <p class='dfont2'>価格：<%=item.price%>円（税込）</p>
+    <p class='dfont2'>特徴：<%=item.feature%></p>
+    <p class='dfont2' class='diaryText'><%=item.text%></p>
+    <div id='cbtn'><span class='btnClick'>▶︎</span>コメント（<%=fitems.length %>）</div>
 
     <div class="dcomment">
 
-      <!-- <% if (fitems.length) { %>
+      <% if (fitems.length) { %>
                 <% fitems.forEach(function(fitem) { %>
                  <div class="comment-box">
                   <div class="dcname"><%= fitem.user_name %></div>             
@@ -75,10 +78,14 @@
       <div class="sidebar__item sidebar__item--fixed">
         <!-- 固定・追従させたいエリア -->
         <form action="/fcomment_post/<%= item.id %>" method="post">
-            <textarea name="fcomment" id="message" class="form textarea"  placeholder="Message"></textarea>
+            <textarea name="fcomment" id="message" class="form textarea"  placeholder="Comment"></textarea>
             <button class="lbutton" type="submit" class="submit">submit</button>
-            
         </form>
+
+        <div class="btncontainer">
+          <button class='btn-open' id="checkout-button">購入画面へ</button>
+        </div>
+
         
       </div>
     </div>
@@ -87,24 +94,67 @@
 
 
 
+
+
+
+
+<!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+<div class="footer-glid">
+  <footer>
+      <h3 class='topSubtitle'>Copyright  second-cube</h3>
+  </footer>
+
+  <!-- フッターナビ -->
+  <div class='Fnav web ' >
+  <ul class='navs'>
+  <li ><a href="/map" ><img class='navimg' src="../images/map-24.png" alt=""></a><a href="/map" class='Fnav-link hlink'>Map</a></li>
+  <li ><a href="/shops" ><img class='navimg' src="../images/shop-24.png" alt=""></a><a href="/shops" class='Fnav-link hlink'>Shop</a></li>
+  <li ><a href="/diarys" ><img class='navimg' src="../images/script-24.png" alt=""></a><a href="/diarys" class='Fnav-link hlink'>Diary</a></li>
+  <li ><a href="/flowers" ><img class='navimg' src="../images/flower-24.png" alt=""></a><a href="/flowers" class='Fnav-link hlink'>Flower</a></li>
+  <!-- <li><div id='search'>検索</div></li> -->
+
+  </ul>
+  </div>
 </div>
+<!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
 
 
 
 
-
-     <footer>
-         <h3>Copyright  second-cube</h3>
-     </footer>
-
-
-
-
-
-
-
-
+<!-- stripe読み込み↓ -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+<!-- 購入ページボタンのアクション↓ -->
+    <script type="text/javascript">
+      // Create an instance of the Stripe object with your publishable API key
+      var stripe = Stripe("pk_test_51HbhniH1kHMqkRvftZX8frXuhhtIQe7Sm7bnQmv0uuF6Nsqsy2s7E6CQy2j0jj0jU5L2klAtfnrr2vorzPIbLbVl00eLZ8qSlj");
+      var checkoutButton = document.getElementById("checkout-button");
+      checkoutButton.addEventListener("click", function () {
+        
+        fetch("/create-session/<%=item.id%>", {
+          method: "POST",
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+          })
+          .then(function (result) {
+            // If redirectToCheckout fails due to a browser or network
+            // error, you should display the localized error message to your
+            // customer using error.message.
+            if (result.error) {
+              alert(result.error.message);
+            }
+          })
+          .catch(function (error) {
+            console.error("Error:", error);
+          });
+      });
+    </script>
+<!-- コメントの表示↓ -->
      <script>
       const cbtn = document.querySelector('#cbtn')
       const hideComment = document.querySelector('.dcomment')
