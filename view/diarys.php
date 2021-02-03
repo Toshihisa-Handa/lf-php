@@ -1,3 +1,39 @@
+<?php 
+include('../common/funcs.php');
+$title = $_POST['title'];
+$tag = $_POST['tag'];
+$text = $_POST['text'];
+
+
+//DB接続
+try{
+  $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
+} catch(PDOException $e) {
+  //ここでエラー時の内容を確認できるようになる。これがないとerror500が出るだけ
+  print "エラー！" . $e->getMessage() . "<br/>";
+  die('終了します');
+}
+
+
+//2．データ登録SQL作成
+//prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
+$stmt = $pdo->prepare("SELECT* FROM diary ORDER BY created_at DESC");//日付で登録が新しいものが上になる様に抽出
+$status = $stmt->execute();
+$result = $stmt->fetchAll();
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
 <?php include('favicon.php') ?>
 
     <title>日記一覧</title>
@@ -58,20 +94,20 @@
 <div class="diary-list">
     <div class="diaryList">
        
-    <!-- <div class="diary-container">
-        <% items.forEach((item) => { %>
+    <div class="diary-container">
+    <?php for($i = 0; $i <count($result); $i++): ?>
             <div class="dcard">
             <div class='diary-card'>
-                <a href="/diary/<%=item.id%>">
-                    <img src="<%= item.image %>" alt="" >
-                    <h3><%= item.title%></h3>               
-                    <p class='dtext'><%= item.text%></p>
+                <a href="diary/<?= $result[$i]['image']; ?>">
+                    <img src="../upload/<?= $result[$i]['image']; ?>" alt="" >
+                    <h3><?= $result[$i]['title']; ?></h3>               
+                    <p class='dtext'><?= $result[$i]['text']; ?></p>
                 </a>
            </div>
-           <div class="dname"><%= item.shopname %></div>
+           <!-- <div class="dname"><?= $result[$i]['shopname']; ?></div> -->
         </div>
-        <% }) %>
-    </div> -->
+        <?php endfor; ?>
+    </div>
   </div>
 </div>
 
