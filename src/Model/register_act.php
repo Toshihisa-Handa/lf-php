@@ -3,14 +3,15 @@
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-
+$hash = password_hash($password, PASSWORD_DEFAULT);
 //正規表現を設定し該当しない登録を外す
-$pattern = "^[a-zA-Z0-9.!#$%&'*+\/=?^{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
-if(preg_match($pattern,$email)){
+// $pattern = "^[a-zA-Z0-9.!#$%&'*+\/=?^{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+// if(preg_match($pattern,$email)){
 
+// echo $password;
+// echo $hash;
 
-
-
+// return;
 //DB接続
 try{
   $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
@@ -27,7 +28,7 @@ try{
   ");
   $stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
   $stmt->bindValue(':email', $email, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
-  $stmt->bindValue(':password', $password, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $stmt->bindValue(':password', $hash, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
   $status = $stmt->execute();
   
   
@@ -45,9 +46,9 @@ try{
   }
     
   
-}else{//正規表現で外れた場合はDBに登録されない
-  header('Location: ../view/register.php');//Location:の後ろの半角スペースは必ず入れる。
-}
+// }else{//正規表現で外れた場合はDBに登録されない
+//   header('Location: ../view/register.php');//Location:の後ろの半角スペースは必ず入れる。
+// }
 
 
 
