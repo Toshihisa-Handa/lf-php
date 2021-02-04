@@ -9,13 +9,34 @@ $passwordFilter = mb_strlen($password);
 $passwordFilter2 = '/^[a-zA-Z0-9]+$/u';//半角英数字許可
 
 //名前が漢字　メールが@ .入ってる　パスワード8文字英数字以上12文字以下
-if(preg_match($nameFilter,$name) && preg_match($passwordFilter2, $password) && $emailFilter && $passwordFilter >= 8 && $passwordFilter <=12){
+// if(preg_match($nameFilter,$name) && preg_match($passwordFilter2, $password) && $emailFilter && $passwordFilter >= 8 && $passwordFilter <=12){
   try{
     $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
   } catch(PDOException $e) {
     print "エラー！" . $e->getMessage() . "<br/>";
     exit('終了します');
   }
+//バリデーション処理
+$errors=[];
+if(preg_match($nameFilter,$name)===0 || preg_match($nameFilter,$name)===false){
+ $errors[] = 'User Nameに不備があります。';
+}
+if($emailFilter===false){
+  $errors[] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+}
+if(preg_match($passwordFilter2, $password)===0 || preg_match($passwordFilter2, $password)===false) {
+  $errors[] = 'Passwordに半角英数字以外が使用されています。';
+}
+
+if($passwordFilter >= 13 || $passwordFilter <=3){
+  $errors[] = 'パスワードは半角英数字8文字以上12文字以下で設定して下さい。';
+}
+if(count($errors) > 0){
+  foreach($errors as $value){
+    echo $value. "\n";
+  }
+   exit('hoge5');
+}
 
 
 //データ登録SQL作成
@@ -34,15 +55,24 @@ if(preg_match($nameFilter,$name) && preg_match($passwordFilter2, $password) && $
   }else{
 
 //index.phpへリダイレクト(エラーがなければindex.phpt)
-    header('Location: ../view/login.php');//Location:の後ろの半角スペースは必ず入れる。
+    header('Location: /src/View/login.php');//Location:の後ろの半角スペースは必ず入れる。
       exit();
     }  
 
-}else{//
-    header('Location: ../view/register.php');//Location:の後ろの半角スペースは必ず入れる。
-}
 
 
 
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>test</h1>
+</body>
+</html>
