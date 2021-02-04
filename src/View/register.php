@@ -4,7 +4,7 @@ session_start();
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-$nameFilter = '/^[ぁ-んァ-ヶー一-龠a-zA-Z0-9]+$/u';//漢字カナひらがな半角英数字許可
+$nameFilter = '/^[ぁ-んァ-ヶー一-龠々a-zA-Z0-9]+$/u';//漢字カナひらがな半角英数字許可
 $hash = password_hash($password, PASSWORD_DEFAULT);
 $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
 $passwordFilter = mb_strlen($password);
@@ -58,8 +58,8 @@ $status = $stmt->execute();
 //データ登録処理後
 if($status==false){
     $error = $stmt->errorInfo();//emai重複時はここにエラー
-    exit("SQLError:".$error[2]);
-}else{
+    $errors['email2'] = 'このアドレスは既に使用されています';
+  }else{
 
 //index.phpへリダイレクト(エラーがなければindex.phpt)
   header('Location: /src/View/login.php');//Location:の後ろの半角スペースは必ず入れる。
@@ -140,6 +140,7 @@ session_destroy();
           placeholder="例：yamada@gmail.com" required
           value='<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'],ENT_QUOTES) : ''; ?>'>
           <span style='color:red;'> <?php echo isset($errors['email']) ? $errors['email'] : ''; ?></span>
+          <span style='color:red;'> <?php echo isset($errors['email2']) ? $errors['email2'] : ''; ?></span>
           <br>
           <br>
           <span class="label">Password</span><input type="password" name="password" class="input linput2"

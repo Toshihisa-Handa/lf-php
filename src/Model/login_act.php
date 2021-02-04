@@ -58,7 +58,7 @@ if(password_verify($password,$val['password'])){
 
 }else{
     //Login処理NGの場合login.phpへ遷移
-    header('Location: src/view/login.php');
+    header('Location: /src/view/login.php');
 }
 
 
