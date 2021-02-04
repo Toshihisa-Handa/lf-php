@@ -130,13 +130,23 @@ session_destroy();
   
       <div class='login-card'>
         <form action="/src/View/register.php" method="post" class="board-form">
-          <span class="label ">User Name</span><input type="text" name="name" class="input linput2" placeholder="日本語、アルファベット対応" required value='<?php echo isset($_POST['input_name']) ? htmlspecialchars($_POST['input_name'],ENT_QUOTES) : ''; ?>'>
+          <span class="label ">User Name</span><input type="text" name="name" class="input linput2"
+           placeholder="日本語、アルファベット対応" required 
+           value='<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'],ENT_QUOTES) : ''; ?>'>
           <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
           <br>
           <br>
-          <span class="label">E-mail</span><input type="email" name="email" class="input linput2" placeholder="例：yamada@gmail.com" required><br>
+          <span class="label">E-mail</span><input type="email" name="email" class="input linput2" 
+          placeholder="例：yamada@gmail.com" required
+          value='<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'],ENT_QUOTES) : ''; ?>'>
+          <span style='color:red;'> <?php echo isset($errors['email']) ? $errors['email'] : ''; ?></span>
           <br>
-          <span class="label">Password</span><input type="password" name="password" class="input linput2" placeholder="半角英数字8文字以上で入力" required><br>
+          <br>
+          <span class="label">Password</span><input type="password" name="password" class="input linput2"
+          placeholder="半角英数字8文字以上で入力" required>
+          <span style='color:red;'> <?php echo isset($errors['password']) ? $errors['password'] : ''; ?></span>
+          <span style='color:red;'> <?php echo isset($errors['password2']) ? $errors['password2'] : ''; ?></span>
+          <br>
           <br>
           <button type="submit" class="submit lbutton2">SignUp</button>
       </form>
