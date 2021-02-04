@@ -1,4 +1,6 @@
 <?php  
+
+session_start();
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -17,27 +19,34 @@ $passwordFilter2 = '/^[a-zA-Z0-9]+$/u';//半角英数字許可
     exit('終了します');
   }
 //バリデーション処理
+
+if(!empty($_POST) && empty($_SESSION['input_data'])){
+
+
 $errors=[];
 if(preg_match($nameFilter,$name)===0 || preg_match($nameFilter,$name)===false){
- $errors[] = 'User Nameに不備があります。';
+ $errors['name'] = 'User Nameに不備があります。';
 }
 if($emailFilter===false){
-  $errors[] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+  $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+}
+if($passwordFilter >= 13 || $passwordFilter <=3){
+  $errors['password'] = 'パスワードは半角英数字8文字以上12文字以下で設定して下さい。';
 }
 if(preg_match($passwordFilter2, $password)===0 || preg_match($passwordFilter2, $password)===false) {
-  $errors[] = 'Passwordに半角英数字以外が使用されています。';
+  $errors['password2'] = 'Passwordに半角英数字以外が使用されています。';
 }
 
-if($passwordFilter >= 13 || $passwordFilter <=3){
-  $errors[] = 'パスワードは半角英数字8文字以上12文字以下で設定して下さい。';
-}
 if(count($errors) > 0){
   foreach($errors as $value){
     echo $value. "\n";
   }
    exit('hoge5');
 }
-
+} elseif(!empty($_SESSION['input_data'])){
+  $_POST = $_SESSION['input_data'];
+}
+session_destroy();
 
 //データ登録SQL作成
   $stmt = $pdo->prepare("INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate());
