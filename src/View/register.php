@@ -46,11 +46,11 @@
   
       <div class='login-card'>
         <form action="/src/Model/register_act.php" method="post" class="board-form">
-          <span class="label ">User Name</span><input type="text" name="name" class="input linput2" placeholder="例：花田かすみ" required><br>
+          <span class="label ">User Name</span><input type="text" name="name" class="input linput2" placeholder="日本語、アルファベット対応" required><br>
           <br>
-          <span class="label">E-mail</span><input type="email" name="email" class="input linput2" placeholder="例：hanadaxxxxx@gmail.com" required><br>
+          <span class="label">E-mail</span><input type="email" name="email" class="input linput2" placeholder="例：yamada@gmail.com" required><br>
           <br>
-          <span class="label">Password</span><input type="password" name="password" class="input linput2" placeholder="例：abc12345　（半角英数字使用可能）" required><br>
+          <span class="label">Password</span><input type="password" name="password" class="input linput2" placeholder="半角英数字8文字以上で入力" required><br>
           <br>
           <button type="submit" class="submit lbutton2">SignUp</button>
       </form>
