@@ -27,8 +27,12 @@ if (!empty($_POST)) {
   if (password_verify($password, $val['password'])) {
 
     $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
-    $_SESSION['uname']  = $val['uname']; //ここのSESSIONの[]内も自由だが、分かりやすいようにmysqlのtableに合わせunameとしている。
-
+    $_SESSION['name']  = $val['name']; //ここのSESSIONの[]内も自由だが、分かりやすいようにmysqlのtableに合わせunameとしている。
+    // echo 'hoge';
+    // echo $_SESSION['chk_ssid'];
+    // echo $_SESSION['uname'];
+    // return;
+    // exit($_SESSION['uname']);
     //Login処理OKの場合index.phpへ遷移
     header('Location: /index.php');
     exit();

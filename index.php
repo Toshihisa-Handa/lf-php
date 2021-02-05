@@ -1,6 +1,10 @@
 <?php 
 session_start();
 include('common/funcs.php');
+$name = $_SESSION['name'];
+
+
+
 // loginCheck();
 include('common/favicon.html') 
 ?>
@@ -17,7 +21,7 @@ include('common/favicon.html')
 
     <header>
        <ul>
-
+<?php echo $name; ?>
          <li><a href="/index.php" ><img src="/public/images/lf-logo-gray.png" alt="" class='logo' ></a></li>
          <?php include('common/header-nav.html') ?>
          <div class='nav-right'>
