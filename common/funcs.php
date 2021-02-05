@@ -8,18 +8,6 @@ function h($str)
 }
 
 
-// 2.DB接続の関数
-// function db_connect(){
-//   try {
-//     //localhostの時はこれ。さくらの場合さくらのデータベースをいれる
-//     //Password:MAMP='root',XAMPP=''
-//     $pdo = new PDO('mysql:dbname=lf-test;charset=utf8;host=localhost','root','root');
-//   } catch (PDOException $e) {//$eにエラー内容が入っている。
-//     exit('DBConnectError:'.$e->getMessage());//ここのDBConnectErrorはエラー時の文字表示の為、ここはなんでも良い。この項目２は基本idとpass以外コピペで覚えればOK
-//   }
-//     return $pdo;//※重要！！※ ここでリターンすることで他の項目でも使用している変数($pdo)を関数の外でも使用できるようにしている
-// }
-
 //3.セッションリジェネレイト処理を全てのページで行うため、関数化し記述を簡略化する(Login認証)
 
 //手打ち入力でログイン後のページにログインせずに行ってもエラーになるようにしている） 

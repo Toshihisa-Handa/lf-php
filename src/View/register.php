@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -19,7 +18,7 @@ try {
 
 
 //バリデーション処理
-if (!empty($_POST) && empty($_SESSION['input_data'])) {
+if (!empty($_POST)) {
   $errors = [];
   if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
     $errors['name'] = 'User Nameに不備があります。';
@@ -47,7 +46,6 @@ if (!empty($_POST) && empty($_SESSION['input_data'])) {
 
     //データ登録処理後
     if ($status == false) {
-      $error = $stmt->errorInfo(); //emai重複時はここにエラー
       $errors['email2'] = 'このアドレスは既に使用されています';
     } else {
 
@@ -56,11 +54,7 @@ if (!empty($_POST) && empty($_SESSION['input_data'])) {
       exit();
     }
   }
-} elseif (!empty($_SESSION['input_data'])) {
-  $_POST = $_SESSION['input_data'];
-}
-session_destroy();
-
+} 
 ?>
 
 <?php include('../../common/favicon.html') ?>

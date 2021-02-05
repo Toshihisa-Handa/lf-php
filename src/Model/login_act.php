@@ -3,6 +3,7 @@ session_start(); //セッション変数を使うよという意味。これで�
 $email = $_POST['email'];
 $password = $_POST['password'];
 $hash = password_hash($password, PASSWORD_DEFAULT);
+$errors=[];
 include('../../common/funcs.php');
 
 //DB接続
@@ -38,6 +39,7 @@ if (password_verify($password, $val['password'])) {
   header('Location: /index.php');
 } else {
   //Login処理NGの場合login.phpへ遷移
+  $errors['errorLog'] = 'メールアドレスとパスワードが一致しませんでした。';
   header('Location: /src/view/login.php');
 }
 

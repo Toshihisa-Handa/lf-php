@@ -3,54 +3,41 @@ session_start(); //セッション変数を使うよという意味。これで�
 $email = $_POST['email'];
 $password = $_POST['password'];
 $hash = password_hash($password, PASSWORD_DEFAULT);
-include('../../common/funcs.php');
+$errors = [];
 
 //DB接続
 try {
   $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
 } catch (PDOException $e) {
   print "エラー！" . $e->getMessage() . "<br/>";
-  die('終了します');
+  exit('終了します');
 }
 
-if (!empty($_POST) && empty($_SESSION['input_data'])) {
+if (!empty($_POST)) {
 
-//データ登録sql作成
-$sql = 'SELECT * FROM user WHERE email=:email'; 
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(':email', $email);  
-$status = $stmt->execute();
-$errors =[];
-//データ登録処理後
-if ($status == false) {
-    $error = $stmt->errorInfo();
-  exit("SQLError:" . $error[2]); 
- }
+  //データ登録sql作成
+  $sql = 'SELECT * FROM user WHERE email=:email';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':email', $email);
+  $status = $stmt->execute();
+  //抽出データ数を取得
+  $val = $stmt->fetch();
 
-//抽出データ数を取得
-$val = $stmt->fetch(); 
+  //該当レコードがあればSESSIONに値を代入
+  if (password_verify($password, $val['password'])) {
 
-//該当レコードがあればSESSIONに値を代入
-if (password_verify($password, $val['password'])) {
+    $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
+    $_SESSION['uname']  = $val['uname']; //ここのSESSIONの[]内も自由だが、分かりやすいようにmysqlのtableに合わせunameとしている。
 
-  $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
-  $_SESSION['uname']  = $val['uname']; //ここのSESSIONの[]内も自由だが、分かりやすいようにmysqlのtableに合わせunameとしている。
-
-  //Login処理OKの場合index.phpへ遷移
-  header('Location: /index.php');
-} else {
-  //Login処理NGの場合login.phpへ遷移
-  header('Location: /src/view/login.php');
+    //Login処理OKの場合index.phpへ遷移
+    header('Location: /index.php');
+    exit();
+  } else {
+    //Login処理NGの場合
+    $errors['errorLog'] = 'メールアドレスとパスワードが一致しませんでした。';
+    // header('Location: /src/view/login.php');
+  }
 }
-
-//処理終了
-exit();
-
-}elseif(!empty($_SESSION['input_data'])){
-  $_POST = $_SESSION['input_data'];
-}
-session_destroy();
-
 
 
 ?>
@@ -64,6 +51,7 @@ session_destroy();
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/login.css">
 </head>
+
 <body>
   <div class="flowers-glid">
     <header>
@@ -82,11 +70,12 @@ session_destroy();
     </div>
     <div class="loginList">
       <div class='login-card'>
-        <form action="/src/Model/login_act.php" method="post">
+        <form action="/src/View/login.php" method="post">
           <span class="label">E-mail</span><input class='linput' type="email" name="email" class="input" required><br>
           <br>
           <span class="label">Password</span><input class='linput' type="password" name="password" class="input" required><br>
           <br>
+          <span style='color:red;'> <?php echo isset($errors['errorLog']) ? $errors['errorLog'] : ''; ?></span>
           <button class="lbutton" type="submit" class="submit">login</button>
         </form>
         <!-- <% if (typeof noUser !== 'undefined') { %>
@@ -116,4 +105,5 @@ session_destroy();
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
+
 </html>
