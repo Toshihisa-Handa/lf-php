@@ -1,5 +1,5 @@
 <?php  
-
+session_start();
 $name = $_POST['name'];
 $price = $_POST['price'];
 $feature = $_POST['feature'];
@@ -75,8 +75,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
 
 
 
-<?php include('favicon.html') ?>
-
+<?php include('../../common/favicon.html') ?>
     <title>花登録</title>
     <?php include('../../common/style.html') ?>
     <link rel="stylesheet" href="/public/css/frege.css">

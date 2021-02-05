@@ -1,5 +1,7 @@
-<?php include('../../common/favicon.html') ?>
-
+<?php 
+session_start();
+include('../../common/favicon.html') 
+?>
     <title>登録情報</title>
     <?php include('../../common/style.html') ?>
     <link rel="stylesheet" href="/public/css/myprofile.css">

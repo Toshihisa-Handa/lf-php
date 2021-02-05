@@ -1,5 +1,7 @@
-<?php include('favicon.html') ?>
-
+<?php 
+session_start();
+include('../../common/favicon.html') 
+?>
     <title>マップ情報編集</title>
     <?php include('../../common/style.html') ?>
     <link rel="stylesheet" href="/public/css/mapEdit.css">

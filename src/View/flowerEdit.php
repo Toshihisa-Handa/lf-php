@@ -1,5 +1,7 @@
-<?php include('favicon.html') ?>
-
+<?php 
+session_start();
+include('../../common/favicon.html') 
+?>
     <title>花編集</title>
 </head>
 <?php include('../../common/style.html') ?>

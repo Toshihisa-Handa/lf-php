@@ -1,5 +1,7 @@
-<?php include('favicon.html') ?>
-
+<?php 
+session_start();
+include('../../common/favicon.html') 
+?>
 <title>マップ</title>
 <style>html,body{height:100%;}body{padding:0;margin:0;}h1{padding:0;margin:0;font-size:50%;}</style>
 <?php include('../../common/style.html') ?>

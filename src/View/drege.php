@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include('../../common/funcs.php');
 $title = $_POST['title'];
 $tag = $_POST['tag'];

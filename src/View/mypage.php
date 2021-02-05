@@ -1,5 +1,7 @@
-<?php include('favicon.html') ?>
-
+<?php 
+session_start();
+include('../../common/favicon.html') 
+?>
     <title>マイページ</title>
     <?php include('../../common/style.html') ?>
     <link rel="stylesheet" href="/public/css/mypage.css">

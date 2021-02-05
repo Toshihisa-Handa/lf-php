@@ -1,5 +1,7 @@
-<?php  
-
+<?php 
+session_start();
+include('../../common/favicon.html') 
+?>
 $name = $_POST['name'];
 $price = $_POST['price'];
 $feature = $_POST['feature'];

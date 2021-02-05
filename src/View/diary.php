@@ -1,4 +1,7 @@
-<?php include('../../common/favicon.html') ?>
+<?php 
+session_start();
+include('../../common/favicon.html') 
+?>
 
     <title>日記詳細</title>
     <?php include('../../common/style.html') ?>
