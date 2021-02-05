@@ -7,6 +7,17 @@ function h($str)
     return htmlspecialchars($str, ENT_QUOTES);
 }
 
+//db接続
+function dbcon(){
+  try {
+    $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
+  } catch (PDOException $e) {
+    print "エラー！" . $e->getMessage() . "<br/>";
+    exit('終了します');
+  }
+  return $pdo;
+}
+
 
 //3.セッションリジェネレイト処理を全てのページで行うため、関数化し記述を簡略化する(Login認証)
 

@@ -1,17 +1,13 @@
 <?php
 session_start(); //セッション変数を使うよという意味。これで他のファイルでも$_SESSION[];で指定した変数が使用できる
+include('../../common/funcs.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
 $hash = password_hash($password, PASSWORD_DEFAULT);
 $errors = [];
 
 //DB接続
-try {
-  $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
-} catch (PDOException $e) {
-  print "エラー！" . $e->getMessage() . "<br/>";
-  exit('終了します');
-}
+$pdo = dbcon();
 
 if (!empty($_POST)) {
 
@@ -27,12 +23,8 @@ if (!empty($_POST)) {
   if (password_verify($password, $val['password'])) {
 
     $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
-    $_SESSION['name']  = $val['name']; //ここのSESSIONの[]内も自由だが、分かりやすいようにmysqlのtableに合わせunameとしている。
-    // echo 'hoge';
-    // echo $_SESSION['chk_ssid'];
-    // echo $_SESSION['uname'];
-    // return;
-    // exit($_SESSION['uname']);
+    $_SESSION['name']  = $val['name']; //$valに今回DBへ登録した値が入っており、そのうちのnameを取得する為この記述をしている。そして$_SESSION['name']で定義すると他のページでsession_start();を宣言した後使用できるようになる。
+
     //Login処理OKの場合index.phpへ遷移
     header('Location: /index.php');
     exit();
