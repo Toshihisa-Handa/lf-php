@@ -5,7 +5,6 @@ $name = $_POST['name'];
 $price = $_POST['price'];
 $feature = $_POST['feature'];
 $tag = $_POST['tag'];
-$title = $_POST['title'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 
@@ -167,8 +166,8 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
             </a>
            </div>
            <div class="option">
-            <div class="update"><a href="/flowerEdit/<%=item.id%>">編集</a></div>
-            <div class="delete"><a href="/flowerDelete/<%=item.id%>">削除</a></div>
+            <div class="update"><a href="flowerEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
+            <div class="delete"><a href="/flowerDelete/<?= $images[$i]['id']; ?>">削除</a></div>
         </div>
         </div>
         <?php endfor; ?>

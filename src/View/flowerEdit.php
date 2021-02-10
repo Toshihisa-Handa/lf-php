@@ -1,5 +1,42 @@
 <?php 
 session_start();
+include('../../common/funcs.php');
+$uid = $_SESSION['uid'];
+
+
+
+//1.GETでidを取得
+$id =$_GET['id'];
+
+//DB接続
+$pdo = dbcon();
+
+
+//sql作成
+$sql = "SELECT * FROM flower WHERE id=:id";
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue('id', $id, PDO::PARAM_INT);
+$status = $stmt->execute();
+
+//4．データ登録処理後（elseより手前はselect2.phpと同じ）
+$view='';
+if($status==false){
+  $error = $stmt->errorInfo();
+  exit("SQLError:".$error[2]);
+
+}else{
+$item = $stmt->fetch();
+}
+
+
+
+
+?>
+
+
+
+
+<?php 
 include('../../common/favicon.html') 
 ?>
     <title>花編集</title>
@@ -40,25 +77,26 @@ include('../../common/favicon.html')
 
     <div class="main">
         <h2>花編集</h2>
-        <!-- <form action='/flowerUpdate/<%=item.id%>' method="post">
+        <form action='/src/View/flowerEditUpdate.php' method="post">
               <div class='inframe'>
-                <div>　　品名</div><input class='inputs' type="text" name="name" value='<%=item.name%>'><br>
+                <div>　　品名</div><input class='inputs' type="text" name="name" value='<?=$item["name"]?>'><br>
             </div>
               <div class='inframe'>
-                <div>　　価格</div><input class='inputs' type="text" name="price" value='<%=item.price%>'><br>
+                <div>　　価格</div><input class='inputs' type="text" name="price" value='<?=$item["price"]?>'><br>
             </div>
               <div class='inframe'>
-                <div>　　特徴</div><input class='inputs' type="text" name="feature" value='<%=item.feature%>'><br>
+                <div>　　特徴</div><input class='inputs' type="text" name="feature" value='<?=$item["feature"]?>'><br>
             </div>
               <div class='inframe'>
-                <div>　　タグ</div><input class='inputs' type="text" name="tag" value='<%=item.tag%>'><br>
+                <div>　　タグ</div><input class='inputs' type="text" name="tag" value='<?=$item["tag"]?>'><br>
             </div>
               <div class='inframe'>
-                <div>テキスト</div><textarea class='txt'  name="text" ><%=item.text%></textarea><br>
+                <div>テキスト</div><textarea class='txt'  name="text" ><?=$item["text"]?></textarea><br>
             </div>
-         
+            <input type="hidden" name='id' value="<?=$item["id"]?>">
+
             <button type="submit" class='sends'>送信</button>
-        </form> -->
+        </form>
 
     
     
