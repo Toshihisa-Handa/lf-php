@@ -148,7 +148,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
                 </a>
                 <div class="option">
                     <div class="update"><a href="diaryEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-                    <div class="delete"><a href="/diaryDelete/<%=item.id%>">削除</a></div>
+                    <div class="delete"><a href="diaryDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
                 </div>
                 
            </div>

@@ -167,7 +167,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
            </div>
            <div class="option">
             <div class="update"><a href="flowerEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-            <div class="delete"><a href="/flowerDelete/<?= $images[$i]['id']; ?>">削除</a></div>
+            <div class="delete"><a href="flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
         </div>
         </div>
         <?php endfor; ?>
