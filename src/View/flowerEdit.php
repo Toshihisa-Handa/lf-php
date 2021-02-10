@@ -18,7 +18,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->bindValue('id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
-//4．データ登録処理後（elseより手前はselect2.phpと同じ）
+//4．データ登録処理後
 $view='';
 if($status==false){
   $error = $stmt->errorInfo();

@@ -35,24 +35,22 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
 
 
   //３．データ登録SQL作成
-  //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
   $stmt = $pdo->prepare("INSERT INTO diary(title,image,tag,text,created_at,user_id)VALUES(:title, :imgname,:tag,:text,sysdate(),:uid)");
-  $stmt->bindValue(':title', $title, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
-  $stmt->bindValue(':imgname', $imgname, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
-  $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-  $stmt->bindValue(':text', $text, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-  $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
+  $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+  $stmt->bindValue(':imgname', $imgname, PDO::PARAM_STR); 
+  $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);  
+  $stmt->bindValue(':text', $text, PDO::PARAM_STR);
+  $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);  
   $status = $stmt->execute();
   
   
   //４．データ登録処理後（基本コピペ使用でOK)
   if($status==false){
-    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
     $error = $stmt->errorInfo();
-    exit("SQLError:".$error[2]);//エラーが起きたらエラーの2番目の配列から取ります。ここは考えず、これを使えばOK
-                               // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
+    exit("SQLError:".$error[2]);
+                              
   }else{
-    //５．index.phpへリダイレクト(エラーがなければindex.phpt)
+    //５．
     header('Location: drege.php');//Location:の後ろの半角スペースは必ず入れる。
     exit();
   
@@ -149,7 +147,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
                     <p class='dtext'><?= $images[$i]['text']; ?></p>
                 </a>
                 <div class="option">
-                    <div class="update"><a href="/diaryEdit/<%=item.id%>">編集</a></div>
+                    <div class="update"><a href="diaryEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
                     <div class="delete"><a href="/diaryDelete/<%=item.id%>">削除</a></div>
                 </div>
                 

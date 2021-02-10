@@ -1,5 +1,39 @@
 <?php 
 session_start();
+include('../../common/funcs.php');
+$uid = $_SESSION['uid'];
+
+
+
+//1.GETでidを取得
+$id =$_GET['id'];
+
+//DB接続
+$pdo = dbcon();
+
+
+//sql作成
+$sql = "SELECT * FROM diary WHERE id=:id";
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue('id', $id, PDO::PARAM_INT);
+$status = $stmt->execute();
+
+//4．データ登録処理後
+$view='';
+if($status==false){
+  $error = $stmt->errorInfo();
+  exit("SQLError:".$error[2]);
+
+}else{
+$item = $stmt->fetch();
+}
+
+?>
+
+
+
+
+<?php 
 include('../../common/favicon.html') 
 ?>
     <title>日記編集</title>
@@ -39,17 +73,18 @@ include('../../common/favicon.html')
  
      <div class="main">
         <h2>日記編集</h2>
-        <form action='/diaryUpdate/<%=item.id%>' method="post">
+        <form action='/src/View/diaryEditUpdate.php' method="post">
               <div class='inframe'>
-                <div>タイトル</div><input class='inputs' type="text" name="title" value='<%=item.title%>'><br>
+                <div>タイトル</div><input class='inputs' type="text" name="title" value='<?=$item["title"]?>'><br>
             </div>
               <div class='inframe'>
-                <div>　　タグ</div><input class='inputs' type="text" name="tag" value='<%=item.tag%>'><br>
+                <div>　　タグ</div><input class='inputs' type="text" name="tag" value='<?=$item["tag"]?>'><br>
             </div>
               <div class='inframe'>
-                <div>テキスト</div><textarea class='txt'  name="text" ><%=item.text%></textarea><br>
+                <div>テキスト</div><textarea class='txt'  name="text" ><?=$item["text"]?></textarea><br>
             </div>
-         
+            <input type="hidden" name='id' value="<?=$item["id"]?>">
+
             <button type="submit" class='sends'>送信</button>
         </form>
 
