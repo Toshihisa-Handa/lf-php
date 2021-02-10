@@ -23,15 +23,6 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
   
   }else{
 
-    // if(is_uploaded_file($_FILES['up_file']['tmp_name'])){
-    //  echo 'test';
-    //  return;
-
-
-    // }
-
-
-
 
     //POSTデータ取得
     //ここのFILESで[]されているimageはinput type=fileタグのname部分の名称
@@ -41,12 +32,6 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     //指定フォルダに画像を保存
     $save = '../../public/upload/' . basename($imgname);//保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
     move_uploaded_file($_FILES['image']['tmp_name'], $save);//指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
-
-
-// echo $save;
-// echo $_FILES['image']['tmp_name'];
-// // var_dump($_FILES);
-// return;
 
 
   //３．データ登録SQL作成
