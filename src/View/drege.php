@@ -4,16 +4,10 @@ include('../../common/funcs.php');
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
-
+$uid = $_SESSION['uid'];
 
 //DB接続
-try{
-  $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
-} catch(PDOException $e) {
-  //ここでエラー時の内容を確認できるようになる。これがないとerror500が出るだけ
-  print "エラー！" . $e->getMessage() . "<br/>";
-  die('終了します');
-}
+$pdo = dbcon();
 
 //画像処理
 if($_SERVER['REQUEST_METHOD'] != 'POST'){
@@ -28,23 +22,41 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
   
   
   }else{
+
+    // if(is_uploaded_file($_FILES['up_file']['tmp_name'])){
+    //  echo 'test';
+    //  return;
+
+
+    // }
+
+
+
+
     //POSTデータ取得
     //ここのFILESで[]されているimageはinput type=fileタグのname部分の名称
     $imgname = date("Ymd") . random_int(1, 999999) . $_FILES['image']['name'];//ここのnameはアップロードされたファイルのファイル名
 
   
     //指定フォルダに画像を保存
-    $save = '/public/upload/' . basename($imgname);//保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
-    move_uploaded_file($_FILES['image']['tmp_name'], $save);//指定した保存先へ保存
-  
+    $save = '../../public/upload/' . basename($imgname);//保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+    move_uploaded_file($_FILES['image']['tmp_name'], $save);//指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
+
+
+// echo $save;
+// echo $_FILES['image']['tmp_name'];
+// // var_dump($_FILES);
+// return;
+
+
   //３．データ登録SQL作成
   //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
-  $stmt = $pdo->prepare("INSERT INTO diary(title,image,tag,text,created_at,user_id)VALUES(:title, :imgname,:tag,:text,sysdate(),1);
-  ");
+  $stmt = $pdo->prepare("INSERT INTO diary(title,image,tag,text,created_at,user_id)VALUES(:title, :imgname,:tag,:text,sysdate(),:uid)");
   $stmt->bindValue(':title', $title, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
   $stmt->bindValue(':imgname', $imgname, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
   $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
   $stmt->bindValue(':text', $text, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+  $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
   $status = $stmt->execute();
   
   
@@ -147,7 +159,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
             <div class="dcard">
             <div class='diary-card'>
                 <a href="diary.php/<?= $images[$i]['id']; ?>">
-                    <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="" >
+                    <img src="../..//public/upload/<?= $images[$i]['image']; ?>" alt="" >
                     <h3><?= $images[$i]['title']; ?></h3>               
                     <p class='dtext'><?= $images[$i]['text']; ?></p>
                 </a>
