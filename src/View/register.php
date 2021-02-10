@@ -1,5 +1,6 @@
 <?php
-
+session_start(); 
+$uid = $_POST['user_id'];
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -48,9 +49,10 @@ if (!empty($_POST)) {
     if ($status == false) {
       $errors['email2'] = 'このアドレスは既に使用されています';
     } else {
+      $_SESSION['uid']  = $uid; 
 
       //index.phpへリダイレクト(エラーがなければindex.phpt)
-      header('Location: /src/View/login.php'); //Location:の後ろの半角スペースは必ず入れる。
+      header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
   }
@@ -95,6 +97,7 @@ if (!empty($_POST)) {
           <span style='color:red;'> <?php echo isset($errors['password2']) ? $errors['password2'] : ''; ?></span>
           <br>
           <br>
+          <input type="hidden" name='user_id'>
           <button type="submit" class="submit lbutton2">SignUp</button>
         </form>
         <!-- <% if (typeof noUser !== 'undefined') { %>
