@@ -19,43 +19,63 @@ $comment = $_POST['comment'];
 $feature = $_POST['feature'];
 $uid = $_SESSION['uid'];
 $uemail = $_SESSION['uemail'];
-$uname = $_SESSION['uname'] ;
+$uname = $_SESSION['uname'];
 
-if($_POST){
-//DB接続
-$pdo = dbcon();
-
-
-//データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
-// $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,account_name,created_at)VALUES(:uid,:name,:account_name,sysdate())");
-$stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
-$stmt->bindValue(':title', $title, PDO::PARAM_STR);
-$stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
-$stmt->bindValue(':web', $web, PDO::PARAM_STR);
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);
-$stmt->bindValue(':tell', $tell, PDO::PARAM_INT);
-$stmt->bindValue(':open', $open, PDO::PARAM_STR);
-$stmt->bindValue(':close', $close, PDO::PARAM_STR);
-$stmt->bindValue(':holiday', $holiday, PDO::PARAM_STR);
-$stmt->bindValue(':location', $location, PDO::PARAM_STR);
-$stmt->bindValue(':map', $map, PDO::PARAM_STR);
-$stmt->bindValue(':message', $message, PDO::PARAM_STR);
-$stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
-$stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
-$status = $stmt->execute();
+if ($_POST) {
+    //DB接続
+    $pdo = dbcon();
 
 
-//データ登録処理後
-if ($status == false) {
-    $error = $stmt->errorInfo();
-    exit("SQLError:" . $error[2]);
-} else {
-    
-    header('Location: /src/View/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
-    exit();
-}
+    // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    if ($_FILES) {
+        $account_img = date("Ymd") . random_int(1, 999999) . $_FILES['account_img']['name']; //ここのnameはアップロードされたファイルのファイル名
+        $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name']; 
+        $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
+        $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name']; 
+        $save = '../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+        move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
+        $sql = "INSERT INTO shop(account_img,shop_img,img1,img2)VALUES(:account_img,:shop_img,:img1,:img2)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':account_img', $account_img, PDO::PARAM_STR);
+        $stmt->bindValue(':sho_img', $sho_img, PDO::PARAM_STR);
+        $stmt->bindValue(':img1', $img1, PDO::PARAM_STR);
+        $stmt->bindValue(':img2', $img2, PDO::PARAM_STR);
+        $status = $stmt->execute();
+        header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+    }
+    // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    //店舗情報登録の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    //データ登録SQL作成
+    $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
+    $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
+    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+    $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+    $stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
+    $stmt->bindValue(':web', $web, PDO::PARAM_STR);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->bindValue(':tell', $tell, PDO::PARAM_INT);
+    $stmt->bindValue(':open', $open, PDO::PARAM_STR);
+    $stmt->bindValue(':close', $close, PDO::PARAM_STR);
+    $stmt->bindValue(':holiday', $holiday, PDO::PARAM_STR);
+    $stmt->bindValue(':location', $location, PDO::PARAM_STR);
+    $stmt->bindValue(':map', $map, PDO::PARAM_STR);
+    $stmt->bindValue(':message', $message, PDO::PARAM_STR);
+    $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
+    $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
+    $status = $stmt->execute();
+
+    //====================================================================
+
+
+    //データ登録処理後
+    if ($status == false) {
+        $error = $stmt->errorInfo();
+        exit("SQLError:" . $error[2]);
+    } else {
+
+        header('Location: /src/View/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
+        exit();
+    }
 }
 
 
@@ -86,7 +106,7 @@ if ($status == false) {
                 </div>
 
                 <div class='inframe'>
-                    <div>　アカウント名</div><input class='inputs' type="text" name="account_name" value='<?=$uname?>' placeholder="例：花田かすみ"><br>
+                    <div>　アカウント名</div><input class='inputs' type="text" name="account_name" value='<?= $uname ?>' placeholder="例：花田かすみ"><br>
                 </div>
 
                 <div class='inframe'>
@@ -94,7 +114,7 @@ if ($status == false) {
                 </div>
 
                 <div class='inframe'>
-                    <div>メールアドレス</div><input class='inputs' type="text" name="email" value='<?=$uemail?>' placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）"><br>
+                    <div>メールアドレス</div><input class='inputs' type="text" name="email" value='<?= $uemail ?>' placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）"><br>
                 </div>
 
                 <div class='inframe'>
@@ -139,52 +159,7 @@ if ($status == false) {
 
         </div>
 
-        <div class="line"></div>
-        <div class="main2">
-            <h2>画像情報編集</h2>
-            <img class='formimg' src="<%= item.account_img %>" alt="">
-            <form class='editform' action="/myprofile_img" method="post" enctype="multipart/form-data">
-                <div id='attachment'>
-                    <label>
-                        <input type="file" name="account_img" class="fileinput">プロフィール写真の変更
-                    </label>
-                    <span class="filename">選択されていません</span>
-                </div><br>
-                <input class='sends' type="submit" value="送信">
-            </form>
-            <img class='formimg' src="<%= item.shop_img %>" alt="">
-            <form class='editform' action="/myprofile_img2" method="post" enctype="multipart/form-data">
-                <div id='attachment'>
-                    <label>
-                        <input type="file" name="shop_img" class="fileinput">　店舗メイン画像変更　
-                    </label>
-                    <span class="filename">選択されていません</span>
-                </div><br>
-                <input class='sends' type="submit" value="送信">
-            </form>
-            <img class='formimg' src="<%= item.img1 %>" alt="">
-            <form class='editform' action="/myprofile_img3" method="post" enctype="multipart/form-data">
-                <div id='attachment'>
-                    <label>
-                        <input type="file" name="img1" class="fileinput">店舗画像①（横長）変更
-                    </label>
-                    <span class="filename">選択されていません</span>
-                </div><br>
-                <input class='sends' type="submit" value="送信">
-            </form>
-            <img class='formimg' src="<%= item.img2 %>" alt="">
-            <form class='editform' action="/myprofile_img4" method="post" enctype="multipart/form-data">
-                <div id='attachment'>
-                    <label>
-                        <input type="file" name="img2" class="fileinput">店舗画像②（縦長）変更
-                    </label>
-                    <span class="filename">選択されていません</span>
-                </div><br>
-                <input class='sends' type="submit" value="送信">
-            </form>
 
-
-        </div>
 
 
 
