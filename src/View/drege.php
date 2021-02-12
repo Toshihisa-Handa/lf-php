@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     
     //2．データ登録SQL作成
   //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
-  $stmt = $pdo->prepare("SELECT* FROM diary ORDER BY created_at DESC");//日付で登録が新しいものが上になる様に抽出
+  $stmt = $pdo->prepare("SELECT* FROM diary WHERE user_id = $uid ORDER BY created_at DESC");//日付で登録が新しいものが上になる様に抽出
   $status = $stmt->execute();
   $images = $stmt->fetchAll();//今までなかった記述。画像のアップロード特有
   
