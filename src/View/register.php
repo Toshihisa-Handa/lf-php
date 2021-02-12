@@ -1,6 +1,9 @@
 <?php
-session_start(); 
-$uid = $_POST['user_id'];
+session_start();
+include('../../common/funcs.php');
+
+
+$uid = $_SESSION['user_id'];
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -10,16 +13,14 @@ $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
 $passwordFilter = mb_strlen($password);
 $passwordFilter2 = '/^[a-zA-Z0-9]+$/u'; //半角英数字許可
 
-try {
-  $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
-} catch (PDOException $e) {
-  print "エラー！" . $e->getMessage() . "<br/>";
-  exit('終了します');
-}
+//DB接続
+$pdo = dbcon();
+
 
 
 //バリデーション処理
 if (!empty($_POST)) {
+
   $errors = [];
   if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
     $errors['name'] = 'User Nameに不備があります。';
@@ -43,20 +44,27 @@ if (!empty($_POST)) {
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
     $status = $stmt->execute();
+    $result = $stmt-> fetchAll(PDO::FETCH_ASSOC);
 
+
+    echo 'hoge';
+    print_r($status);
+    var_dump($result);
+    // var_dump($stmt);;
+    echo 'hogr';
+    return;
 
     //データ登録処理後
     if ($status == false) {
       $errors['email2'] = 'このアドレスは既に使用されています';
     } else {
-      $_SESSION['uid']  = $uid; 
 
       //index.phpへリダイレクト(エラーがなければindex.phpt)
       header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
   }
-} 
+}
 ?>
 
 <?php include('../../common/favicon.html') ?>
@@ -64,6 +72,7 @@ if (!empty($_POST)) {
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/login.css">
 </head>
+
 <body>
   <div class="flowers-glid">
     <header>
@@ -97,7 +106,6 @@ if (!empty($_POST)) {
           <span style='color:red;'> <?php echo isset($errors['password2']) ? $errors['password2'] : ''; ?></span>
           <br>
           <br>
-          <input type="hidden" name='user_id'>
           <button type="submit" class="submit lbutton2">SignUp</button>
         </form>
         <!-- <% if (typeof noUser !== 'undefined') { %>
@@ -127,4 +135,5 @@ if (!empty($_POST)) {
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
+
 </html>
