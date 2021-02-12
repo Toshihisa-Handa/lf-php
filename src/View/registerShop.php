@@ -29,7 +29,7 @@ $pdo = dbcon();
 $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
 // $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,account_name,created_at)VALUES(:uid,:name,:account_name,sysdate())");
 $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
-$stmt->bindValue(':name', $name, PDO::PARAM_INT);
+$stmt->bindValue(':name', $name, PDO::PARAM_STR);
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);
 $stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
 $stmt->bindValue(':web', $web, PDO::PARAM_STR);
@@ -46,12 +46,12 @@ $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
 $status = $stmt->execute();
 
 
-//４．データ登録処理後（基本コピペ使用でOK)
+//データ登録処理後
 if ($status == false) {
     $error = $stmt->errorInfo();
     exit("SQLError:" . $error[2]);
 } else {
-    //５．
+    
     header('Location: /src/View/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
     exit();
 }

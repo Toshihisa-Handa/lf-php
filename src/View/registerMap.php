@@ -5,40 +5,26 @@ $uid = $_SESSION['uid'];
 $uname = $_SESSION['uname'] ;
 $lat = $_POST['lat'];
 $lon = $_POST['lon'];
-// $pincolor = $_POST['pincolor'];
 $maptitle = $_POST['maptitle'];
 $description = $_POST['description'];
-
 
 
 if($_POST){
 
 //db接続
-dbcon();
+$pdo = dbcon();
 
 //sql作成
-$stmt = $pdo->prepare("INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),user_id)");
-// $sql = "INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),:user_id)";
-
+$stmt = $pdo->prepare("INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),:user_id)");
 $stmt->bindValue(':lat', $lat, PDO::PARAM_INT);
 $stmt->bindValue(':lon', $lon, PDO::PARAM_INT);
 $stmt->bindValue(':maptitle', $maptitle, PDO::PARAM_INT);
 $stmt->bindValue(':description', $description, PDO::PARAM_INT);
 $stmt->bindValue(':user_id', $uid, PDO::PARAM_INT);
-
-// $stmt->bindValue(':lat',$lat, PDO::PARAM_INT);
-// $stmt->bindValue(':lon',$lon, PDO::PARAM_INT);
-// $stmt->bindValue(':maptitle',$maptitle, PDO::PARAM_STR);
-// $stmt->bindValue(':description',$description, PDO::PARAM_STR);
-// $stmt->bindValue(':user_id',$uid, PDO::PARAM_INT);
-// $stmt->bindValue(':pincolor',$pincolor, PDO::PARAM_STR);
-
 $status = $stmt->execute();
 
-echo 'hoge';
-return;
 
-//４．データ登録処理後
+//データ登録処理後
 if ($status == false) {
   $error = $stmt->errorInfo();
   exit("SQLError:" . $error[2]);
@@ -125,7 +111,7 @@ if ($status == false) {
               <div>ピンの色</div><input class='inputs' type="text" name="pincolor" value='<%= item.pincolor%>'><br>
           </div> -->
             <div class='inframe '>
-              <div>タイトル</div><input class='inputs' type="text" name="maptitle" value='<?=$uname?>'><br>
+              <div>タイトル</div><input class='inputs' type="text" name="maptitle" value=''><br>
           </div>
             <div class='inframe'>
               <div>　　説明</div><textarea class='txt'  name="description" ></textarea><br>
