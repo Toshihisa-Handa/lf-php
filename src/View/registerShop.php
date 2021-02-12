@@ -18,7 +18,7 @@ $message = $_POST['message'];
 $comment = $_POST['comment'];
 $feature = $_POST['feature'];
 $uid = $_SESSION['uid'];
-
+$uname = $_SESSION['uname'] ;
 
 if($_POST){
 //DB接続
@@ -85,7 +85,7 @@ if ($status == false) {
                 </div>
 
                 <div class='inframe'>
-                    <div>　アカウント名</div><input class='inputs' type="text" name="account_name" placeholder="例：花田かすみ"><br>
+                    <div>　アカウント名</div><input class='inputs' type="text" name="account_name" value='<?=$uname?>' placeholder="例：花田かすみ"><br>
                 </div>
 
                 <div class='inframe'>

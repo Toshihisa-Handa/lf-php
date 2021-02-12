@@ -49,6 +49,7 @@ $pdo = dbcon();
       $status = $stmt->execute();
       $id = $pdo -> lastInsertId(); 
       $_SESSION['uid'] = $id;
+      $_SESSION['uname'] = $name;
 
 
       //データ登録処理後
