@@ -14,8 +14,11 @@ $pdo = dbcon();
 
 
 //2．データ登録SQL作成
-//prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
-$stmt = $pdo->prepare("SELECT* FROM flower ORDER BY created_at DESC"); //日付で登録が新しいものが上になる様に抽出
+$sql = "SELECT 
+         flower.name,flower.price,flower.feature,flower.tag,flower.created_at,flower.user_id,flower.image,shop.name AS shopname
+         FROM flower JOIN shop on flower.user_id =shop.user_id
+         ORDER BY flower.created_at DESC";
+$stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
 $status = $stmt->execute();
 $result = $stmt->fetchAll(); //今までなかった記述。画像のアップロード特有
 
@@ -104,7 +107,7 @@ $result = $stmt->fetchAll(); //今までなかった記述。画像のアップ�
                 <div class='ffeature'><?= $result[$i]['feature']; ?></div>
               </a>
             </div>
-            <!-- <h2 class='fname'><?= $result[$i]['shopname']; ?></h2> -->
+            <h2 class='fname'><?= $result[$i]['shopname']; ?></h2>
           </div>
         <?php endfor; ?>
       </div>

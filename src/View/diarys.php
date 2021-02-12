@@ -6,17 +6,10 @@ $text = $_POST['text'];
 
 
 //DB接続
-try {
-  $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
-} catch (PDOException $e) {
-  //ここでエラー時の内容を確認できるようになる。これがないとerror500が出るだけ
-  print "エラー！" . $e->getMessage() . "<br/>";
-  die('終了します');
-}
+$pdo = dbcon();
 
 
 //2．データ登録SQL作成
-//prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
 $sql = "SELECT 
          diary.title,diary.image,diary.tag,diary.text,diary.created_at,shop.name AS shopname
          FROM diary JOIN shop on diary.user_id =shop.user_id
