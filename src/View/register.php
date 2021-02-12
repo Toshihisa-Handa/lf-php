@@ -48,16 +48,15 @@ $pdo = dbcon();
       $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
       $status = $stmt->execute();
       $id = $pdo -> lastInsertId(); 
-      echo $id;
-      echo 'hoge';
-      return;
+      $_SESSION['uid'] = $id;
+
 
       //データ登録処理後
       if ($status == false) {
         $errors['email2'] = 'このアドレスは既に使用されています';
       } else {
         //index.phpへリダイレクト(エラーがなければindex.phpt)
-        header('Location: /src/View/registerS.php'); //Location:の後ろの半角スペースは必ず入れる。
+        header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
         exit();
       }
     }

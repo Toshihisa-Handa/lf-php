@@ -19,8 +19,6 @@ $comment = $_POST['comment'];
 $feature = $_POST['feature'];
 $uid = $_SESSION['uid'];
 
-echo $uid;
-return;
 
 if($_POST){
 //DB接続
@@ -29,7 +27,9 @@ $pdo = dbcon();
 
 //データ登録SQL作成
 $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
+// $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,account_name,created_at)VALUES(:uid,:name,:account_name,sysdate())");
 $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
+$stmt->bindValue(':name', $name, PDO::PARAM_INT);
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);
 $stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
 $stmt->bindValue(':web', $web, PDO::PARAM_STR);
