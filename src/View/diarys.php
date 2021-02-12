@@ -29,7 +29,9 @@ $kensaku = '%'.$kensaku.'%';
 $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,
         diary.created_at,shop.name AS shopname FROM diary JOIN shop on
         diary.user_id =shop.user_id 
-        WHERE diary.title LIKE :kensaku ORDER BY diary.created_at DESC";
+        WHERE diary.title LIKE :kensaku 
+        OR diary.tag LIKE :kensaku OR diary.text LIKE :kensaku OR shop.name LIKE :kensaku
+        ORDER BY diary.created_at DESC";
 $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
 $stmt->bindParam(':kensaku', $kensaku, PDO::PARAM_STR);
 $status = $stmt->execute();
