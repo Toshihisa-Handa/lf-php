@@ -9,16 +9,32 @@ $text = $_POST['text'];
 //DB接続
 $pdo = dbcon();
 
+if (!$_GET) {
 
-//2．データ登録SQL作成
-$sql = "SELECT 
+  //2．データ登録SQL作成
+  $sql = "SELECT 
          diary.id,diary.title,diary.image,diary.tag,diary.text,diary.created_at,shop.name AS shopname
          FROM diary JOIN shop on diary.user_id =shop.user_id
          ORDER BY diary.created_at DESC";
+  $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+  $status = $stmt->execute();
+  $result = $stmt->fetchAll();
+
+} else {
+// var_dump($_GET);
+// echo $_GET['kensaku'];
+// return;
+$kensaku = $_GET['kensaku'];
+$kensaku = '%'.$kensaku.'%';
+$sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,
+        diary.created_at,shop.name AS shopname FROM diary JOIN shop on
+        diary.user_id =shop.user_id 
+        WHERE diary.title LIKE :kensaku ORDER BY diary.created_at DESC";
 $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+$stmt->bindParam(':kensaku', $kensaku, PDO::PARAM_STR);
 $status = $stmt->execute();
 $result = $stmt->fetchAll();
-
+}
 
 
 
@@ -48,7 +64,7 @@ include('../../common/favicon.html')
 
         <div class='nav-right'>
           <li class='searchNav'>
-            <form action="/d_search" method='get'>
+            <form method='get'>
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
@@ -90,16 +106,16 @@ include('../../common/favicon.html')
     <div class="diaryList">
 
       <div class="diary-container">
-        <?php foreach ($result as $item):?>
+        <?php foreach ($result as $item) : ?>
           <div class="dcard">
             <div class='diary-card'>
-            <a href="diary.php/<?= $item['id']; ?>">
+              <a href="diary.php/<?= $item['id']; ?>">
                 <img src="/public/upload/<?= $item['image']; ?>" alt="">
                 <h3><?= $item['title']; ?></h3>
                 <p class='dtext'><?= $item['text']; ?></p>
               </a>
             </div>
-            <div class="dname"><?= $item['shopname']?></div>
+            <div class="dname"><?= $item['shopname'] ?></div>
           </div>
         <?php endforeach; ?>
       </div>
