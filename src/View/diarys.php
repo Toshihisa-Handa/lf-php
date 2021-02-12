@@ -17,7 +17,11 @@ try {
 
 //2．データ登録SQL作成
 //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
-$stmt = $pdo->prepare("SELECT* FROM diary ORDER BY created_at DESC"); //日付で登録が新しいものが上になる様に抽出
+$sql = "SELECT 
+         diary.title,diary.image,diary.tag,diary.text,diary.created_at,shop.name AS shopname
+         FROM diary JOIN shop on diary.user_id =shop.user_id
+         ORDER BY diary.created_at DESC";
+$stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
 $status = $stmt->execute();
 $result = $stmt->fetchAll();
 
@@ -28,9 +32,9 @@ $result = $stmt->fetchAll();
 ?>
 
 
-<?php 
+<?php
 session_start();
-include('../../common/favicon.html') 
+include('../../common/favicon.html')
 ?>
 
 <title>日記一覧</title>
@@ -93,18 +97,18 @@ include('../../common/favicon.html')
     <div class="diaryList">
 
       <div class="diary-container">
-        <?php for ($i = 0; $i < count($result); $i++) : ?>
+        <?php foreach ($result as $item):?>
           <div class="dcard">
             <div class='diary-card'>
-              <a href="diary/<?= $result[$i]['image']; ?>">
-                <img src="/public/upload/<?= $result[$i]['image']; ?>" alt="">
-                <h3><?= $result[$i]['title']; ?></h3>
-                <p class='dtext'><?= $result[$i]['text']; ?></p>
+              <a href="diary/<?= $item['image']; ?>">
+                <img src="/public/upload/<?= $item['image']; ?>" alt="">
+                <h3><?= $item['title']; ?></h3>
+                <p class='dtext'><?= $item['text']; ?></p>
               </a>
             </div>
-            <!-- <div class="dname"><?= $result[$i]['shopname']; ?></div> -->
+            <div class="dname"><?= $item['shopname']?></div>
           </div>
-        <?php endfor; ?>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>
