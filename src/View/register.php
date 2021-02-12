@@ -2,6 +2,9 @@
 session_start();
 include('../../common/funcs.php');
 
+$_SESSION['tests']=1;
+header('Location: /src/View/registerS.php'); //Location:の後ろの半角スペースは必ず入れる。
+return;
 
 $uid = $_SESSION['user_id'];
 $name = $_POST['name'];
@@ -20,6 +23,8 @@ $pdo = dbcon();
 
 //バリデーション処理
 if (!empty($_POST)) {
+
+
 
   $errors = [];
   if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
@@ -44,23 +49,16 @@ if (!empty($_POST)) {
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
     $status = $stmt->execute();
-    $result = $stmt-> fetchAll(PDO::FETCH_ASSOC);
+    $val = $stmt->fetch();
 
 
-    echo 'hoge';
-    print_r($status);
-    var_dump($result);
-    // var_dump($stmt);;
-    echo 'hogr';
-    return;
 
     //データ登録処理後
     if ($status == false) {
       $errors['email2'] = 'このアドレスは既に使用されています';
     } else {
-
       //index.phpへリダイレクト(エラーがなければindex.phpt)
-      header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+      header('Location: /src/View/registerAct.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
   }
@@ -101,7 +99,7 @@ if (!empty($_POST)) {
           <span style='color:red;'> <?php echo isset($errors['email2']) ? $errors['email2'] : ''; ?></span>
           <br>
           <br>
-          <span class="label">Password</span><input type="password" name="password" class="input linput2" placeholder="半角英数字8文字以上で入力" required>
+          <span class="label">Password</span><input type="password" name="password" class="input linput2" placeholder="半角英数字8文字以上で入力" >
           <span style='color:red;'> <?php echo isset($errors['password']) ? $errors['password'] : ''; ?></span>
           <span style='color:red;'> <?php echo isset($errors['password2']) ? $errors['password2'] : ''; ?></span>
           <br>
