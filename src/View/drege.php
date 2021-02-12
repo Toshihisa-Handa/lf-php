@@ -142,7 +142,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
             <div class="dcard">
             <div class='diary-card'>
                 <a href="diary.php/<?= $images[$i]['id']; ?>">
-                    <img src="../..//public/upload/<?= $images[$i]['image']; ?>" alt="" >
+                    <img src="../../public/upload/<?= $images[$i]['image']; ?>" alt="" >
                     <h3><?= $images[$i]['title']; ?></h3>               
                     <p class='dtext'><?= $images[$i]['text']; ?></p>
                 </a>

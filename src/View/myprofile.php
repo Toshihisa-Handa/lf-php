@@ -79,9 +79,11 @@ if ($status == false) {
             <!-- <% if(item.account_img=== null){%> -->
             <div class='pbox1'><img src="images/account3.png" alt=""></div>
           <?php else : ?>
-            <div class='pbox1'><img src="<?= $item['account_img']; ?>" alt=""></div>
+            <!-- <div class='pbox1'><img src="../../public/upload/<?= $item['account_img']; ?>" alt=""></div> -->
             <!-- <div class='pbox1'><img src="<%= item.account_img %>" alt=""></div> -->
           <?php endif; ?>
+          <div class='pbox1'><img src="../../public/upload/<?= $item['account_img']; ?>" alt=""></div>
+
           <div class="pbox2">
             <div class='shopname'><?= $item['name']; ?></div>
             <div class='shoptitle'><?= $item['title']; ?></div>
@@ -101,15 +103,15 @@ if ($status == false) {
       <div class="imgs">
         <div class="img1">
           <p>メイン画像</p>
-          <img src="<?= $item['shop_img']; ?>" alt="">
+          <img src="../../public/upload/<?= $item['shop_img']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真①</p>
-          <img src="<?= $item['img1']; ?>" alt="">
+          <img src="../../public/upload/<?= $item['img1']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真②</p>
-          <img src="<?= $item['img2']; ?>" alt="">
+          <img src="../../public/upload/<?= $item['img2']; ?>" alt="">
         </div>
 
       </div>
