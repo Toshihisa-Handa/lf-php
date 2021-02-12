@@ -15,7 +15,7 @@ $pdo = dbcon();
 
 //2．データ登録SQL作成
 $sql = "SELECT 
-         flower.name,flower.price,flower.feature,flower.tag,flower.created_at,flower.user_id,flower.image,shop.name AS shopname
+         flower.id,flower.name,flower.price,flower.feature,flower.tag,flower.created_at,flower.user_id,flower.image,shop.name AS shopname
          FROM flower JOIN shop on flower.user_id =shop.user_id
          ORDER BY flower.created_at DESC";
 $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
@@ -100,7 +100,7 @@ $result = $stmt->fetchAll(); //今までなかった記述。画像のアップ�
         <?php for ($i = 0; $i < count($result); $i++) : ?>
           <div class="fcard">
             <div class='flower-card'>
-              <a href="flower.php/<?= $result[$i]['id']; ?>">
+            <a href="flower.php/<?= $result[$i]['id']; ?>">
                 <img src="/public/upload/<?= $result[$i]['image']; ?>" alt="">
                 <h3 class='fsname'><?= $result[$i]['name']; ?></h3>
                 <div class='fprice'><?= $result[$i]['price']; ?>円（税込）</div>

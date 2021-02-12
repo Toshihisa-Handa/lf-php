@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../../common/funcs.php');
 $title = $_POST['title'];
 $tag = $_POST['tag'];
@@ -11,7 +12,7 @@ $pdo = dbcon();
 
 //2．データ登録SQL作成
 $sql = "SELECT 
-         diary.title,diary.image,diary.tag,diary.text,diary.created_at,shop.name AS shopname
+         diary.id,diary.title,diary.image,diary.tag,diary.text,diary.created_at,shop.name AS shopname
          FROM diary JOIN shop on diary.user_id =shop.user_id
          ORDER BY diary.created_at DESC";
 $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
@@ -26,7 +27,6 @@ $result = $stmt->fetchAll();
 
 
 <?php
-session_start();
 include('../../common/favicon.html')
 ?>
 
@@ -93,7 +93,7 @@ include('../../common/favicon.html')
         <?php foreach ($result as $item):?>
           <div class="dcard">
             <div class='diary-card'>
-              <a href="diary/<?= $item['image']; ?>">
+            <a href="diary.php/<?= $item['id']; ?>">
                 <img src="/public/upload/<?= $item['image']; ?>" alt="">
                 <h3><?= $item['title']; ?></h3>
                 <p class='dtext'><?= $item['text']; ?></p>
