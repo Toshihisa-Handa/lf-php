@@ -9,16 +9,32 @@ $text = $_POST['text'];
 //DB接続
 $pdo = dbcon();
 
-
-//2．データ登録SQL作成
-$sql = "SELECT 
+if (!$_GET) {
+  //2．データ登録SQL作成
+  $sql = "SELECT 
          id,name,open,close,holiday,shop_img,feature,created_at
          FROM shop 
          ORDER BY created_at DESC";
-$stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
-$status = $stmt->execute();
-$result = $stmt->fetchAll();
-
+  $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+  $status = $stmt->execute();
+  $result = $stmt->fetchAll();
+} else {
+  // var_dump($_GET);
+  // echo $_GET['kensaku'];
+  // return;
+  $kensaku = $_GET['kensaku'];
+  $kensaku = '%' . $kensaku . '%';
+  $sql = "SELECT 
+                  id,name,open,close,holiday,location,shop_img,feature,created_at
+                  FROM shop 
+                  WHERE name LIKE :kensaku 
+                  OR feature LIKE :kensaku OR location LIKE :kensaku 
+                  ORDER BY shop.created_at DESC";
+  $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+  $stmt->bindParam(':kensaku', $kensaku, PDO::PARAM_STR);
+  $status = $stmt->execute();
+  $result = $stmt->fetchAll();
+}
 
 
 
@@ -46,7 +62,7 @@ include('../../common/favicon.html')
 
         <div class='nav-right'>
           <li class='searchNav'>
-            <form action="/s_search" method='get'>
+            <form method='get'>
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
