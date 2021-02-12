@@ -2,9 +2,7 @@
 session_start();
 include('../../common/funcs.php');
 
-$_SESSION['tests']=1;
-header('Location: /src/View/registerS.php'); //Location:の後ろの半角スペースは必ず入れる。
-return;
+
 
 $uid = $_SESSION['user_id'];
 $name = $_POST['name'];
@@ -21,48 +19,50 @@ $pdo = dbcon();
 
 
 
-//バリデーション処理
-if (!empty($_POST)) {
+  //バリデーション処理
+  if (!empty($_POST)) {
 
 
 
-  $errors = [];
-  if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
-    $errors['name'] = 'User Nameに不備があります。';
-  }
-  if ($emailFilter === false) {
-    $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
-  }
-  if ($passwordFilter >= 13 || $passwordFilter <= 3) {
-    $errors['password'] = 'パスワードは半角英数字8文字以上12文字以下で設定して下さい。';
-  }
-  if (preg_match($passwordFilter2, $password) === 0 || preg_match($passwordFilter2, $password) === false) {
-    $errors['password2'] = 'Passwordに半角英数字以外が使用されています。';
-  }
+    $errors = [];
+    if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
+      $errors['name'] = 'User Nameに不備があります。';
+    }
+    if ($emailFilter === false) {
+      $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+    }
+    if ($passwordFilter >= 13 || $passwordFilter <= 3) {
+      $errors['password'] = 'パスワードは半角英数字8文字以上12文字以下で設定して下さい。';
+    }
+    if (preg_match($passwordFilter2, $password) === 0 || preg_match($passwordFilter2, $password) === false) {
+      $errors['password2'] = 'Passwordに半角英数字以外が使用されています。';
+    }
 
-  if (empty($errors)) {
+    if (empty($errors)) {
 
-    //データ登録SQL作成
-    $stmt = $pdo->prepare("INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate());
-    ");
-    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
-    $status = $stmt->execute();
-    $val = $stmt->fetch();
+      //データ登録SQL作成
+      $sql = "INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate())";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+      $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+      $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
+      $status = $stmt->execute();
+      $id = $pdo -> lastInsertId(); 
+      echo $id;
+      echo 'hoge';
+      return;
 
-
-
-    //データ登録処理後
-    if ($status == false) {
-      $errors['email2'] = 'このアドレスは既に使用されています';
-    } else {
-      //index.phpへリダイレクト(エラーがなければindex.phpt)
-      header('Location: /src/View/registerAct.php'); //Location:の後ろの半角スペースは必ず入れる。
-      exit();
+      //データ登録処理後
+      if ($status == false) {
+        $errors['email2'] = 'このアドレスは既に使用されています';
+      } else {
+        //index.phpへリダイレクト(エラーがなければindex.phpt)
+        header('Location: /src/View/registerS.php'); //Location:の後ろの半角スペースは必ず入れる。
+        exit();
+      }
     }
   }
-}
+
 ?>
 
 <?php include('../../common/favicon.html') ?>
@@ -99,7 +99,7 @@ if (!empty($_POST)) {
           <span style='color:red;'> <?php echo isset($errors['email2']) ? $errors['email2'] : ''; ?></span>
           <br>
           <br>
-          <span class="label">Password</span><input type="password" name="password" class="input linput2" placeholder="半角英数字8文字以上で入力" >
+          <span class="label">Password</span><input type="password" name="password" class="input linput2" placeholder="半角英数字8文字以上で入力">
           <span style='color:red;'> <?php echo isset($errors['password']) ? $errors['password'] : ''; ?></span>
           <span style='color:red;'> <?php echo isset($errors['password2']) ? $errors['password2'] : ''; ?></span>
           <br>
