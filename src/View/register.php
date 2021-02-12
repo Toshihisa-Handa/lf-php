@@ -50,6 +50,7 @@ $pdo = dbcon();
       $id = $pdo -> lastInsertId(); 
       $_SESSION['uid'] = $id;
       $_SESSION['uname'] = $name;
+      $_SESSION['uemail'] = $email;
 
 
       //データ登録処理後

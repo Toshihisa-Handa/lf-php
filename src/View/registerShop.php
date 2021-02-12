@@ -18,6 +18,7 @@ $message = $_POST['message'];
 $comment = $_POST['comment'];
 $feature = $_POST['feature'];
 $uid = $_SESSION['uid'];
+$uemail = $_SESSION['uemail'];
 $uname = $_SESSION['uname'] ;
 
 if($_POST){
@@ -93,7 +94,7 @@ if ($status == false) {
                 </div>
 
                 <div class='inframe'>
-                    <div>メールアドレス</div><input class='inputs' type="text" name="email" placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）"><br>
+                    <div>メールアドレス</div><input class='inputs' type="text" name="email" value='<?=$uemail?>' placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）"><br>
                 </div>
 
                 <div class='inframe'>

@@ -4,6 +4,12 @@ htdocs/php/lf
 
 確認すること
 相対パスしか聞かない時とルートパスが聞く時の違いはなんなのか
+$stmt = $pde->prepare();
+$status = $stmt->execute();
+
+
+
+
 
 
 drege.php
