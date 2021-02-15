@@ -240,10 +240,10 @@ if ($status == false) {
 
 
         <div class="nav">
-            <p><a href="/myprofile">店舗情報</a></p>
-            <p><a href="/drege">日記の登録</a></p>
-            <p><a href="/frege">花の登録</a></p>
-            <p><a href="/mapinfo">マップ情報</a></p>
+            <p><a href="/src/View/myprofile.php">店舗情報</a></p>
+            <p><a href="/src/View/drege.php">日記の登録</a></p>
+            <p><a href="/src/View/frege.php">花の登録</a></p>
+            <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
         </div>
 
     </div>
