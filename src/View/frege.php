@@ -142,7 +142,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     <?php for($i = 0; $i <count($images); $i++): ?>
          <div class="fcard">
             <div class='flower-card'>
-                <a href="flower.php/<?= $images[$i]['id']; ?>">
+                <a href="flower.php/? id=<?= $images[$i]['id']; ?>">
                 <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['name']; ?></h3>
                 <div class='fprice'><?= $images[$i]['price']; ?>円（税別）</div>
