@@ -13,7 +13,13 @@ include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
-  $stmt = $pdo->prepare("SELECT dcomment.diary_id,dcomment.dcomment,dcomment.created_at FROM dcomment where diary_id = $id");
+  $sql0 = "SELECT dcomment.dcomment_id,dcomment.diary_id,dcomment.dcomment,dcomment.created_at,dcomment.user_id,diary.id,user.user_id,user.name
+           FROM dcomment
+           JOIN diary on dcomment.diary_id = diary.id
+           JOIN user on dcomment.user_id = user.user_id
+           WHERE diary.id = $id
+           ORDER BY dcomment.created_at DESC";
+  $stmt = $pdo->prepare($sql0);
   $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
   $status = $stmt->execute();
   $commentitems = $stmt->fetchAll();
