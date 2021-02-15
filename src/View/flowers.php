@@ -123,7 +123,7 @@ $result = $stmt->fetchAll();
         <?php for ($i = 0; $i < count($result); $i++) : ?>
           <div class="fcard">
             <div class='flower-card'>
-            <a href="flower.php/<?= $result[$i]['id']; ?>">
+            <a href="flower.php/? id=<?= $result[$i]['id']; ?>">
                 <img src="/public/upload/<?= $result[$i]['image']; ?>" alt="">
                 <h3 class='fsname'><?= $result[$i]['name']; ?></h3>
                 <div class='fprice'><?= $result[$i]['price']; ?>円（税込）</div>
