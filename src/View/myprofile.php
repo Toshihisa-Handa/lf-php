@@ -61,14 +61,11 @@ if ($status == false) {
       <?php foreach ($items as $item) : ?>
 
         <div class='pimg'>
-          <?php if ($item['account_img']) : ?>
-            <!-- <% if(item.account_img=== null){%> -->
-            <div class='pbox1'><img src="images/account3.png" alt=""></div>
+          <?php if ($aimg==null) : ?>
+            <div class='pbox1'><img src="../../public/images/account3.png" alt=""></div>
           <?php else : ?>
-            <!-- <div class='pbox1'><img src="../../public/upload/<?= $item['account_img']; ?>" alt=""></div> -->
-            <!-- <div class='pbox1'><img src="<%= item.account_img %>" alt=""></div> -->
+            <div class='pbox1'><img src="../../public/upload/<?= $aimg; ?>" alt=""></div>
           <?php endif; ?>
-          <div class='pbox1'><img src="../../public/upload/<?= $item['account_img']; ?>" alt=""></div>
 
           <div class="pbox2">
             <div class='shopname'><?= $item['name']; ?></div>
