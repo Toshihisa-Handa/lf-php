@@ -70,27 +70,27 @@ $item = $stmt->fetch();
       <h2>マップ情報</h2>
       <div class='inframe'>
         <div>表示画像</div>
-        <div class='inputs'> <img src="../../public/upload/<?= $item['account_img'];?>" class='mapimg' alt="" ></div><br>
+        <div class='inputs'> <img src="../../public/upload/<?= $item['account_img']; ?>" class='mapimg' alt=""></div><br>
       </div>
       <div class='inframe'>
         <div>　　緯度</div>
-        <div class='inputs'><?=$item['lat']?></div><br>
+        <div class='inputs'><?= $item['lat'] ?></div><br>
       </div>
       <div class='inframe'>
         <div>　　経度</div>
-        <div class='inputs'><?=$item['lon']?></div><br>
+        <div class='inputs'><?= $item['lon'] ?></div><br>
       </div>
       <div class='inframe'>
         <div>タイトル</div>
-        <div class='inputs'><?=$item['maptitle']?></div><br>
+        <div class='inputs'><?= $item['maptitle'] ?></div><br>
       </div>
       <div class='inframe'>
         <div>ピンの色</div>
-        <div class='inputs'><?=$item['pincolor']?></div><br>
+        <div class='inputs'><?= $item['pincolor'] ?></div><br>
       </div>
       <div class='inframe'>
         <div>　　説明</div>
-        <div class='txt'><?=$item['description']?></div><br>
+        <div class='txt'><?= $item['description'] ?></div><br>
       </div>
 
     </div>
@@ -101,10 +101,10 @@ $item = $stmt->fetch();
 
 
     <div class="nav">
-      <p><a class='maplink' href="/src/View/mapEdit.php/<?=$item['id']?>">マップ情報編集</a></p>
-      <p><a href="/myprofile">店舗情報</a></p>
-      <p><a href="/drege">日記の登録</a></p>
-      <p><a href="/frege">花の登録</a></p>
+      <p><a class='maplink' href="/src/View/mapEdit.php/<?= $item['id'] ?>">マップ情報編集</a></p>
+      <p><a href="/src/View/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/View/drege.php">日記の登録</a></p>
+      <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
     </div>
 
 

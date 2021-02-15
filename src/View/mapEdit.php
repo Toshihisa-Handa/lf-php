@@ -93,30 +93,30 @@ if (!$_POST) {
       <h1>マップ情報登録</h1>
       <form method="post">
         <div class='inframe'>
-          <div>　　緯度</div><input class='inputs' type="text" name="lat" value='<?=$item['lat']?>'><br>
+          <div>　　緯度</div><input class='inputs' type="text" name="lat" value='<?= $item['lat'] ?>'><br>
         </div>
         <div class='inframe'>
-          <div>　　経度</div><input class='inputs' type="text" name="lon" value='<?=$item['lon']?>'><br>
+          <div>　　経度</div><input class='inputs' type="text" name="lon" value='<?= $item['lon'] ?>'><br>
         </div>
         <!-- <div class='inframe maphidden'>
-          <div>ピンの色</div><input class='inputs' type="text" name="pincolor" value='<?=$item['pincolor']?>'><br>
+          <div>ピンの色</div><input class='inputs' type="text" name="pincolor" value='<?= $item['pincolor'] ?>'><br>
         </div> -->
         <div class='inframe '>
-          <div>タイトル</div><input class='inputs' type="text" name="maptitle" value='<?=$item['maptitle']?>'><br>
+          <div>タイトル</div><input class='inputs' type="text" name="maptitle" value='<?= $item['maptitle'] ?>'><br>
         </div>
         <div class='inframe'>
-          <div>　　説明</div><textarea class='txt' name="description"><?=$item['description']?></textarea><br>
+          <div>　　説明</div><textarea class='txt' name="description"><?= $item['description'] ?></textarea><br>
         </div>
-        <input type="hidden" name='id' value='<?=$item['id']?>'>
+        <input type="hidden" name='id' value='<?= $item['id'] ?>'>
         <button type="submit" class='sends'>送信</button>
       </form>
     </div>
 
     <div class="nav">
       <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
-      <p><a href="/myprofile">店舗情報</a></p>
-      <p><a href="/drege">日記の登録</a></p>
-      <p><a href="/frege">花の登録</a></p>
+      <p><a href="/src/View/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/View/drege.php">日記の登録</a></p>
+      <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
     </div>
 
 
