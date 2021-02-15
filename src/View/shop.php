@@ -17,7 +17,7 @@ $status = $stmt->execute();
 $item = $stmt->fetch();
 
 $stmt = $pdo->prepare("SELECT * FROM diary where user_id=:uid");
-$stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
+$stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
 $status = $stmt->execute();
 $diaryitems = $stmt->fetchAll();
 
@@ -133,33 +133,33 @@ $floweritems = $stmt->fetchAll();
 
     <!-- 日記一覧 -->
 
-    <!-- <% if (ditem.length) { %>
+    <?php if (count($diaryitems) >=1) : ?>
   <div class="dlist">
     <div class="dglide">
         <div class="glide__track" data-glide-el="track">
           <ul class="glide__slides">
-            <% ditem.forEach((dite) => { %>
+          <?php foreach ($diaryitems as $ditem) : ?>
               <div class="glide__slide">
                 <div class="diary-box">
-                <a href="/diary/<%=dite.id%>">
-                  <div class="diary"><img src="<%= dite.image %>" alt=""></div>
-                  <div class='dtitle'><%=dite.title%></div>
-                  <div class='dtext'><%=dite.text%></div>
+                <a href="/src/View/diary.php/? id=<?= $ditem['id'] ?>">
+                  <div class="diary"><img src="/public/upload/<?= $ditem['image'] ?>" alt=""></div>
+                  <div class='dtitle'><?= $ditem['title'] ?></div>
+                  <div class='dtext'><?= $ditem['text'] ?></div>
                 </a> 
               </div>
             </div>
-            <% }) %>
+            <?php endforeach; ?>
           </ul>
         </div>
     </div>
   </div>
  
-<% }else{ %>
+  <?php else : ?>
   <div class="dlist">
  <p class='StopsubTitle' style='text-align: center; color:rgb(129, 131, 134)'>日記は登録されてません</p>
 </div>
 
-<% } %> -->
+<?php endif; ?>
 
 
 
@@ -238,96 +238,96 @@ $floweritems = $stmt->fetchAll();
   <script>
     //お花のカルーセルの設定
     let config;
-    // if(<%=fitem.length%> > 4){
-    //    config = {
-    //     type: 'carousel',
-    //     perView: <%=fitem.length%>,
-    //     breakpoints: {
-    //       2250: {
-    //       perView: 5
-    //     },
-    //     1620: {
-    //       perView: 4
-    //     },
-    //     1350: {
-    //       perView: 3
-    //     },
-    //     1000: {
-    //       perView: 2
-    //     },
-    //     650: {
-    //       perView: 1
-    //     }
-    //   }
-    // }
-    // } else{
-    //   // console.log('hogggg')
-    //    config = {
-    //     type: 'carousel',
-    //     perView: <%=fitem.length%>,
-    //     breakpoints: {
-    //     1620: {
-    //       perView: 4
-    //     },
-    //     1350: {
-    //       perView: 3
-    //     },
-    //     1000: {
-    //       perView: 2
-    //     },
-    //     650: {
-    //       perView: 1
-    //     }
-    //   }
-    // }
-    //   // console.log('hogggg')
-    // }
+    if(<?=count($floweritems)?> > 4){
+       config = {
+        type: 'carousel',
+        perView: <?=count($floweritems)?>,
+        breakpoints: {
+          2250: {
+          perView: 5
+        },
+        1620: {
+          perView: 4
+        },
+        1350: {
+          perView: 3
+        },
+        1000: {
+          perView: 2
+        },
+        650: {
+          perView: 1
+        }
+      }
+    }
+    } else{
+      // console.log('hogggg')
+       config = {
+        type: 'carousel',
+        perView: <?=count($floweritems)?>,
+        breakpoints: {
+        1620: {
+          perView: 4
+        },
+        1350: {
+          perView: 3
+        },
+        1000: {
+          perView: 2
+        },
+        650: {
+          perView: 1
+        }
+      }
+    }
+      // console.log('hogggg')
+    }
 
 
     // //日記のカルーセルの設定
-    // let dconfig;
-    // if(<%=ditem.length%> > 4){
-    //   dconfig = {
-    //     type: 'carousel',
-    //     perView:<%=ditem.length%>,
-    //     breakpoints: {
-    //     2250: {
-    //       perView: 5
-    //     },
-    //     1620: {
-    //       perView: 4
-    //     },
-    //     1350: {
-    //       perView: 3
-    //     },
-    //     1000: {
-    //       perView: 2
-    //     },
-    //     650: {
-    //       perView: 1
-    //     }
-    //   }
-    // }
-    // } else{
-    //    dconfig = {
-    //     type: 'carousel',
-    //     perView: <%=ditem.length%>,
-    //     breakpoints: {
-    //     1620: {
-    //       perView: 4
-    //     },
-    //     1350: {
-    //       perView: 3
-    //     },
-    //     1000: {
-    //       perView: 2
-    //     },
-    //     650: {
-    //       perView: 1
-    //     }
-    //   }
-    //  }
-    // }
+    let dconfig;
+    if(<?=count($diaryitems)?> > 4){
+      dconfig = {
+        type: 'carousel',
+        perView:<?=count($diaryitems)?>,
+        breakpoints: {
+        2250: {
+          perView: 5
+        },
+        1620: {
+          perView: 4
+        },
+        1350: {
+          perView: 3
+        },
+        1000: {
+          perView: 2
+        },
+        650: {
+          perView: 1
+        }
+      }
+    }
+    } else{
+       dconfig = {
+        type: 'carousel',
+        perView:<?=count($diaryitems)?>,
+        breakpoints: {
+        1620: {
+          perView: 4
+        },
+        1350: {
+          perView: 3
+        },
+        1000: {
+          perView: 2
+        },
+        650: {
+          perView: 1
+        }
+      }
+     }
+    }
 
 
 

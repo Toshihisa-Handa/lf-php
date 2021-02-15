@@ -6,7 +6,6 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 
-
 //DB接続
 $pdo = dbcon();
 include('../../common/header-icon.php');

@@ -24,7 +24,7 @@ if (!$_POST) {
         FROM diary 
         JOIN shop on diary.user_id = shop.user_id 
         JOIN dcomment on diary.id = dcomment.diary_id
-        WHERE diary.id = 117
+        WHERE diary.id = $id
         ORDER BY created_at DESC";
 
   // $sql2 = "SELECT dcomment.diary_id,dcomment.dcomment FROM dcomment where diary_id = $id";
