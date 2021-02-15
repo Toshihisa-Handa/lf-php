@@ -8,22 +8,62 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 $id = $_GET['id'];
-
+$fcomment = $_POST['fcomment'];
 
 //DB接続
 $pdo = dbcon();
 include('../../common/header-icon.php');
 
 
-//データ登録SQL作成
-$sql = "SELECT flower.id,flower.name,flower.price,flower.feature,flower.text,flower.user_id,flower.image,shop.name AS shopname
-        FROM flower JOIN shop on flower.user_id = shop.user_id 
+
+
+if (!$_POST) {
+  //データ登録SQL作成
+  $sql0 = "SELECT fcomment.fcomment_id,fcomment.flower_id,fcomment.fcomment,fcomment.created_at,fcomment.user_id ,user.user_id,user.name
+           FROM fcomment
+           JOIN flower on fcomment.flower_id = flower.id
+           JOIN user on fcomment.user_id = user.user_id
+           WHERE flower.id = $id
+           ORDER BY fcomment.created_at DESC";
+  $stmt = $pdo->prepare($sql0);
+  $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
+  $status = $stmt->execute();
+  $commentitems = $stmt->fetchAll();
+
+
+  $sql = "SELECT flower.id,flower.name,flower.price,flower.feature,flower.text,flower.user_id,flower.image,shop.name AS shopname
+        FROM flower 
+        JOIN shop on flower.user_id = shop.user_id 
         WHERE flower.id = $id";
-$stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
-$status = $stmt->execute();
-$item = $stmt->fetch();
+  $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+  $status = $stmt->execute();
+  $item = $stmt->fetch();
+} else {
 
 
+
+  $sql = 'INSERT INTO fcomment (flower_id, fcomment, created_at, user_id) VALUES (:flower_id,:fcomment,sysdate(),:uid)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':flower_id', $id, PDO::PARAM_INT);
+  $stmt->bindValue(':fcomment', $fcomment, PDO::PARAM_STR);
+  if ($uid == null) {
+    $stmt->bindValue(':uid', 0, PDO::PARAM_INT);
+  } else {
+    $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
+  }
+  $status = $stmt->execute();
+
+  if ($status == false) {
+    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
+    $error = $stmt->errorInfo();
+    exit("SQLError:" . $error[2]); //エラーが起きたらエラーの2番目の配列から取ります。ここは考えず、これを使えばOK
+    // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
+  } else {
+    //５．index.phpへリダイレクト(エラーがなければindex.phpt)
+    header("Location: /src/View/flower.php/? id=$id"); //Location:の後ろの半角スペースは必ず入れる。
+    exit();
+  }
+}
 
 
 
@@ -48,7 +88,7 @@ $item = $stmt->fetch();
 
         <div class='nav-right'>
 
-        <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -72,19 +112,19 @@ $item = $stmt->fetch();
         <p class='dfont2'>価格：<?= $item['price'] ?>円（税込）</p>
         <p class='dfont2'>特徴：<?= $item['name'] ?></p>
         <p class='dfont2' class='diaryText'><?= $item['text'] ?></p>
-        <div id='cbtn'><span class='btnClick'>▶︎</span>コメント（<%=fitems.length %>）</div>
+        <div id='cbtn'><span class='btnClick'></span>コメント（<?= count($commentitems) ?>）</div>
 
         <div class="dcomment">
 
-          <% if (fitems.length) { %>
-          <% fitems.forEach(function(fitem) { %>
-          <div class="comment-box">
-            <div class="dcname"><%= fitem.user_name %></div>
-            <div class='dccreatedAt'> <%= fitem.created_at %></div>
-            <div class="dccomment"><%= fitem.fcomment %></div>
-          </div>
-          <% }); %>
-          <% } %>
+          <?php if (count($commentitems) >= 1) : ?>
+            <?php foreach ($commentitems as $citem) : ?>
+              <div class="comment-box">
+                <div class="dcname"><?= $citem['name'] ?></div>
+                <div class='dccreatedAt'> <?= $citem['created_at']; ?></div>
+                <div class="dccomment"><?= $citem['fcomment']; ?></div>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
 
 
         </div>
@@ -95,8 +135,8 @@ $item = $stmt->fetch();
         </div>
         <div class="sidebar__item sidebar__item--fixed">
           <!-- 固定・追従させたいエリア -->
-          <form action="/fcomment_post/<%= item.id %>" method="post">
-            <textarea name="fcomment" id="message" class="form textarea" placeholder="Comment"></textarea>
+          <form method="post">
+            <textarea name="fcomment" id="fcomment" class="form textarea" placeholder="Comment"></textarea>
             <button class="lbutton" type="submit" class="submit">submit</button>
           </form>
 
