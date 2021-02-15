@@ -13,30 +13,24 @@ include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
-  // $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id,shop.name AS shopname
-  //         FROM diary 
-  //         JOIN shop on diary.user_id = shop.user_id 
-  //         WHERE diary.id = $id";
-
-  $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id,
-          shop.name AS shopname,shop.account_name,shop.account_img,
-          dcomment.diary_id,dcomment.dcomment,dcomment.created_at
-        FROM diary 
-        JOIN shop on diary.user_id = shop.user_id 
-        JOIN dcomment on diary.id = dcomment.diary_id
-        WHERE diary.id = $id
-        ORDER BY created_at DESC";
-
-  // $sql2 = "SELECT dcomment.diary_id,dcomment.dcomment FROM dcomment where diary_id = $id";
-
-  // $sql2 = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id,shop.name AS shopname,dcomment.diary_id,dcomment.dcomment
-  //        FROM dcomment where diary_id = $id";
+  $stmt = $pdo->prepare("SELECT dcomment.diary_id,dcomment.dcomment,dcomment.created_at FROM dcomment where diary_id = $id");
+  $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
+  $status = $stmt->execute();
+  $commentitems = $stmt->fetchAll();
 
 
-
+  $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id,shop.name AS shopname
+          FROM diary 
+          JOIN shop on diary.user_id = shop.user_id 
+          WHERE diary.id = $id";
   $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
   $status = $stmt->execute();
-  $items = $stmt->fetchAll();
+  $item = $stmt->fetch();
+
+
+
+
+
 } else {
 
 
@@ -104,23 +98,22 @@ if (!$_POST) {
     <div class="container">
       <main class="main">
         <!-- メインコンテンツ -->
-        <?php for ($i = 0; $i < 1; $i++) : ?>
-          <div><img class='diaryImg' src="/public/upload/<?= $items[$i]['image']; ?>"></div>
-          <h2 class='dfont'><?= $items[$i]['title'] ?></h2>
-          <p class='diaryText dfont2'><?= $items[$i]['text'] ?></p>
-        <?php endfor; ?>
-        <div id='cbtn'><span class='btnClick'></span>コメント（<%=ditems.length %>）</div>
+          <div><img class='diaryImg' src="/public/upload/<?= $item['image']; ?>"></div>
+          <h2 class='dfont'><?= $item['title'] ?></h2>
+          <p class='diaryText dfont2'><?= $item['text'] ?></p>
+        <div id='cbtn'><span class='btnClick'></span>コメント（<?=count($commentitems)?>）</div>
 
         <div class="dcomment">
-          <% if (ditems.length) { %>
-          <?php foreach ($items as $item) : ?>
+        <?php if (count($commentitems) >=1) : ?>
+
+        <?php foreach ($commentitems as $citem) : ?>
             <div class="comment-box">
-              <div class="dcname "><%= ditem.user_name %></div>
-              <div class='dccreatedAt'> <?= $item['created_at']; ?></div>
-              <div class="dccomment"><?= $item['dcomment']; ?></div>
+              <div class="dcname "><?= $citem['name'] ?></div>
+              <div class='dccreatedAt'> <?= $citem['created_at']; ?></div>
+              <div class="dccomment"><?= $citem['dcomment']; ?></div>
             </div>
-            <% }); %>
           <?php endforeach; ?>
+<?php endif; ?>
         </div>
       </main>
       <div class="sidebar">
