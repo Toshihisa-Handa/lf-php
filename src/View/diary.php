@@ -6,12 +6,11 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 $id = $_GET['id'];
-
-
+$dcomment = $_POST['dcomment'];
 //DB接続
 $pdo = dbcon();
 
-
+if(!$_POST){
 //データ登録SQL作成
 $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id,shop.name AS shopname
         FROM diary JOIN shop on diary.user_id = shop.user_id 
@@ -19,6 +18,34 @@ $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_
 $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
 $status = $stmt->execute();
 $item = $stmt->fetch();
+}else{
+  
+ 
+  
+  $sql = 'INSERT INTO dcomment (diary_id, dcomment, created_at, user_id) VALUES (:diary_id,:dcomment,sysdate(),:uid)';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':diary_id', $id, PDO::PARAM_INT);  
+  $stmt->bindValue(':dcomment', $dcomment, PDO::PARAM_STR);  
+  $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);  
+  $status = $stmt->execute();
+
+  if($status==false){
+    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
+    $error = $stmt->errorInfo();
+    exit("SQLError:".$error[2]);//エラーが起きたらエラーの2番目の配列から取ります。ここは考えず、これを使えばOK
+                               // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
+  }else{
+    //５．index.phpへリダイレクト(エラーがなければindex.phpt)
+    header("Location: /src/View/diary.php/? id=$id");//Location:の後ろの半角スペースは必ず入れる。
+    exit();
+  
+  }
+
+
+}
+
+
+
 
 
 ?>
@@ -81,7 +108,7 @@ $item = $stmt->fetch();
       <div id='cbtn'><span class='btnClick'></span>コメント（<%=ditems.length %>）</div>
  
       <div class="dcomment">
-        <!-- <% if (ditems.length) { %>
+        <% if (ditems.length) { %>
                   <% ditems.forEach(function(ditem) { %>
                    <div class="comment-box">
                     <div class="dcname "><%= ditem.user_name %></div>             
@@ -89,7 +116,7 @@ $item = $stmt->fetch();
                     <div class="dccomment"><%= ditem.dcomment %></div>
                   </div> 
                   <% }); %>
-         <% } %> -->
+         <% } %>
      </div>
     </main>
     <div class="sidebar">
@@ -98,8 +125,8 @@ $item = $stmt->fetch();
       </div>
       <div class="sidebar__item sidebar__item--fixed">
         <!-- 固定・追従させたいエリア -->
-        <form action="/dcomment_post/<%= item.id %>" method="post">
-            <textarea name="dcomment" id="message" class="form textarea"  placeholder="Comment"></textarea>
+        <form  method="post">
+            <textarea name="dcomment" id="dcomment" class="form textarea"  placeholder="Comment"></textarea>
             <button class="lbutton" type="submit" class="submit">submit</button>
         </form>
         
