@@ -111,7 +111,7 @@ include('../../common/favicon.html')
         <?php foreach ($result as $item) : ?>
           <div class="dcard">
             <div class='diary-card'>
-              <a href="diary.php/<?= $item['id']; ?>">
+              <a href="diary.php/? id=<?= $item['id']; ?>">
                 <img src="/public/upload/<?= $item['image']; ?>" alt="">
                 <h3><?= $item['title']; ?></h3>
                 <p class='dtext'><?= $item['text']; ?></p>

@@ -1,7 +1,29 @@
 <?php 
 session_start();
-include('../../common/favicon.html') 
+include('../../common/funcs.php');
+$title = $_POST['title'];
+$tag = $_POST['tag'];
+$text = $_POST['text'];
+$uid = $_SESSION['uid'];
+$id = $_GET['id'];
+
+
+//DB接続
+$pdo = dbcon();
+
+
+//データ登録SQL作成
+$sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id,shop.name AS shopname
+        FROM diary JOIN shop on diary.user_id = shop.user_id 
+        WHERE diary.id = $id";
+$stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+$status = $stmt->execute();
+$item = $stmt->fetch();
+
+
 ?>
+
+<?php include('../../common/favicon.html') ?>
 
     <title>日記詳細</title>
     <?php include('../../common/style.html') ?>
@@ -53,10 +75,10 @@ include('../../common/favicon.html')
    <div class="container">
     <main class="main">
       <!-- メインコンテンツ -->
-      <div><img class='diaryImg' src="<%= item.image %>"></div>
-      <!-- <h2 class='dfont'><%=item.title%></h2>
-      <p class='diaryText dfont2'><%=item.text%></p>
-      <div id='cbtn'><span class='btnClick'>▶︎</span>コメント（<%=ditems.length %>）</div> -->
+      <div><img class='diaryImg' src="/public/upload/<?= $item['image']; ?>"></div>
+      <h2 class='dfont'><?=$item['title'] ?></h2>
+      <p class='diaryText dfont2'><?=$item['text'] ?></p>
+      <div id='cbtn'><span class='btnClick'></span>コメント（<%=ditems.length %>）</div>
  
       <div class="dcomment">
         <!-- <% if (ditems.length) { %>
