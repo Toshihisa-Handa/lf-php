@@ -1,22 +1,74 @@
-<?php 
+<?php
 session_start();
-include('../../common/favicon.html') 
+include('../../common/funcs.php');
+$id = $_POST['id'];
+$uid = $_SESSION['uid'];
+$lat = $_POST['lat'];
+$lon = $_POST['lon'];
+$maptitle = $_POST['maptitle'];
+$description = $_POST['description'];
+
+//DB接続
+$pdo = dbcon();
+
+//画像処理
+if (!$_POST) {
+
+  //データ登録SQL作成
+  $sql = "SELECT map.id,map.lat,map.lon,map.pincolor,map.maptitle,
+        map.description,map.created_at,map.user_id,shop.account_img 
+        FROM map JOIN shop on map.user_id = shop.user_id 
+        WHERE map.user_id = $uid";
+  $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+  $status = $stmt->execute();
+  $item = $stmt->fetch();
+} else {
+
+  //データ登録SQL作成
+  $sql = 'UPDATE map SET lat=:lat,lon=:lon,maptitle=:maptitle,description=:description WHERE id=:id';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':lat', $lat, PDO::PARAM_INT);
+  $stmt->bindValue(':lon', $lon, PDO::PARAM_INT);
+  $stmt->bindValue(':maptitle', $maptitle, PDO::PARAM_STR);
+  $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+  $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+  $status = $stmt->execute();
+
+
+  //データ登録処理後（基本コピペ使用でOK)
+  if ($status == false) {
+    $error = $stmt->errorInfo();
+    exit("SQLError:" . $error[2]);
+  } else {
+    header('Location: /src/View/mapinfo.php'); //Location:の後ろの半角スペースは必ず入れる。
+    exit();
+  }
+}
+
+
+
+
+
 ?>
-    <title>マップ情報編集</title>
-    <?php include('../../common/style.html') ?>
-    <link rel="stylesheet" href="/public/css/mapEdit.css">
+
+
+<?php include('../../common/favicon.html') ?>
+<title>マップ情報編集</title>
+<?php include('../../common/style.html') ?>
+<link rel="stylesheet" href="/public/css/mapEdit.css">
 
 </head>
- <body>
-<div class="grid-box">
 
-  <header>
-    <ul>
-      
-    <?php include('../../common/header-nav-leftIcon.html') ?>
+<body>
+  <div class="grid-box">
 
-      <div class='nav-right'>
-<!--       
+    <header>
+      <ul>
+
+        <?php include('../../common/header-nav-leftIcon.html') ?>
+
+        <div class='nav-right'>
+          <!--       
       <% if (typeof user == 'undefined') { %>
       <li class='log'><a href="/login" class='hlink'>Login</a></li>
       <% } else{%>
@@ -33,80 +85,72 @@ include('../../common/favicon.html')
               <% } %>
         </a>
     </li> -->
- </div>
+        </div>
 
-    </ul>
- </header>
+      </ul>
+    </header>
     <div class="main">
-        <h1>マップ情報登録</h1>
-        <form class='editform' action="/map_insert" method="post" enctype="multipart/form-data">
-            <div id='attachment'>
-                <label>
-                    <input type="file" name="image" class="fileinput">マップ画像登録
-                  </label><br>
-                  <span class="filename">選択されていません</span>
-              </div><br>
-            <button type="submit" class='sends'>送信</button>
-        </form>
-        <form action='/mapUpdate/<%=item.id%>' method="post" >
-            <!-- <div class='inframe'>
-              <div>　　緯度</div><input class='inputs' type="text" name="lat" value='<%= item.lat%>'><br>
-          </div>
-            <div class='inframe'>
-              <div>　　経度</div><input class='inputs' type="text" name="lon" value='<%= item.lon%>'><br>
-          </div>
-            <div class='inframe maphidden'>
-              <div>ピンの色</div><input class='inputs' type="text" name="pincolor" value='<%= item.pincolor%>'><br>
-          </div>
-            <div class='inframe '>
-              <div>タイトル</div><input class='inputs' type="text" name="maptitle" value='<%= item.title%>'><br>
-          </div>
-            <div class='inframe'>
-              <div>　　説明</div><textarea class='txt'  name="description" ><%= item.description%></textarea><br>
-          </div> -->
-       
-          <button type="submit" class='sends'>送信</button>
+      <h1>マップ情報登録</h1>
+      <form method="post">
+        <div class='inframe'>
+          <div>　　緯度</div><input class='inputs' type="text" name="lat" value='<?=$item['lat']?>'><br>
+        </div>
+        <div class='inframe'>
+          <div>　　経度</div><input class='inputs' type="text" name="lon" value='<?=$item['lon']?>'><br>
+        </div>
+        <!-- <div class='inframe maphidden'>
+          <div>ピンの色</div><input class='inputs' type="text" name="pincolor" value='<?=$item['pincolor']?>'><br>
+        </div> -->
+        <div class='inframe '>
+          <div>タイトル</div><input class='inputs' type="text" name="maptitle" value='<?=$item['maptitle']?>'><br>
+        </div>
+        <div class='inframe'>
+          <div>　　説明</div><textarea class='txt' name="description"><?=$item['description']?></textarea><br>
+        </div>
+        <input type="hidden" name='id' value='<?=$item['id']?>'>
+        <button type="submit" class='sends'>送信</button>
       </form>
     </div>
 
     <div class="nav">
-        <p><a href="/mapinfo">マップ情報</a></p>
-        <p><a href="/myprofile">店舗情報</a></p>
-        <p><a href="/drege">日記の登録</a></p>
-        <p><a href="/frege">花の登録</a></p>
-      </div>
-     
-   
-</div>
+      <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
+      <p><a href="/myprofile">店舗情報</a></p>
+      <p><a href="/drege">日記の登録</a></p>
+      <p><a href="/frege">花の登録</a></p>
+    </div>
 
-<!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-<div class="footer-glid">
-  <footer>
-      <h3>Copyright  second-cube</h3>
-  </footer>
 
-  <!-- フッターナビ -->
-  <div class='Fnav web ' >
-  <ul class='navs'>
-  <li ><a href="/map" ><img class='navimg' src="/public/images/map-24.png" alt=""></a><a href="/map" class='Fnav-link hlink'>Map</a></li>
-  <li ><a href="/shops" ><img class='navimg' src="/public/images/shop-24.png" alt=""></a><a href="/shops" class='Fnav-link hlink'>Shop</a></li>
-  <li ><a href="/diarys" ><img class='navimg' src="/public/images/script-24.png" alt=""></a><a href="/diarys" class='Fnav-link hlink'>Diary</a></li>
-  <li ><a href="/flowers" ><img class='navimg' src="/public/images/flower-24.png" alt=""></a><a href="/flowers" class='Fnav-link hlink'>Flower</a></li>
-  <!-- <li><div id='search'>検索</div></li> -->
-
-  </ul>
   </div>
-</div>
-<!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+
+  <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+  <div class="footer-glid">
+    <footer>
+      <h3>Copyright second-cube</h3>
+    </footer>
+
+    <!-- フッターナビ -->
+    <div class='Fnav web '>
+      <ul class='navs'>
+        <li><a href="/map"><img class='navimg' src="/public/images/map-24.png" alt=""></a><a href="/map" class='Fnav-link hlink'>Map</a></li>
+        <li><a href="/shops"><img class='navimg' src="/public/images/shop-24.png" alt=""></a><a href="/shops" class='Fnav-link hlink'>Shop</a></li>
+        <li><a href="/diarys"><img class='navimg' src="/public/images/script-24.png" alt=""></a><a href="/diarys" class='Fnav-link hlink'>Diary</a></li>
+        <li><a href="/flowers"><img class='navimg' src="/public/images/flower-24.png" alt=""></a><a href="/flowers" class='Fnav-link hlink'>Flower</a></li>
+        <!-- <li><div id='search'>検索</div></li> -->
+
+      </ul>
+    </div>
+  </div>
+  <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script>
-     $('#attachment .fileinput').on('change', function () {
- var file = $(this).prop('files')[0];
- $(this).closest('#attachment').find('.filename').text(file.name);
-});
- </script>
- </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $('#attachment .fileinput').on('change', function() {
+      var file = $(this).prop('files')[0];
+      $(this).closest('#attachment').find('.filename').text(file.name);
+    });
+  </script>
+</body>
+
 </html>
