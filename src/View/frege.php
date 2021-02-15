@@ -11,6 +11,7 @@ $uid = $_SESSION['uid'];
 
 //DB接続
 $pdo = dbcon();
+include('../../common/header-icon.php');
 
 //画像処理
 if($_SERVER['REQUEST_METHOD'] != 'POST'){
@@ -86,23 +87,8 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
             <?php include('../../common/header-nav-leftIcon.html') ?>
 
               <div class='nav-right'>
-<!--               
-              <% if (typeof user == 'undefined') { %>
-              <li class='log'><a href="/login" class='hlink'>Login</a></li>
-              <% } else{%>
-              <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
-              <% } %>
-              <li class='account_img' >
-                 <a href="/mypage">
-                    <% if (typeof user !== 'undefined' ) { %>
-                        <% if(sitems[0].account_img=== null){%>
-                            <img src="images/account3.png" class='aimg' alt="" >  
-                      <% }else{ %>
-                        <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
-                      <% } %>
-                      <% } %>
-                </a>
-            </li> -->
+              <?php include('../../common/header-nav-rightIcon.php') ?>
+
          </div>
      
             </ul>

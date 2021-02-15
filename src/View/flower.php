@@ -12,6 +12,7 @@ $id = $_GET['id'];
 
 //DB接続
 $pdo = dbcon();
+include('../../common/header-icon.php');
 
 
 //データ登録SQL作成
@@ -47,22 +48,8 @@ $item = $stmt->fetch();
 
         <div class='nav-right'>
 
-          <!-- <% if (typeof user == 'undefined') { %>
-      <li class='log'><a href="/login" class='hlink'>Login</a></li>
-      <% } else{%>
-      <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
-      <% } %>
-      <li class='account_img' >
-         <a href="/mypage">
-            <% if (typeof user !== 'undefined' ) { %>
-                <% if(sitems[0].account_img=== null){%>
-                    <img src="/public/images/account3.png" class='aimg' alt="" >  
-              <% }else{ %>
-                <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
-              <% } %>
-              <% } %>
-        </a>
-    </li> -->
+        <?php include('../../common/header-nav-rightIcon.php') ?>
+
         </div>
 
       </ul>

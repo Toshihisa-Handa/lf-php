@@ -9,6 +9,7 @@ $id = $_GET['id'];
 $dcomment = $_POST['dcomment'];
 //DB接続
 $pdo = dbcon();
+include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
@@ -84,24 +85,8 @@ if (!$_POST) {
 
         <div class='nav-right'>
 
-          <?php if ($uid == false || '') : ?>
-            <li class='log'><a href="/src/View/login.php" class='hlink'>Login</a></li>
-          <?php else : ?>
-            <li class='log'><a href="/src/View/logout.php" class='hlink'>Logout</a></li>
-          <?php endif; ?>
-          <li class='account_img'>
-            <a href="/src/View/mypage.php">
-              <?php if ($uid) { ?>
-                <?php if ($items['account_img'] === null) : ?>
-                  <img src="/public/images/account3.png" class='aimg' alt="">
-                <?php else : ?>
-                  <img src="/public/upload/<?= $items['account_img']; ?>" class='aimg' alt="">
-                <?php endif; ?>
-              <?php } ?>
-            </a>
-          </li>
-          </a>
-          </li>
+        <?php include('../../common/header-nav-rightIcon.php') ?>
+
         </div>
 
       </ul>

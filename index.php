@@ -10,7 +10,8 @@ $pdo = dbcon();
 
 
 //データ登録SQL作成
-SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id, shop.name AS shopname,shop.account_name,shop.account_img, dcomment.diary_id,dcomment.dcomment,dcomment.created_at FROM diary JOIN shop on diary.user_id = shop.user_id JOIN dcomment on diary.id = dcomment.diary_id WHERE diary.id = 117 ORDER BY created_at DESC$stmt->bindValue('uid', $uid, PDO::PARAM_INT);
+$stmt = $pdo->prepare("SELECT account_img FROM shop where user_id=:uid");
+$stmt->bindValue('uid', $uid, PDO::PARAM_INT);
 $status = $stmt->execute();
 $item = $stmt->fetch();
 

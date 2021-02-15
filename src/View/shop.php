@@ -1,6 +1,12 @@
 <?php 
 session_start();
+include('../../common/funcs.php');
+
 $uid = $_SESSION['uid'];
+
+$pdo = dbcon();
+include('../../common/header-icon.php');
+
 
 include('../../common/favicon.html') 
 ?>
@@ -23,23 +29,8 @@ include('../../common/favicon.html')
     <?php include('../../common/header-nav-leftIcon.html') ?>
 
       <div class='nav-right'>
-<!--     
-      <% if (typeof user == 'undefined') { %>
-      <li class='log'><a href="/login" class='hlink'>Login</a></li>
-      <% } else{%>
-      <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
-      <% } %>
-      <li class='account_img' >
-         <a href="/mypage">
-            <% if (typeof user !== 'undefined' ) { %>
-                <% if(sitems[0].account_img=== null){%>
-                    <img src="/public/images/account3.png" class='aimg' alt="" >  
-              <% }else{ %>
-                <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
-              <% } %>
-              <% } %>
-        </a>
-    </li> -->
+      <?php include('../../common/header-nav-rightIcon.php') ?>
+
  </div>
 
     </ul>

@@ -20,6 +20,7 @@ $message = $_POST['message'];
 $comment = $_POST['comment'];
 $feature = $_POST['feature'];
 
+
 //DB接続
 $pdo = dbcon();
 
