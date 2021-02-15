@@ -1,14 +1,31 @@
 <?php
 session_start();
 include('common/funcs.php');
+$uid = $_SESSION['uid'];
 $name = $_SESSION['name'];
 
 
+//DB接続
+$pdo = dbcon();
 
-include('common/favicon.html')
+
+//データ登録SQL作成
+SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id, shop.name AS shopname,shop.account_name,shop.account_img, dcomment.diary_id,dcomment.dcomment,dcomment.created_at FROM diary JOIN shop on diary.user_id = shop.user_id JOIN dcomment on diary.id = dcomment.diary_id WHERE diary.id = 117 ORDER BY created_at DESC$stmt->bindValue('uid', $uid, PDO::PARAM_INT);
+$status = $stmt->execute();
+$item = $stmt->fetch();
+
+
+
+//データ登録処理後
+if ($status == false) {
+    $error = $stmt->errorInfo();
+    exit("SQLError:" . $error[2]);
+}
+
 ?>
 
 
+<?php include('common/favicon.html'); ?>
 <title>Life flower</title>
 <?php include('common/style.html') ?>
 <link rel="stylesheet" href="public/css/top.css">
@@ -16,7 +33,6 @@ include('common/favicon.html')
 
 <body>
     <div class="grid-box">
-
         <header>
             <ul>
                 <li><a href="/index.php"><img src="/public/images/lf-logo-gray.png" alt="" class='logo'></a></li>
@@ -25,24 +41,23 @@ include('common/favicon.html')
                     <li>
                         <div id='search'>検索</div>
                     </li>
-                    <!-- <% if (typeof user == 'undefined') { %> -->
-                    <li class='log'><a href="/src/View/login.php" class='hlink'>Login</a></li>
-                    <!-- <% } else{%> -->
-                    <li class='log'><a href="/src/View/logout.php" class='hlink'>Logout</a></li>
-                    <!-- <% } %> -->
+                    <?php if ($uid == false || '') : ?>
+                        <li class='log'><a href="/src/View/login.php" class='hlink'>Login</a></li>
+                    <?php else : ?>
+                        <li class='log'><a href="/src/View/logout.php" class='hlink'>Logout</a></li>
+                    <?php endif; ?>
                     <li class='account_img'>
                         <a href="/src/View/mypage.php">
-                            <!-- <% if (typeof user !== 'undefined' ) { %> -->
-                            <!-- <% if(sitems[0].account_img=== null){%> -->
-                            <img src="/public/images/account3.png" class='aimg' alt="">
-                            <!-- <% }else{ %>
-                   <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
-                 <% } %>
-                 <% } %> -->
+                            <?php if ($uid) { ?>
+                                <?php if ($item['account_img'] === null) : ?>
+                                    <img src="/public/images/account3.png" class='aimg' alt="">
+                                <?php else : ?>
+                                    <img src="/public/upload/<?= $item['account_img']; ?>" class='aimg' alt="">
+                                <?php endif; ?>
+                            <?php } ?>
                         </a>
                     </li>
                 </div>
-
             </ul>
         </header>
 

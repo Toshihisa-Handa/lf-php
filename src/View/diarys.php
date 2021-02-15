@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../../common/funcs.php');
+$uid = $_SESSION['uid'];
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
@@ -18,24 +19,23 @@ if (!$_GET) {
          ORDER BY diary.created_at DESC";
   $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
   $status = $stmt->execute();
-  $result = $stmt->fetchAll();
-
+  $items = $stmt->fetchAll();
 } else {
-// var_dump($_GET);
-// echo $_GET['kensaku'];
-// return;
-$kensaku = $_GET['kensaku'];
-$kensaku = '%'.$kensaku.'%';
-$sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,
+  // var_dump($_GET);
+  // echo $_GET['kensaku'];
+  // return;
+  $kensaku = $_GET['kensaku'];
+  $kensaku = '%' . $kensaku . '%';
+  $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,
         diary.created_at,shop.name AS shopname FROM diary JOIN shop on
         diary.user_id =shop.user_id 
         WHERE diary.title LIKE :kensaku 
         OR diary.tag LIKE :kensaku OR diary.text LIKE :kensaku OR shop.name LIKE :kensaku
         ORDER BY diary.created_at DESC";
-$stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
-$stmt->bindParam(':kensaku', $kensaku, PDO::PARAM_STR);
-$status = $stmt->execute();
-$result = $stmt->fetchAll();
+  $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
+  $stmt->bindParam(':kensaku', $kensaku, PDO::PARAM_STR);
+  $status = $stmt->execute();
+  $items = $stmt->fetchAll();
 }
 
 
@@ -70,22 +70,22 @@ include('../../common/favicon.html')
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <!-- <% if (typeof user == 'undefined') { %>
+          <% if (typeof user == 'undefined') { %>
           <li class='log'><a href="/login" class='hlink'>Login</a></li>
           <% } else{%>
           <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
           <% } %>
-          <li class='account_img' >
-             <a href="/mypage">
-                <% if (typeof user !== 'undefined' ) { %>
-                    <% if(sitems[0].account_img=== null){%>
-                        <img src="images/account3.png" class='aimg' alt="" >  
-                  <% }else{ %>
-                    <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
-                  <% } %>
-                  <% } %>
+          <li class='account_img'>
+            <a href="/mypage">
+              <% if (typeof user !== 'undefined' ) { %>
+              <% if(sitems[0].account_img=== null){%>
+              <img src="images/account3.png" class='aimg' alt="">
+              <% }else{ %>
+              <img src="<%=sitems[0].account_img %>" class='aimg' alt="">
+              <% } %>
+              <% } %>
             </a>
-        </li> -->
+          </li>
         </div>
 
       </ul>
@@ -108,7 +108,7 @@ include('../../common/favicon.html')
     <div class="diaryList">
 
       <div class="diary-container">
-        <?php foreach ($result as $item) : ?>
+        <?php foreach ($items as $item) : ?>
           <div class="dcard">
             <div class='diary-card'>
               <a href="diary.php/? id=<?= $item['id']; ?>">

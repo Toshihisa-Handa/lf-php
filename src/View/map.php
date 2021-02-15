@@ -1,4 +1,6 @@
 <?php 
+$uid = $_SESSION['uid'];
+
 session_start();
 include('../../common/favicon.html') 
 ?>

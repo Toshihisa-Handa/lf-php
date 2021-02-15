@@ -1,5 +1,7 @@
 <?php 
 session_start();
+$uid = $_SESSION['uid'];
+
 include('../../common/favicon.html') 
 ?>
     <title>マイページ</title>

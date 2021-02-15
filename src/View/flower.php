@@ -80,11 +80,11 @@ $item = $stmt->fetch();
       <main class="main">
         <!-- メインコンテンツ -->
         <div><img src="/public/upload/<?= $item['image']; ?>" alt="" class='diaryImg'></div>
-        <h3 class='dfont'><?=$item['name'] ?></h3>
-        <p class='dfont2'>店舗：<?=$item['shopname'] ?></p>
-        <p class='dfont2'>価格：<?=$item['price'] ?>円（税込）</p>
-        <p class='dfont2'>特徴：<?=$item['name'] ?></p>
-        <p class='dfont2' class='diaryText'><?=$item['text'] ?></p>
+        <h3 class='dfont'><?= $item['name'] ?></h3>
+        <p class='dfont2'>店舗：<?= $item['shopname'] ?></p>
+        <p class='dfont2'>価格：<?= $item['price'] ?>円（税込）</p>
+        <p class='dfont2'>特徴：<?= $item['name'] ?></p>
+        <p class='dfont2' class='diaryText'><?= $item['text'] ?></p>
         <div id='cbtn'><span class='btnClick'>▶︎</span>コメント（<%=fitems.length %>）</div>
 
         <div class="dcomment">
@@ -174,7 +174,7 @@ $item = $stmt->fetch();
             sessionId: session.id
           });
         })
-        .then(function(result) {
+        .then(function(items) {
           // If redirectToCheckout fails due to a browser or network
           // error, you should display the localized error message to your
           // customer using error.message.

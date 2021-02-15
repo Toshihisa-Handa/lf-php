@@ -14,7 +14,7 @@ $pdo = dbcon();
 $stmt = $pdo->prepare("SELECT * FROM shop where user_id=:uid");
 $stmt->bindValue('uid', $uid, PDO::PARAM_INT);
 $status = $stmt->execute();
-$result = $stmt->fetchAll();
+$items = $stmt->fetchAll();
 
 
 
@@ -72,7 +72,7 @@ if ($status == false) {
 
 
     <div class="main">
-      <?php foreach ($result as $item) : ?>
+      <?php foreach ($items as $item) : ?>
 
         <div class='pimg'>
           <?php if ($item['account_img']) : ?>

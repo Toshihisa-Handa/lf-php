@@ -18,12 +18,12 @@ if (!$_POST) {
   //         WHERE diary.id = $id";
 
   $sql = "SELECT diary.id,diary.title,diary.image,diary.tag,diary.text,diary.user_id,
-          shop.name AS shopname,shop.account_name,
+          shop.name AS shopname,shop.account_name,shop.account_img,
           dcomment.diary_id,dcomment.dcomment,dcomment.created_at
         FROM diary 
         JOIN shop on diary.user_id = shop.user_id 
         JOIN dcomment on diary.id = dcomment.diary_id
-        WHERE diary.id = $id
+        WHERE diary.id = 117
         ORDER BY created_at DESC";
 
   // $sql2 = "SELECT dcomment.diary_id,dcomment.dcomment FROM dcomment where diary_id = $id";
@@ -84,21 +84,23 @@ if (!$_POST) {
 
         <div class='nav-right'>
 
-          <!-- <% if (typeof user == 'undefined') { %> -->
-          <li class='log'><a href="/login" class='hlink'>Login</a></li>
-          <!-- <% } else{%> -->
-          <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
-          <!-- <% } %> -->
+          <?php if ($uid == false || '') : ?>
+            <li class='log'><a href="/src/View/login.php" class='hlink'>Login</a></li>
+          <?php else : ?>
+            <li class='log'><a href="/src/View/logout.php" class='hlink'>Logout</a></li>
+          <?php endif; ?>
           <li class='account_img'>
-            <a href="/mypage">
-              <!-- <% if (typeof user !== 'undefined' ) { %>
-                <% if(sitems[0].account_img=== null){%>
-                    <img src="/public/images/account3.png" class='aimg' alt="" >  
-              <% }else{ %>
-                <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
-              <% } %>
-              <% } %> -->
+            <a href="/src/View/mypage.php">
+              <?php if ($uid) { ?>
+                <?php if ($items['account_img'] === null) : ?>
+                  <img src="/public/images/account3.png" class='aimg' alt="">
+                <?php else : ?>
+                  <img src="/public/upload/<?= $items['account_img']; ?>" class='aimg' alt="">
+                <?php endif; ?>
+              <?php } ?>
             </a>
+          </li>
+          </a>
           </li>
         </div>
 
@@ -117,22 +119,22 @@ if (!$_POST) {
     <div class="container">
       <main class="main">
         <!-- メインコンテンツ -->
-        <?php for($i=0; $i<1; $i++): ?>
-        <div><img class='diaryImg' src="/public/upload/<?= $items[$i]['image']; ?>"></div>
-        <h2 class='dfont'><?= $items[$i]['title'] ?></h2>
-        <p class='diaryText dfont2'><?= $items[$i]['text'] ?></p>
+        <?php for ($i = 0; $i < 1; $i++) : ?>
+          <div><img class='diaryImg' src="/public/upload/<?= $items[$i]['image']; ?>"></div>
+          <h2 class='dfont'><?= $items[$i]['title'] ?></h2>
+          <p class='diaryText dfont2'><?= $items[$i]['text'] ?></p>
         <?php endfor; ?>
         <div id='cbtn'><span class='btnClick'></span>コメント（<%=ditems.length %>）</div>
 
         <div class="dcomment">
           <% if (ditems.length) { %>
-            <?php foreach($items as $item): ?>
-          <div class="comment-box">
-            <div class="dcname "><%= ditem.user_name %></div>
-            <div class='dccreatedAt'> <?= $item['created_at']; ?></div>
-            <div class="dccomment"><?= $item['dcomment']; ?></div>
-          </div>
-          <% }); %>
+          <?php foreach ($items as $item) : ?>
+            <div class="comment-box">
+              <div class="dcname "><%= ditem.user_name %></div>
+              <div class='dccreatedAt'> <?= $item['created_at']; ?></div>
+              <div class="dccomment"><?= $item['dcomment']; ?></div>
+            </div>
+            <% }); %>
           <?php endforeach; ?>
         </div>
       </main>
