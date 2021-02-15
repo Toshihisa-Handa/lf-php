@@ -3,13 +3,41 @@ session_start();
 include('../../common/funcs.php');
 
 $uid = $_SESSION['uid'];
-
+$id = $_GET['id'];
+//DBs接続
 $pdo = dbcon();
 include('../../common/header-icon.php');
 
 
-include('../../common/favicon.html') 
+
+//データ登録SQL作成
+$stmt = $pdo->prepare("SELECT * FROM shop where id=:id");
+$stmt->bindValue('id', $id, PDO::PARAM_INT);
+$status = $stmt->execute();
+$item = $stmt->fetch();
+
+$stmt = $pdo->prepare("SELECT * FROM diary where user_id=:uid");
+$stmt->bindValue('uid', $uid, PDO::PARAM_INT);
+$status = $stmt->execute();
+$diaryitems = $stmt->fetchAll();
+
+$stmt = $pdo->prepare("SELECT * FROM flower where user_id=:uid");
+$stmt->bindValue('uid', $uid, PDO::PARAM_INT);
+$status = $stmt->execute();
+$floweritems = $stmt->fetchAll();
+
+
+
+
+
+
+
+
+
+
 ?>
+
+<?php include('../../common/favicon.html') ?>
     <title>店舗</title>
     <?php include('../../common/style.html') ?>
     <link rel="stylesheet" href="/public/css/shop.css">
@@ -36,26 +64,26 @@ include('../../common/favicon.html')
     </ul>
  </header>
 
-    <!-- <div class='main' style='background-image: url(<%= item[0].shop_img %>)'>
-            <p class='mainTitle'><span class='mainspan1'>&nbsp;<%=item[0].name%>&nbsp;</span></p>
-            <p class='mainSubtitle'><span class='mainspan2'>&nbsp;<%=item[0].title%>&nbsp;</span></p>
+    <div class='main' style='background-image: url(/public/upload/<?=$item['shop_img']?>)'>
+            <p class='mainTitle'><span class='mainspan1'>&nbsp;<?=$item['name']?> &nbsp;</span></p>
+            <p class='mainSubtitle'><span class='mainspan2'>&nbsp;<?=$item['title']?>&nbsp;</span></p>
     </div>
     <div class='title1'>
-          <h1 class='StopTitle'><%=item[0].message%></h1>       
+          <h1 class='StopTitle'><?=$item['message']?></h1>       
     </div>
   </div>
 
   <div class="tips-glid">
     <div class="tips1">
-        <h3 class='StopsubTitle'><%=item[0].comment%></h3>
+        <h3 class='StopsubTitle'><?=$item['comment']?></h3>
     </div>
   </div>
 
   <div class="img-glid">
     <div class='img1'>
-        <img src="<%= item[0].img1 %>" alt="">
+        <img src="/public/upload/<?=$item['img1']?>" alt="">
     </div>
-  </div> -->
+  </div>
 
   <div class="flower-glid">
     <div class='title2'>
@@ -149,7 +177,7 @@ include('../../common/favicon.html')
 </div>
 
 <div class="shopName">
-  <!-- <h1 class='StopTitle'> <%=item[0].name%></h1> -->
+  <h1 class='StopTitle'> <?=$item['name']?></h1>
 </div>
 </div>
 <!-- アクセスここまで -->
@@ -159,24 +187,24 @@ include('../../common/favicon.html')
 
 <div class="img3">
   <div class="imgBox">
-    <!-- <img src="<%= item[0].img2 %>" alt=""> -->
+    <img src="/public/upload/<?=$item['img2']?>" alt="">
   </div>
 </div>
 
 
 <div class="access">
-      <!-- <h3 class='afont'>　　　住　所　：<%=item[0].location%></h3>
-      <h3 class='afont'>　　営業時間　：<%=item[0].open%>〜<%=item[0].close%></h3>
-      <h3 class='afont'>　　　定休日　：<%=item[0].holiday%></h3>
-      <h3 class='afont'>　　電話番号　：<a class='link' href="tel:<%= item[0].tell %> "><%= item[0].tell %></a></h3>
-      <h3 class='afont'>メールアドレス：<a class='link' href="<%= item[0].email %>"><%= item[0].email %></a></h3>
+      <h3 class='afont'>　　　住　所　：<?=$item['location']?></h3>
+      <h3 class='afont'>　　営業時間　：<?=$item['open']?>〜<?=$item['close']?></h3>
+      <h3 class='afont'>　　　定休日　：<?=$item['holiday']?></h3>
+      <h3 class='afont'>　　電話番号　：<a class='link' href="tel:<%= item[0].tell %> "><?=$item['tell']?></a></h3>
+      <h3 class='afont'>メールアドレス：<a class='link' href="<%= item[0].email %>"><?=$item['email']?></a></h3>
       <h3 class='afont'>ホームページ　：</h3>
-      <h3 class='afont'><a href="<%= item[0].web %>" class='link' target=”_blank”><%= item[0].web %></a></h3> -->
+      <h3 class='afont'><a href="<?=$item['web']?>" class='link' target=”_blank”><?=$item['web']?></a></h3>
 </div>
 
 
 <div class="map">
-  <iframe src="<%=item[0].map %>" class='shopmap'  frameborder="0"></iframe>
+  <iframe src="<?=$item['map']?>" class='shopmap'  frameborder="0"></iframe>
 </div>
 
 </div>

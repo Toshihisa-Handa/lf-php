@@ -95,7 +95,7 @@ include('../../common/favicon.html')
       <div class="shop-container">
         <?php foreach ($items as $item) : ?>
           <div class="shop-card">
-            <a href="shop.php/<?= $item['id']; ?>">
+            <a href="shop.php/? id=<?= $item['id']; ?>">
               <img src="/public/upload/<?= $item['shop_img']; ?>" alt="">
               <div class='shopTitle'><?= $item['name'] ?></div>
               <div class='shopSub'>営業時間：<?= $item['open'] ?>~<?= $item['close'] ?></div>
