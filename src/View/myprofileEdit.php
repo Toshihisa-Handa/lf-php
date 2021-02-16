@@ -142,7 +142,6 @@ if ($status == false) {
                 <h2>営業時間</h2>
                 <div class='inframe'>
                     <div>　　　オープン</div>
-                    <!-- <input type="text" class='inputs' name="open" placeholder="10時" value='<?= $item["open"] ?>'><br> -->
                     <?php if ($item['open'] == null) : ?>
                         <select name="open-hour">
                             <option value="">選択して下さい</option>
@@ -172,7 +171,6 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>　　　クローズ</div>
-                    <!-- <input type="text" class='inputs' name="close" placeholder="18時" value='<?= $item["close"] ?>'><br> -->
                     <?php if ($item['close'] == null) : ?>
                         <select name="close-hour">
                             <option value="">選択して下さい</option>
@@ -202,7 +200,21 @@ if ($status == false) {
                 </div>
 
                 <div class='inframe'>
-                    <div>　　　　定休日</div><input type="text" class='inputs' name="holiday" placeholder="水曜日" value='<?= $item["holiday"] ?>'><br>
+                    <div>　　　　定休日</div>
+                    <!-- <input type="text" class='inputs' name="holiday" placeholder="水曜日" value='<?= $item["holiday"] ?>'><br> -->
+                    <?php if ($item['holiday'] == null) : ?>
+                        <select name="holiday">
+                            <option value="">選択して下さい</option>
+                            <?php include('../../common/selectsun-sat.html') ?>
+                        </select>
+                    <?php else : ?>
+                        <select name="holiday">
+                            <option value="<?= $item['holiday'] ?>"><?= $item['holiday'] ?></option>
+                            <?php include('../../common/selectsun-sat.html') ?>
+
+                        </select>
+
+                    <?php endif; ?>
                 </div>
 
                 <div class='inframe'>
