@@ -7,7 +7,7 @@ $feature = $_POST['feature'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
-$id = $_GET['id'];
+$id = $_GET['id'];//flowerのid
 $fcomment = $_POST['fcomment'];
 
 //DB接続
@@ -19,12 +19,18 @@ include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
-  $sql0 = "SELECT fcomment.fcomment_id,fcomment.flower_id,fcomment.fcomment,fcomment.created_at,fcomment.user_id ,user.user_id,user.name
-           FROM fcomment
-           JOIN flower on fcomment.flower_id = flower.id
-           JOIN user on fcomment.user_id = user.user_id
-           WHERE flower.id = $id
-           ORDER BY fcomment.created_at DESC";
+  // $sql0 = "SELECT fcomment.fcomment_id,fcomment.flower_id,fcomment.fcomment,fcomment.created_at,fcomment.user_id ,user.user_id,user.name
+  //          FROM fcomment
+  //          JOIN flower on fcomment.flower_id = flower.id
+  //          JOIN user on fcomment.user_id = user.user_id
+  //          WHERE flower.id = $id
+  //          ORDER BY fcomment.created_at DESC";
+  $sql0 = "SELECT Fc.fcomment, ifnull(U.name, '名無し') AS user_name,
+            DATE_FORMAT(Fc.created_at, '%Y/%m/%d  %k:%i') AS created_at 
+            FROM fcomment Fc LEFT OUTER JOIN user U ON Fc.user_id = U.user_id 
+            WHERE Fc.flower_id = $id
+            ORDER BY Fc.created_at DESC";
+
   $stmt = $pdo->prepare($sql0);
   $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
   $status = $stmt->execute();
@@ -129,7 +135,7 @@ $_SESSION['image']= $item['image'];
           <?php if (count($commentitems) >= 1) : ?>
             <?php foreach ($commentitems as $citem) : ?>
               <div class="comment-box">
-                <div class="dcname"><?= $citem['name'] ?></div>
+                <div class="dcname"><?= $citem['user_name'] ?></div>
                 <div class='dccreatedAt'> <?= $citem['created_at']; ?></div>
                 <div class="dccomment"><?= $citem['fcomment']; ?></div>
               </div>
