@@ -1,5 +1,13 @@
 <?php
+session_start();
+$price = $_SESSION['price'];
+$name = $_SESSION['name'];
+$image = $_SESSION['image'];
 
+
+
+
+//stripeの記述
 require 'vendor/autoload.php';
 \Stripe\Stripe::setApiKey('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -11,11 +19,11 @@ $checkout_session = \Stripe\Checkout\Session::create([
   'payment_method_types' => ['card'],
   'line_items' => [[
     'price_data' => [
-      'currency' => 'usd',
-      'unit_amount' => 2000,
+      'currency' => 'jpy',
+      'unit_amount' => $price,
       'product_data' => [
-        'name' => 'Stubborn Attachments',
-        'images' => ["https://i.imgur.com/EHyR2nP.png"],
+        'name' => $name,
+        // 'images' => ["$YOUR_DOMAIN/public/upload/$image"],//画面に表示はされるがバイナリ型に変換されている模様。
       ],
     ],
     'quantity' => 1,

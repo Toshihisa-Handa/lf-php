@@ -38,6 +38,15 @@ if (!$_POST) {
   $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
   $status = $stmt->execute();
   $item = $stmt->fetch();
+
+//stripe用にセッションを用意
+$_SESSION['price']= $item['price'];
+$_SESSION['name']= $item['name'];
+$_SESSION['image']= $item['image'];
+
+
+
+
 } else {
 
 
@@ -189,7 +198,7 @@ if (!$_POST) {
     var checkoutButton = document.getElementById("checkout-button");
 
     checkoutButton.addEventListener("click", function () {
-      fetch("/src/View/stripe-app.php", {
+      fetch("/src/View/stripe-app.php/<?=$item['id']?>", {
         method: "POST",
       })
         .then(function (response) {
