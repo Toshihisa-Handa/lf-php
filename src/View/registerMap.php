@@ -18,8 +18,8 @@ if ($_POST) {
   $stmt = $pdo->prepare("INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),:user_id)");
   $stmt->bindValue(':lat', $lat, PDO::PARAM_INT);
   $stmt->bindValue(':lon', $lon, PDO::PARAM_INT);
-  $stmt->bindValue(':maptitle', $maptitle, PDO::PARAM_INT);
-  $stmt->bindValue(':description', $description, PDO::PARAM_INT);
+  $stmt->bindValue(':maptitle', $maptitle, PDO::PARAM_STR);
+  $stmt->bindValue(':description', $description, PDO::PARAM_STR);
   $stmt->bindValue(':user_id', $uid, PDO::PARAM_INT);
   $status = $stmt->execute();
 

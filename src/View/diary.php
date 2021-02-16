@@ -19,6 +19,8 @@ if (!$_POST) {
            JOIN user on dcomment.user_id = user.user_id
            WHERE diary.id = $id
            ORDER BY dcomment.created_at DESC";
+
+  
   $stmt = $pdo->prepare($sql0);
   $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
   $status = $stmt->execute();
