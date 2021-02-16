@@ -24,6 +24,8 @@ $checkout_session = \Stripe\Checkout\Session::create([
       'product_data' => [
         'name' => $name,
         // 'images' => ["$YOUR_DOMAIN/public/upload/$image"],//画面に表示はされるがバイナリ型に変換されている模様。
+        // 'images' => ["https://i.imgur.com/EHyR2nP.png"],←元のstripeの記述
+
       ],
     ],
     'quantity' => 1,
