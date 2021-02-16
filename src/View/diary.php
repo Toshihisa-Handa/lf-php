@@ -5,7 +5,7 @@ $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
-$id = $_GET['id'];
+$id = $_GET['id'];//diaryのid
 $dcomment = $_POST['dcomment'];
 //DB接続
 $pdo = dbcon();
@@ -13,12 +13,18 @@ include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
-  $sql0 = "SELECT dcomment.dcomment_id,dcomment.diary_id,dcomment.dcomment,dcomment.created_at,dcomment.user_id,diary.id,user.user_id,user.name
-           FROM dcomment
-           JOIN diary on dcomment.diary_id = diary.id
-           JOIN user on dcomment.user_id = user.user_id
-           WHERE diary.id = $id
-           ORDER BY dcomment.created_at DESC";
+  // $sql0 = "SELECT dcomment.dcomment_id,dcomment.diary_id,dcomment.dcomment,dcomment.created_at,dcomment.user_id,diary.id,user.user_id,user.name
+  //          FROM dcomment
+  //          JOIN diary on dcomment.diary_id = diary.id
+  //          JOIN user on dcomment.user_id = user.user_id
+  //          WHERE diary.id = $id
+  //          ORDER BY dcomment.created_at DESC";
+
+  $sql0 = "SELECT Dc.dcomment, ifnull(U.name, '名無し') AS user_name, 
+           DATE_FORMAT(Dc.created_at, '%Y/%m/%d  %k:%i') AS created_at 
+           FROM dcomment Dc LEFT OUTER JOIN user U ON Dc.user_id = U.user_id 
+           WHERE Dc.diary_id = $id
+           ORDER BY Dc.created_at DESC"; 
 
   
   $stmt = $pdo->prepare($sql0);
@@ -116,7 +122,7 @@ if (!$_POST) {
 
         <?php foreach ($commentitems as $citem) : ?>
             <div class="comment-box">
-              <div class="dcname "><?= $citem['name'] ?></div>
+              <div class="dcname "><?= $citem['user_name'] ?></div>
               <div class='dccreatedAt'> <?= $citem['created_at']; ?></div>
               <div class="dccomment"><?= $citem['dcomment']; ?></div>
             </div>

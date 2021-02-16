@@ -19,12 +19,7 @@ include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
-  // $sql0 = "SELECT fcomment.fcomment_id,fcomment.flower_id,fcomment.fcomment,fcomment.created_at,fcomment.user_id ,user.user_id,user.name
-  //          FROM fcomment
-  //          JOIN flower on fcomment.flower_id = flower.id
-  //          JOIN user on fcomment.user_id = user.user_id
-  //          WHERE flower.id = $id
-  //          ORDER BY fcomment.created_at DESC";
+
   $sql0 = "SELECT Fc.fcomment, ifnull(U.name, '名無し') AS user_name,
             DATE_FORMAT(Fc.created_at, '%Y/%m/%d  %k:%i') AS created_at 
             FROM fcomment Fc LEFT OUTER JOIN user U ON Fc.user_id = U.user_id 
