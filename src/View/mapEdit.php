@@ -9,6 +9,13 @@ $maptitle = $_POST['maptitle'];
 $description = $_POST['description'];
 
 
+
+
+
+
+
+
+
 //DB接続
 $pdo = dbcon();
 include('../../common/header-icon.php');
@@ -70,7 +77,7 @@ if (!$_POST) {
         <?php include('../../common/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
-        <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -104,6 +111,13 @@ if (!$_POST) {
       <p><a href="/src/View/myprofile.php">店舗情報</a></p>
       <p><a href="/src/View/drege.php">日記の登録</a></p>
       <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
+
+
+      <p>
+      <h2>住所変換</h2><button id='exec'>変換</button></p>
+      <p id='lat' value='<?= $item['lat'] ?>'><?= $item['lat'] ?></p>
+      <p id='lon' value='<?= $item['lon'] ?>'><?= $item['lon'] ?></p>
+
     </div>
 
 
@@ -130,14 +144,33 @@ if (!$_POST) {
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
 
+  <script src="https://cdn.geolonia.com/community-geocoder.js"></script>
+  <script>
+  document.getElementById('exec').addEventListener('click', () => {
+  if (document.getElementById('lat').value) {
+    getLatLng(document.getElementById('lat').value, (latlng) => {
+      map.setCenter(latlng)
+    })
+  }
+})
+  console.log(document.getElementById('lat').value);
+  
+  
+  </script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     $('#attachment .fileinput').on('change', function() {
       var file = $(this).prop('files')[0];
       $(this).closest('#attachment').find('.filename').text(file.name);
     });
-  </script>
+  </script> -->
 </body>
 
 </html>

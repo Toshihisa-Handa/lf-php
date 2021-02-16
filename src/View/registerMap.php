@@ -9,6 +9,10 @@ $maptitle = $_POST['maptitle'];
 $description = $_POST['description'];
 
 
+
+
+
+
 if ($_POST) {
 
   //db接続
