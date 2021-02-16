@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 
 header('Content-Type: application/json');
 
-$YOUR_DOMAIN = 'http://localhost:4242';
+$YOUR_DOMAIN = 'http://localhost:';
 
 $checkout_session = \Stripe\Checkout\Session::create([
   'payment_method_types' => ['card'],
@@ -21,8 +21,8 @@ $checkout_session = \Stripe\Checkout\Session::create([
     'quantity' => 1,
   ]],
   'mode' => 'payment',
-  'success_url' => $YOUR_DOMAIN . '/success.html',
-  'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+  'success_url' => $YOUR_DOMAIN . '/src/View/f_success.php',
+  'cancel_url' => $YOUR_DOMAIN . '/src/View/f_error.php',
 ]);
 
 echo json_encode(['id' => $checkout_session->id]);
