@@ -11,7 +11,7 @@ include('../../common/header-icon.php');
 
 // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 if ($_FILES) {
-        //account_img
+    //account_img
     if ($_FILES['account_img']['name']) {
 
         $account_img = date("Ymd") . random_int(1, 999999) . $_FILES['account_img']['name']; //ここのnameはアップロードされたファイルのファイル名
@@ -23,33 +23,33 @@ if ($_FILES) {
         $stmt->bindValue(':account_img', $account_img, PDO::PARAM_STR);
         $status = $stmt->execute();
     }
-            //shop_img
+    //shop_img
     if ($_FILES['shop_img']['name']) {
         $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name'];
         $save2 = '../../public/upload/' . basename($shop_img); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
-        move_uploaded_file($_FILES['shop_img']['tmp_name'], $save2); 
+        move_uploaded_file($_FILES['shop_img']['tmp_name'], $save2);
         $sql = "UPDATE shop SET shop_img=:shop_img WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
         $stmt->bindValue(':shop_img', $shop_img, PDO::PARAM_STR);
         $status = $stmt->execute();
     }
-            //img1
+    //img1
     if ($_FILES['img1']['name']) {
         $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
         $save3 = '../../public/upload/' . basename($img1); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
-        move_uploaded_file($_FILES['img1']['tmp_name'], $save3); 
+        move_uploaded_file($_FILES['img1']['tmp_name'], $save3);
         $sql = "UPDATE shop SET img1=:img1 WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
         $stmt->bindValue(':img1', $img1, PDO::PARAM_STR);
         $status = $stmt->execute();
     }
-            //img2
+    //img2
     if ($_FILES['img2']['name']) {
         $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name'];
         $save4 = '../../public/upload/' . basename($img2); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
-        move_uploaded_file($_FILES['img2']['tmp_name'], $save4); 
+        move_uploaded_file($_FILES['img2']['tmp_name'], $save4);
         $sql = "UPDATE shop SET img2=:img2 WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
@@ -104,7 +104,7 @@ if ($status == false) {
                 <?php include('../../common/header-nav-leftIcon.html') ?>
 
                 <div class='nav-right'>
-                                
+
                     <?php include('../../common/header-nav-rightIcon.php') ?>
 
                 </div>
@@ -141,11 +141,201 @@ if ($status == false) {
 
                 <h2>営業時間</h2>
                 <div class='inframe'>
-                    <div>　　　オープン</div><input type="text" class='inputs' name="open" placeholder="10時" value='<?= $item["open"] ?>'><br>
+                    <div>　　　オープン</div>
+                    <!-- <input type="text" class='inputs' name="open" placeholder="10時" value='<?= $item["open"] ?>'><br> -->
+                    <select  name="open-hour">
+                        <option value="">選択して下さい</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                    <div>:</div>
+                    
+                    <select  name="open-time">
+                        <option value="">選択して下さい</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="32">32</option>
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+                        <option value="45">45</option>
+                        <option value="46">46</option>
+                        <option value="47">47</option>
+                        <option value="48">48</option>
+                        <option value="49">49</option>
+                        <option value="50">50</option>
+                        <option value="51">51</option>
+                        <option value="52">52</option>
+                        <option value="53">53</option>
+                        <option value="54">54</option>
+                        <option value="55">55</option>
+                        <option value="56">56</option>
+                        <option value="57">57</option>
+                        <option value="58">58</option>
+                        <option value="59">59</option>
+                        <option value="60">60</option>
+                    </select>
+
                 </div>
 
                 <div class='inframe'>
-                    <div>　　　クローズ</div><input type="text" class='inputs' name="close" placeholder="18時" value='<?= $item["close"] ?>'><br>
+                    <div>　　　クローズ</div>
+                    <!-- <input type="text" class='inputs' name="close" placeholder="18時" value='<?= $item["close"] ?>'><br> -->
+                    <select  name="close-hour">
+                        <option value="">選択して下さい</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                    <div>:</div>
+                    <select  name="close-time">
+                        <option value="">選択して下さい</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="32">32</option>
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+                        <option value="45">45</option>
+                        <option value="46">46</option>
+                        <option value="47">47</option>
+                        <option value="48">48</option>
+                        <option value="49">49</option>
+                        <option value="50">50</option>
+                        <option value="51">51</option>
+                        <option value="52">52</option>
+                        <option value="53">53</option>
+                        <option value="54">54</option>
+                        <option value="55">55</option>
+                        <option value="56">56</option>
+                        <option value="57">57</option>
+                        <option value="58">58</option>
+                        <option value="59">59</option>
+                        <option value="60">60</option>
+                    </select>
                 </div>
 
                 <div class='inframe'>
