@@ -75,7 +75,8 @@ if (!$_POST) {
 <?php include('../../common/style.html') ?>
 
 <link rel="stylesheet" href="/public/css/flower.css">
-
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
@@ -141,7 +142,7 @@ if (!$_POST) {
           </form>
 
           <div class="btncontainer">
-            <button class='btn-open' id="checkout-button">購入画面へ</button>
+          <button class='btn-open' type="button" id="checkout-button">購入画面へ</button>
           </div>
 
 
@@ -180,28 +181,24 @@ if (!$_POST) {
 
 
 
-  <!-- stripe読み込み↓ -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-  <script src="https://js.stripe.com/v3/"></script>
+
   <!-- 購入ページボタンのアクション↓ -->
   <script type="text/javascript">
     // Create an instance of the Stripe object with your publishable API key
-    var stripe = Stripe("pk_test_51HbhniH1kHMqkRvftZX8frXuhhtIQe7Sm7bnQmv0uuF6Nsqsy2s7E6CQy2j0jj0jU5L2klAtfnrr2vorzPIbLbVl00eLZ8qSlj");
+    var stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
     var checkoutButton = document.getElementById("checkout-button");
-    checkoutButton.addEventListener("click", function() {
 
-      fetch("/create-session/<%=item.id%>", {
-          method: "POST",
-        })
-        .then(function(response) {
+    checkoutButton.addEventListener("click", function () {
+      fetch("/src/View/stripe-app.php", {
+        method: "POST",
+      })
+        .then(function (response) {
           return response.json();
         })
-        .then(function(session) {
-          return stripe.redirectToCheckout({
-            sessionId: session.id
-          });
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
         })
-        .then(function(items) {
+        .then(function (result) {
           // If redirectToCheckout fails due to a browser or network
           // error, you should display the localized error message to your
           // customer using error.message.
@@ -209,7 +206,7 @@ if (!$_POST) {
             alert(result.error.message);
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.error("Error:", error);
         });
     });
