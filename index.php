@@ -152,16 +152,7 @@ if ($status == false) {
         </footer>
     </div>
     <!-- フッターナビ -->
-    <div class='Fnav web '>
-        <ul class='navs'>
-            <li><a href="/src/View/map.php"><img class='navimg' src="/public/images/map-24.png" alt=""></a><a href="/map" class='Fnav-link hlink'>Map</a></li>
-            <li><a href="/src/View/shops.php"><img class='navimg' src="/public/images/shop-24.png" alt=""></a><a href="/shops" class='Fnav-link hlink'>Shop</a></li>
-            <li><a href="/src/View/diarys.php"><img class='navimg' src="/public/images/script-24.png" alt=""></a><a href="/diarys" class='Fnav-link hlink'>Diary</a></li>
-            <li><a href="/src/View/flowers.php"><img class='navimg' src="/public/images/flower-24.png" alt=""></a><a href="/flowers" class='Fnav-link hlink'>Flower</a></li>
-            <!-- <li><div id='search'>検索</div></li> -->
-
-        </ul>
-    </div>
+    <?php include('../../common/footer.html') ?>
 
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
