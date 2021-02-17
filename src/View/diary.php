@@ -13,6 +13,7 @@ include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
+  // //自作で未ログインユーザーのコメント表示が出来なかったもの
   // $sql0 = "SELECT dcomment.dcomment_id,dcomment.diary_id,dcomment.dcomment,dcomment.created_at,dcomment.user_id,diary.id,user.user_id,user.name
   //          FROM dcomment
   //          JOIN diary on dcomment.diary_id = diary.id
@@ -20,12 +21,32 @@ if (!$_POST) {
   //          WHERE diary.id = $id
   //          ORDER BY dcomment.created_at DESC";
 
+  //自作で書いたもの修正
+$sql0 = "SELECT dcomment.dcomment,ifnull(user.name,'名無し'),DATE_FORMAT(dcomment.created_at,'%Y/%m/%d %k:%i')
+           FROM dcomment
+           LEFT OUTER JOIN diary on dcomment.diary_id = diary.id
+           LEFT OUTER JOIN user on dcomment.user_id = user.user_id
+           WHERE diary.id = $id
+           ORDER BY dcomment.created_at DESC";
+
+  //node.jsの内容からコピーしてphpに置換えて動くようにしたもの
   $sql0 = "SELECT Dc.dcomment, ifnull(U.name, '名無し') AS user_name, 
            DATE_FORMAT(Dc.created_at, '%Y/%m/%d  %k:%i') AS created_at 
            FROM dcomment Dc LEFT OUTER JOIN user U ON Dc.user_id = U.user_id 
            WHERE Dc.diary_id = $id
            ORDER BY Dc.created_at DESC"; 
+  //自分で改めて書いたもの
+  $sql0 = "SELECT dcomment.dcomment,ifnull(user.name,'名無し') AS user_name, DATE_FORMAT(dcomment.created_at,'%Y/%m/%d') AS created_at
+           FROM dcomment
+           dcomment LEFT OUTER JOIN user ON dcomment.user_id = user.user_id
+           WHERE dcomment.diary_id = $id
+           ORDER BY dcomment.created_at DESC";
 
+  $sql0 = "SELECT dcomment.dcomment,DATE_FORMAT(dcomment.created_at,'%Y/%m/%d %k:%i') AS created_at,ifnull(user.name,'名無し') AS user_name
+          FROM dcomment
+          LEFT OUTER JOIN user on dcomment.user_id = user.user_id
+          WHERE dcomment.diary_id = $id
+          ORDER BY dcomment.created_at DESC";
   
   $stmt = $pdo->prepare($sql0);
   $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
