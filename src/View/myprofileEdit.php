@@ -150,6 +150,7 @@ if ($status == false) {
                         <div>:</div>
 
                         <select name="open-time">
+                            <option value="">選択して下さい</option>
                             <?php include('../../common/select00-60.html') ?>
 
                         </select>
