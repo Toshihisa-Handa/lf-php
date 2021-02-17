@@ -202,7 +202,6 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>　　　　定休日</div>
-                    <!-- <input type="text" class='inputs' name="holiday" placeholder="水曜日" value='<?= $item["holiday"] ?>'><br> -->
                     <?php if ($item['holiday'] == null) : ?>
                         <select name="holiday">
                             <option value="">選択して下さい</option>

@@ -9,8 +9,14 @@ $account_name = $_POST['account_name'];
 $web = $_POST['web'];
 $email = $_POST['email'];
 $tell = $_POST['tell'];
-$open = $_POST['open'];
-$close = $_POST['close'];
+// $open = $_POST['open'];
+// $close = $_POST['close'];
+$openHour = $_POST['open-hour'];
+$openTime = $_POST['open-time'];
+$open = $openHour.':'.$openTime;
+$closeHour = $_POST['close-hour'];
+$closeTime = $_POST['close-time'];
+$close = $closeHour.':'.$closeTime;
 $holiday = $_POST['holiday'];
 $location = $_POST['location'];
 $map = $_POST['map'];
@@ -29,9 +35,9 @@ if ($_POST) {
     // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     if ($_FILES) {
         $account_img = date("Ymd") . random_int(1, 999999) . $_FILES['account_img']['name']; //ここのnameはアップロードされたファイルのファイル名
-        $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name']; 
+        $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name'];
         $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
-        $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name']; 
+        $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name'];
         $save = '../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
         $sql = "INSERT INTO shop(account_img,shop_img,img1,img2)VALUES(:account_img,:shop_img,:img1,:img2)";
@@ -123,15 +129,44 @@ if ($_POST) {
 
                 <h2>営業時間</h2>
                 <div class='inframe'>
-                    <div>　　　オープン</div><input type="text" class='inputs' name="open" placeholder="10時"><br>
+                    <div>　　　オープン</div>
+                    <!-- <input type="text" class='inputs' name="open" placeholder="10時"><br> -->
+                    <select name="open-hour">
+                            <option value="">選択して下さい</option>
+                            <?php include('../../common/select0-24.html') ?>
+                        </select>
+                        <div>:</div>
+
+                        <select name="open-time">
+                            <option value="">選択して下さい</option>
+                            <?php include('../../common/select00-60.html') ?>
+
+                        </select>
                 </div>
 
                 <div class='inframe'>
-                    <div>　　　クローズ</div><input type="text" class='inputs' name="close" placeholder="18時"><br>
+                    <div>　　　クローズ</div>
+                    <!-- <input type="text" class='inputs' name="close" placeholder="18時"><br> -->
+                    <select name="close-hour">
+                            <option value="">選択して下さい</option>
+                            <?php include('../../common/select0-24.html') ?>
+
+                        </select>
+                        <div>:</div>
+                        <select name="close-time">
+                            <option value="">選択して下さい</option>
+                            <?php include('../../common/select00-60.html') ?>
+
+                        </select>
                 </div>
 
                 <div class='inframe'>
-                    <div>　　　　定休日</div><input type="text" class='inputs' name="holiday" placeholder="水曜日"><br>
+                    <div>　　　　定休日</div>
+                    <!-- <input type="text" class='inputs' name="holiday" placeholder="水曜日"><br> -->
+                    <select name="holiday">
+                            <option value="">選択して下さい</option>
+                            <?php include('../../common/selectsun-sat.html') ?>
+                        </select>
                 </div>
 
                 <div class='inframe'>

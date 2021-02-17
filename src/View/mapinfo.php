@@ -71,10 +71,10 @@ $item = $stmt->fetch();
         <div>タイトル</div>
         <div class='inputs'><?= $item['maptitle'] ?></div><br>
       </div>
-      <div class='inframe'>
+      <!-- <div class='inframe'>
         <div>ピンの色</div>
         <div class='inputs'><?= $item['pincolor'] ?></div><br>
-      </div>
+      </div> -->
       <div class='inframe'>
         <div>　　説明</div>
         <div class='txt'><?= $item['description'] ?></div><br>
