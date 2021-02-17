@@ -236,10 +236,10 @@ $floweritems = $stmt->fetchAll();
   <script>
     //お花のカルーセルの設定
     let config;
-    <?php if(count($floweritems) > 4){?>
+    <?php if(count($floweritems) > 4){ ?>
        config = {
         type: 'carousel',
-        perView: <?=count($floweritems)?>,
+        perView: <?= count($floweritems) ?>,
         breakpoints: {
           2250: {
           perView: 5
@@ -258,45 +258,39 @@ $floweritems = $stmt->fetchAll();
         }
       }
     }
-   <?php } else{ ?>
+   <?php }else{ ?>
       // console.log('hogggg')
        config = {
         type: 'carousel',
-        perView: <?=count($floweritems)?>,
+        perView: <?= count($floweritems) ?>,
         breakpoints: {
-        <?php if(count($floweritems)==4){?>
         1620: {
-          perView: 4
+          perView: <?= count($floweritems) ?>
         },
-        <?php} elseif (count($floweritems)==3){?>
 
         1350: {
-          perView: 3
+          perView: <?= count($floweritems) ?>
         },
-        <?php }elseif (count($floweritems)==2){?>
 
         1000: {
-          perView: 2
+          perView: <?= count($floweritems) ?>
         },
-        <?php }else{?>
 
         650: {
-          perView: 1
+          perView: <?= count($floweritems) ?>
         }
-        <?php };?>
 
       }
     }
       // console.log('hogggg')
-  <?php  } ?>
-
+<?php } ?>
 
     // //日記のカルーセルの設定
     let dconfig;
   <?php  if(count($diaryitems) > 4){ ?>
       dconfig = {
         type: 'carousel',
-        perView:<?=count($diaryitems)?>,
+        perView:<?= count($diaryitems) ?>,
         breakpoints: {
         2250: {
           perView: 5
@@ -320,32 +314,27 @@ $floweritems = $stmt->fetchAll();
         type: 'carousel',
         perView:<?=count($diaryitems)?>,
         breakpoints: {
-          <?php if(count($diaryitems)==4){?>
-
+ 
         1620: {
-          perView: 4
+          perView: <?=count($diaryitems)?>
         },
-        <?php} elseif (count($diaryitems)==3){?>
 
         1350: {
-          perView: 3
+          perView: <?=count($diaryitems)?>
         },
-        <?php} elseif (count($diaryitems)==2){?>
 
         1000: {
-          perView: 2
+          perView: <?=count($diaryitems)?>
         },
-        <?php} else{?>
 
         650: {
-          perView: 1
+          perView: <?=count($diaryitems)?>
         }
-        <?php };?>
+
 
       }
      }
-  <?php  } ?>
-
+<?php } ?>
 
 
 
