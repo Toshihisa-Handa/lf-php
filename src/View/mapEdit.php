@@ -33,24 +33,35 @@ if (!$_POST) {
   $item = $stmt->fetch();
 } else {
 
-  //データ登録SQL作成
-  $sql = 'UPDATE map SET lat=:lat,lon=:lon,maptitle=:maptitle,description=:description WHERE id=:id';
-  $stmt = $pdo->prepare($sql);
-  $stmt->bindValue(':lat', $lat, PDO::PARAM_INT);
-  $stmt->bindValue(':lon', $lon, PDO::PARAM_INT);
-  $stmt->bindValue(':maptitle', $maptitle, PDO::PARAM_STR);
-  $stmt->bindValue(':description', $description, PDO::PARAM_STR);
-  $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-  $status = $stmt->execute();
+  $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
+  if(!$maptitle){} else 
+ if (preg_match($docFilter, $maptitle) === 0 || preg_match($docFilter, $maptitle) === false) {
+    $errors['maptitle'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  }
+
+  if (empty($errors)) { //$errorsが空の時
 
 
-  //データ登録処理後（基本コピペ使用でOK)
-  if ($status == false) {
-    $error = $stmt->errorInfo();
-    exit("SQLError:" . $error[2]);
-  } else {
-    header('Location: /src/View/mapinfo.php'); //Location:の後ろの半角スペースは必ず入れる。
-    exit();
+
+    //データ登録SQL作成
+    $sql = 'UPDATE map SET lat=:lat,lon=:lon,maptitle=:maptitle,description=:description WHERE id=:id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':lat', h($lat), PDO::PARAM_INT);
+    $stmt->bindValue(':lon', h($lon), PDO::PARAM_INT);
+    $stmt->bindValue(':maptitle', h($maptitle), PDO::PARAM_STR);
+    $stmt->bindValue(':description', h($description), PDO::PARAM_STR);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $status = $stmt->execute();
+
+
+    //データ登録処理後（基本コピペ使用でOK)
+    if ($status == false) {
+      $error = $stmt->errorInfo();
+      exit("SQLError:" . $error[2]);
+    } else {
+      header('Location: /src/View/mapinfo.php'); //Location:の後ろの半角スペースは必ず入れる。
+      exit();
+    }
   }
 }
 
@@ -97,6 +108,7 @@ if (!$_POST) {
         </div> -->
         <div class='inframe '>
           <div>タイトル</div><input class='inputs' type="text" name="maptitle" value='<?= $item['maptitle'] ?>'><br>
+          <span style='color:red;'> <?php echo isset($errors['maptitle']) ? $errors['maptitle'] : ''; ?></span>
         </div>
         <div class='inframe'>
           <div>　　説明</div><textarea class='txt' name="description"><?= $item['description'] ?></textarea><br>
@@ -114,7 +126,8 @@ if (!$_POST) {
 
 
       <p>
-      <h2>住所変換</h2><button id='exec'>変換</button></p>
+        <h2>住所変換</h2><button id='exec'>変換</button>
+      </p>
       <p id='lat' value='<?= $item['lat'] ?>'><?= $item['lat'] ?></p>
       <p id='lon' value='<?= $item['lon'] ?>'><?= $item['lon'] ?></p>
 
@@ -137,16 +150,14 @@ if (!$_POST) {
 
   <script src="https://cdn.geolonia.com/community-geocoder.js"></script>
   <script>
-  document.getElementById('exec').addEventListener('click', () => {
-  if (document.getElementById('lat').value) {
-    getLatLng(document.getElementById('lat').value, (latlng) => {
-      map.setCenter(latlng)
+    document.getElementById('exec').addEventListener('click', () => {
+      if (document.getElementById('lat').value) {
+        getLatLng(document.getElementById('lat').value, (latlng) => {
+          map.setCenter(latlng)
+        })
+      }
     })
-  }
-})
-  console.log(document.getElementById('lat').value);
-  
-  
+    console.log(document.getElementById('lat').value);
   </script>
 
 

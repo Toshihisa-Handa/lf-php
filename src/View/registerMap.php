@@ -18,6 +18,14 @@ if ($_POST) {
   //db接続
   $pdo = dbcon();
 
+  $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
+  if(!$maptitle){} else 
+  if (preg_match($docFilter, $maptitle) === 0 || preg_match($docFilter, $maptitle) === false) {
+    $errors['maptitle'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  }
+
+  if (empty($errors)) { //$errorsが空の時
+
   //sql作成
   $stmt = $pdo->prepare("INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),:user_id)");
   $stmt->bindValue(':lat', $lat, PDO::PARAM_INT);
@@ -37,6 +45,7 @@ if ($_POST) {
     header('Location: /index.php'); //Location:の後ろの半角スペースは必ず入れる。
     exit();
   }
+}
 }
 
 
@@ -95,6 +104,7 @@ if ($_POST) {
           </div> -->
         <div class='inframe '>
           <div>タイトル</div><input class='inputs' type="text" name="maptitle" value=''><br>
+          <span style='color:red;'> <?php echo isset($errors['maptitle']) ? $errors['maptitle'] : ''; ?></span>
         </div>
         <div class='inframe'>
           <div>　　説明</div><textarea class='txt' name="description"></textarea><br>
