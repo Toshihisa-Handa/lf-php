@@ -117,10 +117,15 @@ if ($status == false) {
             <form action='/src/View/myprofileEditUpdate.php' method="post" class='editform1'>
                 <div class='inframe'>
                     <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?= $item["name"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
                     <div>　サブタイトル</div><input class='inputs' type="text" name="title" placeholder="例：お店のキャッチコピーなど" value='<?= $item["title"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['title1']) ? $errors['title1'] : ''; ?></span>
+                    <span style='color:red;'> <?php echo isset($errors['title2']) ? $errors['title2'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>

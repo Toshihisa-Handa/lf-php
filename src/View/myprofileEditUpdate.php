@@ -25,6 +25,7 @@ $map = $_POST['map'];
 $message = $_POST['message'];
 $comment = $_POST['comment'];
 $feature = $_POST['feature'];
+$errors = [];
 
 
 //DB接続
@@ -33,14 +34,21 @@ $pdo = dbcon();
 
 
 //バリデーション処理
-$nameFilter = ''; //漢字カタカナひらがな記号Ok
+$docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
+$titleFilter = '#[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑].{5}#';
 $webFileter = '/^http(.|s)/';
 
 
 
-$errors = [];
-if (preg_match(ここに正規表現, $name) === 0 || preg_match(ここに正規表現, $name) === false) {
-  $errors['name'] = '店舗名に使用出来ない文字が使用されています';
+if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
+  $errors['name'] = '店舗名に使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+}
+if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
+  $errors['title1'] = 'サブタイトルに使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+}
+if(mb_strlen($title)>20){
+  $errors['title2'] = '20文字以内の記述をお願いします。';
+
 }
 if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === false) {
   $errors['web'] = 'http or https から始まるURLを使用して下さい';
@@ -49,12 +57,7 @@ if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === fal
 $_SESSION['errors'] = $errors;
 
 
-if (empty($errors)) {
-  header('Location: /src/View/myprofileEdit.php');
-} else {
-
-
-
+if (empty($errors)) {//$errorsが空の時
 
   //データ登録SQL作成
   $sql = 'UPDATE shop SET name=:name,title=:title,account_name=:account_name,web=:web,
@@ -85,7 +88,15 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
     $error = $stmt->errorInfo();
     exit("SQLError:" . $error[2]);
   } else {
-    header('Location: /src/View/myprofileEdit.php');
+    header('Location: /src/View/myprofile.php');
     exit;
   }
+
+
+} else {
+
+
+  header('Location: /src/View/myprofileEdit.php');
+
+
 }
