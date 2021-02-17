@@ -35,8 +35,6 @@ $floweritems = $stmt->fetchAll();
 
 
 
-
-
 ?>
 
 <?php include('../../common/favicon.html') ?>
@@ -238,7 +236,7 @@ $floweritems = $stmt->fetchAll();
   <script>
     //お花のカルーセルの設定
     let config;
-    if(<?=count($floweritems)?> > 4){
+    <?php if(count($floweritems) > 4){?>
        config = {
         type: 'carousel',
         perView: <?=count($floweritems)?>,
@@ -260,33 +258,42 @@ $floweritems = $stmt->fetchAll();
         }
       }
     }
-    } else{
+   <?php } else{ ?>
       // console.log('hogggg')
        config = {
         type: 'carousel',
         perView: <?=count($floweritems)?>,
         breakpoints: {
+        <?php if(count($floweritems)==4){?>
         1620: {
           perView: 4
         },
+        <?php} elseif (count($floweritems)==3){?>
+
         1350: {
           perView: 3
         },
+        <?php }elseif (count($floweritems)==2){?>
+
         1000: {
           perView: 2
         },
+        <?php }else{?>
+
         650: {
           perView: 1
         }
+        <?php };?>
+
       }
     }
       // console.log('hogggg')
-    }
+  <?php  } ?>
 
 
     // //日記のカルーセルの設定
     let dconfig;
-    if(<?=count($diaryitems)?> > 4){
+  <?php  if(count($diaryitems) > 4){ ?>
       dconfig = {
         type: 'carousel',
         perView:<?=count($diaryitems)?>,
@@ -308,26 +315,36 @@ $floweritems = $stmt->fetchAll();
         }
       }
     }
-    } else{
+ <?php } else{ ?>
        dconfig = {
         type: 'carousel',
         perView:<?=count($diaryitems)?>,
         breakpoints: {
+          <?php if(count($diaryitems)==4){?>
+
         1620: {
           perView: 4
         },
+        <?php} elseif (count($diaryitems)==3){?>
+
         1350: {
           perView: 3
         },
+        <?php} elseif (count($diaryitems)==2){?>
+
         1000: {
           perView: 2
         },
+        <?php} else{?>
+
         650: {
           perView: 1
         }
+        <?php };?>
+
       }
      }
-    }
+  <?php  } ?>
 
 
 
