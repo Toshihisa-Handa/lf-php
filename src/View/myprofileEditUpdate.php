@@ -37,24 +37,53 @@ $pdo = dbcon();
 $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
 $titleFilter = '#[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑].{5}#';
 $webFileter = '/^http(.|s)/';
+$emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
+$numFilter = '#^[\d]+$#';
+$adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
 
 
 if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
-  $errors['name'] = '店舗名に使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
 }
 if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
-  $errors['title1'] = 'サブタイトルに使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  $errors['title1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
 }
 if(mb_strlen($title)>20){
   $errors['title2'] = '20文字以内の記述をお願いします。';
-
+}
+if (preg_match($docFilter, $account_name) === 0 || preg_match($docFilter, $account_name) === false) {
+  $errors['account_name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
 }
 if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === false) {
   $errors['web'] = 'http or https から始まるURLを使用して下さい';
 }
+if ($emailFilter === false) {
+  $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+}
+if(strlen($tell)>11 || strlen($tell)<10 ){
+  $errors['tell'] = '10又は11文字での記述をお願いします。';
+}
+if (preg_match($numFilter, $tell) === 0 || preg_match($numFilter, $tell) === false) {
+  $errors['tell2'] = '使用出来るのは数字のみです';
+}
+if (preg_match($adressFilter, $location) === 0 || preg_match($adressFilter, $location) === false) {
+  $errors['location'] = '使用出来ない文字が使用されています。（記号は「-」、「ー」のみ使用可能です）。';
+}
+if (preg_match($docFilter, $message) === 0 || preg_match($docFilter, $message) === false) {
+  $errors['message1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+}
+if(mb_strlen($message)>15){
+  $errors['message2'] = '15文字以内の記述をお願いします。';
+}
+if (preg_match($docFilter, $feature) === 0 || preg_match($docFilter, $feature) === false) {
+  $errors['feature'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+}
 
-$_SESSION['errors'] = $errors;
+
+
+
+
 
 
 if (empty($errors)) {//$errorsが空の時
@@ -86,15 +115,22 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
   //データ登録処理後
   if ($status == false) {
     $error = $stmt->errorInfo();
-    exit("SQLError:" . $error[2]);
+    // $errors['other'] = '電話番号の桁が11を超えています';
+    // $_SESSION['errors'] = $errors;
+
+    // header('Location: /src/View/myprofileEdit.php');
+
+    exit("SQLError:". $error[2]);
+    
   } else {
+    $_SESSION['errors'] = [];
     header('Location: /src/View/myprofile.php');
     exit;
   }
 
 
 } else {
-
+  $_SESSION['errors'] = $errors;
 
   header('Location: /src/View/myprofileEdit.php');
 

@@ -114,7 +114,10 @@ if ($status == false) {
 
         <div class="main">
             <h2>基本情報編集</h2>
+            <h3 style='color:red;'> <?php echo isset($errors['other']) ? $errors['other'] : ''; ?></h3>
+
             <form action='/src/View/myprofileEditUpdate.php' method="post" class='editform1'>
+
                 <div class='inframe'>
                     <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?= $item["name"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
@@ -130,6 +133,7 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>　アカウント名</div><input class='inputs' type="text" name="account_name" placeholder="例：花田かすみ" value='<?= $item["account_name"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['account_name']) ? $errors['account_name'] : ''; ?></span>
                 </div>
 
                 <div class='inframe'>
@@ -140,10 +144,13 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>メールアドレス</div><input class='inputs' type="text" name="email" placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）" value='<?= $item["email"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['email']) ? $errors['email'] : ''; ?></span>
                 </div>
 
                 <div class='inframe'>
                     <div>　　　電話番号</div><input type="text" class='inputs' name="tell" placeholder="「–」なし半角数字で入力して下さい" value='<?= $item["tell"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['tell']) ? $errors['tell'] : ''; ?></span>
+                    <span style='color:red;'> <?php echo isset($errors['tell2']) ? $errors['tell2'] : ''; ?></span>
                 </div>
 
                 <h2>営業時間</h2>
@@ -226,6 +233,8 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>　　　　　住所</div><input type="text" class='inputs' name="location" placeholder="〇〇県〇〇市〇〇町〜" value='<?= $item["location"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['location']) ? $errors['location'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
@@ -234,6 +243,9 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>　店舗タイトル</div><input type="text" class='inputs' name="message" placeholder="店舗からお客様への一言を記入" value='<?= $item["message"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['message1']) ? $errors['message1'] : ''; ?></span>
+                    <span style='color:red;'> <?php echo isset($errors['message2']) ? $errors['message2'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
@@ -242,6 +254,8 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>　　　店舗特徴</div><input type="text" class='inputs' name="feature" placeholder="店舗の特徴を一言で" value='<?= $item["feature"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['feature']) ? $errors['feature'] : ''; ?></span>
+
                 </div>
                 <input type="hidden" name='id' value="<?= $item["id"] ?>">
 
