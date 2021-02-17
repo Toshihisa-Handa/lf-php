@@ -120,7 +120,7 @@ $_SESSION['image']= $item['image'];
         <div><img src="/public/upload/<?= $item['image']; ?>" alt="" class='diaryImg'></div>
         <h3 class='dfont'><?= $item['name'] ?></h3>
         <p class='dfont2'>店舗：<?= $item['shopname'] ?></p>
-        <p class='dfont2'>価格：<?= $item['price'] ?>円（税込）</p>
+        <p class='dfont2'>価格：<?= number_format($item['price']) ?>円（税込）</p>
         <p class='dfont2'>特徴：<?= $item['name'] ?></p>
         <p class='dfont2' class='diaryText'><?= $item['text'] ?></p>
         <div id='cbtn'><span class='btnClick'></span>コメント（<?= count($commentitems) ?>）</div>

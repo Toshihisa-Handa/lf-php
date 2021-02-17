@@ -34,16 +34,42 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     //指定フォルダに画像を保存
     $save = '../..//public/upload/' . basename($imgname);//保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
     move_uploaded_file($_FILES['image']['tmp_name'], $save);//指定した保存先へ保存
+
+
+
+
+    $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
+    $numFilter = '#^[0-9]+$#'; //数字Ok
+
+    if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
+      $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  }
+    if (preg_match($numFilter, $price) === 0 || preg_match($numFilter, $price) === false) {
+      $errors['price'] = '使用出来ない文字が使用されています。（数字を入力してください）。';
+  }
+    if (preg_match($docFilter, $feature) === 0 || preg_match($docFilter, $feature) === false) {
+      $errors['fe$feature'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  }
+    if (preg_match($docFilter, $tag) === 0 || preg_match($docFilter, $tag) === false) {
+      $errors['tag'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  }
+
+
+
+  if (empty($errors)) {//$errorsが空の時
+
+
+
   
   //３．データ登録SQL作成
   //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
   $stmt = $pdo->prepare("INSERT INTO flower(name, price, feature, tag, text, created_at, user_id, image)VALUES(:name,:price,:feature,:tag,:text,sysdate(),:uid,:imgname);
   ");
-  $stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
-  $stmt->bindValue(':price', $price, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
-  $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
-  $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT
-  $stmt->bindValue(':text', $text, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+  $stmt->bindValue(':name', h($name), PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $stmt->bindValue(':price', h($price), PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
+  $stmt->bindValue(':tag', h($tag), PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT
+  $stmt->bindValue(':text', h($text), PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
   $stmt->bindValue(':imgname', $imgname, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)  第３引数は省略出来るが、セキュリティの観点から記述している。文字列か数値はmysqlのデータベースに登録したものがvarcharaかintかというところで判断する
   $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
   $status = $stmt->execute();
@@ -61,7 +87,8 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     exit();
   
   }
-    
+}
+
   }
 
 
@@ -110,16 +137,24 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
               </div><br>
               <div class='inframe'>
                 <div>　　　　品名</div><input class='inputs' type="text" name="name"><br>
-            </div>
+                <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
+
+              </div>
               <div class='inframe'>
                 <div>価格（税込）</div><input class='inputs' type="text" placeholder="例：120  (半角数字で入力。単位（円）は入力不要です)" name="price"><br>
-            </div>
+                <span style='color:red;'> <?php echo isset($errors['price']) ? $errors['price'] : ''; ?></span>
+
+              </div>
               <div class='inframe'>
                 <div>　　　　特徴</div><input class='inputs' type="text" name="feature"><br>
-            </div>
+                <span style='color:red;'> <?php echo isset($errors['feature']) ? $errors['feature'] : ''; ?></span>
+
+              </div>
               <div class='inframe'>
                 <div>　　　　タグ</div><input class='inputs' type="text" name="tag"><br>
-            </div>
+                <span style='color:red;'> <?php echo isset($errors['tag']) ? $errors['tag'] : ''; ?></span>
+
+              </div>
               <div class='inframe'>
                 <div>　　テキスト</div><textarea class='txt' name="text" ></textarea><br>
             </div>
@@ -145,10 +180,10 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
                 <a href="flower.php/? id=<?= $images[$i]['id']; ?>">
                 <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['name']; ?></h3>
-                <div class='fprice'><?= $images[$i]['price']; ?>円（税別）</div>
+                <div class='fprice'><?= number_format($images[$i]['price']); ?>円（税別）</div>
                 <div class='ffeature'><?= $images[$i]['feature']; ?></div>
                 <div class='ffeature'><?= $images[$i]['tag']; ?></div>
-          
+                
             </a>
            </div>
            <div class="option">

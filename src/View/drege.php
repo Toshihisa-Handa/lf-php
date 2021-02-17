@@ -35,12 +35,26 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
     move_uploaded_file($_FILES['image']['tmp_name'], $save);//指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
 
 
+    $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
+
+    if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
+      $errors['title'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  }
+    if (preg_match($docFilter, $tag) === 0 || preg_match($docFilter, $tag) === false) {
+      $errors['tag'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+  }
+
+  if (empty($errors)) {//$errorsが空の時
+
+
+
+
   //３．データ登録SQL作成
   $stmt = $pdo->prepare("INSERT INTO diary(title,image,tag,text,created_at,user_id)VALUES(:title, :imgname,:tag,:text,sysdate(),:uid)");
-  $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+  $stmt->bindValue(':title', h($title), PDO::PARAM_STR);
   $stmt->bindValue(':imgname', $imgname, PDO::PARAM_STR); 
-  $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);  
-  $stmt->bindValue(':text', $text, PDO::PARAM_STR);
+  $stmt->bindValue(':tag', h($tag), PDO::PARAM_STR);  
+  $stmt->bindValue(':text', h($text), PDO::PARAM_STR);
   $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);  
   $status = $stmt->execute();
   
@@ -57,6 +71,8 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
   
   }
     
+  }
+
   }
 
 
@@ -104,9 +120,11 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
               </div><br>
               <div class='inframe'>
                 <div>タイトル</div><input class='inputs' type="text" name="title"><br>
+                <span style='color:red;'> <?php echo isset($errors['title']) ? $errors['title'] : ''; ?></span>
             </div>
               <div class='inframe'>
                 <div>　　タグ</div><input class='inputs' type="text" name="tag"><br>
+                <span style='color:red;'> <?php echo isset($errors['tag']) ? $errors['tag'] : ''; ?></span>
             </div>
               <div class='inframe'>
                 <div>テキスト</div><textarea class='txt' name="text" ></textarea><br>

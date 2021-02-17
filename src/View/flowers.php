@@ -111,7 +111,7 @@ if (!$_GET) {
               <a href="flower.php/? id=<?= $item['id']; ?>">
                 <img src="/public/upload/<?= $item['image']; ?>" alt="">
                 <h3 class='fsname'><?= $item['name']; ?></h3>
-                <div class='fprice'><?= $item['price']; ?>円（税込）</div>
+                <div class='fprice'><?= number_format($item['price']); ?>円（税込）</div>
                 <div class='ffeature'><?= $item['feature']; ?></div>
               </a>
             </div>

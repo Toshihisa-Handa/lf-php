@@ -13,10 +13,10 @@ $tell = $_POST['tell'];
 // $close = $_POST['close'];
 $openHour = $_POST['open-hour'];
 $openTime = $_POST['open-time'];
-$open = $openHour.':'.$openTime;
+$open = $openHour . ':' . $openTime;
 $closeHour = $_POST['close-hour'];
 $closeTime = $_POST['close-time'];
-$close = $closeHour.':'.$closeTime;
+$close = $closeHour . ':' . $closeTime;
 $holiday = $_POST['holiday'];
 $location = $_POST['location'];
 $map = $_POST['map'];
@@ -30,6 +30,57 @@ $uname = $_SESSION['uname'];
 if ($_POST) {
     //DB接続
     $pdo = dbcon();
+
+
+    //バリデーション処理
+    $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
+    $titleFilter = '#[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑].{5}#';
+    $webFileter = '/^http(.|s)/';
+    $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
+    $numFilter = '#^[\d]+$#';
+    $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
+
+
+    if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
+        $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+    }
+    if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
+        $errors['title1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+    }
+    if (mb_strlen($title) > 20) {
+        $errors['title2'] = '20文字以内の記述をお願いします。';
+    }
+    if (preg_match($docFilter, $account_name) === 0 || preg_match($docFilter, $account_name) === false) {
+        $errors['account_name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+    }
+    if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === false) {
+        $errors['web'] = 'http or https から始まるURLを使用して下さい';
+    }
+    if ($emailFilter === false) {
+        $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+    }
+    if (strlen($tell) > 11 || strlen($tell) < 10) {
+        $errors['tell'] = '10又は11文字での記述をお願いします。';
+    }
+    if (preg_match($numFilter, $tell) === 0 || preg_match($numFilter, $tell) === false) {
+        $errors['tell2'] = '使用出来るのは数字のみです';
+    }
+    if (preg_match($adressFilter, $location) === 0 || preg_match($adressFilter, $location) === false) {
+        $errors['location'] = '使用出来ない文字が使用されています。（記号は「-」、「ー」のみ使用可能です）。';
+    }
+    if (preg_match($docFilter, $message) === 0 || preg_match($docFilter, $message) === false) {
+        $errors['message1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+    }
+    if (mb_strlen($message) > 15) {
+        $errors['message2'] = '15文字以内の記述をお願いします。';
+    }
+    if (preg_match($docFilter, $feature) === 0 || preg_match($docFilter, $feature) === false) {
+        $errors['feature'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+    }
+
+
+    if (empty($errors)) {//$errorsが空の時
+
 
 
     // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -82,6 +133,11 @@ if ($_POST) {
         header('Location: /src/View/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
         exit();
     }
+
+
+
+
+} 
 }
 
 
@@ -105,26 +161,37 @@ if ($_POST) {
             <form method="post" class='editform1' enctype="">
                 <div class='inframe'>
                     <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店"><br>
+                    <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
                 </div>
 
                 <div class='inframe'>
                     <div>　サブタイトル</div><input class='inputs' type="text" name="title" placeholder="例：お店のキャッチコピーなど"><br>
+                    <span style='color:red;'> <?php echo isset($errors['title1']) ? $errors['title1'] : ''; ?></span>
+                    <span style='color:red;'> <?php echo isset($errors['title2']) ? $errors['title2'] : ''; ?></span>
                 </div>
 
                 <div class='inframe'>
                     <div>　アカウント名</div><input class='inputs' type="text" name="account_name" value='<?= $uname ?>' placeholder="例：花田かすみ"><br>
+                    <span style='color:red;'> <?php echo isset($errors['account_name']) ? $errors['account_name'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
                     <div>　ウェブサイト</div><input class='inputs' type="text" name="web" placeholder="例：https://xxxxx.com"><br>
+                    <span style='color:red;'> <?php echo isset($errors['web']) ? $errors['web'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
                     <div>メールアドレス</div><input class='inputs' type="text" name="email" value='<?= $uemail ?>' placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）"><br>
+                    <span style='color:red;'> <?php echo isset($errors['email']) ? $errors['email'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
                     <div>　　　電話番号</div><input type="text" class='inputs' name="tell" placeholder="「–」なし半角数字で入力して下さい"><br>
+                    <span style='color:red;'> <?php echo isset($errors['tell']) ? $errors['tell'] : ''; ?></span>
+                    <span style='color:red;'> <?php echo isset($errors['tell2']) ? $errors['tell2'] : ''; ?></span>
                 </div>
 
                 <h2>営業時間</h2>
@@ -132,45 +199,47 @@ if ($_POST) {
                     <div>　　　オープン</div>
                     <!-- <input type="text" class='inputs' name="open" placeholder="10時"><br> -->
                     <select name="open-hour">
-                            <option value="">選択して下さい</option>
-                            <?php include('../../common/select0-24.html') ?>
-                        </select>
-                        <div>:</div>
+                        <option value="">選択して下さい</option>
+                        <?php include('../../common/select0-24.html') ?>
+                    </select>
+                    <div>:</div>
 
-                        <select name="open-time">
-                            <option value="">選択して下さい</option>
-                            <?php include('../../common/select00-60.html') ?>
+                    <select name="open-time">
+                        <option value="">選択して下さい</option>
+                        <?php include('../../common/select00-60.html') ?>
 
-                        </select>
+                    </select>
                 </div>
 
                 <div class='inframe'>
                     <div>　　　クローズ</div>
                     <!-- <input type="text" class='inputs' name="close" placeholder="18時"><br> -->
                     <select name="close-hour">
-                            <option value="">選択して下さい</option>
-                            <?php include('../../common/select0-24.html') ?>
+                        <option value="">選択して下さい</option>
+                        <?php include('../../common/select0-24.html') ?>
 
-                        </select>
-                        <div>:</div>
-                        <select name="close-time">
-                            <option value="">選択して下さい</option>
-                            <?php include('../../common/select00-60.html') ?>
+                    </select>
+                    <div>:</div>
+                    <select name="close-time">
+                        <option value="">選択して下さい</option>
+                        <?php include('../../common/select00-60.html') ?>
 
-                        </select>
+                    </select>
                 </div>
 
                 <div class='inframe'>
                     <div>　　　　定休日</div>
                     <!-- <input type="text" class='inputs' name="holiday" placeholder="水曜日"><br> -->
                     <select name="holiday">
-                            <option value="">選択して下さい</option>
-                            <?php include('../../common/selectsun-sat.html') ?>
-                        </select>
+                        <option value="">選択して下さい</option>
+                        <?php include('../../common/selectsun-sat.html') ?>
+                    </select>
                 </div>
 
                 <div class='inframe'>
                     <div>　　　　　住所</div><input type="text" class='inputs' name="location" placeholder="〇〇県〇〇市〇〇町〜"><br>
+                    <span style='color:red;'> <?php echo isset($errors['location']) ? $errors['location'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
@@ -179,6 +248,8 @@ if ($_POST) {
 
                 <div class='inframe'>
                     <div>　店舗タイトル</div><input type="text" class='inputs' name="message" placeholder="店舗からお客様への一言を記入"><br>
+                    <span style='color:red;'> <?php echo isset($errors['message1']) ? $errors['message1'] : ''; ?></span>
+                    <span style='color:red;'> <?php echo isset($errors['message2']) ? $errors['message2'] : ''; ?></span>
                 </div>
 
                 <div class='inframe'>
@@ -187,6 +258,8 @@ if ($_POST) {
 
                 <div class='inframe'>
                     <div>　　　店舗特徴</div><input type="text" class='inputs' name="feature" placeholder="店舗の特徴を一言で"><br>
+                    <span style='color:red;'> <?php echo isset($errors['feature']) ? $errors['feature'] : ''; ?></span>
+
                 </div>
 
                 <button class='sends1 sends' type="submit">送信</button>

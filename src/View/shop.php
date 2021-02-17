@@ -105,7 +105,7 @@ $floweritems = $stmt->fetchAll();
                     <a href="/src/View/flower.php/? id=<?=$fitem['id']?>">
                       <div class="flower"><img src="/public/upload/<?= $fitem['image'] ?>" alt=""></div>
                       <h3 class='fname'><?= $fitem['name'] ?></h3>
-                      <p class='fprice'><?= $fitem['price'] ?>円（税込）</p>
+                      <p class='fprice'><?= number_format($fitem['price']) ?>円（税込）</p>
                       <p class='ffeature'><?= $fitem['feature'] ?></p>
                     </a>
                   </div>
