@@ -2,7 +2,7 @@
 session_start();
 include('../../common/funcs.php');
 $uid = $_SESSION['uid'];
-
+$errors = $_SESSION['errors'];
 
 //DB接続
 $pdo = dbcon();
@@ -129,6 +129,8 @@ if ($status == false) {
 
                 <div class='inframe'>
                     <div>　ウェブサイト</div><input class='inputs' type="text" name="web" placeholder="例：https://xxxxx.com" value='<?= $item["web"] ?>'><br>
+                    <span style='color:red;'> <?php echo isset($errors['web']) ? $errors['web'] : ''; ?></span>
+
                 </div>
 
                 <div class='inframe'>
