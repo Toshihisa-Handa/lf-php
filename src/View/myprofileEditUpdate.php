@@ -31,27 +31,40 @@ $feature = $_POST['feature'];
 $pdo = dbcon();
 
 
+
+//バリデーション処理
+// $errors = [];
+// if(preg_match(ここに正規表現, $name) ===0 || preg_match(ここに正規表現, $name) === false){
+//   $errors['name'] = '店舗名に使用出来ない文字が使用されています'
+// }
+
+
+
+
+
+
+
 //データ登録SQL作成
 $sql = 'UPDATE shop SET name=:name,title=:title,account_name=:account_name,web=:web,
 email=:email,tell=:tell,open=:open,close=:close,holiday=:holiday,location=:location,map=:map,
 message=:message,comment=:comment,feature=:feature WHERE id=:id';
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
-$stmt->bindValue(':title', $title, PDO::PARAM_STR);
-$stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
-$stmt->bindValue(':web', $web, PDO::PARAM_STR);
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);
-$stmt->bindValue(':tell', $tell, PDO::PARAM_INT);
-$stmt->bindValue(':open', $open, PDO::PARAM_STR);
-$stmt->bindValue(':close', $close, PDO::PARAM_STR);
-$stmt->bindValue(':holiday', $holiday, PDO::PARAM_STR);
-$stmt->bindValue(':location', $location, PDO::PARAM_STR);
-$stmt->bindValue(':map', $map, PDO::PARAM_STR);
-$stmt->bindValue(':message', $message, PDO::PARAM_STR);
-$stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
-$stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
-$stmt->bindValue(':id',   $id,     PDO::PARAM_INT);  
+$stmt->bindValue(':name', h($name), PDO::PARAM_STR);
+$stmt->bindValue(':title', h($title), PDO::PARAM_STR);
+$stmt->bindValue(':account_name', h($account_name), PDO::PARAM_STR);
+$stmt->bindValue(':web', h($web), PDO::PARAM_STR);
+$stmt->bindValue(':email', h($email), PDO::PARAM_STR);
+$stmt->bindValue(':tell', h($tell), PDO::PARAM_INT);
+$stmt->bindValue(':open', h($open), PDO::PARAM_STR);
+$stmt->bindValue(':close', h($close), PDO::PARAM_STR);
+$stmt->bindValue(':holiday', h($holiday), PDO::PARAM_STR);
+$stmt->bindValue(':location', h($location), PDO::PARAM_STR);
+$stmt->bindValue(':map', h($map), PDO::PARAM_STR);
+$stmt->bindValue(':message', h($message), PDO::PARAM_STR);
+$stmt->bindValue(':comment', h($comment), PDO::PARAM_STR);
+$stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);
+$stmt->bindValue(':id',   h($id),     PDO::PARAM_INT);  
 $status = $stmt->execute();
 
 
