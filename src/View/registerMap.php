@@ -39,7 +39,7 @@ if ($_POST) {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
-
+      $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
       header('Location: /index.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
