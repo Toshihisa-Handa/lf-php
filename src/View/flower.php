@@ -7,11 +7,13 @@ $feature = $_POST['feature'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
-$id = $_GET['id'];//flowerのid
+$id = $_GET['id']; //flowerのid
 $fcomment = $_POST['fcomment'];
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 
@@ -40,14 +42,10 @@ if (!$_POST) {
   $status = $stmt->execute();
   $item = $stmt->fetch();
 
-//stripe用にセッションを用意
-$_SESSION['price']= $item['price'];
-$_SESSION['name']= $item['name'];
-$_SESSION['image']= $item['image'];
-
-
-
-
+  //stripe用にセッションを用意
+  $_SESSION['price'] = $item['price'];
+  $_SESSION['name'] = $item['name'];
+  $_SESSION['image'] = $item['image'];
 } else {
 
 
@@ -86,7 +84,7 @@ $_SESSION['image']= $item['image'];
 
 <link rel="stylesheet" href="/public/css/flower.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-    <script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
@@ -152,7 +150,7 @@ $_SESSION['image']= $item['image'];
           </form>
 
           <div class="btncontainer">
-          <button class='btn-open' type="button" id="checkout-button">購入画面へ</button>
+            <button class='btn-open' type="button" id="checkout-button">購入画面へ</button>
           </div>
 
 
@@ -189,17 +187,19 @@ $_SESSION['image']= $item['image'];
     var stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
     var checkoutButton = document.getElementById("checkout-button");
 
-    checkoutButton.addEventListener("click", function () {
-      fetch("/src/View/stripe-app.php/<?=$item['id']?>", {
-        method: "POST",
-      })
-        .then(function (response) {
+    checkoutButton.addEventListener("click", function() {
+      fetch("/src/View/stripe-app.php/<?= $item['id'] ?>", {
+          method: "POST",
+        })
+        .then(function(response) {
           return response.json();
         })
-        .then(function (session) {
-          return stripe.redirectToCheckout({ sessionId: session.id });
+        .then(function(session) {
+          return stripe.redirectToCheckout({
+            sessionId: session.id
+          });
         })
-        .then(function (result) {
+        .then(function(result) {
           // If redirectToCheckout fails due to a browser or network
           // error, you should display the localized error message to your
           // customer using error.message.
@@ -207,7 +207,7 @@ $_SESSION['image']= $item['image'];
             alert(result.error.message);
           }
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.error("Error:", error);
         });
     });

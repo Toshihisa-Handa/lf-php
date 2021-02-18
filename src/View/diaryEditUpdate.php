@@ -9,7 +9,9 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo =$db->dbset();
 
 
 //データ登録SQL作成
@@ -30,4 +32,3 @@ if($status==false){
   header('Location: /src/View/drege.php');
   exit;
 }
-?>

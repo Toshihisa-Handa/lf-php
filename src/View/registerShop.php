@@ -29,7 +29,9 @@ $uname = $_SESSION['uname'];
 
 if ($_POST) {
     //DB接続
-    $pdo = dbcon();
+    include('../../common/class-db.php');
+    $db = new DB;
+    $pdo = $db->dbset();
 
 
     //バリデーション処理
@@ -40,115 +42,123 @@ if ($_POST) {
     $numFilter = '#^[\d]+$#';
     $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
-    if(!$name){} else 
+    if (!$name) {
+    } else 
     if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
         $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
     }
-    if(!$title){} else 
+    if (!$title) {
+    } else 
     if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
         $errors['title1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
     }
-    if(!$title){} else 
+    if (!$title) {
+    } else 
     if (mb_strlen($title) > 20) {
         $errors['title2'] = '20文字以内の記述をお願いします。';
     }
-    if(!$account_name){} else 
+    if (!$account_name) {
+    } else 
     if (preg_match($docFilter, $account_name) === 0 || preg_match($docFilter, $account_name) === false) {
         $errors['account_name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
     }
-    if(!$web){} else 
+    if (!$web) {
+    } else 
     if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === false) {
         $errors['web'] = 'http or https から始まるURLを使用して下さい';
     }
-    if(!$email){} else 
+    if (!$email) {
+    } else 
     if ($emailFilter === false) {
         $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
     }
-    if(!$tell){} else 
+    if (!$tell) {
+    } else 
     if (strlen($tell) > 11 || strlen($tell) < 10) {
         $errors['tell'] = '10又は11文字での記述をお願いします。';
     }
-    if(!$tell){} else 
+    if (!$tell) {
+    } else 
     if (preg_match($numFilter, $tell) === 0 || preg_match($numFilter, $tell) === false) {
         $errors['tell2'] = '使用出来るのは数字のみです';
     }
-    if(!$location){} else 
+    if (!$location) {
+    } else 
     if (preg_match($adressFilter, $location) === 0 || preg_match($adressFilter, $location) === false) {
         $errors['location'] = '使用出来ない文字が使用されています。（記号は「-」、「ー」のみ使用可能です）。';
     }
-    if(!$message){} else 
+    if (!$message) {
+    } else 
     if (preg_match($docFilter, $message) === 0 || preg_match($docFilter, $message) === false) {
         $errors['message1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
     }
-    if(!$message){} else 
+    if (!$message) {
+    } else 
     if (mb_strlen($message) > 15) {
         $errors['message2'] = '15文字以内の記述をお願いします。';
     }
-    if(!$feature){} else 
+    if (!$feature) {
+    } else 
     if (preg_match($docFilter, $feature) === 0 || preg_match($docFilter, $feature) === false) {
         $errors['feature'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
     }
 
 
-    if (empty($errors)) {//$errorsが空の時
+    if (empty($errors)) { //$errorsが空の時
 
 
 
-    // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-    if ($_FILES) {
-        $account_img = date("Ymd") . random_int(1, 999999) . $_FILES['account_img']['name']; //ここのnameはアップロードされたファイルのファイル名
-        $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name'];
-        $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
-        $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name'];
-        $save = '../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
-        move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
-        $sql = "INSERT INTO shop(account_img,shop_img,img1,img2)VALUES(:account_img,:shop_img,:img1,:img2)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':account_img', $account_img, PDO::PARAM_STR);
-        $stmt->bindValue(':sho_img', $sho_img, PDO::PARAM_STR);
-        $stmt->bindValue(':img1', $img1, PDO::PARAM_STR);
-        $stmt->bindValue(':img2', $img2, PDO::PARAM_STR);
+        // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        if ($_FILES) {
+            $account_img = date("Ymd") . random_int(1, 999999) . $_FILES['account_img']['name']; //ここのnameはアップロードされたファイルのファイル名
+            $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name'];
+            $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
+            $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name'];
+            $save = '../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+            move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
+            $sql = "INSERT INTO shop(account_img,shop_img,img1,img2)VALUES(:account_img,:shop_img,:img1,:img2)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':account_img', $account_img, PDO::PARAM_STR);
+            $stmt->bindValue(':sho_img', $sho_img, PDO::PARAM_STR);
+            $stmt->bindValue(':img1', $img1, PDO::PARAM_STR);
+            $stmt->bindValue(':img2', $img2, PDO::PARAM_STR);
+            $status = $stmt->execute();
+            header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+        }
+        // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        //店舗情報登録の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        //データ登録SQL作成
+        $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
+        $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+        $stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
+        $stmt->bindValue(':web', $web, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':tell', $tell, PDO::PARAM_INT);
+        $stmt->bindValue(':open', $open, PDO::PARAM_STR);
+        $stmt->bindValue(':close', $close, PDO::PARAM_STR);
+        $stmt->bindValue(':holiday', $holiday, PDO::PARAM_STR);
+        $stmt->bindValue(':location', $location, PDO::PARAM_STR);
+        $stmt->bindValue(':map', $map, PDO::PARAM_STR);
+        $stmt->bindValue(':message', $message, PDO::PARAM_STR);
+        $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
+        $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
         $status = $stmt->execute();
-        header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+
+        //====================================================================
+
+
+        //データ登録処理後
+        if ($status == false) {
+            $error = $stmt->errorInfo();
+            exit("SQLError:" . $error[2]);
+        } else {
+
+            header('Location: /src/View/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
+            exit();
+        }
     }
-    // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-    //店舗情報登録の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-    //データ登録SQL作成
-    $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
-    $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
-    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-    $stmt->bindValue(':title', $title, PDO::PARAM_STR);
-    $stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
-    $stmt->bindValue(':web', $web, PDO::PARAM_STR);
-    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->bindValue(':tell', $tell, PDO::PARAM_INT);
-    $stmt->bindValue(':open', $open, PDO::PARAM_STR);
-    $stmt->bindValue(':close', $close, PDO::PARAM_STR);
-    $stmt->bindValue(':holiday', $holiday, PDO::PARAM_STR);
-    $stmt->bindValue(':location', $location, PDO::PARAM_STR);
-    $stmt->bindValue(':map', $map, PDO::PARAM_STR);
-    $stmt->bindValue(':message', $message, PDO::PARAM_STR);
-    $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
-    $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
-    $status = $stmt->execute();
-
-    //====================================================================
-
-
-    //データ登録処理後
-    if ($status == false) {
-        $error = $stmt->errorInfo();
-        exit("SQLError:" . $error[2]);
-    } else {
-
-        header('Location: /src/View/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
-        exit();
-    }
-
-
-
-
-} 
 }
 
 

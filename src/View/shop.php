@@ -5,7 +5,9 @@ include('../../common/funcs.php');
 $uid = $_SESSION['uid'];
 $id = $_GET['id'];
 //DBs接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 
@@ -94,7 +96,7 @@ $floweritems = $stmt->fetchAll();
     <!-- お花一覧 -->
 
 
-    <?php if (count($floweritems) >=1) : ?>
+    <?php if (count($floweritems) >= 1) : ?>
       <div class="flist">
         <div class="glide">
           <div class="glide__track" data-glide-el="track">
@@ -102,7 +104,7 @@ $floweritems = $stmt->fetchAll();
               <?php foreach ($floweritems as $fitem) : ?>
                 <div class="glide__slide">
                   <div class="flower-box">
-                    <a href="/src/View/flower.php/? id=<?=$fitem['id']?>">
+                    <a href="/src/View/flower.php/? id=<?= $fitem['id'] ?>">
                       <div class="flower"><img src="/public/upload/<?= $fitem['image'] ?>" alt=""></div>
                       <h3 class='fname'><?= $fitem['name'] ?></h3>
                       <p class='fprice'><?= number_format($fitem['price']) ?>円（税込）</p>
@@ -131,33 +133,33 @@ $floweritems = $stmt->fetchAll();
 
     <!-- 日記一覧 -->
 
-    <?php if (count($diaryitems) >=1) : ?>
-  <div class="dlist">
-    <div class="dglide">
-        <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides">
-          <?php foreach ($diaryitems as $ditem) : ?>
-              <div class="glide__slide">
-                <div class="diary-box">
-                <a href="/src/View/diary.php/? id=<?= $ditem['id'] ?>">
-                  <div class="diary"><img src="/public/upload/<?= $ditem['image'] ?>" alt=""></div>
-                  <div class='dtitle'><?= $ditem['title'] ?></div>
-                  <div class='dtext'><?= $ditem['text'] ?></div>
-                </a> 
-              </div>
-            </div>
-            <?php endforeach; ?>
-          </ul>
+    <?php if (count($diaryitems) >= 1) : ?>
+      <div class="dlist">
+        <div class="dglide">
+          <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+              <?php foreach ($diaryitems as $ditem) : ?>
+                <div class="glide__slide">
+                  <div class="diary-box">
+                    <a href="/src/View/diary.php/? id=<?= $ditem['id'] ?>">
+                      <div class="diary"><img src="/public/upload/<?= $ditem['image'] ?>" alt=""></div>
+                      <div class='dtitle'><?= $ditem['title'] ?></div>
+                      <div class='dtext'><?= $ditem['text'] ?></div>
+                    </a>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </ul>
+          </div>
         </div>
-    </div>
-  </div>
- 
-  <?php else : ?>
-  <div class="dlist">
- <p class='StopsubTitle' style='text-align: center; color:rgb(129, 131, 134)'>日記は登録されてません</p>
-</div>
+      </div>
 
-<?php endif; ?>
+    <?php else : ?>
+      <div class="dlist">
+        <p class='StopsubTitle' style='text-align: center; color:rgb(129, 131, 134)'>日記は登録されてません</p>
+      </div>
+
+    <?php endif; ?>
 
 
 
@@ -227,105 +229,105 @@ $floweritems = $stmt->fetchAll();
   <script>
     //お花のカルーセルの設定
     let config;
-    <?php if(count($floweritems) > 4){ ?>
-       config = {
+    <?php if (count($floweritems) > 4) { ?>
+      config = {
         type: 'carousel',
         perView: <?= count($floweritems) ?>,
         breakpoints: {
           2250: {
-          perView: 5
-        },
-        1620: {
-          perView: 4
-        },
-        1350: {
-          perView: 3
-        },
-        1000: {
-          perView: 2
-        },
-        650: {
-          perView: 1
+            perView: 5
+          },
+          1620: {
+            perView: 4
+          },
+          1350: {
+            perView: 3
+          },
+          1000: {
+            perView: 2
+          },
+          650: {
+            perView: 1
+          }
         }
       }
-    }
-   <?php }else{ ?>
+    <?php } else { ?>
       // console.log('hogggg')
-       config = {
+      config = {
         type: 'carousel',
         perView: <?= count($floweritems) ?>,
         breakpoints: {
-        1620: {
-          perView: <?= count($floweritems) ?>
-        },
+          1620: {
+            perView: <?= count($floweritems) ?>
+          },
 
-        1350: {
-          perView: <?= count($floweritems) ?>
-        },
+          1350: {
+            perView: <?= count($floweritems) ?>
+          },
 
-        1000: {
-          perView: <?= count($floweritems) ?>
-        },
+          1000: {
+            perView: <?= count($floweritems) ?>
+          },
 
-        650: {
-          perView: <?= count($floweritems) ?>
+          650: {
+            perView: <?= count($floweritems) ?>
+          }
+
         }
-
       }
-    }
       // console.log('hogggg')
-<?php } ?>
+    <?php } ?>
 
     // //日記のカルーセルの設定
     let dconfig;
-  <?php  if(count($diaryitems) > 4){ ?>
+    <?php if (count($diaryitems) > 4) { ?>
       dconfig = {
         type: 'carousel',
-        perView:<?= count($diaryitems) ?>,
+        perView: <?= count($diaryitems) ?>,
         breakpoints: {
-        2250: {
-          perView: 5
-        },
-        1620: {
-          perView: 4
-        },
-        1350: {
-          perView: 3
-        },
-        1000: {
-          perView: 2
-        },
-        650: {
-          perView: 1
+          2250: {
+            perView: 5
+          },
+          1620: {
+            perView: 4
+          },
+          1350: {
+            perView: 3
+          },
+          1000: {
+            perView: 2
+          },
+          650: {
+            perView: 1
+          }
         }
       }
-    }
- <?php } else{ ?>
-       dconfig = {
+    <?php } else { ?>
+      dconfig = {
         type: 'carousel',
-        perView:<?=count($diaryitems)?>,
+        perView: <?= count($diaryitems) ?>,
         breakpoints: {
- 
-        1620: {
-          perView: <?=count($diaryitems)?>
-        },
 
-        1350: {
-          perView: <?=count($diaryitems)?>
-        },
+          1620: {
+            perView: <?= count($diaryitems) ?>
+          },
 
-        1000: {
-          perView: <?=count($diaryitems)?>
-        },
+          1350: {
+            perView: <?= count($diaryitems) ?>
+          },
 
-        650: {
-          perView: <?=count($diaryitems)?>
+          1000: {
+            perView: <?= count($diaryitems) ?>
+          },
+
+          650: {
+            perView: <?= count($diaryitems) ?>
+          }
+
+
         }
-
-
       }
-     }
-<?php } ?>
+    <?php } ?>
 
 
 

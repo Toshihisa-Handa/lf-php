@@ -8,7 +8,9 @@ $text = $_POST['text'];
 
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 if (!$_GET) {

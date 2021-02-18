@@ -5,10 +5,12 @@ $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
-$id = $_GET['id'];//diaryのid
+$id = $_GET['id']; //diaryのid
 $dcomment = $_POST['dcomment'];
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 if (!$_POST) {
@@ -18,7 +20,7 @@ if (!$_POST) {
           LEFT OUTER JOIN user on dcomment.user_id = user.user_id
           WHERE dcomment.diary_id = $id
           ORDER BY dcomment.created_at DESC";
-  
+
   $stmt = $pdo->prepare($sql0);
   $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
   $status = $stmt->execute();
@@ -32,11 +34,6 @@ if (!$_POST) {
   $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
   $status = $stmt->execute();
   $item = $stmt->fetch();
-
-
-
-
-
 } else {
 
 
@@ -85,7 +82,7 @@ if (!$_POST) {
 
         <div class='nav-right'>
 
-        <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -104,22 +101,22 @@ if (!$_POST) {
     <div class="container">
       <main class="main">
         <!-- メインコンテンツ -->
-          <div><img class='diaryImg' src="/public/upload/<?= $item['image']; ?>"></div>
-          <h2 class='dfont'><?= $item['title'] ?></h2>
-          <p class='diaryText dfont2'><?= $item['text'] ?></p>
-        <div id='cbtn'><span class='btnClick'></span>コメント（<?=count($commentitems)?>）</div>
+        <div><img class='diaryImg' src="/public/upload/<?= $item['image']; ?>"></div>
+        <h2 class='dfont'><?= $item['title'] ?></h2>
+        <p class='diaryText dfont2'><?= $item['text'] ?></p>
+        <div id='cbtn'><span class='btnClick'></span>コメント（<?= count($commentitems) ?>）</div>
 
         <div class="dcomment">
-        <?php if (count($commentitems) >=1) : ?>
+          <?php if (count($commentitems) >= 1) : ?>
 
-        <?php foreach ($commentitems as $citem) : ?>
-            <div class="comment-box">
-              <div class="dcname "><?= $citem['user_name'] ?></div>
-              <div class='dccreatedAt'> <?= $citem['created_at']; ?></div>
-              <div class="dccomment"><?= $citem['dcomment']; ?></div>
-            </div>
-          <?php endforeach; ?>
-<?php endif; ?>
+            <?php foreach ($commentitems as $citem) : ?>
+              <div class="comment-box">
+                <div class="dcname "><?= $citem['user_name'] ?></div>
+                <div class='dccreatedAt'> <?= $citem['created_at']; ?></div>
+                <div class="dccomment"><?= $citem['dcomment']; ?></div>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
       </main>
       <div class="sidebar">
@@ -147,7 +144,7 @@ if (!$_POST) {
     </footer>
 
     <!-- フッターナビ -->
-<?php include('../../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

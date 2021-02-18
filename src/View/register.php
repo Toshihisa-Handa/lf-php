@@ -15,54 +15,56 @@ $passwordFilter = mb_strlen($password);
 $passwordFilter2 = '/^[a-zA-Z0-9]+$/u'; //半角英数字許可
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 
 
 
-  //バリデーション処理
-  if (!empty($_POST)) {
+//バリデーション処理
+if (!empty($_POST)) {
 
 
 
-    $errors = [];
-    if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
-      $errors['name'] = 'User Nameに不備があります。';
-    }
-    if ($emailFilter === false) {
-      $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
-    }
-    if ($passwordFilter >= 13 || $passwordFilter <= 3) {
-      $errors['password'] = 'パスワードは半角英数字8文字以上12文字以下で設定して下さい。';
-    }
-    if (preg_match($passwordFilter2, $password) === 0 || preg_match($passwordFilter2, $password) === false) {
-      $errors['password2'] = 'Passwordに半角英数字以外が使用されています。';
-    }
+  $errors = [];
+  if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
+    $errors['name'] = 'User Nameに不備があります。';
+  }
+  if ($emailFilter === false) {
+    $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+  }
+  if ($passwordFilter >= 13 || $passwordFilter <= 3) {
+    $errors['password'] = 'パスワードは半角英数字8文字以上12文字以下で設定して下さい。';
+  }
+  if (preg_match($passwordFilter2, $password) === 0 || preg_match($passwordFilter2, $password) === false) {
+    $errors['password2'] = 'Passwordに半角英数字以外が使用されています。';
+  }
 
-    if (empty($errors)) {
+  if (empty($errors)) {
 
-      //データ登録SQL作成
-      $sql = "INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate())";
-      $stmt = $pdo->prepare($sql);
-      $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-      $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-      $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
-      $status = $stmt->execute();
-      $id = $pdo -> lastInsertId(); 
-      $_SESSION['uid'] = $id;
-      $_SESSION['uname'] = $name;
-      $_SESSION['uemail'] = $email;
+    //データ登録SQL作成
+    $sql = "INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate())";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
+    $status = $stmt->execute();
+    $id = $pdo->lastInsertId();
+    $_SESSION['uid'] = $id;
+    $_SESSION['uname'] = $name;
+    $_SESSION['uemail'] = $email;
 
 
-      //データ登録処理後
-      if ($status == false) {
-        $errors['email2'] = 'このアドレスは既に使用されています';
-      } else {
-        //index.phpへリダイレクト(エラーがなければindex.phpt)
-        header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
-        exit();
-      }
+    //データ登録処理後
+    if ($status == false) {
+      $errors['email2'] = 'このアドレスは既に使用されています';
+    } else {
+      //index.phpへリダイレクト(エラーがなければindex.phpt)
+      header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+      exit();
     }
   }
+}
 
 ?>
 

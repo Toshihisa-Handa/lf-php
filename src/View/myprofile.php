@@ -7,7 +7,9 @@ $uid = $_SESSION['uid'];
 
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 
@@ -47,7 +49,7 @@ if ($status == false) {
         </div>
         <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-        <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -61,7 +63,7 @@ if ($status == false) {
       <?php foreach ($items as $item) : ?>
 
         <div class='pimg'>
-          <?php if ($aimg==null) : ?>
+          <?php if ($aimg == null) : ?>
             <div class='pbox1'><img src="../../public/images/account3.png" alt=""></div>
           <?php else : ?>
             <div class='pbox1'><img src="../../public/upload/<?= $aimg; ?>" alt=""></div>

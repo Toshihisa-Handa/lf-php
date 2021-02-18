@@ -8,7 +8,9 @@ $uid = $_SESSION['uid'];
 
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 
@@ -45,7 +47,7 @@ $item = $stmt->fetch();
         <?php include('../../common/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
-        <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
 
         </div>
 

@@ -6,7 +6,9 @@ $name = $_SESSION['name'];
 
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 
 
 //データ登録SQL作成

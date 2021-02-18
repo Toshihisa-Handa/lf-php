@@ -1,17 +1,19 @@
-<?php 
+<?php
 session_start();
 include('../../common/funcs.php');
 
 $uid = $_SESSION['uid'];
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 
-include('../../common/favicon.html') 
+include('../../common/favicon.html')
 ?>
-    <title>マイページ</title>
-    <?php include('../../common/style.html') ?>
-    <link rel="stylesheet" href="/public/css/mypage.css">
+<title>マイページ</title>
+<?php include('../../common/style.html') ?>
+<link rel="stylesheet" href="/public/css/mypage.css">
 
 </head>
 
@@ -25,45 +27,46 @@ include('../../common/favicon.html')
 
         <header>
             <ul>
-              
 
-            <?php include('../../common/header-nav-leftIcon.html') ?>
-              <div class='nav-right'>
-              
-              <?php include('../../common/header-nav-rightIcon.php') ?>
 
-         </div>
-     
+                <?php include('../../common/header-nav-leftIcon.html') ?>
+                <div class='nav-right'>
+
+                    <?php include('../../common/header-nav-rightIcon.php') ?>
+
+                </div>
+
             </ul>
-         </header>
-   <div class="main">
-    <p class='mylink'><a href="myprofile.php">店舗登録情報</a></p>
-    <p class='mylink'><a href="drege.php">日記の登録</a></p>
-    <p class='mylink'><a href="frege.php">花の登録</a></p>
-    <p class='mylink'><a href="mapinfo.php">マップ情報</a></p>
-   </div>
+        </header>
+        <div class="main">
+            <p class='mylink'><a href="myprofile.php">店舗登録情報</a></p>
+            <p class='mylink'><a href="drege.php">日記の登録</a></p>
+            <p class='mylink'><a href="frege.php">花の登録</a></p>
+            <p class='mylink'><a href="mapinfo.php">マップ情報</a></p>
+        </div>
 
 
 
 
-</div>
+    </div>
 
 
-<!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-<div class="footer-glid">
-    <footer>
-        <h3 class='topSubtitle'>Copyright  second-cube</h3>
-    </footer>
+    <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+    <div class="footer-glid">
+        <footer>
+            <h3 class='topSubtitle'>Copyright second-cube</h3>
+        </footer>
 
-    <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
-</div>
-<!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-
-
+        <!-- フッターナビ -->
+        <?php include('../../common/footer.html') ?>
+    </div>
+    <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
 
 
-</div>
+
+
+    </div>
 </body>
+
 </html>

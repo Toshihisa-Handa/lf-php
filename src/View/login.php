@@ -7,7 +7,9 @@ $hash = password_hash($password, PASSWORD_DEFAULT);
 $errors = [];
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 
 if (!empty($_POST)) {
 
@@ -24,7 +26,7 @@ if (!empty($_POST)) {
 
     $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
     $_SESSION['name']  = $val['name']; //$valに今回DBへ登録した値が入っており、そのうちのnameを取得する為この記述をしている。そして$_SESSION['name']で定義すると他のページでsession_start();を宣言した後使用できるようになる。
-    $_SESSION['uid']  = $val['user_id']; 
+    $_SESSION['uid']  = $val['user_id'];
     //Login処理OKの場合index.phpへ遷移
     header('Location: /index.php');
     exit();
@@ -90,7 +92,7 @@ if (!empty($_POST)) {
     </footer>
     <!-- フッターナビ -->
     <?php include('../../common/footer.html') ?>
-  <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+    <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
 
 </html>

@@ -1,10 +1,12 @@
-<?php 
+<?php
 session_start();
 include('../../common/funcs.php');
 $uid = $_SESSION['uid'];
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 //SELECT M.lat,M.lon,M.title,M.pincolor,M.description, M.image, S.id as sid from map M join shop S on M.user_id = S.user_id
@@ -23,88 +25,106 @@ $items = $stmt->fetchAll();
 
 <?php include('../../common/favicon.html') ?>
 <title>マップ</title>
-<style>html,body{height:100%;}body{padding:0;margin:0;}h1{padding:0;margin:0;font-size:50%;}</style>
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    h1 {
+        padding: 0;
+        margin: 0;
+        font-size: 50%;
+    }
+</style>
 <?php include('../../common/style.html') ?>
 
 
 </head>
+
 <body>
 
     <header style="max-height: 70px;">
         <ul>
-          
-        <?php include('../../common/header-nav-leftIcon.html') ?>
-          <div class='nav-right'>
-          <?php include('../../common/header-nav-rightIcon.php') ?>
 
-     </div>
- 
+            <?php include('../../common/header-nav-leftIcon.html') ?>
+            <div class='nav-right'>
+                <?php include('../../common/header-nav-rightIcon.php') ?>
+
+            </div>
+
         </ul>
-     </header>
+    </header>
 
 
 
-<!-- MAP[START] -->
-<h1 style='height: 64px;'></h1>
-<div id="myMap" style="width:100vw;height:100vh;"></div>
-<!-- MAP[END] -->
+    <!-- MAP[START] -->
+    <h1 style='height: 64px;'></h1>
+    <div id="myMap" style="width:100vw;height:100vh;"></div>
+    <!-- MAP[END] -->
 
-<style>
-    h1{
-        color:rgb(0, 153, 255)
-    }
-</style>
-<!-- フッターナビ -->
-<?php include('../../common/footer.html') ?>
+    <style>
+        h1 {
+            color: rgb(0, 153, 255)
+        }
+    </style>
+    <!-- フッターナビ -->
+    <?php include('../../common/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-    
-  
-<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AmJSmi0DfSGMPQNbHQ7GSRPBRvWKZHpsv13mLTVUyr-EEQpqyk2I-d4tHVYiGw88' async defer></script>
-<script src="/public/js/BmapQuery.js"></script>
-<script>
-    //init
-    function GetMap() {
-        //------------------------------------------------------------------------
-        //1. Instance
-        //------------------------------------------------------------------------
-        const map = new Bmap("#myMap");
-        //------------------------------------------------------------------------
-        //2. Display Map
-        //------------------------------------------------------------------------
-        map.geolocation(function(data) {
-        //location
-        const lat = data.coords.latitude;
-        const lon = data.coords.longitude;
-        //Map
-        map.startMap(lat, lon, "load", 11);
-        //pin
-        map.pin(lat,lon,":rgb(0, 153, 255)");
-        // map.pin(36.4147612,139.3320506,"#ff0000");
-        const options = [];
-        
-        let i =0
-        console.log(i)
-        <?php foreach($items as $item): ?>
-        options[i]={
-            "lat":<?=$item['lat']?>,
-            "lon":<?=$item['lon']?>,
-            "title":"<?=$item['maptitle']?>",
-            "pinColor":"<?=$item['pincolor']?>",
-            "height":220,
-            "width":200,
-            "description": '<a href="/src/View/shop.php/? id=<?=$item['id']?>"><?=$item['description']?><br><img src="/public/upload/<?=$item['shop_img']?>" width="180"></a>',
-            "show":false
-        };
-        i++
-        <?php endforeach; ?>
 
 
-        map.infoboxLayers(options,true);
+    <script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AmJSmi0DfSGMPQNbHQ7GSRPBRvWKZHpsv13mLTVUyr-EEQpqyk2I-d4tHVYiGw88' async defer></script>
+    <script src="/public/js/BmapQuery.js"></script>
+    <script>
+        //init
+        function GetMap() {
+            //------------------------------------------------------------------------
+            //1. Instance
+            //------------------------------------------------------------------------
+            const map = new Bmap("#myMap");
+            //------------------------------------------------------------------------
+            //2. Display Map
+            //------------------------------------------------------------------------
+            map.geolocation(function(data) {
+                //location
+                const lat = data.coords.latitude;
+                const lon = data.coords.longitude;
+                //Map
+                map.startMap(lat, lon, "load", 11);
+                //pin
+                map.pin(lat, lon, ":rgb(0, 153, 255)");
+                // map.pin(36.4147612,139.3320506,"#ff0000");
+                const options = [];
 
-    });
+                let i = 0
+                console.log(i)
+                <?php foreach ($items as $item) : ?>
+                    options[i] = {
+                        "lat": <?= $item['lat'] ?>,
+                        "lon": <?= $item['lon'] ?>,
+                        "title": "<?= $item['maptitle'] ?>",
+                        "pinColor": "<?= $item['pincolor'] ?>",
+                        "height": 220,
+                        "width": 200,
+                        "description": '<a href="/src/View/shop.php/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
+                        "show": false
+                    };
+                    i++
+                <?php endforeach; ?>
 
-       
-    }
-</script>
+
+                map.infoboxLayers(options, true);
+
+            });
+
+
+        }
+    </script>
 </body>
+
 </html>

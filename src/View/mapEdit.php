@@ -17,7 +17,9 @@ $description = $_POST['description'];
 
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 include('../../common/header-icon.php');
 
 //画像処理
@@ -34,7 +36,8 @@ if (!$_POST) {
 } else {
 
   $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
-  if(!$maptitle){} else 
+  if (!$maptitle) {
+  } else 
  if (preg_match($docFilter, $maptitle) === 0 || preg_match($docFilter, $maptitle) === false) {
     $errors['maptitle'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
   }
@@ -126,7 +129,7 @@ if (!$_POST) {
 
 
       <p>
-        <h2>住所変換</h2><button id='exec'>変換</button>
+      <h2>住所変換</h2><button id='exec'>変換</button>
       </p>
       <p id='lat' value='<?= $item['lat'] ?>'><?= $item['lat'] ?></p>
       <p id='lon' value='<?= $item['lon'] ?>'><?= $item['lon'] ?></p>
