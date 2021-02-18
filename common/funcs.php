@@ -24,7 +24,7 @@ function dbcon()
 function regiCheck()
 {
   if (!isset($_SESSION['chk_regi'])) {
-    header('Location: /common/session_error.php');
+    header('Location: /common/session_regi_error.php');
     exit();
   }
 }

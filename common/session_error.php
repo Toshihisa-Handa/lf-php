@@ -10,9 +10,9 @@ include('../../common/favicon.html')
     <p>
         ログインしていません
         <br>
-        下記リンクからトップページへ戻れます。
+        下記リンクからログインページへ戻れます。
       </p>
-      <p><a href="/">戻る</a></p>
+      <p><a href="/src/View/login.php">戻る</a></p>
   </section>
 </body>
 </html>
