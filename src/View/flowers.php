@@ -11,16 +11,9 @@ $text = $_POST['text'];
 
 
 //DB接続
-include('class-db.php');
+include('../../common/class-db.php');
 $db = new DB;
-// $test = $db->test(3,4);
-// echo $test . 'hoge';
-// return;
-
 $pdo =$db->dbset();
-var_dump($pdo);
-// return;
-// $pdo = dbcon();
 include('../../common/header-icon.php');
 
 
