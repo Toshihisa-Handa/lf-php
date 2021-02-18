@@ -6,7 +6,7 @@ $name = $_SESSION['name'];
 
 
 //DB接続
-include('../../common/class-db.php');
+include('common/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 

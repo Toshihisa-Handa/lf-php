@@ -35,12 +35,8 @@ if (!$_POST) {
   $item = $stmt->fetch();
 } else {
 
-  $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
-  if (!$maptitle) {
-  } else 
- if (preg_match($docFilter, $maptitle) === 0 || preg_match($docFilter, $maptitle) === false) {
-    $errors['maptitle'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-  }
+  docFilter($maptitle,'maptitle');
+
 
   if (empty($errors)) { //$errorsが空の時
 

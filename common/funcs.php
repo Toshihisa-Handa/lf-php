@@ -55,3 +55,14 @@ if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
    return $errors[$b] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
   }
 }
+
+function docFilterDF($a, $b)
+{
+  global $errors;
+  $filter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
+
+if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
+   return $errors[$b] = '使用出来ない文字が使用されてる。又はテキストが入力されていません。（漢字は常用漢字をご使用下さい）。';
+  }
+}
+

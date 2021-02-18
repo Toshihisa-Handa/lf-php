@@ -37,21 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
 
-  $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
+  docFilterDF($name,'name');
+  docFilterDF($feature,'feature');
+  docFilterDF($tag,'tag');
   $numFilter = '#^[0-9]+$#'; //数字Ok
-
-  if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
-    $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-  }
   if (preg_match($numFilter, $price) === 0 || preg_match($numFilter, $price) === false) {
     $errors['price'] = '使用出来ない文字が使用されています。（数字を入力してください）。';
   }
-  if (preg_match($docFilter, $feature) === 0 || preg_match($docFilter, $feature) === false) {
-    $errors['fe$feature'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-  }
-  if (preg_match($docFilter, $tag) === 0 || preg_match($docFilter, $tag) === false) {
-    $errors['tag'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-  }
+
 
 
 

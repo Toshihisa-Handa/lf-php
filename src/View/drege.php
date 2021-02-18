@@ -37,14 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
 
 
-  $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
+  docFilterDF($title,'title');
+  docFilterDF($tag,'tag');
 
-  if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
-    $errors['title'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-  }
-  if (preg_match($docFilter, $tag) === 0 || preg_match($docFilter, $tag) === false) {
-    $errors['tag'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-  }
 
   if (empty($errors)) { //$errorsが空の時
 

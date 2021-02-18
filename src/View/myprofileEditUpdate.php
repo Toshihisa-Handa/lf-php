@@ -36,7 +36,6 @@ $pdo = $db->dbset();
 
 
 //バリデーション処理
-$docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
 $titleFilter = '#[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑].{5}#';
 $webFileter = '/^http(.|s)/';
 $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -45,8 +44,8 @@ $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
 docFilter($name,'name');
 docFilter($title,'title1');
-docFilter($account_name,'account$account_name');
-docFilter($message,'messa$message');
+docFilter($account_name,'account_name');
+docFilter($message,'message1');
 docFilter($feature,'feature');
 
 if(!$title){} else 
