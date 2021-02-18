@@ -33,15 +33,14 @@ function loginCheck(){
     }
 }
 
-function docFilter($a,$b,$c){
-  $docFilter1 = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
-  if (!$a) {
-  } else 
-  if (preg_match($docFilter1, $a) === 0 || preg_match($docFilter1, $a) === false) {
-    return $b['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-  }
+function test(){
+  global $errors;
+  return $errors['name'] = 'ttthogte';
 }
-
+function test2(){
+  global $errors;
+  return $errors['email'] = 'emai';
+}
 
 
 
