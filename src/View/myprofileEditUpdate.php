@@ -29,14 +29,11 @@ $errors = [];
 
 
 //DB接続
-$pdo = dbcon();
+include('../../common/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 
- test();
- test2();
-// var_dump($errors);
-echo($errors['name']);
-echo($errors['email']);
-return;
+
 
 //バリデーション処理
 $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
@@ -46,11 +43,11 @@ $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
 $numFilter = '#^[\d]+$#';
 $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
-
-if(!$name){} else 
-if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
-    $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-}
+docFilter($name,'name');
+// if(!$name){} else 
+// if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
+//     $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+// }
 if(!$title){} else 
 if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
     $errors['title1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
