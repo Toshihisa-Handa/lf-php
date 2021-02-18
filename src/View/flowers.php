@@ -11,7 +11,10 @@ $text = $_POST['text'];
 
 
 //DB接続
-$pdo = dbcon();
+include('class-db.php');
+$db = new DB;
+$pdo = $DB->dbset()
+// $pdo = dbcon();
 include('../../common/header-icon.php');
 
 
