@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../../common/funcs.php');
+unset($_SESSION['chk_regi']);//登録セッションの初期化
 
 
 
@@ -59,6 +60,20 @@ if (!empty($_POST)) {
     if ($status == false) {
       $errors['email2'] = 'このアドレスは既に使用されています';
     } else {
+      // 次に遷移する会員登録フォームにセッションチェックを入れるための用意
+      // 変数の初期化
+      $res = null; //生成した文字列を格納
+      $string_length = 10; //生成する文字列の長さを指定
+      $base_strings = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      for ($i = 0; $i < $string_length; $i++) {
+        $res .= $base_strings[random_int(0, count($base_strings) - 1)];
+      }
+
+      $_SESSION['chk_regi']  = $res.$email; //ここは自由に好きな名前を振るのもOK
+//       var_dump($_SESSION['chk_regi']);
+// return;
+
       //index.phpへリダイレクト(エラーがなければindex.phpt)
       header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();

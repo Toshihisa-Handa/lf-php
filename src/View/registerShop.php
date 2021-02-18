@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../../common/funcs.php');
-
+regiCheck();
 
 $name = $_POST['name'];
 $titile = $_POST['titile'];

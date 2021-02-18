@@ -154,7 +154,7 @@ if ($status == false) {
         </footer>
     </div>
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('common/footer.html') ?>
 
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

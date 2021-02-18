@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../../common/funcs.php');
+regiCheck();
+
 $uid = $_SESSION['uid'];
 $uname = $_SESSION['uname'];
 $lat = $_POST['lat'];
@@ -40,6 +42,7 @@ if ($_POST) {
       exit("SQLError:" . $error[2]);
     } else {
       $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
+      unset($_SESSION['chk_regi']);
       header('Location: /index.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
