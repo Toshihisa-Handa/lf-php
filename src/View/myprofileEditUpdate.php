@@ -43,12 +43,14 @@ $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
 $numFilter = '#^[\d]+$#';
 $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
-
-if (!$name) {
-} else 
-if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
-    $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-}
+$errors = docFilter($name,$errors,"name");
+var_dump($errors[0]);
+return;
+// if (!$name) {
+// } else 
+// if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
+//     $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+// }
 if (!$title) {
 } else 
 if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
