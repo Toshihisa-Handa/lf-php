@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../../common/funcs.php');
+loginCheck();
+
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];

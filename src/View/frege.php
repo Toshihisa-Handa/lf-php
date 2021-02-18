@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../../common/funcs.php');
+loginCheck();
+
 $name = $_POST['name'];
 $price = $_POST['price'];
 $feature = $_POST['feature'];

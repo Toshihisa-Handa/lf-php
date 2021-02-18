@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../../common/funcs.php');
+loginCheck();
 $uid = $_SESSION['uid'];
 $errors = $_SESSION['errors'];
 

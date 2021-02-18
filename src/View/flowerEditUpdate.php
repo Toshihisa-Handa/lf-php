@@ -1,5 +1,6 @@
 <?php 
 include('../../common/funcs.php');
+loginCheck();
 
 
 //1. POSTデータ取得

@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../../common/funcs.php');
+loginCheck();
+
 $id = $_POST['id'];
 $uid = $_SESSION['uid'];
 $lat = $_POST['lat'];
