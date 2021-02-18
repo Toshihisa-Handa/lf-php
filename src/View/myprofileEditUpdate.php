@@ -44,22 +44,16 @@ $numFilter = '#^[\d]+$#';
 $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
 docFilter($name,'name');
-// if(!$name){} else 
-// if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {
-//     $errors['name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-// }
-if(!$title){} else 
-if (preg_match($docFilter, $title) === 0 || preg_match($docFilter, $title) === false) {
-    $errors['title1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-}
+docFilter($title,'title1');
+docFilter($account_name,'account$account_name');
+docFilter($message,'messa$message');
+docFilter($feature,'feature');
+
 if(!$title){} else 
 if (mb_strlen($title) > 20) {
     $errors['title2'] = '20文字以内の記述をお願いします。';
 }
-if(!$account_name){} else 
-if (preg_match($docFilter, $account_name) === 0 || preg_match($docFilter, $account_name) === false) {
-    $errors['account_name'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-}
+
 if(!$web){} else 
 if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === false) {
     $errors['web'] = 'http or https から始まるURLを使用して下さい';
@@ -80,18 +74,12 @@ if(!$location){} else
 if (preg_match($adressFilter, $location) === 0 || preg_match($adressFilter, $location) === false) {
     $errors['location'] = '使用出来ない文字が使用されています。（記号は「-」、「ー」のみ使用可能です）。';
 }
-if(!$message){} else 
-if (preg_match($docFilter, $message) === 0 || preg_match($docFilter, $message) === false) {
-    $errors['message1'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-}
+
 if(!$message){} else 
 if (mb_strlen($message) > 15) {
     $errors['message2'] = '15文字以内の記述をお願いします。';
 }
-if(!$feature){} else 
-if (preg_match($docFilter, $feature) === 0 || preg_match($docFilter, $feature) === false) {
-    $errors['feature'] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
-}
+
 
 
 

@@ -42,6 +42,8 @@ if ($_POST) {
     $numFilter = '#^[\d]+$#';
     $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
+
+    
     if (!$name) {
     } else 
     if (preg_match($docFilter, $name) === 0 || preg_match($docFilter, $name) === false) {

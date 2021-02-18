@@ -48,7 +48,7 @@ function test2()
 function docFilter($a, $b)
 {
   global $errors;
-  $filter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
+  $filter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
   if (!$a) {
   } else 
 if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
