@@ -68,7 +68,7 @@ if (!empty($_POST)) {
     </div>
     <div class="loginList">
       <div class='login-card'>
-        <form action="/src/View/login.php" method="post">
+        <form action="/src/view/login.php" method="post">
           <span class="label">E-mail</span><input class='linput' type="email" name="email" class="input" required><br>
           <br>
           <span class="label">Password</span><input class='linput' type="password" name="password" class="input" required><br>

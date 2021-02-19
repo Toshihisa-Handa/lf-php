@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             </div>
             <div class="option">
               <div class="update"><a href="flowerEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-              <div class="delete"><a href="/src/Model/flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
+              <div class="delete"><a href="/src/model/flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
             </div>
           </div>
         <?php endfor; ?>
@@ -193,9 +193,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
     <div class="nav">
-      <p><a href="/src/View/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/View/drege.php">日記の登録</a></p>
-      <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/drege.php">日記の登録</a></p>
+      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
     </div>
 
 

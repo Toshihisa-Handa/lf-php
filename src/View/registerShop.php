@@ -108,7 +108,7 @@ if ($_POST) {
         //     $stmt->bindValue(':img1', $img1, PDO::PARAM_STR);
         //     $stmt->bindValue(':img2', $img2, PDO::PARAM_STR);
         //     $status = $stmt->execute();
-        //     header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+        //     header('Location: /src/view/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
         // }
         // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
         //店舗情報登録の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -140,7 +140,7 @@ if ($_POST) {
             exit("SQLError:" . $error[2]);
         } else {
 
-            header('Location: /src/View/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
+            header('Location: /src/view/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
             exit();
         }
     }

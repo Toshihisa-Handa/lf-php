@@ -92,10 +92,10 @@ $item = $stmt->fetch();
 
 
     <div class="nav">
-      <p><a class='maplink' href="/src/View/mapEdit.php/<?= $item['id'] ?>">マップ情報編集</a></p>
-      <p><a href="/src/View/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/View/drege.php">日記の登録</a></p>
-      <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
+      <p><a class='maplink' href="/src/view/mapEdit.php/<?= $item['id'] ?>">マップ情報編集</a></p>
+      <p><a href="/src/view/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/drege.php">日記の登録</a></p>
+      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
     </div>
 
 

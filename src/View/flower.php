@@ -68,7 +68,7 @@ if (!$_POST) {
     // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
   } else {
     //５．index.phpへリダイレクト(エラーがなければindex.phpt)
-    header("Location: /src/View/flower.php/? id=$id"); //Location:の後ろの半角スペースは必ず入れる。
+    header("Location: /src/view/flower.php/? id=$id"); //Location:の後ろの半角スペースは必ず入れる。
     exit();
   }
 }
@@ -188,7 +188,7 @@ if (!$_POST) {
     var checkoutButton = document.getElementById("checkout-button");
 
     checkoutButton.addEventListener("click", function() {
-      fetch("/Libralys/stripe-app.php/<?= $item['id'] ?>", {
+      fetch("/libralys/stripe-app.php/<?= $item['id'] ?>", {
           method: "POST",
         })
         .then(function(response) {

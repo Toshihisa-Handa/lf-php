@@ -26,7 +26,7 @@ function dbcon()
 function regiCheck()
 {
   if (!isset($_SESSION['chk_regi'])) {
-    header('Location: /src/View/session_regi_error.php');
+    header('Location: /src/view/session_regi_error.php');
     exit();
   }
 }
@@ -34,9 +34,9 @@ function regiCheck()
 function loginCheck()
 {
   if (!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid'] != session_id()) {
-    header('Location: /src/View/session_error.php');
+    header('Location: /src/view/session_error.php');
     exit();
-  } else { 
+  } else {
     session_regenerate_id(true);
     $_SESSION['chk_ssid'] = session_id();
   }
@@ -60,7 +60,7 @@ function docFilter($a, $b)
   if (!$a) {
   } else 
 if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
-   return $errors[$b] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
+    return $errors[$b] = '使用出来ない文字が使用されています。（漢字は常用漢字をご使用下さい）。';
   }
 }
 
@@ -69,20 +69,20 @@ function docFilterDF($a, $b)
   global $errors;
   $filter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々]+$#'; //カタカナひらがな英数字記号Ok
 
-if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
-   return $errors[$b] = '使用出来ない文字が使用されてる。又はテキストが入力されていません。（漢字は常用漢字をご使用下さい）。';
+  if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
+    return $errors[$b] = '使用出来ない文字が使用されてる。又はテキストが入力されていません。（漢字は常用漢字をご使用下さい）。';
   }
 }
 
 
-  function redirectCheck($url){
-    global $status, $stmt;
-    if ($status == false) {
-      $error = $stmt->errorInfo();
-      exit("SQLError:" . $error[2]);
-    } else {
-      header("Location: ".$url); //Location:の後ろの半角スペースは必ず入れる。
-      exit;
-    }
-  
+function redirectCheck($url)
+{
+  global $status, $stmt;
+  if ($status == false) {
+    $error = $stmt->errorInfo();
+    exit("SQLError:" . $error[2]);
+  } else {
+    header("Location: " . $url); //Location:の後ろの半角スペースは必ず入れる。
+    exit;
   }
+}

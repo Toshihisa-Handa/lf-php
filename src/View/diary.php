@@ -52,7 +52,7 @@ if (!$_POST) {
     // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
   } else {
     //５．index.phpへリダイレクト(エラーがなければindex.phpt)
-    header("Location: /src/View/diary.php/? id=$id"); //Location:の後ろの半角スペースは必ず入れる。
+    header("Location: /src/view/diary.php/? id=$id"); //Location:の後ろの半角スペースは必ず入れる。
     exit();
   }
 }

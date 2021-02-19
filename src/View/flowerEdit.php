@@ -68,7 +68,7 @@ include('../../common/component/favicon.html')
 
     <div class="main">
       <h2>花編集</h2>
-      <form action='/src/View/flowerEditUpdate.php' method="post">
+      <form action='/src/view/flowerEditUpdate.php' method="post">
         <div class='inframe'>
           <div>　　品名</div><input class='inputs' type="text" name="name" value='<?= $item["name"] ?>'><br>
         </div>

@@ -31,6 +31,6 @@ if ($status == false) {
   $error = $stmt->errorInfo();
   exit("SQLError:" . $error[2]);
 } else {
-  header('Location: /src/View/drege.php');
+  header('Location: /src/view/drege.php');
   exit;
 }

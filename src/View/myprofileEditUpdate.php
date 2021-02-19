@@ -126,16 +126,16 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
     // $errors['other'] = '電話番号の桁が11を超えています';
     // $_SESSION['errors'] = $errors;
 
-    // header('Location: /src/View/myprofileEdit.php');
+    // header('Location: /src/view/myprofileEdit.php');
 
     exit("SQLError:" . $error[2]);
   } else {
     $_SESSION['errors'] = [];
-    header('Location: /src/View/myprofile.php');
+    header('Location: /src/view/myprofile.php');
     exit;
   }
 } else {
   $_SESSION['errors'] = $errors;
 
-  header('Location: /src/View/myprofileEdit.php');
+  header('Location: /src/view/myprofileEdit.php');
 }

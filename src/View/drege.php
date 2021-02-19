@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
               </a>
               <div class="option">
                 <div class="update"><a href="diaryEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-                <div class="delete"><a href="/src/Model/diaryDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
+                <div class="delete"><a href="/src/model/diaryDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
               </div>
 
             </div>
@@ -161,9 +161,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
     <br>
     <div class="nav">
-      <p><a href="/src/View/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/View/frege.php">花の登録</a></p>
-      <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/frege.php">花の登録</a></p>
+      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
     </div>
 
   </div>

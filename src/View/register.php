@@ -75,7 +75,7 @@ if (!empty($_POST)) {
       // return;
 
       //index.phpへリダイレクト(エラーがなければindex.phpt)
-      header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+      header('Location: /src/view/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
   }
@@ -107,7 +107,7 @@ if (!empty($_POST)) {
     </div>
     <div class="loginList2">
       <div class='login-card'>
-        <form action="/src/View/register.php" method="post" class="board-form">
+        <form action="/src/view/register.php" method="post" class="board-form">
           <span class="label ">User Name</span><input type="text" name="name" class="input linput2" placeholder="日本語、アルファベット対応" required value='<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : ''; ?>'>
           <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
           <br>

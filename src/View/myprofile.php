@@ -111,11 +111,11 @@ if ($status == false) {
     </div>
 
     <div class="nav">
-      <p><a href="/src/View/myprofileEdit.php/<?= $item['uid']; ?>">店舗情報編集</a></p>
+      <p><a href="/src/view/myprofileEdit.php/<?= $item['uid']; ?>">店舗情報編集</a></p>
     <?php endforeach; ?>
-    <p><a href="/src/View/drege.php">日記の登録</a></p>
-    <p><a href="/src/View/frege.php">花の登録</a></p>
-    <p><a href="/src/View/mapinfo.php">マップ情報</a></p>
+    <p><a href="/src/view/drege.php">日記の登録</a></p>
+    <p><a href="/src/view/frege.php">花の登録</a></p>
+    <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
     </div>
 
   </div>

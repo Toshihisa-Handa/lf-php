@@ -21,4 +21,4 @@ $status = $stmt->execute(); //このexecuteで上で処理した内容を実行�
 
 
 //データ登録処理後
-redirectCheck('/src/View/drege.php');
+redirectCheck('/src/view/drege.php');
