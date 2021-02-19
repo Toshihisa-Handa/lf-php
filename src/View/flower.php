@@ -188,7 +188,7 @@ if (!$_POST) {
     var checkoutButton = document.getElementById("checkout-button");
 
     checkoutButton.addEventListener("click", function() {
-      fetch("/src/View/stripe-app.php/<?= $item['id'] ?>", {
+      fetch("/Libralys/stripe-app.php/<?= $item['id'] ?>", {
           method: "POST",
         })
         .then(function(response) {
