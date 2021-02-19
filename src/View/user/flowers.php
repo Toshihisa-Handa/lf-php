@@ -6,7 +6,6 @@ include('../../common/funcs/funcs.php');
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/component/header-icon.php');
 
 $uid = $_SESSION['uid'];
 $name = $_POST['name'];
@@ -15,6 +14,7 @@ $feature = $_POST['feature'];
 $tag = $_POST['tag'];
 $title = $_POST['title'];
 $text = $_POST['text'];
+include('../../common/component/header-icon.php');
 
 if (!$_GET) {
   $sql = "SELECT 

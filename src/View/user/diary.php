@@ -6,7 +6,6 @@ include('../../common/funcs/funcs.php');
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/component/header-icon.php');
 
 $title = $_POST['title'];
 $tag = $_POST['tag'];
@@ -14,6 +13,7 @@ $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 $id = $_GET['id']; //diaryのid
 $dcomment = $_POST['dcomment'];
+include('../../common/component/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成

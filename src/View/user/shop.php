@@ -6,10 +6,10 @@ include('../../common/funcs/funcs.php');
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/component/header-icon.php');
 
 $uid = $_SESSION['uid'];
 $id = $_GET['id'];
+include('../../common/component/header-icon.php');
 
 //データ登録SQL作成(3種類)
 //1

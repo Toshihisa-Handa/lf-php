@@ -3,8 +3,12 @@ session_start();
 include('../common/funcs/funcs.php');
 //loginCheck()
 
+//DB接続
+include('../common/component/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 
-//1. POSTデータ取得
+
 $id = $_POST['id'];
 $name = $_POST['name'];
 $title = $_POST['title'];
@@ -12,8 +16,6 @@ $account_name = $_POST['account_name'];
 $web = $_POST['web'];
 $email = $_POST['email'];
 $tell = $_POST['tell'];
-// $open = $_POST['open'];
-// $close = $_POST['close'];
 $openHour = $_POST['open-hour'];
 $openTime = $_POST['open-time'];
 $open = $openHour . ':' . $openTime;
@@ -29,14 +31,7 @@ $feature = $_POST['feature'];
 $errors = [];
 
 
-//DB接続
-include('../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
-
-
-
-//バリデーション処理
+//バリデーション
 $titleFilter = '#[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑].{5}#';
 $webFileter = '/^http(.|s)/';
 $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -87,15 +82,7 @@ if (mb_strlen($message) > 15) {
   $errors['message2'] = '15文字以内の記述をお願いします。';
 }
 
-
-
-
-
-
-
-
 if (empty($errors)) { //$errorsが空の時
-
   //データ登録SQL作成
   $sql = 'UPDATE shop SET name=:name,title=:title,account_name=:account_name,web=:web,
 email=:email,tell=:tell,open=:open,close=:close,holiday=:holiday,location=:location,map=:map,
@@ -123,11 +110,6 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
   //データ登録処理後
   if ($status == false) {
     $error = $stmt->errorInfo();
-    // $errors['other'] = '電話番号の桁が11を超えています';
-    // $_SESSION['errors'] = $errors;
-
-    // header('Location: /src/view/admin/myprofileEdit.php');
-
     exit("SQLError:" . $error[2]);
   } else {
     $_SESSION['errors'] = [];

@@ -3,18 +3,14 @@ session_start();
 include('../../common/funcs/funcs.php');
 //loginCheck()
 
-$uid = $_SESSION['uid'];
-
-
-
-//1.GETでidを取得
-$id = $_GET['id'];
-
 //DB接続
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
+
+$id = $_GET['id'];
+$uid = $_SESSION['uid'];
 include('../../common/component/header-icon.php');
 
 //sql作成
@@ -23,7 +19,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->bindValue('id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
-//4．データ登録処理後
+//データ登録処理後
 $view = '';
 if ($status == false) {
   $error = $stmt->errorInfo();
@@ -33,8 +29,6 @@ if ($status == false) {
 }
 
 ?>
-
-
 
 
 <?php
@@ -49,18 +43,12 @@ include('../../common/component/favicon.html')
   <div class="grid-box">
     <header>
       <ul>
-
         <?php include('../../common/component/header-nav-leftIcon.html') ?>
-
         <div class='nav-right'>
-
           <?php include('../../common/component/header-nav-rightIcon.php') ?>
-
         </div>
-
       </ul>
     </header>
-
     <div class="main">
       <h2>日記編集</h2>
       <form action='/src/model/diaryEditUpdate.php' method="post">
@@ -74,18 +62,9 @@ include('../../common/component/favicon.html')
           <div>テキスト</div><textarea class='txt' name="text"><?= $item["text"] ?></textarea><br>
         </div>
         <input type="hidden" name='id' value="<?= $item["id"] ?>">
-
         <button type="submit" class='sends'>送信</button>
       </form>
-
-
-
     </div>
-
-
-
-
-
     <br>
     <div class="nav">
       <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
@@ -93,29 +72,16 @@ include('../../common/component/favicon.html')
       <p><a href="/src/view/admin/frege.php">花の登録</a></p>
       <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
     </div>
-
-
-
   </div>
-
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <div class="footer-glid">
     <footer>
       <h3>Copyright second-cube</h3>
     </footer>
-
     <!-- フッターナビ -->
     <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-    $('#attachment .fileinput').on('change', function() {
-      var file = $(this).prop('files')[0];
-      $(this).closest('#attachment').find('.filename').text(file.name);
-    });
-  </script>
 </body>
 
 </html>

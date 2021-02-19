@@ -4,17 +4,15 @@ include('../common/funcs/funcs.php');
 //loginCheck()
 
 
-//1. POSTデータ取得
-$id = $_POST['id'];
-$title = $_POST['title'];
-$tag = $_POST['tag'];
-$text = $_POST['text'];
-
 //DB接続
 include('../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
+$id = $_POST['id'];
+$title = $_POST['title'];
+$tag = $_POST['tag'];
+$text = $_POST['text'];
 
 //データ登録SQL作成
 $sql = 'UPDATE diary SET title=:title,tag=:tag,text=:text WHERE id=:id';
@@ -22,7 +20,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);
 $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);
 $stmt->bindValue(':text', $text, PDO::PARAM_STR);
-$stmt->bindValue(':id',   $id,     PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':id',   $id,     PDO::PARAM_INT);  
 $status = $stmt->execute();
 
 

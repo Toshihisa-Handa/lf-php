@@ -6,12 +6,12 @@ include('../../common/funcs/funcs.php');
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/component/header-icon.php');
 
 $uid = $_SESSION['uid'];
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
+include('../../common/component/header-icon.php');
 
 if (!$_GET) {
   //データ登録SQL作成

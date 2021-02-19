@@ -6,7 +6,6 @@ include('../../common/funcs/funcs.php');
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/component/header-icon.php');
 
 $name = $_POST['name'];
 $price = $_POST['price'];
@@ -16,6 +15,7 @@ $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 $id = $_GET['id']; //flowerのid
 $fcomment = $_POST['fcomment'];
+include('../../common/component/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
