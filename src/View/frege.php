@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 
 $name = $_POST['name'];
 $price = $_POST['price'];
@@ -12,10 +12,10 @@ $uid = $_SESSION['uid'];
 
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 //画像処理
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -39,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
 
-  docFilterDF($name,'name');
-  docFilterDF($feature,'feature');
-  docFilterDF($tag,'tag');
+  docFilterDF($name, 'name');
+  docFilterDF($feature, 'feature');
+  docFilterDF($tag, 'tag');
   $numFilter = '#^[0-9]+$#'; //数字Ok
   if (preg_match($numFilter, $price) === 0 || preg_match($numFilter, $price) === false) {
     $errors['price'] = '使用出来ない文字が使用されています。（数字を入力してください）。';
@@ -91,9 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>花登録</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/frege.css">
 
 </head>
@@ -104,10 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     <header>
       <ul>
 
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -208,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

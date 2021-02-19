@@ -1,19 +1,19 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 
 $uid = $_SESSION['uid'];
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 
-include('../../common/favicon.html')
+include('../../common/component/favicon.html')
 ?>
 <title>マイページ</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/mypage.css">
 
 </head>
@@ -30,10 +30,10 @@ include('../../common/favicon.html')
             <ul>
 
 
-                <?php include('../../common/header-nav-leftIcon.html') ?>
+                <?php include('../../common/component/header-nav-leftIcon.html') ?>
                 <div class='nav-right'>
 
-                    <?php include('../../common/header-nav-rightIcon.php') ?>
+                    <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
                 </div>
 
@@ -59,7 +59,7 @@ include('../../common/favicon.html')
         </footer>
 
         <!-- フッターナビ -->
-        <?php include('../../common/footer.html') ?>
+        <?php include('../../common/component/footer.html') ?>
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

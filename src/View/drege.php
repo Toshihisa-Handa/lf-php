@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 
 $title = $_POST['title'];
 $tag = $_POST['tag'];
@@ -9,10 +9,10 @@ $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 //画像処理
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
 
 
-  docFilterDF($title,'title');
-  docFilterDF($tag,'tag');
+  docFilterDF($title, 'title');
+  docFilterDF($tag, 'tag');
 
 
   if (empty($errors)) { //$errorsが空の時
@@ -80,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 
 <title>日記登録</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/drege.css">
 
 
@@ -94,11 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     <header>
       <ul>
 
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
 
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

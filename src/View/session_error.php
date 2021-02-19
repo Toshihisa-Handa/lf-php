@@ -2,18 +2,18 @@
 session_start();
 include('../../common/component/favicon.html')
 ?>
-<title>決済エラー</title>
+<title>ログインエラー</title>
 <link rel="stylesheet" href="/public/css/stripe.css">
 </head>
 
 <body>
   <section>
     <p>
-      決済が失敗しました。
+      ログインしていません
       <br>
-      下記リンクからトップページへ戻れます。
+      下記リンクからログインページへ戻れます。
     </p>
-    <p><a href="/">戻る</a></p>
+    <p><a href="/src/View/login.php">戻る</a></p>
   </section>
 </body>
 

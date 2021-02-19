@@ -1,14 +1,14 @@
 <?php
 session_start();
-include('../../common/funcs.php');
+include('../../common/funcs/funcs.php');
 
 $uid = $_SESSION['uid'];
 $id = $_GET['id'];
 //DBs接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 
 
@@ -39,9 +39,9 @@ $floweritems = $stmt->fetchAll();
 
 ?>
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>店舗</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/shop.css">
 <link rel="stylesheet" href="/public/css/Rshop.css">
 
@@ -56,10 +56,10 @@ $floweritems = $stmt->fetchAll();
 
     <header>
       <ul>
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -219,7 +219,7 @@ $floweritems = $stmt->fetchAll();
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?> -->
+    <?php include('../../common/component/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs.php');
+include('../../common/funcs/funcs.php');
 regiCheck();
 
 $name = $_POST['name'];
@@ -29,7 +29,7 @@ $uname = $_SESSION['uname'];
 
 if ($_POST) {
     //DB接続
-    include('../../common/class-db.php');
+    include('../../common/component/class-db.php');
     $db = new DB;
     $pdo = $db->dbset();
 
@@ -42,20 +42,20 @@ if ($_POST) {
     $numFilter = '#^[\d]+$#';
     $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
-    docFilter($name,'name');
-    docFilter($title,'title1');
-    docFilter($account_name,'account_name');
-    docFilter($message,'message1');
-    docFilter($feature,'feature');
+    docFilter($name, 'name');
+    docFilter($title, 'title1');
+    docFilter($account_name, 'account_name');
+    docFilter($message, 'message1');
+    docFilter($feature, 'feature');
 
-  
- 
+
+
     if (!$title) {
     } else 
     if (mb_strlen($title) > 20) {
         $errors['title2'] = '20文字以内の記述をお願いします。';
     }
-  
+
     if (!$web) {
     } else 
     if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === false) {
@@ -149,9 +149,9 @@ if ($_POST) {
 
 ?>
 
-<?php include('../../common/favicon.html'); ?>
+<?php include('../../common/component/favicon.html'); ?>
 <title>店舗情報編集</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/myprofileEdit.css">
 
 </head>
@@ -206,13 +206,13 @@ if ($_POST) {
                     <!-- <input type="text" class='inputs' name="open" placeholder="10時"><br> -->
                     <select name="open-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/select0-24.html') ?>
+                        <?php include('../../common/component/select0-23.html') ?>
                     </select>
                     <div>:</div>
 
                     <select name="open-time">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/select00-60.html') ?>
+                        <?php include('../../common/component/select00-59.html') ?>
 
                     </select>
                 </div>
@@ -222,13 +222,13 @@ if ($_POST) {
                     <!-- <input type="text" class='inputs' name="close" placeholder="18時"><br> -->
                     <select name="close-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/select0-24.html') ?>
+                        <?php include('../../common/component/select0-23.html') ?>
 
                     </select>
                     <div>:</div>
                     <select name="close-time">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/select00-60.html') ?>
+                        <?php include('../../common/component/select00-59.html') ?>
 
                     </select>
                 </div>
@@ -238,7 +238,7 @@ if ($_POST) {
                     <!-- <input type="text" class='inputs' name="holiday" placeholder="水曜日"><br> -->
                     <select name="holiday">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/selectsun-sat.html') ?>
+                        <?php include('../../common/component/selectMon-Sun.html') ?>
                     </select>
                 </div>
 
@@ -286,7 +286,7 @@ if ($_POST) {
         </footer>
 
         <!-- フッターナビ -->
-        <!-- <?php include('../../common/footer.html') ?> -->
+        <!-- <?php include('../../common/component/footer.html') ?> -->
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

@@ -2,18 +2,18 @@
 session_start();
 include('../../common/component/favicon.html')
 ?>
-<title>決済エラー</title>
+<title>会員登録エラー</title>
 <link rel="stylesheet" href="/public/css/stripe.css">
 </head>
 
 <body>
   <section>
     <p>
-      決済が失敗しました。
+      新規登録ページからお入り下さい
       <br>
-      下記リンクからトップページへ戻れます。
+      下記リンクから新規登録ページへ戻れます。
     </p>
-    <p><a href="/">戻る</a></p>
+    <p><a href="/src/View/register.php">戻る</a></p>
   </section>
 </body>
 

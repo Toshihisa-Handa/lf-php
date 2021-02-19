@@ -1,10 +1,11 @@
-<?php 
+<?php
 session_start();
-include('../../common/favicon.html') 
+include('../../common/component/favicon.html')
 ?>
-  <title>決済完了</title>
-  <link rel="stylesheet" href="css/stripe.css">
+<title>決済完了</title>
+<link rel="stylesheet" href="css/stripe.css">
 </head>
+
 <body>
   <section>
     <p>
@@ -15,4 +16,5 @@ include('../../common/favicon.html')
     <p><a href="/">Topページへ戻る</a></p>
   </section>
 </body>
+
 </html>

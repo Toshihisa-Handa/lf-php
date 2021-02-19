@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs.php');
+include('../../common/funcs/funcs.php');
 $uid = $_SESSION['uid'];
 $title = $_POST['title'];
 $tag = $_POST['tag'];
@@ -8,10 +8,10 @@ $text = $_POST['text'];
 
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 if (!$_GET) {
   //2．データ登録SQL作成
@@ -46,10 +46,10 @@ if (!$_GET) {
 ?>
 
 <?php
-include('../../common/favicon.html')
+include('../../common/component/favicon.html')
 ?>
 <title>店舗一覧</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/shops.css">
 
 </head>
@@ -62,7 +62,7 @@ include('../../common/favicon.html')
     <header>
       <ul>
 
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
           <li class='searchNav'>
@@ -70,7 +70,7 @@ include('../../common/favicon.html')
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -118,7 +118,7 @@ include('../../common/favicon.html')
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

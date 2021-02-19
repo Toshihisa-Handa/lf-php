@@ -8,6 +8,9 @@ function h($str)
 }
 
 //db接続
+
+
+
 function dbcon()
 {
   try {
@@ -19,12 +22,11 @@ function dbcon()
   return $pdo;
 }
 
-//3.セッションリジェネレイト処理を全てのページで行うため、関数化し記述を簡略化する(Login認証)
 //手打ち入力でログイン後のページにログインせずに行ってもエラーになるようにしている） 
 function regiCheck()
 {
   if (!isset($_SESSION['chk_regi'])) {
-    header('Location: /common/session_regi_error.php');
+    header('Location: /src/View/session_regi_error.php');
     exit();
   }
 }
@@ -32,7 +34,7 @@ function regiCheck()
 function loginCheck()
 {
   if (!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid'] != session_id()) {
-    header('Location: /common/session_error.php');
+    header('Location: /src/View/session_error.php');
     exit();
   } else { 
     session_regenerate_id(true);

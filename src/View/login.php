@@ -1,13 +1,13 @@
 <?php
 session_start(); //セッション変数を使うよという意味。これで他のファイルでも$_SESSION[];で指定した変数が使用できる
-include('../../common/funcs.php');
+include('../../common/funcs/funcs.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
 $hash = password_hash($password, PASSWORD_DEFAULT);
 $errors = [];
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
@@ -44,9 +44,9 @@ if (!empty($_POST)) {
 
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>ログイン</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/login.css">
 </head>
 
@@ -54,7 +54,7 @@ if (!empty($_POST)) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
       </ul>
     </header>
     <div class="img1">
@@ -91,7 +91,7 @@ if (!empty($_POST)) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
 

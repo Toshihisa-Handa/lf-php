@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 
 $uid = $_SESSION['uid'];
 
@@ -12,10 +12,10 @@ $id = $_GET['id'];
 
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 
 //sql作成
@@ -42,11 +42,11 @@ if ($status == false) {
 
 
 <?php
-include('../../common/favicon.html')
+include('../../common/component/favicon.html')
 ?>
 <title>花編集</title>
 </head>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/flowerEdit.css">
 
 <body>
@@ -55,11 +55,11 @@ include('../../common/favicon.html')
     <header>
       <ul>
 
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
 
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -115,7 +115,7 @@ include('../../common/favicon.html')
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

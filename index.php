@@ -1,12 +1,12 @@
 <?php
 session_start();
-include('common/funcs.php');
+include('common/funcs/funcs.php');
 $uid = $_SESSION['uid'];
 $name = $_SESSION['name'];
 
 
 //DB接続
-include('common/class-db.php');
+include('common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
@@ -28,9 +28,9 @@ if ($status == false) {
 ?>
 
 
-<?php include('common/favicon.html'); ?>
+<?php include('common/component/favicon.html'); ?>
 <title>Life flower</title>
-<?php include('common/style.html') ?>
+<?php include('common/component/style.html') ?>
 <link rel="stylesheet" href="public/css/top.css">
 </head>
 
@@ -39,7 +39,7 @@ if ($status == false) {
         <header>
             <ul>
                 <li><a href="/index.php"><img src="/public/images/lf-logo-gray.png" alt="" class='logo'></a></li>
-                <?php include('common/header-nav.html') ?>
+                <?php include('common/component/header-nav.html') ?>
                 <div class='nav-right'>
                     <li>
                         <div id='search'>検索</div>
@@ -154,7 +154,7 @@ if ($status == false) {
         </footer>
     </div>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('common/component/footer.html') ?>
 
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

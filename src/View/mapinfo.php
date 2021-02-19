@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 
 $title = $_POST['title'];
 $tag = $_POST['tag'];
@@ -10,10 +10,10 @@ $uid = $_SESSION['uid'];
 
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 
 //データ登録SQL作成
@@ -34,9 +34,9 @@ $item = $stmt->fetch();
 
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>マップ情報</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/mapinfo.css">
 
 </head>
@@ -46,10 +46,10 @@ $item = $stmt->fetch();
     <header>
       <ul>
 
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -108,7 +108,7 @@ $item = $stmt->fetch();
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

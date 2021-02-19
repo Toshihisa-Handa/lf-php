@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-unset($_SESSION['chk_regi']);//登録セッションの初期化
+include('../../common/funcs/funcs.php');
+unset($_SESSION['chk_regi']); //登録セッションの初期化
 
 
 
@@ -16,7 +16,7 @@ $passwordFilter = mb_strlen($password);
 $passwordFilter2 = '/^[a-zA-Z0-9]+$/u'; //半角英数字許可
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
@@ -70,9 +70,9 @@ if (!empty($_POST)) {
         $res .= $base_strings[random_int(0, count($base_strings) - 1)];
       }
 
-      $_SESSION['chk_regi']  = $res.$email; //ここは自由に好きな名前を振るのもOK
-//       var_dump($_SESSION['chk_regi']);
-// return;
+      $_SESSION['chk_regi']  = $res . $email; //ここは自由に好きな名前を振るのもOK
+      //       var_dump($_SESSION['chk_regi']);
+      // return;
 
       //index.phpへリダイレクト(エラーがなければindex.phpt)
       header('Location: /src/View/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
@@ -83,9 +83,9 @@ if (!empty($_POST)) {
 
 ?>
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>新規登録</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/login.css">
 </head>
 
@@ -93,7 +93,7 @@ if (!empty($_POST)) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
       </ul>
     </header>
     <div class="img1">
@@ -139,7 +139,7 @@ if (!empty($_POST)) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

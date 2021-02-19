@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs.php');
+include('../../common/funcs/funcs.php');
 $name = $_POST['name'];
 $price = $_POST['price'];
 $feature = $_POST['feature'];
@@ -11,10 +11,10 @@ $id = $_GET['id']; //flowerのid
 $fcomment = $_POST['fcomment'];
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 
 
@@ -78,9 +78,9 @@ if (!$_POST) {
 
 ?>
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>花詳細</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 
 <link rel="stylesheet" href="/public/css/flower.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
@@ -93,11 +93,11 @@ if (!$_POST) {
     <header>
       <ul>
 
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
 
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -172,7 +172,7 @@ if (!$_POST) {
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

@@ -1,15 +1,15 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 $uid = $_SESSION['uid'];
 $errors = $_SESSION['errors'];
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 
 // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -92,9 +92,9 @@ if ($status == false) {
 ?>
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>店舗情報編集</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/myprofileEdit.css">
 
 </head>
@@ -104,11 +104,11 @@ if ($status == false) {
         <header>
             <ul>
 
-                <?php include('../../common/header-nav-leftIcon.html') ?>
+                <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
                 <div class='nav-right'>
 
-                    <?php include('../../common/header-nav-rightIcon.php') ?>
+                    <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
                 </div>
 
@@ -162,26 +162,26 @@ if ($status == false) {
                     <?php if ($item['open'] == null) : ?>
                         <select name="open-hour">
                             <option value="">選択して下さい</option>
-                            <?php include('../../common/select0-24.html') ?>
+                            <?php include('../../common/component/select0-23.html') ?>
                         </select>
                         <div>:</div>
 
                         <select name="open-time">
                             <option value="">選択して下さい</option>
-                            <?php include('../../common/select00-60.html') ?>
+                            <?php include('../../common/component/select00-59.html') ?>
 
                         </select>
                     <?php else : ?>
                         <select name="open-hour">
                             <option value="<?= explode(":", $item['open'])[0] ?>"><?= explode(":", $item['open'])[0] ?></option>
-                            <?php include('../../common/select0-24.html') ?>
+                            <?php include('../../common/component/select0-23.html') ?>
 
                         </select>
                         <div>:</div>
 
                         <select name="open-time">
                             <option value="<?= explode(":", $item['open'])[1] ?>"><?= explode(":", $item['open'])[1] ?></option>
-                            <?php include('../../common/select00-60.html') ?>
+                            <?php include('../../common/component/select00-59.html') ?>
 
                         </select>
                     <?php endif; ?>
@@ -192,26 +192,26 @@ if ($status == false) {
                     <?php if ($item['close'] == null) : ?>
                         <select name="close-hour">
                             <option value="">選択して下さい</option>
-                            <?php include('../../common/select0-24.html') ?>
+                            <?php include('../../common/component/select0-23.html') ?>
 
                         </select>
                         <div>:</div>
                         <select name="close-time">
                             <option value="">選択して下さい</option>
-                            <?php include('../../common/select00-60.html') ?>
+                            <?php include('../../common/component/select00-59.html') ?>
 
                         </select>
                     <?php else : ?>
                         <select name="close-hour">
                             <option value="<?= explode(":", $item['close'])[0] ?>"><?= explode(":", $item['close'])[0] ?></option>
-                            <?php include('../../common/select0-24.html') ?>
+                            <?php include('../../common/component/select0-23.html') ?>
 
                         </select>
                         <div>:</div>
 
                         <select name="close-time">
                             <option value="<?= explode(":", $item['close'])[1] ?>"><?= explode(":", $item['close'])[1] ?></option>
-                            <?php include('../../common/select00-60.html') ?>
+                            <?php include('../../common/component/select00-59.html') ?>
 
                         </select>
                     <?php endif; ?>
@@ -222,12 +222,12 @@ if ($status == false) {
                     <?php if ($item['holiday'] == null) : ?>
                         <select name="holiday">
                             <option value="">選択して下さい</option>
-                            <?php include('../../common/selectsun-sat.html') ?>
+                            <?php include('../../common/component/selectMon-Sun.html') ?>
                         </select>
                     <?php else : ?>
                         <select name="holiday">
                             <option value="<?= $item['holiday'] ?>"><?= $item['holiday'] ?></option>
-                            <?php include('../../common/selectsun-sat.html') ?>
+                            <?php include('../../common/component/selectMon-Sun.html') ?>
 
                         </select>
 
@@ -331,7 +331,7 @@ if ($status == false) {
         </footer>
 
         <!-- フッターナビ -->
-        <?php include('../../common/footer.html') ?>
+        <?php include('../../common/component/footer.html') ?>
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

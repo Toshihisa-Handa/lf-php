@@ -1,6 +1,6 @@
-<?php 
-include('../../common/funcs.php');
-loginCheck();
+<?php
+include('../../common/funcs/funcs.php');
+//loginCheck()
 
 
 //1. POSTデータ取得
@@ -12,9 +12,9 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
-$pdo =$db->dbset();
+$pdo = $db->dbset();
 
 
 //データ登録SQL作成
@@ -30,10 +30,10 @@ $status = $stmt->execute();
 
 
 //データ登録処理後
-if($status==false){
+if ($status == false) {
   $error = $stmt->errorInfo();
-  exit("SQLError:".$error[2]);
-}else{
+  exit("SQLError:" . $error[2]);
+} else {
   header('Location: /src/View/frege.php');
   exit;
 }

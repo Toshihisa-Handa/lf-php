@@ -1,17 +1,17 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 $uid = $_SESSION['uid'];
 
 
 
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 
 //データ登録SQL作成
@@ -32,9 +32,9 @@ if ($status == false) {
 ?>
 
 
-<?php include('../../common/favicon.html'); ?>
+<?php include('../../common/component/favicon.html'); ?>
 <title>登録情報</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/myprofile.css">
 
 </head>
@@ -48,9 +48,9 @@ if ($status == false) {
         <div class='leftNav'>
           <li><a href="/"><img src="images/lf-logo-gray.png" alt="" class='logo'></a></li>
         </div>
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -127,7 +127,7 @@ if ($status == false) {
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

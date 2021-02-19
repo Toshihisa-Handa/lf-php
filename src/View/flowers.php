@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs.php');
+include('../../common/funcs/funcs.php');
 $uid = $_SESSION['uid'];
 $name = $_POST['name'];
 $price = $_POST['price'];
@@ -11,10 +11,10 @@ $text = $_POST['text'];
 
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
-$pdo =$db->dbset();
-include('../../common/header-icon.php');
+$pdo = $db->dbset();
+include('../../common/component/header-icon.php');
 
 
 if (!$_GET) {
@@ -61,9 +61,9 @@ if (!$_GET) {
 
 
 
-<?php include('../../common/favicon.html'); ?>
+<?php include('../../common/component/favicon.html'); ?>
 <title>花一覧</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/flowers.css">
 
 
@@ -76,7 +76,7 @@ if (!$_GET) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
           <li class='searchNav'>
@@ -84,7 +84,7 @@ if (!$_GET) {
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <?php include('../../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
         </div>
 
       </ul>
@@ -107,7 +107,7 @@ if (!$_GET) {
     <div class="flowerList">
 
       <div class="flower-container">
-        <?php foreach($items as $item) : ?>
+        <?php foreach ($items as $item) : ?>
           <div class="fcard">
             <div class='flower-card'>
               <a href="flower.php/? id=<?= $item['id']; ?>">
@@ -132,7 +132,7 @@ if (!$_GET) {
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

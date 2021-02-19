@@ -1,13 +1,13 @@
 <?php
 session_start();
-include('../../common/funcs.php');
+include('../../common/funcs/funcs.php');
 $uid = $_SESSION['uid'];
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/header-icon.php');
+include('../../common/component/header-icon.php');
 
 //SELECT M.lat,M.lon,M.title,M.pincolor,M.description, M.image, S.id as sid from map M join shop S on M.user_id = S.user_id
 $sql = "SELECT map.lat,map.lon,map.maptitle,map.pincolor,map.description,shop.id,shop.shop_img 
@@ -23,7 +23,7 @@ $items = $stmt->fetchAll();
 ?>
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>マップ</title>
 <style>
     html,
@@ -42,7 +42,7 @@ $items = $stmt->fetchAll();
         font-size: 50%;
     }
 </style>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 
 
 </head>
@@ -52,9 +52,9 @@ $items = $stmt->fetchAll();
     <header style="max-height: 70px;">
         <ul>
 
-            <?php include('../../common/header-nav-leftIcon.html') ?>
+            <?php include('../../common/component/header-nav-leftIcon.html') ?>
             <div class='nav-right'>
-                <?php include('../../common/header-nav-rightIcon.php') ?>
+                <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
             </div>
 
@@ -74,7 +74,7 @@ $items = $stmt->fetchAll();
         }
     </style>
     <!-- フッターナビ -->
-    <?php include('../../common/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
 

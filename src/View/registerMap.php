@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-regiCheck();
+include('../../common/funcs/funcs.php');
+//regiCheck();
 
 $uid = $_SESSION['uid'];
 $uname = $_SESSION['uname'];
@@ -18,11 +18,11 @@ $description = $_POST['description'];
 if ($_POST) {
 
   //db接続
-  include('../../common/class-db.php');
+  include('../../common/component/class-db.php');
   $db = new DB;
   $pdo = $db->dbset();
 
-  docFilter($maptitle,'maptitle');
+  docFilter($maptitle, 'maptitle');
 
   if (empty($errors)) { //$errorsが空の時
 
@@ -54,9 +54,9 @@ if ($_POST) {
 
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 <title>マップ情報編集</title>
-<?php include('../../common/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/mapEdit.css">
 
 </head>
@@ -67,7 +67,7 @@ if ($_POST) {
     <header>
       <ul>
 
-        <?php include('../../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
           <!--       
@@ -132,7 +132,7 @@ if ($_POST) {
     </footer>
 
     <!-- フッターナビ -->
-    <!-- <?php include('../../common/footer.html') ?> -->
+    <!-- <?php include('../../common/component/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

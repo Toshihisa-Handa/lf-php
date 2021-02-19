@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs.php');
-loginCheck();
+include('../../common/funcs/funcs.php');
+//loginCheck()
 
 
 //1. POSTデータ取得
@@ -30,7 +30,7 @@ $errors = [];
 
 
 //DB接続
-include('../../common/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
@@ -43,41 +43,48 @@ $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
 $numFilter = '#^[\d]+$#';
 $adressFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9一-龠々﨑\-]+$#';
 
-docFilter($name,'name');
-docFilter($title,'title1');
-docFilter($account_name,'account_name');
-docFilter($message,'message1');
-docFilter($feature,'feature');
+docFilter($name, 'name');
+docFilter($title, 'title1');
+docFilter($account_name, 'account_name');
+docFilter($message, 'message1');
+docFilter($feature, 'feature');
 
-if(!$title){} else 
+if (!$title) {
+} else 
 if (mb_strlen($title) > 20) {
-    $errors['title2'] = '20文字以内の記述をお願いします。';
+  $errors['title2'] = '20文字以内の記述をお願いします。';
 }
 
-if(!$web){} else 
+if (!$web) {
+} else 
 if (preg_match($webFileter, $web) === 0 || preg_match($webFileter, $web) === false) {
-    $errors['web'] = 'http or https から始まるURLを使用して下さい';
+  $errors['web'] = 'http or https から始まるURLを使用して下さい';
 }
-if(!$email){} else 
+if (!$email) {
+} else 
 if ($emailFilter === false) {
-    $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
+  $errors['email'] = 'E-mailの形式「@」と「.」の記述を確認して下さい。';
 }
-if(!$tell){} else 
+if (!$tell) {
+} else 
 if (strlen($tell) > 11 || strlen($tell) < 10) {
-    $errors['tell'] = '10又は11文字での記述をお願いします。';
+  $errors['tell'] = '10又は11文字での記述をお願いします。';
 }
-if(!$tell){} else 
+if (!$tell) {
+} else 
 if (preg_match($numFilter, $tell) === 0 || preg_match($numFilter, $tell) === false) {
-    $errors['tell2'] = '使用出来るのは数字のみです';
+  $errors['tell2'] = '使用出来るのは数字のみです';
 }
-if(!$location){} else 
+if (!$location) {
+} else 
 if (preg_match($adressFilter, $location) === 0 || preg_match($adressFilter, $location) === false) {
-    $errors['location'] = '使用出来ない文字が使用されています。（記号は「-」、「ー」のみ使用可能です）。';
+  $errors['location'] = '使用出来ない文字が使用されています。（記号は「-」、「ー」のみ使用可能です）。';
 }
 
-if(!$message){} else 
+if (!$message) {
+} else 
 if (mb_strlen($message) > 15) {
-    $errors['message2'] = '15文字以内の記述をお願いします。';
+  $errors['message2'] = '15文字以内の記述をお願いします。';
 }
 
 
@@ -87,7 +94,7 @@ if (mb_strlen($message) > 15) {
 
 
 
-if (empty($errors)) {//$errorsが空の時
+if (empty($errors)) { //$errorsが空の時
 
   //データ登録SQL作成
   $sql = 'UPDATE shop SET name=:name,title=:title,account_name=:account_name,web=:web,
@@ -121,19 +128,14 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
 
     // header('Location: /src/View/myprofileEdit.php');
 
-    exit("SQLError:". $error[2]);
-    
+    exit("SQLError:" . $error[2]);
   } else {
     $_SESSION['errors'] = [];
     header('Location: /src/View/myprofile.php');
     exit;
   }
-
-
 } else {
   $_SESSION['errors'] = $errors;
 
   header('Location: /src/View/myprofileEdit.php');
-
-
 }
