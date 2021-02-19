@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../../common/funcs/funcs.php');
+include('../../common/funcs/funcs.php');
 //loginCheck()
 
 $title = $_POST['title'];
@@ -9,10 +9,10 @@ $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 
 //DB接続
-include('../../../common/component/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../../common/component/header-icon.php');
+include('../../common/component/header-icon.php');
 
 //画像処理
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -80,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
 
-<?php include('../../../common/component/favicon.html') ?>
+<?php include('../../common/component/favicon.html') ?>
 
 <title>日記登録</title>
-<?php include('../../../common/component/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/drege.css">
 
 
@@ -94,11 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     <header>
       <ul>
 
-        <?php include('../../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
 
-          <?php include('../../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -161,9 +161,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
     <br>
     <div class="nav">
-      <p><a href="/src/view/admin/admin/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/admin/admin/frege.php">花の登録</a></p>
-      <p><a href="/src/view/admin/admin/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/admin/frege.php">花の登録</a></p>
+      <p><a href="/src/view//admin/mapinfo.php">マップ情報</a></p>
     </div>
 
   </div>

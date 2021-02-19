@@ -45,9 +45,7 @@ if ($status == false) {
     <header>
       <ul>
 
-        <div class='leftNav'>
-          <li><a href="/"><img src="images/lf-logo-gray.png" alt="" class='logo'></a></li>
-        </div>
+
         <?php include('../../common/component/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
           <?php include('../../common/component/header-nav-rightIcon.php') ?>
@@ -65,7 +63,7 @@ if ($status == false) {
 
         <div class='pimg'>
           <?php if ($aimg == null) : ?>
-            <div class='pbox1'><img src="../../public/images/account3.png" alt=""></div>
+            <div class='pbox1'><img src="/public/images/account3.png" alt=""></div>
           <?php else : ?>
             <div class='pbox1'><img src="/public/upload/<?= $aimg; ?>" alt=""></div>
           <?php endif; ?>
@@ -89,15 +87,15 @@ if ($status == false) {
       <div class="imgs">
         <div class="img1">
           <p>メイン画像</p>
-          <img src="/public/upload/<?= $item['shop_img']; ?>" alt="">
+          <img src="../../public/upload/<?= $item['shop_img']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真①</p>
-          <img src="/public/upload/<?= $item['img1']; ?>" alt="">
+          <img src="../../public/upload/<?= $item['img1']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真②</p>
-          <img src="/public/upload/<?= $item['img2']; ?>" alt="">
+          <img src="../../public/upload/<?= $item['img2']; ?>" alt="">
         </div>
 
       </div>

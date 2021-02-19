@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
   //指定フォルダに画像を保存
-  $save = '../..//public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+  $save = '../../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
   move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
 
 
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
       // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
     } else {
       //５．index.phpへリダイレクト(エラーがなければindex.phpt)
-      header('Location: frege.php'); //Location:の後ろの半角スペースは必ず入れる。
+      header('Location: /src/view/admin/frege.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
   }

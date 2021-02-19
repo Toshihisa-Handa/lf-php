@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../../common/funcs/funcs.php');
+include('../../common/funcs/funcs.php');
 //loginCheck()
 
 $uid = $_SESSION['uid'];
@@ -11,11 +11,11 @@ $uid = $_SESSION['uid'];
 $id = $_GET['id'];
 
 //DB接続
-include('../../../common/component/class-db.php');
+include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
-include('../../../common/component/header-icon.php');
+include('../../common/component/header-icon.php');
 
 //sql作成
 $sql = "SELECT * FROM diary WHERE id=:id";
@@ -38,11 +38,11 @@ if ($status == false) {
 
 
 <?php
-include('../../../common/component/favicon.html')
+include('../../common/component/favicon.html')
 ?>
 <title>日記編集</title>
 </head>
-<?php include('../../../common/component/style.html') ?>
+<?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/diaryEdit.css">
 
 <body>
@@ -50,11 +50,11 @@ include('../../../common/component/favicon.html')
     <header>
       <ul>
 
-        <?php include('../../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
 
-          <?php include('../../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -105,7 +105,7 @@ include('../../../common/component/favicon.html')
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../../common/component/footer.html') ?>
+    <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
