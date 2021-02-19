@@ -1,7 +1,6 @@
 <?php
 session_start();
 include('../../common/funcs/funcs.php');
-$uid = $_SESSION['uid'];
 
 //DB接続
 include('../../common/component/class-db.php');
@@ -9,16 +8,11 @@ $db = new DB;
 $pdo = $db->dbset();
 include('../../common/component/header-icon.php');
 
-//SELECT M.lat,M.lon,M.title,M.pincolor,M.description, M.image, S.id as sid from map M join shop S on M.user_id = S.user_id
 $sql = "SELECT map.lat,map.lon,map.maptitle,map.pincolor,map.description,shop.id,shop.shop_img 
         FROM map JOIN shop on map.user_id = shop.user_id";
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
 $items = $stmt->fetchAll();
-
-
-
-
 
 ?>
 
@@ -43,31 +37,21 @@ $items = $stmt->fetchAll();
     }
 </style>
 <?php include('../../common/component/style.html') ?>
-
-
 </head>
 
 <body>
-
     <header style="max-height: 70px;">
         <ul>
-
             <?php include('../../common/component/header-nav-leftIcon.html') ?>
             <div class='nav-right'>
                 <?php include('../../common/component/header-nav-rightIcon.php') ?>
-
             </div>
-
         </ul>
     </header>
-
-
-
     <!-- MAP[START] -->
     <h1 style='height: 64px;'></h1>
     <div id="myMap" style="width:100vw;height:100vh;"></div>
     <!-- MAP[END] -->
-
     <style>
         h1 {
             color: rgb(0, 153, 255)
@@ -76,8 +60,6 @@ $items = $stmt->fetchAll();
     <!-- フッターナビ -->
     <?php include('../../common/component/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-
-
     <script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AmJSmi0DfSGMPQNbHQ7GSRPBRvWKZHpsv13mLTVUyr-EEQpqyk2I-d4tHVYiGw88' async defer></script>
     <script src="/public/js/BmapQuery.js"></script>
     <script>
@@ -116,13 +98,8 @@ $items = $stmt->fetchAll();
                     };
                     i++
                 <?php endforeach; ?>
-
-
                 map.infoboxLayers(options, true);
-
             });
-
-
         }
     </script>
 </body>

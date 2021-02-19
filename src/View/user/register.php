@@ -3,6 +3,10 @@ session_start();
 include('../../common/funcs/funcs.php');
 unset($_SESSION['chk_regi']); //登録セッションの初期化
 
+//DB接続
+include('../../common/component/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 
 
 $uid = $_SESSION['user_id'];
@@ -15,18 +19,9 @@ $emailFilter = filter_var($email, FILTER_VALIDATE_EMAIL);
 $passwordFilter = mb_strlen($password);
 $passwordFilter2 = '/^[a-zA-Z0-9]+$/u'; //半角英数字許可
 
-//DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
-
-
 
 //バリデーション処理
 if (!empty($_POST)) {
-
-
-
   $errors = [];
   if (preg_match($nameFilter, $name) === 0 || preg_match($nameFilter, $name) === false) {
     $errors['name'] = 'User Nameに不備があります。';
@@ -40,10 +35,7 @@ if (!empty($_POST)) {
   if (preg_match($passwordFilter2, $password) === 0 || preg_match($passwordFilter2, $password) === false) {
     $errors['password2'] = 'Passwordに半角英数字以外が使用されています。';
   }
-
   if (empty($errors)) {
-
-    //データ登録SQL作成
     $sql = "INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate())";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':name', $name, PDO::PARAM_STR);
@@ -55,13 +47,10 @@ if (!empty($_POST)) {
     $_SESSION['uname'] = $name;
     $_SESSION['uemail'] = $email;
 
-
     //データ登録処理後
     if ($status == false) {
       $errors['email2'] = 'このアドレスは既に使用されています';
     } else {
-      // 次に遷移する会員登録フォームにセッションチェックを入れるための用意
-      // 変数の初期化
       $res = null; //生成した文字列を格納
       $string_length = 10; //生成する文字列の長さを指定
       $base_strings = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -70,12 +59,8 @@ if (!empty($_POST)) {
         $res .= $base_strings[random_int(0, count($base_strings) - 1)];
       }
 
-      $_SESSION['chk_regi']  = $res . $email; //ここは自由に好きな名前を振るのもOK
-      //       var_dump($_SESSION['chk_regi']);
-      // return;
-
-      //index.phpへリダイレクト(エラーがなければindex.phpt)
-      header('Location: /src/view/user/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+      $_SESSION['chk_regi']  = $res . $email;
+      header('Location: /src/view/user/registerShop.php');
       exit();
     }
   }
@@ -124,9 +109,6 @@ if (!empty($_POST)) {
           <br>
           <button type="submit" class="submit lbutton2">SignUp</button>
         </form>
-        <!-- <% if (typeof noUser !== 'undefined') { %>
-          <p class="error"><%= noUser %></p>
-      <% } %> -->
         <div class="rlink">
           <a href="login.php"><span class='underbar'>&nbsp;&nbsp;ログインの方はこちらへ</span></a>
         </div>

@@ -2,42 +2,36 @@
 session_start();
 include('../../common/funcs/funcs.php');
 
-$uid = $_SESSION['uid'];
-$id = $_GET['id'];
 //DBs接続
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 include('../../common/component/header-icon.php');
 
+$uid = $_SESSION['uid'];
+$id = $_GET['id'];
 
-
-//データ登録SQL作成
+//データ登録SQL作成(3種類)
+//1
 $stmt = $pdo->prepare("SELECT * FROM shop where id=:id");
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 $item = $stmt->fetch();
 
+//2
 $stmt = $pdo->prepare("SELECT * FROM diary where user_id=:uid");
 $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
 $status = $stmt->execute();
 $diaryitems = $stmt->fetchAll();
 
-// echo $item['user_id'];
-// return;
+//3
 $stmt = $pdo->prepare("SELECT * FROM flower where user_id=:uid");
 $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
 $status = $stmt->execute();
 $floweritems = $stmt->fetchAll();
 
-
-
-
-
-
-
-
 ?>
+
 
 <?php include('../../common/component/favicon.html') ?>
 <title>店舗</title>
@@ -52,20 +46,14 @@ $floweritems = $stmt->fetchAll();
 
 <body>
   <div class="main-glid">
-
-
     <header>
       <ul>
         <?php include('../../common/component/header-nav-leftIcon.html') ?>
-
         <div class='nav-right'>
           <?php include('../../common/component/header-nav-rightIcon.php') ?>
-
         </div>
-
       </ul>
     </header>
-
     <div class='main' style='background-image: url(/public/upload/<?= $item['shop_img'] ?>)'>
       <p class='mainTitle'><span class='mainspan1'>&nbsp;<?= $item['name'] ?> &nbsp;</span></p>
       <p class='mainSubtitle'><span class='mainspan2'>&nbsp;<?= $item['title'] ?>&nbsp;</span></p>
@@ -74,28 +62,22 @@ $floweritems = $stmt->fetchAll();
       <h1 class='StopTitle'><?= $item['message'] ?></h1>
     </div>
   </div>
-
   <div class="tips-glid">
     <div class="tips1">
       <h3 class='StopsubTitle'><?= $item['comment'] ?></h3>
     </div>
   </div>
-
   <div class="img-glid">
     <div class='img1'>
       <img src="/public/upload/<?= $item['img1'] ?>" alt="">
     </div>
   </div>
-
   <div class="flower-glid">
     <div class='title2'>
       <h1 class='StopTitle'>Our Flowers</h1>
     </div>
 
-
     <!-- お花一覧 -->
-
-
     <?php if (count($floweritems) >= 1) : ?>
       <div class="flist">
         <div class="glide">
@@ -114,25 +96,19 @@ $floweritems = $stmt->fetchAll();
                 </div>
               <?php endforeach; ?>
             </ul>
-
           </div>
-
         </div>
       </div>
     <?php else : ?>
       <div class="flist">
         <p class='StopsubTitle' style='text-align: center; color:rgb(129, 131, 134)'>お花は登録されてません</p>
       </div>
-
     <?php endif; ?>
     <!-- お花一覧ここまで -->
-
     <div class='title3'>
       <h1 class='StopTitle'>Our Diaries</h1>
     </div>
-
     <!-- 日記一覧 -->
-
     <?php if (count($diaryitems) >= 1) : ?>
       <div class="dlist">
         <div class="dglide">
@@ -153,30 +129,21 @@ $floweritems = $stmt->fetchAll();
           </div>
         </div>
       </div>
-
     <?php else : ?>
       <div class="dlist">
         <p class='StopsubTitle' style='text-align: center; color:rgb(129, 131, 134)'>日記は登録されてません</p>
       </div>
-
     <?php endif; ?>
-
-
-
-
-
   </div>
   <!-- 日記一覧ここまで -->
 
   <!-- アクセスグリッド -->
   <div class="access-glid">
-
     <div class='title4'>
       <h1>
         <span class='accessTitle StopTitle'>Access</span>
       </h1>
     </div>
-
     <div class="shopName">
       <h1 class='StopTitle'> <?= $item['name'] ?></h1>
     </div>
@@ -185,14 +152,11 @@ $floweritems = $stmt->fetchAll();
 
   <!-- マップ -->
   <div class="map-glid">
-
     <div class="img3">
       <div class="imgBox">
         <img src="/public/upload/<?= $item['img2'] ?>" alt="">
       </div>
     </div>
-
-
     <div class="access">
       <h3 class='afont'>　　　住　所　：<?= $item['location'] ?></h3>
       <h3 class='afont'>　　営業時間　：<?= $item['open'] ?>〜<?= $item['close'] ?></h3>
@@ -202,27 +166,19 @@ $floweritems = $stmt->fetchAll();
       <h3 class='afont'>ホームページ　：</h3>
       <h3 class='afont'><a href="<?= $item['web'] ?>" class='link' target=”_blank”><?= $item['web'] ?></a></h3>
     </div>
-
-
     <div class="map">
       <iframe src="<?= $item['map'] ?>" class='shopmap' frameborder="0"></iframe>
     </div>
-
   </div>
-
-
-
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <div class="footer-glid">
     <footer>
       <h3 class='StopsubTitle'>Copyright second-cube</h3>
     </footer>
-
     <!-- フッターナビ -->
     <?php include('../../common/component/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-
 
   <!-- glide.jsの読み込み -->
   <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
@@ -252,7 +208,6 @@ $floweritems = $stmt->fetchAll();
         }
       }
     <?php } else { ?>
-      // console.log('hogggg')
       config = {
         type: 'carousel',
         perView: <?= count($floweritems) ?>,
@@ -275,7 +230,6 @@ $floweritems = $stmt->fetchAll();
 
         }
       }
-      // console.log('hogggg')
     <?php } ?>
 
     // //日記のカルーセルの設定
@@ -328,8 +282,6 @@ $floweritems = $stmt->fetchAll();
         }
       }
     <?php } ?>
-
-
 
     new Glide('.glide', config).mount()
     new Glide('.dglide', dconfig).mount()

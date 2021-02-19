@@ -1,17 +1,19 @@
 <?php
 session_start();
 include('../../common/funcs/funcs.php');
+
+//DB接続
+include('../../common/component/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
+include('../../common/component/header-icon.php');
+
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 $id = $_GET['id']; //diaryのid
 $dcomment = $_POST['dcomment'];
-//DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
-include('../../common/component/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
@@ -35,9 +37,6 @@ if (!$_POST) {
   $status = $stmt->execute();
   $item = $stmt->fetch();
 } else {
-
-
-
   $sql = 'INSERT INTO dcomment (diary_id, dcomment, created_at, user_id) VALUES (:diary_id,:dcomment,sysdate(),:uid)';
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':diary_id', $id, PDO::PARAM_INT);
@@ -46,57 +45,35 @@ if (!$_POST) {
   $status = $stmt->execute();
 
   if ($status == false) {
-    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
     $error = $stmt->errorInfo();
-    exit("SQLError:" . $error[2]); //エラーが起きたらエラーの2番目の配列から取ります。ここは考えず、これを使えばOK
-    // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
+    exit("SQLError:" . $error[2]);
   } else {
-    //５．index.phpへリダイレクト(エラーがなければindex.phpt)
-    header("Location: /src/view/user/diary.php/? id=$id"); //Location:の後ろの半角スペースは必ず入れる。
+    header("Location: /src/view/user/diary.php/? id=$id");
     exit();
   }
 }
-
-
-
-
-
 ?>
 
 <?php include('../../common/component/favicon.html') ?>
-
 <title>日記詳細</title>
 <?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/diary.css">
-
 </head>
 
 <body>
   <div class="main-glid">
-
-
     <header>
       <ul>
-
         <?php include('../../common/component/header-nav-leftIcon.html') ?>
-
         <div class='nav-right'>
-
           <?php include('../../common/component/header-nav-rightIcon.php') ?>
-
         </div>
-
       </ul>
     </header>
-
-
     <div class="title1">
       <h1 class='topTitle'>diary</h1>
     </div>
-
   </div>
-
-
   <div class="editar-area">
     <div class="container">
       <main class="main">
@@ -105,10 +82,8 @@ if (!$_POST) {
         <h2 class='dfont'><?= $item['title'] ?></h2>
         <p class='diaryText dfont2'><?= $item['text'] ?></p>
         <div id='cbtn'><span class='btnClick'></span>コメント（<?= count($commentitems) ?>）</div>
-
         <div class="dcomment">
           <?php if (count($commentitems) >= 1) : ?>
-
             <?php foreach ($commentitems as $citem) : ?>
               <div class="comment-box">
                 <div class="dcname "><?= $citem['user_name'] ?></div>
@@ -130,33 +105,24 @@ if (!$_POST) {
             <input type="hidden" name='did' value=''>
             <button class="lbutton" type="submit" class="submit">submit</button>
           </form>
-
         </div>
       </div>
-
     </div>
   </div>
-
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <div class="footer-glid">
     <footer>
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
-
     <!-- フッターナビ -->
     <?php include('../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-
-
-
-
   <script>
     const cbtn = document.querySelector('#cbtn')
     const hideComment = document.querySelector('.dcomment')
     cbtn.onclick = function() {
       hideComment.classList.toggle('dcomment')
-      // alert('hit')
     }
   </script>
 </body>

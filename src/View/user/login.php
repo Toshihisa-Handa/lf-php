@@ -1,47 +1,35 @@
 <?php
 session_start(); //セッション変数を使うよという意味。これで他のファイルでも$_SESSION[];で指定した変数が使用できる
 include('../../common/funcs/funcs.php');
-$email = $_POST['email'];
-$password = $_POST['password'];
-$hash = password_hash($password, PASSWORD_DEFAULT);
-$errors = [];
 
 //DB接続
 include('../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
-if (!empty($_POST)) {
+$email = $_POST['email'];
+$password = $_POST['password'];
+$hash = password_hash($password, PASSWORD_DEFAULT);
+$errors = [];
 
-  //データ登録sql作成
+if (!empty($_POST)) {
   $sql = 'SELECT * FROM user WHERE email=:email';
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':email', $email);
   $status = $stmt->execute();
-  //抽出データ数を取得
   $val = $stmt->fetch();
-
-  //該当レコードがあればSESSIONに値を代入
   if (password_verify($password, $val['password'])) {
-
-    $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
-    $_SESSION['name']  = $val['name']; //$valに今回DBへ登録した値が入っており、そのうちのnameを取得する為この記述をしている。そして$_SESSION['name']で定義すると他のページでsession_start();を宣言した後使用できるようになる。
+    $_SESSION['chk_ssid']  = session_id();
+    $_SESSION['name']  = $val['name'];
     $_SESSION['uid']  = $val['user_id'];
-    //Login処理OKの場合index.phpへ遷移
     header('Location: /index.php');
     exit();
   } else {
-    //Login処理NGの場合
     $errors['errorLog'] = 'メールアドレスとパスワードが一致しませんでした。';
-    // header('Location: /src/view/user/login.php');
   }
 }
 
-
 ?>
-
-
-
 
 
 <?php include('../../common/component/favicon.html') ?>
@@ -76,9 +64,6 @@ if (!empty($_POST)) {
           <span style='color:red;'> <?php echo isset($errors['errorLog']) ? $errors['errorLog'] : ''; ?></span>
           <button class="lbutton" type="submit" class="submit">login</button>
         </form>
-        <!-- <% if (typeof noUser !== 'undefined') { %>
-          <p class="error"><%= noUser %></p>
-      <% } %> -->
         <div class="rlink">
           <a href="register.php"><span class='underbar'>&nbsp;&nbsp;新規御登録の方はこちらへ</span></a>
         </div>

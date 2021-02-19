@@ -10,13 +10,7 @@ $lon = $_POST['lon'];
 $maptitle = $_POST['maptitle'];
 $description = $_POST['description'];
 
-
-
-
-
-
 if ($_POST) {
-
   //db接続
   include('../../common/component/class-db.php');
   $db = new DB;
@@ -25,7 +19,6 @@ if ($_POST) {
   docFilter($maptitle, 'maptitle');
 
   if (empty($errors)) { //$errorsが空の時
-
     //sql作成
     $stmt = $pdo->prepare("INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),:user_id)");
     $stmt->bindValue(':lat', $lat, PDO::PARAM_INT);
@@ -34,7 +27,6 @@ if ($_POST) {
     $stmt->bindValue(':description', $description, PDO::PARAM_STR);
     $stmt->bindValue(':user_id', $uid, PDO::PARAM_INT);
     $status = $stmt->execute();
-
 
     //データ登録処理後
     if ($status == false) {
@@ -48,47 +40,21 @@ if ($_POST) {
     }
   }
 }
-
-
 ?>
-
-
 
 <?php include('../../common/component/favicon.html') ?>
 <title>マップ情報編集</title>
 <?php include('../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/mapEdit.css">
-
 </head>
 
 <body>
   <div class="grid-box">
-
     <header>
       <ul>
-
         <?php include('../../common/component/header-nav-leftIcon.html') ?>
-
         <div class='nav-right'>
-          <!--       
-      <% if (typeof user == 'undefined') { %>
-      <li class='log'><a href="/login" class='hlink'>Login</a></li>
-      <% } else{%>
-      <li class='log'><a href="/logout" class='hlink'>Logout</a></li>
-      <% } %>
-      <li class='account_img' >
-         <a href="/mypage">
-            <% if (typeof user !== 'undefined' ) { %>
-                <% if(sitems[0].account_img=== null){%>
-                    <img src="/public/images/account3.png" class='aimg' alt="" >  
-              <% }else{ %>
-                <img src="<%=sitems[0].account_img %>" class='aimg' alt="" >  
-              <% } %>
-              <% } %>
-        </a>
-    </li> -->
         </div>
-
       </ul>
     </header>
     <div class="main">
@@ -100,9 +66,6 @@ if ($_POST) {
         <div class='inframe'>
           <div>　　経度</div><input class='inputs' type="text" name="lon" value=''><br>
         </div>
-        <!-- <div class='inframe maphidden'>
-              <div>ピンの色</div><input class='inputs' type="text" name="pincolor" value='<%= item.pincolor%>'><br>
-          </div> -->
         <div class='inframe '>
           <div>タイトル</div><input class='inputs' type="text" name="maptitle" value=''><br>
           <span style='color:red;'> <?php echo isset($errors['maptitle']) ? $errors['maptitle'] : ''; ?></span>
@@ -110,41 +73,25 @@ if ($_POST) {
         <div class='inframe'>
           <div>　　説明</div><textarea class='txt' name="description"></textarea><br>
         </div>
-
         <button type="submit" class='sends'>送信</button>
       </form>
     </div>
-
     <div class="nav">
-      <p><a href="/mapinfo">マップ情報</a></p>
-      <p><a href="/myprofile">店舗情報</a></p>
-      <p><a href="/drege">日記の登録</a></p>
-      <p><a href="/frege">花の登録</a></p>
+      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
+      <p><a href="/src/view/admin/frege.php">花の登録</a></p>
     </div>
-
-
   </div>
-
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <div class="footer-glid">
     <footer>
       <h3>Copyright second-cube</h3>
     </footer>
-
     <!-- フッターナビ -->
     <!-- <?php include('../../common/component/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-
-
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-    $('#attachment .fileinput').on('change', function() {
-      var file = $(this).prop('files')[0];
-      $(this).closest('#attachment').find('.filename').text(file.name);
-    });
-  </script>
 </body>
 
 </html>
