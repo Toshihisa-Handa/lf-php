@@ -64,7 +64,7 @@ if ($_FILES) {
         $error = $stmt->errorInfo();
         exit("SQLError:" . $error[2]);
     } else {
-        header('Location: /src/view/myprofileEdit.php'); //Location:の後ろの半角スペースは必ず入れる。
+        header('Location: /src/view/admin/myprofileEdit.php'); //Location:の後ろの半角スペースは必ず入れる。
         exit();
     }
 } else {
@@ -119,7 +119,7 @@ if ($status == false) {
             <h2>基本情報編集</h2>
             <h3 style='color:red;'> <?php echo isset($errors['other']) ? $errors['other'] : ''; ?></h3>
 
-            <form action='/src/view/myprofileEditUpdate.php' method="post" class='editform1'>
+            <form action='/src/view/admin/myprofileEditUpdate.php' method="post" class='editform1'>
 
                 <div class='inframe'>
                     <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?= $item["name"] ?>'><br>
@@ -317,10 +317,10 @@ if ($status == false) {
 
 
         <div class="nav">
-            <p><a href="/src/view/myprofile.php">店舗情報</a></p>
-            <p><a href="/src/view/drege.php">日記の登録</a></p>
-            <p><a href="/src/view/frege.php">花の登録</a></p>
-            <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
+            <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
+            <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
+            <p><a href="/src/view/admin/frege.php">花の登録</a></p>
+            <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
         </div>
 
     </div>

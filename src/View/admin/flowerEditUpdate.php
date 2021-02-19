@@ -34,6 +34,6 @@ if ($status == false) {
   $error = $stmt->errorInfo();
   exit("SQLError:" . $error[2]);
 } else {
-  header('Location: /src/view/frege.php');
+  header('Location: /src/view/admin/frege.php');
   exit;
 }

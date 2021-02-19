@@ -16,6 +16,4 @@ if(isset($_COOKIE[session_name()])){//session_name()はセッションIDを返�
 session_destroy();
 
 //処理後、login.php(初期画面）へリダイレクト（毎回変える必要があるのはこの遷移先のみ。あとはコピペで使う！）
-header('Location: /src/view/login.php')
-
-?>
+header('Location: /src/view/user/login.php')

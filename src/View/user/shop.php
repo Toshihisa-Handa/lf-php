@@ -104,7 +104,7 @@ $floweritems = $stmt->fetchAll();
               <?php foreach ($floweritems as $fitem) : ?>
                 <div class="glide__slide">
                   <div class="flower-box">
-                    <a href="/src/view/flower.php/? id=<?= $fitem['id'] ?>">
+                    <a href="/src/view/user/flower.php/? id=<?= $fitem['id'] ?>">
                       <div class="flower"><img src="/public/upload/<?= $fitem['image'] ?>" alt=""></div>
                       <h3 class='fname'><?= $fitem['name'] ?></h3>
                       <p class='fprice'><?= number_format($fitem['price']) ?>円（税込）</p>
@@ -141,7 +141,7 @@ $floweritems = $stmt->fetchAll();
               <?php foreach ($diaryitems as $ditem) : ?>
                 <div class="glide__slide">
                   <div class="diary-box">
-                    <a href="/src/view/diary.php/? id=<?= $ditem['id'] ?>">
+                    <a href="/src/view/user/diary.php/? id=<?= $ditem['id'] ?>">
                       <div class="diary"><img src="/public/upload/<?= $ditem['image'] ?>" alt=""></div>
                       <div class='dtitle'><?= $ditem['title'] ?></div>
                       <div class='dtext'><?= $ditem['text'] ?></div>

@@ -61,7 +61,7 @@ $item = $stmt->fetch();
       <h2>マップ情報</h2>
       <div class='inframe'>
         <div>表示画像</div>
-        <div class='inputs'> <img src="../../public/upload/<?= $item['account_img']; ?>" class='mapimg' alt=""></div><br>
+        <div class='inputs'> <img src="/public/upload/<?= $item['account_img']; ?>" class='mapimg' alt=""></div><br>
       </div>
       <div class='inframe'>
         <div>　　緯度</div>
@@ -92,10 +92,10 @@ $item = $stmt->fetch();
 
 
     <div class="nav">
-      <p><a class='maplink' href="/src/view/mapEdit.php/<?= $item['id'] ?>">マップ情報編集</a></p>
-      <p><a href="/src/view/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/drege.php">日記の登録</a></p>
-      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
+      <p><a class='maplink' href="/src/view/admin/mapEdit.php/<?= $item['id'] ?>">マップ情報編集</a></p>
+      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
+      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
     </div>
 
 

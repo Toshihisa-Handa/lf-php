@@ -13,7 +13,7 @@ include('../../common/component/favicon.html')
       <br>
       下記リンクから新規登録ページへ戻れます。
     </p>
-    <p><a href="/src/view/register.php">戻る</a></p>
+    <p><a href="/src/view/user/register.php">戻る</a></p>
   </section>
 </body>
 

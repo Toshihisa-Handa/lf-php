@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
+include('../../../common/funcs/funcs.php');
 //loginCheck()
 
 $uid = $_SESSION['uid'];
@@ -10,16 +10,15 @@ $uid = $_SESSION['uid'];
 //1.GETでidを取得
 $id = $_GET['id'];
 
-
 //DB接続
-include('../../common/component/class-db.php');
+include('../../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/component/header-icon.php');
 
+include('../../../common/component/header-icon.php');
 
 //sql作成
-$sql = "SELECT * FROM flower WHERE id=:id";
+$sql = "SELECT * FROM diary WHERE id=:id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue('id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
@@ -33,33 +32,29 @@ if ($status == false) {
   $item = $stmt->fetch();
 }
 
-
-
-
 ?>
 
 
 
 
 <?php
-include('../../common/component/favicon.html')
+include('../../../common/component/favicon.html')
 ?>
-<title>花編集</title>
+<title>日記編集</title>
 </head>
-<?php include('../../common/component/style.html') ?>
-<link rel="stylesheet" href="/public/css/flowerEdit.css">
+<?php include('../../../common/component/style.html') ?>
+<link rel="stylesheet" href="/public/css/diaryEdit.css">
 
 <body>
   <div class="grid-box">
-
     <header>
       <ul>
 
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('../../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
 
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('../../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -67,16 +62,10 @@ include('../../common/component/favicon.html')
     </header>
 
     <div class="main">
-      <h2>花編集</h2>
-      <form action='/src/view/flowerEditUpdate.php' method="post">
+      <h2>日記編集</h2>
+      <form action='/src/view/admin/diaryEditUpdate.php' method="post">
         <div class='inframe'>
-          <div>　　品名</div><input class='inputs' type="text" name="name" value='<?= $item["name"] ?>'><br>
-        </div>
-        <div class='inframe'>
-          <div>　　価格</div><input class='inputs' type="text" name="price" value='<?= $item["price"] ?>'><br>
-        </div>
-        <div class='inframe'>
-          <div>　　特徴</div><input class='inputs' type="text" name="feature" value='<?= $item["feature"] ?>'><br>
+          <div>タイトル</div><input class='inputs' type="text" name="title" value='<?= $item["title"] ?>'><br>
         </div>
         <div class='inframe'>
           <div>　　タグ</div><input class='inputs' type="text" name="tag" value='<?= $item["tag"] ?>'><br>
@@ -99,11 +88,12 @@ include('../../common/component/favicon.html')
 
     <br>
     <div class="nav">
-      <p><a href="/frege">花の登録</a></p>
-      <p><a href="/myprofile">店舗情報</a></p>
-      <p><a href="/drege">日記の登録</a></p>
-      <p><a href="/mapinfo">マップ情報</a></p>
+      <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
+      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/admin/frege.php">花の登録</a></p>
+      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
     </div>
+
 
 
   </div>
@@ -115,10 +105,9 @@ include('../../common/component/favicon.html')
     </footer>
 
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('../../../common/component/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>

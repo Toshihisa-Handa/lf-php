@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
+include('../../../common/funcs/funcs.php');
 //loginCheck()
 
 
@@ -11,7 +11,7 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 
 //DB接続
-include('../../common/component/class-db.php');
+include('../../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 
@@ -31,6 +31,6 @@ if ($status == false) {
   $error = $stmt->errorInfo();
   exit("SQLError:" . $error[2]);
 } else {
-  header('Location: /src/view/drege.php');
+  header('Location: /src/view/admin/drege.php');
   exit;
 }

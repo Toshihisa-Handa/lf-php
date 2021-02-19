@@ -45,12 +45,12 @@ if ($status == false) {
                         <div id='search'>検索</div>
                     </li>
                     <?php if ($uid == false || '') : ?>
-                        <li class='log'><a href="/src/view/login.php" class='hlink'>Login</a></li>
+                        <li class='log'><a href="/src/view/user/login.php" class='hlink'>Login</a></li>
                     <?php else : ?>
-                        <li class='log'><a href="/src/view/logout.php" class='hlink'>Logout</a></li>
+                        <li class='log'><a href="/src/view/admin/logout.php" class='hlink'>Logout</a></li>
                     <?php endif; ?>
                     <li class='account_img'>
-                        <a href="/src/view/mypage.php">
+                        <a href="/src/view/admin/mypage.php">
                             <?php if ($uid) { ?>
                                 <?php if ($item['account_img'] === null) : ?>
                                     <img src="/public/images/account3.png" class='aimg' alt="">
@@ -115,7 +115,7 @@ if ($status == false) {
 
 
         <div class='link1'>
-            <h1><a href="/src/view/shops"><span class='underbar topTitle'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
+            <h1><a href="/src/view/user/shops"><span class='underbar topTitle'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
         </div>
 
         <div class='title3'>

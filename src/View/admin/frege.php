@@ -193,9 +193,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
     <div class="nav">
-      <p><a href="/src/view/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/drege.php">日記の登録</a></p>
-      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
+      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
     </div>
 
 

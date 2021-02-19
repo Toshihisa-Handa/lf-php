@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
+include('../../../common/funcs/funcs.php');
 //loginCheck()
 
 $title = $_POST['title'];
@@ -9,10 +9,10 @@ $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 
 //DB接続
-include('../../common/component/class-db.php');
+include('../../../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
-include('../../common/component/header-icon.php');
+include('../../../common/component/header-icon.php');
 
 //画像処理
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
   //指定フォルダに画像を保存
-  $save = '../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+  $save = '../../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
   move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
 
 
@@ -80,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('../../../common/component/favicon.html') ?>
 
 <title>日記登録</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('../../../common/component/style.html') ?>
 <link rel="stylesheet" href="/public/css/drege.css">
 
 
@@ -94,11 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     <header>
       <ul>
 
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('../../../common/component/header-nav-leftIcon.html') ?>
 
         <div class='nav-right'>
 
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('../../../common/component/header-nav-rightIcon.php') ?>
 
         </div>
 
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           <div class="dcard">
             <div class='diary-card'>
               <a href="diary.php/<?= $images[$i]['id']; ?>">
-                <img src="../../public/upload/<?= $images[$i]['image']; ?>" alt="">
+                <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['title']; ?></h3>
                 <p class='dtext'><?= $images[$i]['text']; ?></p>
               </a>
@@ -161,9 +161,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
     <br>
     <div class="nav">
-      <p><a href="/src/view/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/frege.php">花の登録</a></p>
-      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/admin/admin/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/admin/admin/frege.php">花の登録</a></p>
+      <p><a href="/src/view/admin/admin/mapinfo.php">マップ情報</a></p>
     </div>
 
   </div>

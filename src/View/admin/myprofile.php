@@ -67,7 +67,7 @@ if ($status == false) {
           <?php if ($aimg == null) : ?>
             <div class='pbox1'><img src="../../public/images/account3.png" alt=""></div>
           <?php else : ?>
-            <div class='pbox1'><img src="../../public/upload/<?= $aimg; ?>" alt=""></div>
+            <div class='pbox1'><img src="/public/upload/<?= $aimg; ?>" alt=""></div>
           <?php endif; ?>
 
           <div class="pbox2">
@@ -89,15 +89,15 @@ if ($status == false) {
       <div class="imgs">
         <div class="img1">
           <p>メイン画像</p>
-          <img src="../../public/upload/<?= $item['shop_img']; ?>" alt="">
+          <img src="/public/upload/<?= $item['shop_img']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真①</p>
-          <img src="../../public/upload/<?= $item['img1']; ?>" alt="">
+          <img src="/public/upload/<?= $item['img1']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真②</p>
-          <img src="../../public/upload/<?= $item['img2']; ?>" alt="">
+          <img src="/public/upload/<?= $item['img2']; ?>" alt="">
         </div>
 
       </div>
@@ -111,11 +111,11 @@ if ($status == false) {
     </div>
 
     <div class="nav">
-      <p><a href="/src/view/myprofileEdit.php/<?= $item['uid']; ?>">店舗情報編集</a></p>
+      <p><a href="/src/view/admin/myprofileEdit.php/<?= $item['uid']; ?>">店舗情報編集</a></p>
     <?php endforeach; ?>
-    <p><a href="/src/view/drege.php">日記の登録</a></p>
-    <p><a href="/src/view/frege.php">花の登録</a></p>
-    <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
+    <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
+    <p><a href="/src/view/admin/frege.php">花の登録</a></p>
+    <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
     </div>
 
   </div>

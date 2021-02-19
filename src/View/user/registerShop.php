@@ -99,7 +99,7 @@ if ($_POST) {
         //     $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name'];
         //     $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
         //     $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name'];
-        //     $save = '../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+        //     $save = '../../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         //     move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存**現在ルートディレクトリがtmp_nameを含んでいない為move_uploadが効かない。
         //     $sql = "INSERT INTO shop(account_img,shop_img,img1,img2)VALUES(:account_img,:shop_img,:img1,:img2)";
         //     $stmt = $pdo->prepare($sql);
@@ -108,7 +108,7 @@ if ($_POST) {
         //     $stmt->bindValue(':img1', $img1, PDO::PARAM_STR);
         //     $stmt->bindValue(':img2', $img2, PDO::PARAM_STR);
         //     $status = $stmt->execute();
-        //     header('Location: /src/view/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
+        //     header('Location: /src/view/user/registerShop.php'); //Location:の後ろの半角スペースは必ず入れる。
         // }
         // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
         //店舗情報登録の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -140,7 +140,7 @@ if ($_POST) {
             exit("SQLError:" . $error[2]);
         } else {
 
-            header('Location: /src/view/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
+            header('Location: /src/view/user/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
             exit();
         }
     }

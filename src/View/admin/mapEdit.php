@@ -60,7 +60,7 @@ if (!$_POST) {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
-      header('Location: /src/view/mapinfo.php'); //Location:の後ろの半角スペースは必ず入れる。
+      header('Location: /src/view/admin/mapinfo.php'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
   }
@@ -120,10 +120,10 @@ if (!$_POST) {
     </div>
 
     <div class="nav">
-      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
-      <p><a href="/src/view/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/drege.php">日記の登録</a></p>
-      <p><a href="/src/view/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
+      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
+      <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
+      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
 
 
       <p>

@@ -33,7 +33,7 @@ if (!empty($_POST)) {
   } else {
     //Login処理NGの場合
     $errors['errorLog'] = 'メールアドレスとパスワードが一致しませんでした。';
-    // header('Location: /src/view/login.php');
+    // header('Location: /src/view/user/login.php');
   }
 }
 
@@ -68,7 +68,7 @@ if (!empty($_POST)) {
     </div>
     <div class="loginList">
       <div class='login-card'>
-        <form action="/src/view/login.php" method="post">
+        <form action="/src/view/user/login.php" method="post">
           <span class="label">E-mail</span><input class='linput' type="email" name="email" class="input" required><br>
           <br>
           <span class="label">Password</span><input class='linput' type="password" name="password" class="input" required><br>

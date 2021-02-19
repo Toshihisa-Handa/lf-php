@@ -13,7 +13,7 @@ include('../../common/component/favicon.html')
       <br>
       下記リンクからログインページへ戻れます。
     </p>
-    <p><a href="/src/view/login.php">戻る</a></p>
+    <p><a href="/src/view/user/login.php">戻る</a></p>
   </section>
 </body>
 

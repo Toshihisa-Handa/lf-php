@@ -111,7 +111,7 @@ $items = $stmt->fetchAll();
                         "pinColor": "<?= $item['pincolor'] ?>",
                         "height": 220,
                         "width": 200,
-                        "description": '<a href="/src/view/shop.php/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
+                        "description": '<a href="/src/view/user/shop.php/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
                         "show": false
                     };
                     i++
