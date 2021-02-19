@@ -119,7 +119,7 @@ if ($status == false) {
             <h2>基本情報編集</h2>
             <h3 style='color:red;'> <?php echo isset($errors['other']) ? $errors['other'] : ''; ?></h3>
 
-            <form action='/src/view/admin/myprofileEditUpdate.php' method="post" class='editform1'>
+            <form action='/src/model/myprofileEditUpdate.php' method="post" class='editform1'>
 
                 <div class='inframe'>
                     <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?= $item["name"] ?>'><br>

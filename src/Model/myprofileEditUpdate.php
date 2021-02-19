@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
+include('../common/funcs/funcs.php');
 //loginCheck()
 
 
@@ -30,7 +30,7 @@ $errors = [];
 
 
 //DB接続
-include('../../common/component/class-db.php');
+include('../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 

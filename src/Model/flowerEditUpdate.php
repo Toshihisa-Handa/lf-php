@@ -1,5 +1,5 @@
 <?php
-include('../../common/funcs/funcs.php');
+include('../common/funcs/funcs.php');
 //loginCheck()
 
 
@@ -12,7 +12,7 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 
 //DB接続
-include('../../common/component/class-db.php');
+include('../common/component/class-db.php');
 $db = new DB;
 $pdo = $db->dbset();
 

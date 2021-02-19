@@ -63,7 +63,7 @@ include('../../common/component/favicon.html')
 
     <div class="main">
       <h2>日記編集</h2>
-      <form action='/src/view/admin/diaryEditUpdate.php' method="post">
+      <form action='/src/model/diaryEditUpdate.php' method="post">
         <div class='inframe'>
           <div>タイトル</div><input class='inputs' type="text" name="title" value='<?= $item["title"] ?>'><br>
         </div>

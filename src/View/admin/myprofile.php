@@ -87,15 +87,15 @@ if ($status == false) {
       <div class="imgs">
         <div class="img1">
           <p>メイン画像</p>
-          <img src="../../public/upload/<?= $item['shop_img']; ?>" alt="">
+          <img src="/public/upload/<?= $item['shop_img']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真①</p>
-          <img src="../../public/upload/<?= $item['img1']; ?>" alt="">
+          <img src="/public/upload/<?= $item['img1']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真②</p>
-          <img src="../../public/upload/<?= $item['img2']; ?>" alt="">
+          <img src="/public/upload/<?= $item['img2']; ?>" alt="">
         </div>
 
       </div>

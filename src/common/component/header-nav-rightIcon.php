@@ -1,7 +1,7 @@
 <?php if ($uid == false || '') : ?>
     <li class='log'><a href="/src/view/user/login.php" class='hlink'>Login</a></li>
 <?php else : ?>
-    <li class='log'><a href="/src/view/admin/logout.php" class='hlink'>Logout</a></li>
+    <li class='log'><a href="/src/model/logout.php" class='hlink'>Logout</a></li>
 <?php endif; ?>
 <li class='account_img'>
     <a href="/src/view/admin/mypage.php">
