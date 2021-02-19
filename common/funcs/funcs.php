@@ -74,3 +74,15 @@ if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
   }
 }
 
+
+  function redirectCheck($url){
+    global $status, $stmt;
+    if ($status == false) {
+      $error = $stmt->errorInfo();
+      exit("SQLError:" . $error[2]);
+    } else {
+      header("Location: ".$url); //Location:の後ろの半角スペースは必ず入れる。
+      exit;
+    }
+  
+  }
