@@ -21,12 +21,4 @@ $status = $stmt->execute(); //このexecuteで上で処理した内容を実行�
 
 
 //データ登録処理後
-// if ($status == false) {
-//   $error = $stmt->errorInfo();
-//   exit("SQLError:" . $error[2]);
-// } else {
-//   header('Location: /src/View/drege.php'); //Location:の後ろの半角スペースは必ず入れる。
-//   exit;
-// }
-
 redirectCheck('/src/View/drege.php');
