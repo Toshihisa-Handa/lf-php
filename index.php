@@ -39,7 +39,7 @@ if ($status == false) {
         <header>
             <ul>
                 <li><a href="/index.php"><img src="/public/images/lf-logo-gray.png" alt="" class='logo'></a></li>
-                <?php include('src/ommon/component/header-nav.html') ?>
+                <?php include('src/common/component/header-nav.html') ?>
                 <div class='nav-right'>
                     <li>
                         <div id='search'>検索</div>
