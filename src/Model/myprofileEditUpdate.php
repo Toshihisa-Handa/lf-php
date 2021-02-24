@@ -119,6 +119,6 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
   }
 } else {
   $_SESSION['errors'] = $errors;
-
+$_SESSION['post'] = $_POST;
   header('Location: /src/view/admin/myprofileEdit.php');
 }

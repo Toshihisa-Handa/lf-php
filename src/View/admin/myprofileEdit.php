@@ -1,5 +1,10 @@
 <?php
 require('../../controller/admin/myprofileEdit.php');
+include(__DIR__.'/../../../app/config.php');
+
+$posted = $_SESSION['post'];
+
+
 ?>
 
 
@@ -24,9 +29,12 @@ require('../../controller/admin/myprofileEdit.php');
             <h3 style='color:red;'> <?php echo isset($errors['other']) ? $errors['other'] : ''; ?></h3>
             <form action='/src/model/myprofileEditUpdate.php' method="post" class='editform1'>
                 <div class='inframe'>
-                    <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?= $item["name"] ?>'><br>
+                    <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?php echo isset($posted['name']) ? htmlspecialchars($posted['name'], ENT_QUOTES) : $item['name']; ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
                 </div>
+
+
+
                 <div class='inframe'>
                     <div>　サブタイトル</div><input class='inputs' type="text" name="title" placeholder="例：お店のキャッチコピーなど" value='<?= $item["title"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['title1']) ? $errors['title1'] : ''; ?></span>
@@ -204,6 +212,10 @@ require('../../controller/admin/myprofileEdit.php');
             $(this).closest('#attachment').find('.filename').text(file.name);
         });
     </script>
+
+
+<?php var_dump($posted['name']);return;
+ ?>
 </body>
 
 </html>

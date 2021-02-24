@@ -6,8 +6,9 @@ include(__DIR__.'/../../../app/config.php');
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
-
+include('../../common/component/class-db.php');
+$db = new DB;
+$pdo = $db->dbset();
 
 $uid = $_SESSION['uid'];
 $errors = $_SESSION['errors'];
@@ -58,7 +59,7 @@ if ($_FILES) {
         $sql = "UPDATE shop SET img2=:img2 WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
-        $stmt->bindValue(':img2', Utils::h($img2), PDO::PARAM_STR);
+        $stmt->bindValue(':img2', zZZZ$img2, PDO::PARAM_STR);
         $status = $stmt->execute();
     }
 
@@ -86,3 +87,4 @@ if ($status == false) {
 } else {
     $item = $stmt->fetch();
 }
+ ?>
