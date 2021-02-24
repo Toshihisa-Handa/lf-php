@@ -75,3 +75,6 @@ drege.php
  JOINはINNNER JOIN の略称
 LEFT JOIN と LEFT OUTER JOINの違いについて
 「LEFT JOIN は　LEFT OUTER JOIN の略
+
+
+

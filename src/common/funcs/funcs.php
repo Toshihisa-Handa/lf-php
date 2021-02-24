@@ -68,3 +68,22 @@ function redirectCheck($url)
     exit;
   }
 }
+
+
+function fileup($imgname,$varimg,$save,$pdo){
+global $uid;
+
+  if ($_FILES[$imgname]['name']) {
+    $varimg = date("Ymd") . random_int(1, 999999) . $_FILES[$imgname]['name'];
+    $save = '../../../public/upload/' . basename($varimg); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+    move_uploaded_file($_FILES[$imgname]['tmp_name'], $save);
+    $sql = "UPDATE shop SET $imgname=:$imgname WHERE user_id=:uid";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
+    $stmt->bindValue($imgname, $varimg, PDO::PARAM_STR);
+   $status = $stmt->execute();
+}
+
+return $status;
+
+}
