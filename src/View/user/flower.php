@@ -80,7 +80,7 @@ require('../../controller/user/flower.php');
     var stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
     var checkoutButton = document.getElementById("checkout-button");
     checkoutButton.addEventListener("click", function() {
-      fetch("/libralys/stripe-app.php/<?= $item['id'] ?>", {
+      fetch("/modules/libralys/stripe-app.php/<?= $item['id'] ?>", {
           method: "POST",
         })
         .then(function(response) {

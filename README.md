@@ -2,6 +2,29 @@
 ドキュメントルート 
 htdocs/php/lf
 
+ドキュメント構造（参照：https://www.php.net/manual/ja/yaf.tutorials.php#example-4381）
+例1 標準的なアプリケーションのディレクトリ構造
+
+- index.php 
+- .htaccess 
++ conf
+  |- application.ini // アプリケーションの設定
+- application/
+  - Bootstrap.php   
+  + controllers
+     - Index.php // デフォルトのコントローラ
+  + views    
+     |+ index   
+        - index.phtml // デフォルトアクション用のビューテンプレート
+  + modules 
+  - library
+  - models  
+  - plugins 
+
+  上記を参考に作成。
+
+
+
 確認すること
 相対パスしか聞かない時とルートパスが聞く時の違いはなんなのか
 $stmt = $pde->prepare();
