@@ -114,11 +114,13 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
     exit("SQLError:" . $error[2]);
   } else {
     $_SESSION['errors'] = [];
+    unset ($_SESSION['posted']);
     header('Location: /src/view/admin/myprofile.php');
     exit;
   }
 } else {
   $_SESSION['errors'] = $errors;
-$_SESSION['post'] = $_POST;
+  $_SESSION['posted'] = $_POST;
+   
   header('Location: /src/view/admin/myprofileEdit.php');
 }
