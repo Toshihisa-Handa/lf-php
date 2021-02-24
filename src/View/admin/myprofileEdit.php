@@ -1,9 +1,6 @@
 <?php
 require('../../controller/admin/myprofileEdit.php');
-include(__DIR__.'/../../../app/config.php');
-
-$posted = $_SESSION['post'];
-
+$posted = $_SESSION['posted']
 
 ?>
 
@@ -29,31 +26,28 @@ $posted = $_SESSION['post'];
             <h3 style='color:red;'> <?php echo isset($errors['other']) ? $errors['other'] : ''; ?></h3>
             <form action='/src/model/myprofileEditUpdate.php' method="post" class='editform1'>
                 <div class='inframe'>
-                    <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?php echo isset($posted['name']) ? htmlspecialchars($posted['name'], ENT_QUOTES) : $item['name']; ?>'><br>
+                    <div>　　　　店舗名</div><input class='inputs' type="text" name="name" placeholder="例：花田商店" value='<?=isset($posted['name'])?$posted['name'] : $item["name"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
                 </div>
-
-
-
                 <div class='inframe'>
-                    <div>　サブタイトル</div><input class='inputs' type="text" name="title" placeholder="例：お店のキャッチコピーなど" value='<?= $item["title"] ?>'><br>
+                    <div>　サブタイトル</div><input class='inputs' type="text" name="title" placeholder="例：お店のキャッチコピーなど" value='<?=isset($posted['title'])?$posted['title'] : $item["title"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['title1']) ? $errors['title1'] : ''; ?></span>
                     <span style='color:red;'> <?php echo isset($errors['title2']) ? $errors['title2'] : ''; ?></span>
                 </div>
                 <div class='inframe'>
-                    <div>　アカウント名</div><input class='inputs' type="text" name="account_name" placeholder="例：花田かすみ" value='<?= $item["account_name"] ?>'><br>
+                    <div>　アカウント名</div><input class='inputs' type="text" name="account_name" placeholder="例：花田かすみ" value='<?=isset($posted['account_name'])?$posted['account_name'] : $item["account_name"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['account_name']) ? $errors['account_name'] : ''; ?></span>
                 </div>
                 <div class='inframe'>
-                    <div>　ウェブサイト</div><input class='inputs' type="text" name="web" placeholder="例：https://xxxxx.com" value='<?= $item["web"] ?>'><br>
+                    <div>　ウェブサイト</div><input class='inputs' type="text" name="web" placeholder="例：https://xxxxx.com" value='<?=isset($posted['web'])?$posted['web'] : $item["web"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['web']) ? $errors['web'] : ''; ?></span>
                 </div>
                 <div class='inframe'>
-                    <div>メールアドレス</div><input class='inputs' type="text" name="email" placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）" value='<?= $item["email"] ?>'><br>
+                    <div>メールアドレス</div><input class='inputs' type="text" name="email" placeholder="例：hanadaxxxxx@gmail.com（半角英数字で入力して下さい）" value='<?=isset($posted['email'])?$posted['email'] : $item["email"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['email']) ? $errors['email'] : ''; ?></span>
                 </div>
                 <div class='inframe'>
-                    <div>　　　電話番号</div><input type="text" class='inputs' name="tell" placeholder="「–」なし半角数字で入力して下さい" value='<?= $item["tell"] ?>'><br>
+                    <div>　　　電話番号</div><input type="text" class='inputs' name="tell" placeholder="「–」なし半角数字で入力して下さい" value='<?=isset($posted['tell'])?$posted['tell'] : $item["tell"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['tell']) ? $errors['tell'] : ''; ?></span>
                     <span style='color:red;'> <?php echo isset($errors['tell2']) ? $errors['tell2'] : ''; ?></span>
                 </div>
@@ -72,12 +66,12 @@ $posted = $_SESSION['post'];
                         </select>
                     <?php else : ?>
                         <select name="open-hour">
-                            <option value="<?= explode(":", $item['open'])[0] ?>"><?= explode(":", $item['open'])[0] ?></option>
+                            <option value="<?=isset($posted['open-hour'])?$posted['open-hour'] :  explode(":", $item['open'])[0]?>"><?=isset($posted['open-hour'])?$posted['open-hour'] :  explode(":", $item['open'])[0]?></option>
                             <?php include('../../common/component/select0-23.html') ?>
                         </select>
                         <div>:</div>
                         <select name="open-time">
-                            <option value="<?= explode(":", $item['open'])[1] ?>"><?= explode(":", $item['open'])[1] ?></option>
+                        <option value="<?=isset($posted['open-time'])?$posted['open-time'] :  explode(":", $item['open'])[1]?>"><?=isset($posted['open-time'])?$posted['open-time'] :  explode(":", $item['open'])[1]?></option>
                             <?php include('../../common/component/select00-59.html') ?>
                         </select>
                     <?php endif; ?>
@@ -96,12 +90,12 @@ $posted = $_SESSION['post'];
                         </select>
                     <?php else : ?>
                         <select name="close-hour">
-                            <option value="<?= explode(":", $item['close'])[0] ?>"><?= explode(":", $item['close'])[0] ?></option>
+                        <option value="<?=isset($posted['close-hour'])?$posted['close-hour'] :  explode(":", $item['close'])[0]?>"><?=isset($posted['close-hour'])?$posted['close-hour'] :  explode(":", $item['close'])[0]?></option>
                             <?php include('../../common/component/select0-23.html') ?>
                         </select>
                         <div>:</div>
                         <select name="close-time">
-                            <option value="<?= explode(":", $item['close'])[1] ?>"><?= explode(":", $item['close'])[1] ?></option>
+                        <option value="<?=isset($posted['close-time'])?$posted['close-time'] :  explode(":", $item['close'])[1]?>"><?=isset($posted['close-time'])?$posted['close-time'] :  explode(":", $item['close'])[1]?></option>
                             <?php include('../../common/component/select00-59.html') ?>
                         </select>
                     <?php endif; ?>
@@ -115,28 +109,29 @@ $posted = $_SESSION['post'];
                         </select>
                     <?php else : ?>
                         <select name="holiday">
+                            <option value="<?=isset($posted['holiday'])?$posted['holiday'] : $item["holiday"] ?>"><?=isset($posted['holiday'])?$posted['holiday'] : $item["holiday"] ?></option>
                             <option value="<?= $item['holiday'] ?>"><?= $item['holiday'] ?></option>
                             <?php include('../../common/component/selectMon-Sun.html') ?>
                         </select>
                     <?php endif; ?>
                 </div>
                 <div class='inframe'>
-                    <div>　　　　　住所</div><input type="text" class='inputs' name="location" placeholder="〇〇県〇〇市〇〇町〜" value='<?= $item["location"] ?>'><br>
+                    <div>　　　　　住所</div><input type="text" class='inputs' name="location" placeholder="〇〇県〇〇市〇〇町〜" value='<?=isset($posted['location'])?$posted['location'] : $item["location"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['location']) ? $errors['location'] : ''; ?></span>
                 </div>
                 <div class='inframe'>
                     <div>　　　　　地図</div><input type="text" class='inputs' name="map" placeholder="https://goo.gl/maps/xxxxxxxx" value='<?= $item["map"] ?>'><br>
                 </div>
                 <div class='inframe'>
-                    <div>　店舗タイトル</div><input type="text" class='inputs' name="message" placeholder="店舗からお客様への一言を記入" value='<?= $item["message"] ?>'><br>
+                    <div>　店舗タイトル</div><input type="text" class='inputs' name="message" placeholder="店舗からお客様への一言を記入" value='<?=isset($posted['message'])?$posted['message'] : $item["message"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['message1']) ? $errors['message1'] : ''; ?></span>
                     <span style='color:red;'> <?php echo isset($errors['message2']) ? $errors['message2'] : ''; ?></span>
                 </div>
                 <div class='inframe'>
-                    <div>　店舗コメント</div><textarea class='inputs' placeholder="店舗からお客様へのメッセージを記入" name="comment"><?= $item["comment"] ?></textarea><br>
+                    <div>　店舗コメント</div><textarea class='inputs' placeholder="店舗からお客様へのメッセージを記入" name="comment"><?=isset($posted['comment'])?$posted['comment'] : $item["comment"] ?></textarea><br>
                 </div>
                 <div class='inframe'>
-                    <div>　　　店舗特徴</div><input type="text" class='inputs' name="feature" placeholder="店舗の特徴を一言で" value='<?= $item["feature"] ?>'><br>
+                    <div>　　　店舗特徴</div><input type="text" class='inputs' name="feature" placeholder="店舗の特徴を一言で" value='<?=isset($posted['feature'])?$posted['feature'] : $item["feature"] ?>'><br>
                     <span style='color:red;'> <?php echo isset($errors['feature']) ? $errors['feature'] : ''; ?></span>
                 </div>
                 <input type="hidden" name='id' value="<?= $item["id"] ?>">
@@ -212,10 +207,6 @@ $posted = $_SESSION['post'];
             $(this).closest('#attachment').find('.filename').text(file.name);
         });
     </script>
-
-
-<?php var_dump($posted['name']);return;
- ?>
 </body>
 
 </html>
