@@ -10,4 +10,14 @@ public static function h($str)
 }
 
 
+public static function bvint($stmt,$str, $var){
+    $stmt->bindValue($str, $var, PDO::PARAM_INT);
+  }
+public static function bvstr($stmt,$str, $var){
+    $stmt->bindValue($str, $var, PDO::PARAM_STR);
+  }
+  
+
+
+
 }

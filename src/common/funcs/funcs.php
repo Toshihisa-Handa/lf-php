@@ -2,17 +2,7 @@
 //共通に使う関数を記述
 
 
-//db接続
-// function dbcon()
-// {
-//   try {
-//     $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
-//   } catch (PDOException $e) {
-//     print "エラー！" . $e->getMessage() . "<br/>";
-//     exit('終了します');
-//   }
-//   return $pdo;
-// }
+
 
 //手打ち入力でログイン後のページにログインせずに行ってもエラーになるようにしている） 
 function regiCheck()
