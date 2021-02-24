@@ -69,11 +69,12 @@ function redirectCheck($url)
   }
 }
 
+//店鋪画像の更新時の処理
+function fileup($imgname, $varimg, $save, $pdo)
+{
+  global $uid;
 
-function fileup($imgname,$varimg,$save,$pdo){
-global $uid;
-
-  if ($_FILES[$imgname]['name']) {
+  if ($_FILES[$varimg]['name']) {
     $varimg = date("Ymd") . random_int(1, 999999) . $_FILES[$imgname]['name'];
     $save = '../../../public/upload/' . basename($varimg); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
     move_uploaded_file($_FILES[$imgname]['tmp_name'], $save);
@@ -81,9 +82,19 @@ global $uid;
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
     $stmt->bindValue($imgname, $varimg, PDO::PARAM_STR);
-   $status = $stmt->execute();
+    $status = $stmt->execute();
+  }
+  return $status;
 }
 
-return $status;
 
+//
+function filein($imgname){
+//POSTデータ取得
+$imgname = date("Ymd") . random_int(1, 999999) . $_FILES['image']['name']; //ここのnameはアップロードされたファイルのファイル名
+
+//指定フォルダに画像を保存
+$save = '../../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
+return $imgname;
 }

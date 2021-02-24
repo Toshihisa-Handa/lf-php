@@ -23,12 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   $status = $stmt->execute();
   $images = $stmt->fetchAll();
 } else {
-  //POSTデータ取得
-  $imgname = date("Ymd") . random_int(1, 999999) . $_FILES['image']['name']; //ここのnameはアップロードされたファイルのファイル名
+  // //POSTデータ取得
+  // $imgname = date("Ymd") . random_int(1, 999999) . $_FILES['image']['name']; //ここのnameはアップロードされたファイルのファイル名
 
-  //指定フォルダに画像を保存
-  $save = '../../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
-  move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
+  // //指定フォルダに画像を保存
+  // $save = '../../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+  // move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
+
+$imgname = filein($imgname);
+
 
   //バリデーション
   docFilterDF($name, 'name');
