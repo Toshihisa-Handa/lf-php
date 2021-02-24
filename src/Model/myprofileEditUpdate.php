@@ -1,12 +1,13 @@
 <?php
 session_start();
 include('../common/funcs/funcs.php');
+include(__DIR__ . '/../../app/config.php');
+
 //loginCheck()
 
 //DB接続
-include('../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 
 $id = $_POST['id'];
@@ -89,21 +90,21 @@ email=:email,tell=:tell,open=:open,close=:close,holiday=:holiday,location=:locat
 message=:message,comment=:comment,feature=:feature WHERE id=:id';
 
   $stmt = $pdo->prepare($sql);
-  $stmt->bindValue(':name', h($name), PDO::PARAM_STR);
-  $stmt->bindValue(':title', h($title), PDO::PARAM_STR);
-  $stmt->bindValue(':account_name', h($account_name), PDO::PARAM_STR);
-  $stmt->bindValue(':web', h($web), PDO::PARAM_STR);
-  $stmt->bindValue(':email', h($email), PDO::PARAM_STR);
-  $stmt->bindValue(':tell', h($tell), PDO::PARAM_INT);
-  $stmt->bindValue(':open', h($open), PDO::PARAM_STR);
-  $stmt->bindValue(':close', h($close), PDO::PARAM_STR);
-  $stmt->bindValue(':holiday', h($holiday), PDO::PARAM_STR);
-  $stmt->bindValue(':location', h($location), PDO::PARAM_STR);
-  $stmt->bindValue(':map', h($map), PDO::PARAM_STR);
-  $stmt->bindValue(':message', h($message), PDO::PARAM_STR);
-  $stmt->bindValue(':comment', h($comment), PDO::PARAM_STR);
-  $stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);
-  $stmt->bindValue(':id',   h($id),     PDO::PARAM_INT);
+  $stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
+  $stmt->bindValue(':title', Utils::h($title), PDO::PARAM_STR);
+  $stmt->bindValue(':account_name', Utils::h($account_name), PDO::PARAM_STR);
+  $stmt->bindValue(':web', Utils::h($web), PDO::PARAM_STR);
+  $stmt->bindValue(':email', Utils::h($email), PDO::PARAM_STR);
+  $stmt->bindValue(':tell', Utils::h($tell), PDO::PARAM_INT);
+  $stmt->bindValue(':open', Utils::h($open), PDO::PARAM_STR);
+  $stmt->bindValue(':close', Utils::h($close), PDO::PARAM_STR);
+  $stmt->bindValue(':holiday', Utils::h($holiday), PDO::PARAM_STR);
+  $stmt->bindValue(':location', Utils::h($location), PDO::PARAM_STR);
+  $stmt->bindValue(':map', Utils::h($map), PDO::PARAM_STR);
+  $stmt->bindValue(':message', Utils::h($message), PDO::PARAM_STR);
+  $stmt->bindValue(':comment', Utils::h($comment), PDO::PARAM_STR);
+  $stmt->bindValue(':feature', Utils::h($feature), PDO::PARAM_STR);
+  $stmt->bindValue(':id',   $id,  PDO::PARAM_INT);
   $status = $stmt->execute();
 
 

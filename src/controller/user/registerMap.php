@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 //regiCheck();
 
 $uid = $_SESSION['uid'];
@@ -12,19 +14,18 @@ $description = $_POST['description'];
 
 if ($_POST) {
   //db接続
-  include('../../common/component/class-db.php');
-  $db = new DB;
-  $pdo = $db->dbset();
+  $pdo = Database::dbcon();
+
 
   docFilter($maptitle, 'maptitle');
 
   if (empty($errors)) { //$errorsが空の時
     //sql作成
     $stmt = $pdo->prepare("INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),:user_id)");
-    $stmt->bindValue(':lat', $lat, PDO::PARAM_INT);
-    $stmt->bindValue(':lon', $lon, PDO::PARAM_INT);
-    $stmt->bindValue(':maptitle', $maptitle, PDO::PARAM_STR);
-    $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+    $stmt->bindValue(':lat', Utils::h($lat), PDO::PARAM_INT);
+    $stmt->bindValue(':lon', Utils::h($lon), PDO::PARAM_INT);
+    $stmt->bindValue(':maptitle', Utils::h($maptitle), PDO::PARAM_STR);
+    $stmt->bindValue(':description', Utils::h($description), PDO::PARAM_STR);
     $stmt->bindValue(':user_id', $uid, PDO::PARAM_INT);
     $status = $stmt->execute();
 

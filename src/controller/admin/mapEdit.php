@@ -1,12 +1,13 @@
 <?php 
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 //loginCheck()
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $id = $_POST['id'];
 $uid = $_SESSION['uid'];
@@ -35,10 +36,10 @@ if (!$_POST) {
     //データ登録SQL作成
     $sql = 'UPDATE map SET lat=:lat,lon=:lon,maptitle=:maptitle,description=:description WHERE id=:id';
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':lat', h($lat), PDO::PARAM_INT);
-    $stmt->bindValue(':lon', h($lon), PDO::PARAM_INT);
-    $stmt->bindValue(':maptitle', h($maptitle), PDO::PARAM_STR);
-    $stmt->bindValue(':description', h($description), PDO::PARAM_STR);
+    $stmt->bindValue(':lat', Utils::h($lat), PDO::PARAM_INT);
+    $stmt->bindValue(':lon', Utils::h($lon), PDO::PARAM_INT);
+    $stmt->bindValue(':maptitle', Utils::h($maptitle), PDO::PARAM_STR);
+    $stmt->bindValue(':description', Utils::h($description), PDO::PARAM_STR);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $status = $stmt->execute();
 
@@ -52,4 +53,3 @@ if (!$_POST) {
     }
   }
 }
- ?>

@@ -1,12 +1,13 @@
 <?php 
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 //loginCheck()
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $name = $_POST['name'];
 $price = $_POST['price'];
@@ -44,12 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     //データ登録SQL作成
     $stmt = $pdo->prepare("INSERT INTO flower(name, price, feature, tag, text, created_at, user_id, image)VALUES(:name,:price,:feature,:tag,:text,sysdate(),:uid,:imgname);
   ");
-    $stmt->bindValue(':name', h($name), PDO::PARAM_STR);
-    $stmt->bindValue(':price', h($price), PDO::PARAM_INT);
-    $stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);
-    $stmt->bindValue(':tag', h($tag), PDO::PARAM_STR);
-    $stmt->bindValue(':text', h($text), PDO::PARAM_STR);
-    $stmt->bindValue(':imgname', $imgname, PDO::PARAM_STR);
+    $stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
+    $stmt->bindValue(':price', Utils::h($price), PDO::PARAM_INT);
+    $stmt->bindValue(':feature', Utils::h($feature), PDO::PARAM_STR);
+    $stmt->bindValue(':tag', Utils::h($tag), PDO::PARAM_STR);
+    $stmt->bindValue(':text', Utils::h($text), PDO::PARAM_STR);
+    $stmt->bindValue(':imgname', Utils::h($imgname), PDO::PARAM_STR);
     $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
     $status = $stmt->execute();
 
@@ -64,4 +65,3 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     }
   }
 }
- ?>

@@ -1,12 +1,13 @@
 <?php 
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 //loginCheck()
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $uid = $_SESSION['uid'];
 $errors = $_SESSION['errors'];
@@ -24,7 +25,7 @@ if ($_FILES) {
         $sql = "UPDATE shop SET account_img=:account_img WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
-        $stmt->bindValue(':account_img', $account_img, PDO::PARAM_STR);
+        $stmt->bindValue(':account_img', Utils::h($account_img), PDO::PARAM_STR);
         $status = $stmt->execute();
     }
     //shop_img
@@ -35,7 +36,7 @@ if ($_FILES) {
         $sql = "UPDATE shop SET shop_img=:shop_img WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
-        $stmt->bindValue(':shop_img', $shop_img, PDO::PARAM_STR);
+        $stmt->bindValue(':shop_img', Utils::h($shop_img), PDO::PARAM_STR);
         $status = $stmt->execute();
     }
     //img1
@@ -46,7 +47,7 @@ if ($_FILES) {
         $sql = "UPDATE shop SET img1=:img1 WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
-        $stmt->bindValue(':img1', $img1, PDO::PARAM_STR);
+        $stmt->bindValue(':img1', Utils::h($img1), PDO::PARAM_STR);
         $status = $stmt->execute();
     }
     //img2
@@ -57,7 +58,7 @@ if ($_FILES) {
         $sql = "UPDATE shop SET img2=:img2 WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':uid', $uid, PDO::PARAM_STR);
-        $stmt->bindValue(':img2', $img2, PDO::PARAM_STR);
+        $stmt->bindValue(':img2', Utils::h($img2), PDO::PARAM_STR);
         $status = $stmt->execute();
     }
 
@@ -85,4 +86,3 @@ if ($status == false) {
 } else {
     $item = $stmt->fetch();
 }
- ?>

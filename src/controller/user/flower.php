@@ -1,11 +1,11 @@
 <?php 
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $name = $_POST['name'];
 $price = $_POST['price'];
@@ -51,7 +51,7 @@ if (!$_POST) {
   $sql = 'INSERT INTO fcomment (flower_id, fcomment, created_at, user_id) VALUES (:flower_id,:fcomment,sysdate(),:uid)';
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':flower_id', $id, PDO::PARAM_INT);
-  $stmt->bindValue(':fcomment', $fcomment, PDO::PARAM_STR);
+  $stmt->bindValue(':fcomment', Utils::h($fcomment), PDO::PARAM_STR);
   if ($uid == null) {
     $stmt->bindValue(':uid', 0, PDO::PARAM_INT);
   } else {
@@ -68,5 +68,3 @@ if (!$_POST) {
     exit();
   }
 }
-
-?>

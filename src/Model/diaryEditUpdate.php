@@ -1,13 +1,13 @@
 <?php
 session_start();
 include('../common/funcs/funcs.php');
+include(__DIR__.'/../../app/config.php');
+
 //loginCheck()
 
-
 //DB接続
-include('../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $id = $_POST['id'];
 $title = $_POST['title'];
@@ -17,9 +17,9 @@ $text = $_POST['text'];
 //データ登録SQL作成
 $sql = 'UPDATE diary SET title=:title,tag=:tag,text=:text WHERE id=:id';
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':title', $title, PDO::PARAM_STR);
-$stmt->bindValue(':tag', $tag, PDO::PARAM_STR);
-$stmt->bindValue(':text', $text, PDO::PARAM_STR);
+$stmt->bindValue(':title', Utils::h($title), PDO::PARAM_STR);
+$stmt->bindValue(':tag', Utils::h($tag), PDO::PARAM_STR);
+$stmt->bindValue(':text', Utils::h($text), PDO::PARAM_STR);
 $stmt->bindValue(':id',   $id,     PDO::PARAM_INT);  
 $status = $stmt->execute();
 

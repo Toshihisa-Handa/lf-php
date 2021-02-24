@@ -1,12 +1,13 @@
 <?php 
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 //loginCheck()
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $uid = $_SESSION['uid'];
 include('../../common/component/header-icon.php');
@@ -22,4 +23,4 @@ $items = $stmt->fetchAll();
 if ($status == false) {
   $error = $stmt->errorInfo();
   exit("SQLError:" . $error[2]);
-} ?>
+}

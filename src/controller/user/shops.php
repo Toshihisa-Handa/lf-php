@@ -4,8 +4,9 @@ include('../../common/funcs/funcs.php');
 
 //DB接続
 include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+include(__DIR__.'/../../../app/config.php');
+
+$pdo = Database::dbcon();
 
 $uid = $_SESSION['uid'];
 $title = $_POST['title'];
@@ -32,7 +33,7 @@ if (!$_GET) {
           OR feature LIKE :kensaku OR location LIKE :kensaku 
           ORDER BY shop.created_at DESC";
   $stmt = $pdo->prepare($sql);
-  $stmt->bindParam(':kensaku', $kensaku, PDO::PARAM_STR);
+  $stmt->bindValue(':kensaku', $kensaku, PDO::PARAM_STR);
   $status = $stmt->execute();
   $items = $stmt->fetchAll();
 }

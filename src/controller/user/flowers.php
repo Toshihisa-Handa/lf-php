@@ -1,11 +1,12 @@
 <?php
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $uid = $_SESSION['uid'];
 $name = $_POST['name'];
@@ -35,9 +36,7 @@ if (!$_GET) {
                 OR flower.feature LIKE :kensaku OR flower.text LIKE :kensaku OR flower.tag LIKE :kensaku OR shop.name LIKE :kensaku
                 ORDER BY flower.created_at DESC";
   $stmt = $pdo->prepare($sql);
-  $stmt->bindParam(':kensaku', $kensaku, PDO::PARAM_STR);
+  $stmt->bindvalue(':kensaku', $kensaku, PDO::PARAM_STR);
   $status = $stmt->execute();
   $items = $stmt->fetchAll();
 }
-
-?>

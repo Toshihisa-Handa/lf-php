@@ -1,12 +1,13 @@
 <?php
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 unset($_SESSION['chk_regi']); //登録セッションの初期化
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 
 $uid = $_SESSION['user_id'];
@@ -38,8 +39,8 @@ if (!empty($_POST)) {
   if (empty($errors)) {
     $sql = "INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate())";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
+    $stmt->bindValue(':email', Utils::h($email), PDO::PARAM_STR);
     $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
     $status = $stmt->execute();
     $id = $pdo->lastInsertId();
@@ -65,5 +66,3 @@ if (!empty($_POST)) {
     }
   }
 }
-
-?>

@@ -1,11 +1,11 @@
 <?php
 session_start(); //セッション変数を使うよという意味。これで他のファイルでも$_SESSION[];で指定した変数が使用できる
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -15,7 +15,7 @@ $errors = [];
 if (!empty($_POST)) {
   $sql = 'SELECT * FROM user WHERE email=:email';
   $stmt = $pdo->prepare($sql);
-  $stmt->bindValue(':email', $email);
+  $stmt->bindValue(':email', Utils::h($email));
   $status = $stmt->execute();
   $val = $stmt->fetch();
   if (password_verify($password, $val['password'])) {
@@ -28,5 +28,3 @@ if (!empty($_POST)) {
     $errors['errorLog'] = 'メールアドレスとパスワードが一致しませんでした。';
   }
 }
-
-?>

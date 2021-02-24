@@ -1,11 +1,12 @@
 <?php 
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 
 //DB接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $title = $_POST['title'];
 $tag = $_POST['tag'];
@@ -40,7 +41,7 @@ if (!$_POST) {
   $sql = 'INSERT INTO dcomment (diary_id, dcomment, created_at, user_id) VALUES (:diary_id,:dcomment,sysdate(),:uid)';
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':diary_id', $id, PDO::PARAM_INT);
-  $stmt->bindValue(':dcomment', $dcomment, PDO::PARAM_STR);
+  $stmt->bindValue(':dcomment', Utils::h($dcomment), PDO::PARAM_STR);
   $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
   $status = $stmt->execute();
 
@@ -52,4 +53,3 @@ if (!$_POST) {
     exit();
   }
 }
-?>

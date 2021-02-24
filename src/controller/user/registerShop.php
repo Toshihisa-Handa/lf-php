@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
+
 regiCheck();
 
 $name = $_POST['name'];
@@ -27,9 +29,8 @@ $uname = $_SESSION['uname'];
 
 if ($_POST) {
     //DB接続
-    include('../../common/component/class-db.php');
-    $db = new DB;
-    $pdo = $db->dbset();
+    $pdo = Database::dbcon();
+
 
     //バリデーション処理
     $docFilter = '#^[ァ-ヶぁ-んa-zA-Z0-9 -/:-@\[-_\'一-龠々﨑]+$#'; //カタカナひらがな英数字記号Ok
@@ -87,20 +88,20 @@ if ($_POST) {
         //データ登録SQL作成
         $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
         $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
-        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
-        $stmt->bindValue(':account_name', $account_name, PDO::PARAM_STR);
-        $stmt->bindValue(':web', $web, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-        $stmt->bindValue(':tell', $tell, PDO::PARAM_INT);
-        $stmt->bindValue(':open', $open, PDO::PARAM_STR);
-        $stmt->bindValue(':close', $close, PDO::PARAM_STR);
-        $stmt->bindValue(':holiday', $holiday, PDO::PARAM_STR);
-        $stmt->bindValue(':location', $location, PDO::PARAM_STR);
+        $stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
+        $stmt->bindValue(':title', Utils::h($title), PDO::PARAM_STR);
+        $stmt->bindValue(':account_name', Utils::h($account_name), PDO::PARAM_STR);
+        $stmt->bindValue(':web', Utils::h($web), PDO::PARAM_STR);
+        $stmt->bindValue(':email', Utils::h($email), PDO::PARAM_STR);
+        $stmt->bindValue(':tell', Utils::h($tell), PDO::PARAM_INT);
+        $stmt->bindValue(':open', Utils::h($open), PDO::PARAM_STR);
+        $stmt->bindValue(':close', Utils::h($close), PDO::PARAM_STR);
+        $stmt->bindValue(':holiday', Utils::h($holiday), PDO::PARAM_STR);
+        $stmt->bindValue(':location', Utils::h($location), PDO::PARAM_STR);
         $stmt->bindValue(':map', $map, PDO::PARAM_STR);
-        $stmt->bindValue(':message', $message, PDO::PARAM_STR);
-        $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
-        $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
+        $stmt->bindValue(':message', Utils::h($message), PDO::PARAM_STR);
+        $stmt->bindValue(':comment', Utils::h($comment), PDO::PARAM_STR);
+        $stmt->bindValue(':feature', Utils::h($feature), PDO::PARAM_STR);
         $status = $stmt->execute();
         //====================================================================
 

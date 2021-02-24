@@ -1,11 +1,12 @@
 <?php
 include('../common/funcs/funcs.php');
+include(__DIR__ . '/../../app/config.php');
+
 //loginCheck()
 
 //DB接続
-include('../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 
 $id = $_POST['id'];
@@ -18,11 +19,11 @@ $text = $_POST['text'];
 //データ登録SQL作成
 $sql = 'UPDATE flower SET name=:name,price=:price,feature=:feature,tag=:tag,text=:text WHERE id=:id';
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
-$stmt->bindValue(':price', $price, PDO::PARAM_INT);
-$stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
-$stmt->bindValue(':tag', $tag, PDO::PARAM_STR);
-$stmt->bindValue(':text', $text, PDO::PARAM_STR);
+$stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
+$stmt->bindValue(':price', Utils::h($price), PDO::PARAM_INT);
+$stmt->bindValue(':feature', Utils::h($feature), PDO::PARAM_STR);
+$stmt->bindValue(':tag', Utils::h($tag), PDO::PARAM_STR);
+$stmt->bindValue(':text', Utils::h($text), PDO::PARAM_STR);
 $stmt->bindValue(':id',   $id,     PDO::PARAM_INT);
 $status = $stmt->execute();
 

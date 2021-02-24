@@ -1,11 +1,11 @@
 <?php
 session_start();
 include('../../common/funcs/funcs.php');
+include(__DIR__.'/../../../app/config.php');
 
 //DBs接続
-include('../../common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 $uid = $_SESSION['uid'];
 $id = $_GET['id'];
@@ -29,5 +29,3 @@ $stmt = $pdo->prepare("SELECT * FROM flower where user_id=:uid");
 $stmt->bindValue(':uid', $item['user_id'], PDO::PARAM_INT);
 $status = $stmt->execute();
 $floweritems = $stmt->fetchAll();
-
-?>
