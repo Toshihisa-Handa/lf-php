@@ -1,11 +1,11 @@
 <?php
-require('../../controller/user/diarys.php');
+require('../controller/diarys.php');
 
 ?>
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>日記一覧</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/diarys.css">
 </head>
 
@@ -13,14 +13,14 @@ require('../../controller/user/diarys.php');
   <div class="diarys-glid">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
           <li class='searchNav'>
             <form method='get'>
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -37,7 +37,7 @@ require('../../controller/user/diarys.php');
         <?php foreach ($items as $item) : ?>
           <div class="dcard">
             <div class='diary-card'>
-              <a href="/src/view/user/diary.php/? id=<?= $item['id']; ?>">
+              <a href="/view/diary.php/? id=<?= $item['id']; ?>">
                 <img src="/public/upload/<?= $item['image']; ?>" alt="">
                 <h3><?= $item['title']; ?></h3>
                 <p class='dtext'><?= $item['text']; ?></p>
@@ -55,7 +55,7 @@ require('../../controller/user/diarys.php');
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <script>

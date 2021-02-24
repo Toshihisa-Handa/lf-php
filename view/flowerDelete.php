@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../common/funcs/funcs.php');
+include('../app/funcs/funcs.php');
 include(__DIR__ . '/../../app/config.php');
 
 //loginCheck()
@@ -19,4 +19,4 @@ $status = $stmt->execute();
 
 
 //データ登録処理後
-redirectCheck('/src/view/admin/frege.php');
+redirectCheck('/view/frege.php');

@@ -1,10 +1,10 @@
 <?php if ($uid == false || '') : ?>
-    <li class='log'><a href="/src/view/user/login.php" class='hlink'>Login</a></li>
+    <li class='log'><a href="/view/login.php" class='hlink'>Login</a></li>
 <?php else : ?>
-    <li class='log'><a href="/src/model/logout.php" class='hlink'>Logout</a></li>
+    <li class='log'><a href="/view/logout.php" class='hlink'>Logout</a></li>
 <?php endif; ?>
 <li class='account_img'>
-    <a href="/src/view/admin/mypage.php">
+    <a href="/view/mypage.php">
         <?php if ($uid) { ?>
             <?php if ($aimg === null) : ?>
                 <img src="/public/images/account3.png" class='aimg' alt="">

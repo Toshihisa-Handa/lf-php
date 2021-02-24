@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -13,7 +13,7 @@ $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 //データ登録SQL作成
 $sql = "SELECT map.id,map.lat,map.lon,map.pincolor,map.maptitle,

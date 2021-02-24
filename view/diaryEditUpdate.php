@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../common/funcs/funcs.php');
-include(__DIR__.'/../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -20,7 +20,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':title', Utils::h($title), PDO::PARAM_STR);
 $stmt->bindValue(':tag', Utils::h($tag), PDO::PARAM_STR);
 $stmt->bindValue(':text', Utils::h($text), PDO::PARAM_STR);
-$stmt->bindValue(':id',   $id,     PDO::PARAM_INT);  
+$stmt->bindValue(':id',   $id,     PDO::PARAM_INT);
 $status = $stmt->execute();
 
 
@@ -29,6 +29,6 @@ if ($status == false) {
   $error = $stmt->errorInfo();
   exit("SQLError:" . $error[2]);
 } else {
-  header('Location: /src/view/admin/drege.php');
+  header('Location: /view/drege.php');
   exit;
 }

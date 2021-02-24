@@ -1,7 +1,7 @@
 <?php
 session_start(); //セッション変数を使うよという意味。これで他のファイルでも$_SESSION[];で指定した変数が使用できる
-include('../../common/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //DB接続
 $pdo = Database::dbcon();

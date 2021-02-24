@@ -1,10 +1,10 @@
 <?php
-require('../../controller//admin/mypage.php');
+require('../controller/mypage.php');
 ?>
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>マイページ</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/mypage.css">
 </head>
 
@@ -12,17 +12,17 @@ require('../../controller//admin/mypage.php');
     <div class="grid-box">
         <header>
             <ul>
-                <?php include('../../common/component/header-nav-leftIcon.html') ?>
+                <?php include('common/header-nav-leftIcon.html') ?>
                 <div class='nav-right'>
-                    <?php include('../../common/component/header-nav-rightIcon.php') ?>
+                    <?php include('common/header-nav-rightIcon.php') ?>
                 </div>
             </ul>
         </header>
         <div class="main">
-            <p class='mylink'><a href="myprofile.php">店舗登録情報</a></p>
-            <p class='mylink'><a href="drege.php">日記の登録</a></p>
-            <p class='mylink'><a href="frege.php">花の登録</a></p>
-            <p class='mylink'><a href="mapinfo.php">マップ情報</a></p>
+            <p class='mylink'><a href="/view/myprofile.php">店舗登録情報</a></p>
+            <p class='mylink'><a href="/view/drege.php">日記の登録</a></p>
+            <p class='mylink'><a href="/view/frege.php">花の登録</a></p>
+            <p class='mylink'><a href="/view/mapinfo.php">マップ情報</a></p>
         </div>
     </div>
     <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
@@ -31,7 +31,7 @@ require('../../controller//admin/mypage.php');
             <h3 class='topSubtitle'>Copyright second-cube</h3>
         </footer>
         <!-- フッターナビ -->
-        <?php include('../../common/component/footer.html') ?>
+        <?php include('common/footer.html') ?>
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
     </div>

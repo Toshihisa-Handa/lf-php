@@ -1,10 +1,10 @@
 <?php
-require('../../controller/user/diary.php');
+require('../controller/diary.php');
 ?>
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>日記詳細</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/diary.css">
 </head>
 
@@ -12,9 +12,9 @@ require('../../controller/user/diary.php');
   <div class="main-glid">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -63,7 +63,7 @@ require('../../controller/user/diary.php');
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <script>

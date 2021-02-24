@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/component/favicon.html')
+include('common/favicon.html')
 ?>
 <title>決済エラー</title>
 <link rel="stylesheet" href="/public/css/stripe.css">

@@ -1,9 +1,9 @@
 <?php
-require('../../controller/user/map.php');
+require('../controller/map.php');
 ?>
 
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>マップ</title>
 <style>
     html,
@@ -22,15 +22,15 @@ require('../../controller/user/map.php');
         font-size: 50%;
     }
 </style>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 </head>
 
 <body>
     <header style="max-height: 70px;">
         <ul>
-            <?php include('../../common/component/header-nav-leftIcon.html') ?>
+            <?php include('common/header-nav-leftIcon.html') ?>
             <div class='nav-right'>
-                <?php include('../../common/component/header-nav-rightIcon.php') ?>
+                <?php include('common/header-nav-rightIcon.php') ?>
             </div>
         </ul>
     </header>
@@ -44,7 +44,7 @@ require('../../controller/user/map.php');
         }
     </style>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
     <script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AmJSmi0DfSGMPQNbHQ7GSRPBRvWKZHpsv13mLTVUyr-EEQpqyk2I-d4tHVYiGw88' async defer></script>
     <script src="/public/js/BmapQuery.js"></script>
@@ -79,7 +79,7 @@ require('../../controller/user/map.php');
                         "pinColor": "<?= $item['pincolor'] ?>",
                         "height": 220,
                         "width": 200,
-                        "description": '<a href="/src/view/user/shop.php/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
+                        "description": '<a href="/view/shop.php/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
                         "show": false
                     };
                     i++

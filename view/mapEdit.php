@@ -1,10 +1,10 @@
 <?php
-require('../../controller/admin/mapEdit.php');
+require('../controller/mapEdit.php');
 ?>
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>マップ情報編集</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/mapEdit.css">
 </head>
 
@@ -12,9 +12,9 @@ require('../../controller/admin/mapEdit.php');
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -39,10 +39,10 @@ require('../../controller/admin/mapEdit.php');
       </form>
     </div>
     <div class="nav">
-      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
-      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
-      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
+      <p><a href="/view/mapinfo.php">マップ情報</a></p>
+      <p><a href="/view/myprofile.php">店舗情報</a></p>
+      <p><a href="/view/drege.php">日記の登録</a></p>
+      <p><a href="/view/mapinfo.php">マップ情報</a></p>
       <p>
       <h2>住所変換</h2><button id='exec'>変換</button>
       </p>
@@ -56,7 +56,7 @@ require('../../controller/admin/mapEdit.php');
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
@@ -75,4 +75,3 @@ require('../../controller/admin/mapEdit.php');
 </body>
 
 </html>
-

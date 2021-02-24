@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
+include('../app/funcs/funcs.php');
 include(__DIR__.'/../../../app/config.php');
 
 //regiCheck();
@@ -41,4 +41,3 @@ if ($_POST) {
     }
   }
 }
-?>

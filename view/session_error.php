@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/component/favicon.html')
+include('common/favicon.html')
 ?>
 <title>ログインエラー</title>
 <link rel="stylesheet" href="/public/css/stripe.css">
@@ -13,7 +13,7 @@ include('../../common/component/favicon.html')
       <br>
       下記リンクからログインページへ戻れます。
     </p>
-    <p><a href="/src/view/user/login.php">戻る</a></p>
+    <p><a href="/view/login.php">戻る</a></p>
   </section>
 </body>
 

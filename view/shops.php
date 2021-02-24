@@ -1,11 +1,11 @@
 <?php
-require('../../controller/user/shops.php');
+require('../controller/shops.php');
 
 ?>
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>店舗一覧</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/shops.css">
 </head>
 
@@ -13,14 +13,14 @@ require('../../controller/user/shops.php');
   <div class="shops-glid">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
           <li class='searchNav'>
             <form method='get'>
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -36,7 +36,7 @@ require('../../controller/user/shops.php');
       <div class="shop-container">
         <?php foreach ($items as $item) : ?>
           <div class="shop-card">
-            <a href="shop.php/? id=<?= $item['id']; ?>">
+            <a href="/view/shop.php/? id=<?= $item['id']; ?>">
               <img src="/public/upload/<?= $item['shop_img']; ?>" alt="">
               <div class='shopTitle'><?= $item['name'] ?></div>
               <div class='shopSub'>営業時間：<?= $item['open'] ?>~<?= $item['close'] ?></div>
@@ -54,7 +54,7 @@ require('../../controller/user/shops.php');
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <script>

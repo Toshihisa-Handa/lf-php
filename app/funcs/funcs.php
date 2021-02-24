@@ -76,7 +76,7 @@ function fileup($imgname, $varimg, $save, $pdo)
 
   if ($_FILES[$varimg]['name']) {
     $varimg = date("Ymd") . random_int(1, 999999) . $_FILES[$imgname]['name'];
-    $save = '../../../public/upload/' . basename($varimg); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+    $save = '../public/upload/' . basename($varimg); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
     move_uploaded_file($_FILES[$imgname]['tmp_name'], $save);
     $sql = "UPDATE shop SET $imgname=:$imgname WHERE user_id=:uid";
     $stmt = $pdo->prepare($sql);
@@ -94,7 +94,7 @@ function filein($imgname){
 $imgname = date("Ymd") . random_int(1, 999999) . $_FILES['image']['name']; //ここのnameはアップロードされたファイルのファイル名
 
 //指定フォルダに画像を保存
-$save = '../../../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+$save = '../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
 move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
 return $imgname;
 }

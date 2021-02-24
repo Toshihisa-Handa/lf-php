@@ -1,10 +1,10 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
+include('../app/funcs/funcs.php');
 
 //DB接続
-include('../../common/component/class-db.php');
-include(__DIR__.'/../../../app/config.php');
+include('common/class-db.php');
+include(__DIR__ . '/../app/config.php');
 
 $pdo = Database::dbcon();
 
@@ -12,7 +12,7 @@ $uid = $_SESSION['uid'];
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 if (!$_GET) {
   //データ登録SQL作成
@@ -37,5 +37,3 @@ if (!$_GET) {
   $status = $stmt->execute();
   $items = $stmt->fetchAll();
 }
-
-?>

@@ -1,11 +1,11 @@
 <?php
-require('../../controller/user/shop.php');
+require('../controller/shop.php');
 ?>
 
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>店舗</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/shop.css">
 <link rel="stylesheet" href="/public/css/Rshop.css">
 
@@ -18,9 +18,9 @@ require('../../controller/user/shop.php');
   <div class="main-glid">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -56,7 +56,7 @@ require('../../controller/user/shop.php');
               <?php foreach ($floweritems as $fitem) : ?>
                 <div class="glide__slide">
                   <div class="flower-box">
-                    <a href="/src/view/user/flower.php/? id=<?= $fitem['id'] ?>">
+                    <a href="/view/flower.php/? id=<?= $fitem['id'] ?>">
                       <div class="flower"><img src="/public/upload/<?= $fitem['image'] ?>" alt=""></div>
                       <h3 class='fname'><?= $fitem['name'] ?></h3>
                       <p class='fprice'><?= number_format($fitem['price']) ?>円（税込）</p>
@@ -87,7 +87,7 @@ require('../../controller/user/shop.php');
               <?php foreach ($diaryitems as $ditem) : ?>
                 <div class="glide__slide">
                   <div class="diary-box">
-                    <a href="/src/view/user/diary.php/? id=<?= $ditem['id'] ?>">
+                    <a href="/view/diary.php/? id=<?= $ditem['id'] ?>">
                       <div class="diary"><img src="/public/upload/<?= $ditem['image'] ?>" alt=""></div>
                       <div class='dtitle'><?= $ditem['title'] ?></div>
                       <div class='dtext'><?= $ditem['text'] ?></div>
@@ -146,7 +146,7 @@ require('../../controller/user/shop.php');
       <h3 class='StopsubTitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?> -->
+    <?php include('common/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

@@ -1,12 +1,12 @@
 <?php
-require('../../controller/admin/frege.php'); 
+require('../controller/frege.php');
 ?>
 
 
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>花登録</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/frege.css">
 </head>
 
@@ -14,9 +14,9 @@ require('../../controller/admin/frege.php');
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -59,7 +59,7 @@ require('../../controller/admin/frege.php');
         <?php for ($i = 0; $i < count($images); $i++) : ?>
           <div class="fcard">
             <div class='flower-card'>
-              <a href="/src/view/user/flower.php/? id=<?= $images[$i]['id']; ?>">
+              <a href="/view/flower.php/? id=<?= $images[$i]['id']; ?>">
                 <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['name']; ?></h3>
                 <div class='fprice'><?= number_format($images[$i]['price']); ?>円（税別）</div>
@@ -68,17 +68,17 @@ require('../../controller/admin/frege.php');
               </a>
             </div>
             <div class="option">
-              <div class="update"><a href="flowerEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-              <div class="delete"><a href="/src/model/flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
+              <div class="update"><a href="/view/flowerEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
+              <div class="delete"><a href="/view/flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
             </div>
           </div>
         <?php endfor; ?>
       </div>
     </div>
     <div class="nav">
-      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/admin/drege.php">日記の登録</a></p>
-      <p><a href="/src/view/admin/mapinfo.php">マップ情報</a></p>
+      <p><a href="/view/myprofile.php">店舗情報</a></p>
+      <p><a href="/view/drege.php">日記の登録</a></p>
+      <p><a href="/view/mapinfo.php">マップ情報</a></p>
     </div>
   </div>
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
@@ -87,7 +87,7 @@ require('../../controller/admin/frege.php');
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

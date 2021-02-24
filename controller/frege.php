@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__ . '/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 //loginCheck()
 
 //DB接続
@@ -13,7 +13,7 @@ $feature = $_POST['feature'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 //画像処理
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
-      header('Location: /src/view/admin/frege.php');
+      header('Location: /view/frege.php');
       exit();
     }
   }

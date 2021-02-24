@@ -1,10 +1,10 @@
 <?php
-require('../../controller/user/registerShop.php');
+require('../controller/registerShop.php');
 ?>
 
-<?php include('../../common/component/favicon.html'); ?>
+<?php include('common/favicon.html'); ?>
 <title>店舗情報編集</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/myprofileEdit.css">
 </head>
 
@@ -46,31 +46,31 @@ require('../../controller/user/registerShop.php');
                     <div>　　　オープン</div>
                     <select name="open-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/component/select0-23.html') ?>
+                        <?php include('common/select0-23.html') ?>
                     </select>
                     <div>:</div>
                     <select name="open-time">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/component/select00-59.html') ?>
+                        <?php include('common/select00-59.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
                     <div>　　　クローズ</div>
                     <select name="close-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/component/select0-23.html') ?>
+                        <?php include('common/select0-23.html') ?>
                     </select>
                     <div>:</div>
                     <select name="close-time">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/component/select00-59.html') ?>
+                        <?php include('common/select00-59.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
                     <div>　　　　定休日</div>
                     <select name="holiday">
                         <option value="">選択して下さい</option>
-                        <?php include('../../common/component/selectMon-Sun.html') ?>
+                        <?php include('common/selectMon-Sun.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
@@ -102,7 +102,7 @@ require('../../controller/user/registerShop.php');
             <h3>Copyright second-cube</h3>
         </footer>
         <!-- フッターナビ -->
-        <!-- <?php include('../../common/component/footer.html') ?> -->
+        <!-- <?php include('common/footer.html') ?> -->
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

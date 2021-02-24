@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 
 //DB接続
@@ -12,7 +12,7 @@ $uid = $_SESSION['uid'];
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 if (!$_GET) {
   //データ登録SQL作成

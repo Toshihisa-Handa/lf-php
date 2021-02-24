@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../common/component/favicon.html')
+include('common/favicon.html')
 ?>
 <title>会員登録エラー</title>
 <link rel="stylesheet" href="/public/css/stripe.css">
@@ -13,7 +13,7 @@ include('../../common/component/favicon.html')
       <br>
       下記リンクから新規登録ページへ戻れます。
     </p>
-    <p><a href="/src/view/user/register.php">戻る</a></p>
+    <p><a href="/view/register.php">戻る</a></p>
   </section>
 </body>
 

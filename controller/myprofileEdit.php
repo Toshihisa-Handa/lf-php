@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__ . '/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -11,7 +11,7 @@ $pdo = Database::dbcon();
 
 $uid = $_SESSION['uid'];
 $errors = $_SESSION['errors'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 
 // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -26,7 +26,7 @@ if ($_FILES) {
         $error = $stmt->errorInfo();
         exit("SQLError:" . $error[2]);
     } else {
-        header('Location: /src/view/admin/myprofileEdit.php'); //Location:の後ろの半角スペースは必ず入れる。
+        header('Location: /view/myprofileEdit.php'); //Location:の後ろの半角スペースは必ず入れる。
         exit();
     }
 }

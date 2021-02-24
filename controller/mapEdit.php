@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -15,7 +15,7 @@ $lat = $_POST['lat'];
 $lon = $_POST['lon'];
 $maptitle = $_POST['maptitle'];
 $description = $_POST['description'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 //画像処理
 if (!$_POST) {
@@ -48,7 +48,7 @@ if (!$_POST) {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
-      header('Location: /src/view/admin/mapinfo.php');
+      header('Location: /view/mapinfo.php');
       exit();
     }
   }

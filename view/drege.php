@@ -1,19 +1,20 @@
 <?php
-require('../../controller/admin/drege.php')
+require('../controller/drege.php')
 ?>
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>日記登録</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/drege.css">
 </head>
+
 <body>
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../../common/component/header-nav-rightIcon.php') ?>
+          <?php include('common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -48,14 +49,14 @@ require('../../controller/admin/drege.php')
         <?php for ($i = 0; $i < count($images); $i++) : ?>
           <div class="dcard">
             <div class='diary-card'>
-              <a href="/src/view/user/diary.php/? id=<?= $images[$i]['id']; ?>">
+              <a href="/view/diary.php/? id=<?= $images[$i]['id']; ?>">
                 <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['title']; ?></h3>
                 <p class='dtext'><?= $images[$i]['text']; ?></p>
               </a>
               <div class="option">
-                <div class="update"><a href="diaryEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-                <div class="delete"><a href="/src/model/diaryDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
+                <div class="update"><a href="/view/diaryEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
+                <div class="delete"><a href="/view/diaryDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
               </div>
             </div>
           </div>
@@ -64,9 +65,9 @@ require('../../controller/admin/drege.php')
     </div>
     <br>
     <div class="nav">
-      <p><a href="/src/view/admin/myprofile.php">店舗情報</a></p>
-      <p><a href="/src/view/admin/frege.php">花の登録</a></p>
-      <p><a href="/src/view//admin/mapinfo.php">マップ情報</a></p>
+      <p><a href="/view/myprofile.php">店舗情報</a></p>
+      <p><a href="/view/frege.php">花の登録</a></p>
+      <p><a href="/view/mapinfo.php">マップ情報</a></p>
     </div>
   </div>
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
@@ -75,10 +76,10 @@ require('../../controller/admin/drege.php')
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-  
+
   <!-- 以下ファイルアップロード の記述 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>

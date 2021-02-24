@@ -1,14 +1,14 @@
 <?php
 session_start();
-include('src/common/funcs/funcs.php');
+include('app/funcs/funcs.php');
+include('app/config.php');
 $uid = $_SESSION['uid'];
 $name = $_SESSION['name'];
 
 
 //DB接続
-include('src/common/component/class-db.php');
-$db = new DB;
-$pdo = $db->dbset();
+$pdo = Database::dbcon();
+
 
 
 //データ登録SQL作成
@@ -28,9 +28,9 @@ if ($status == false) {
 ?>
 
 
-<?php include('src/common/component/favicon.html'); ?>
+<?php include('view/common/favicon.html'); ?>
 <title>Life flower</title>
-<?php include('src/common/component/style.html') ?>
+<?php include('view/common/style.html') ?>
 <link rel="stylesheet" href="public/css/top.css">
 </head>
 
@@ -39,18 +39,18 @@ if ($status == false) {
         <header>
             <ul>
                 <li><a href="/index.php"><img src="/public/images/lf-logo-gray.png" alt="" class='logo'></a></li>
-                <?php include('src/common/component/header-nav.html') ?>
+                <?php include('view/common/header-nav.html') ?>
                 <div class='nav-right'>
                     <li>
                         <div id='search'>検索</div>
                     </li>
                     <?php if ($uid == false || '') : ?>
-                        <li class='log'><a href="/src/view/user/login.php" class='hlink'>Login</a></li>
+                        <li class='log'><a href="/view/login.php" class='hlink'>Login</a></li>
                     <?php else : ?>
-                        <li class='log'><a href="/src/model/logout.php" class='hlink'>Logout</a></li>
+                        <li class='log'><a href="/view/logout.php" class='hlink'>Logout</a></li>
                     <?php endif; ?>
                     <li class='account_img'>
-                        <a href="/src/view/admin/mypage.php">
+                        <a href="/view/mypage.php">
                             <?php if ($uid) { ?>
                                 <?php if ($item['account_img'] === null) : ?>
                                     <img src="/public/images/account3.png" class='aimg' alt="">
@@ -115,7 +115,7 @@ if ($status == false) {
 
 
         <div class='link1'>
-            <h1><a href="/src/view/user/shops"><span class='underbar topTitle'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
+            <h1><a href="/view/shops.php"><span class='underbar topTitle'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
         </div>
 
         <div class='title3'>
@@ -154,7 +154,7 @@ if ($status == false) {
         </footer>
     </div>
     <!-- フッターナビ -->
-    <?php include('src/common/component/footer.html') ?>
+    <?php include('view/common/footer.html') ?>
 
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 
 //DB接続
@@ -15,7 +15,7 @@ $feature = $_POST['feature'];
 $tag = $_POST['tag'];
 $title = $_POST['title'];
 $text = $_POST['text'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 if (!$_GET) {
   $sql = "SELECT 

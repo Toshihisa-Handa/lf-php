@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 //loginCheck()
 
 //DB接続
@@ -11,7 +11,7 @@ $pdo = Database::dbcon();
 
 $id = $_GET['id'];
 $uid = $_SESSION['uid'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 //sql作成
 $sql = "SELECT * FROM diary WHERE id=:id";
@@ -27,6 +27,3 @@ if ($status == false) {
 } else {
   $item = $stmt->fetch();
 }
-
-
- ?>

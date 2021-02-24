@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
-include('../../common/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //DB接続
 $pdo = Database::dbcon();
@@ -15,7 +15,7 @@ $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 $id = $_GET['id']; //flowerのid
 $fcomment = $_POST['fcomment'];
-include('../../common/component/header-icon.php');
+include('common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
@@ -64,7 +64,7 @@ if (!$_POST) {
     exit("SQLError:" . $error[2]);
   } else {
 
-    header("Location: /src/view/user/flower.php/? id=$id");
+    header("Location: /view/flower.php/? id=$id");
     exit();
   }
 }

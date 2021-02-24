@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../common/funcs/funcs.php');
-include(__DIR__.'/../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -18,4 +18,4 @@ $status = $stmt->execute(); //このexecuteで上で処理した内容を実行�
 
 
 //データ登録処理後
-redirectCheck('/src/view/admin/drege.php');
+redirectCheck('/view/drege.php');

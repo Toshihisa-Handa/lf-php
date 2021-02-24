@@ -1,11 +1,11 @@
 <?php
-require('../../controller/user/login.php');
+require('../controller/login.php');
 ?>
 
 
-<?php include('../../common/component/favicon.html') ?>
+<?php include('common/favicon.html') ?>
 <title>ログイン</title>
-<?php include('../../common/component/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="/public/css/login.css">
 </head>
 
@@ -13,7 +13,7 @@ require('../../controller/user/login.php');
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('../../common/component/header-nav-leftIcon.html') ?>
+        <?php include('common/header-nav-leftIcon.html') ?>
       </ul>
     </header>
     <div class="img1">
@@ -27,7 +27,7 @@ require('../../controller/user/login.php');
     </div>
     <div class="loginList">
       <div class='login-card'>
-        <form action="/src/view/user/login.php" method="post">
+        <form action="/view/login.php" method="post">
           <span class="label">E-mail</span><input class='linput' type="email" name="email" class="input" required><br>
           <br>
           <span class="label">Password</span><input class='linput' type="password" name="password" class="input" required><br>
@@ -47,7 +47,7 @@ require('../../controller/user/login.php');
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../../common/component/footer.html') ?>
+    <?php include('common/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
 

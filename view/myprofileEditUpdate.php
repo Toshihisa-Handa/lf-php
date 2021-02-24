@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../common/funcs/funcs.php');
-include(__DIR__ . '/../../app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -114,13 +114,13 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
     exit("SQLError:" . $error[2]);
   } else {
     $_SESSION['errors'] = [];
-    unset ($_SESSION['posted']);
-    header('Location: /src/view/admin/myprofile.php');
+    unset($_SESSION['posted']);
+    header('Location: /view/myprofile.php');
     exit;
   }
 } else {
   $_SESSION['errors'] = $errors;
   $_SESSION['posted'] = $_POST;
-   
-  header('Location: /src/view/admin/myprofileEdit.php');
+
+  header('Location: /view/myprofileEdit.php');
 }
