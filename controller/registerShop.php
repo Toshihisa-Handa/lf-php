@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../app/funcs/funcs.php');
-include(__DIR__ . '/../../../app/config.php');
+include(__DIR__ . '/../../../../app/config.php');
 
 regiCheck();
 
@@ -111,7 +111,7 @@ if ($_POST) {
             exit("SQLError:" . $error[2]);
         } else {
 
-            header('Location: /view/registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
+            header('Location: /registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
             exit();
         }
     }

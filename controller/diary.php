@@ -49,7 +49,7 @@ if (!$_POST) {
     $error = $stmt->errorInfo();
     exit("SQLError:" . $error[2]);
   } else {
-    header("Location: /view/diary.php/? id=$id");
+    header("Location: /diary.php/? id=$id");
     exit();
   }
 }

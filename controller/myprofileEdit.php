@@ -26,7 +26,7 @@ if ($_FILES) {
         $error = $stmt->errorInfo();
         exit("SQLError:" . $error[2]);
     } else {
-        header('Location: /view/myprofileEdit.php'); //Location:の後ろの半角スペースは必ず入れる。
+        header('Location: /myprofileEdit.php'); //Location:の後ろの半角スペースは必ず入れる。
         exit();
     }
 }

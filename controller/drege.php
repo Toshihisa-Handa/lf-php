@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
+include('app/funcs/funcs.php');
 include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
-      header('Location: drege.php');
+      header('Location: /drege.php');
       exit();
     }
   }

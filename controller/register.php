@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include(__DIR__ . '/app/config.php');
 
 unset($_SESSION['chk_regi']); //登録セッションの初期化
 
@@ -61,7 +61,7 @@ if (!empty($_POST)) {
       }
 
       $_SESSION['chk_regi']  = $res . $email;
-      header('Location: /view/registerShop.php');
+      header('Location: /registerShop.php');
       exit();
     }
   }

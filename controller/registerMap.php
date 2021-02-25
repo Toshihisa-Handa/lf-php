@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../app/funcs/funcs.php');
-include(__DIR__.'/../../../app/config.php');
+include(__DIR__ . '/../app/config.php');
 
 //regiCheck();
 

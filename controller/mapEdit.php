@@ -48,7 +48,7 @@ if (!$_POST) {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
-      header('Location: /view/mapinfo.php');
+      header('Location: /mapinfo.php');
       exit();
     }
   }

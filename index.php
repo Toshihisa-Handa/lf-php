@@ -28,9 +28,9 @@ if ($status == false) {
 ?>
 
 
-<?php include('view/common/favicon.html'); ?>
+<?php include('common/favicon.html'); ?>
 <title>Life flower</title>
-<?php include('view/common/style.html') ?>
+<?php include('common/style.html') ?>
 <link rel="stylesheet" href="public/css/top.css">
 </head>
 
@@ -39,18 +39,18 @@ if ($status == false) {
         <header>
             <ul>
                 <li><a href="/index.php"><img src="/public/images/lf-logo-gray.png" alt="" class='logo'></a></li>
-                <?php include('view/common/header-nav.html') ?>
+                <?php include('common/header-nav.html') ?>
                 <div class='nav-right'>
                     <li>
                         <div id='search'>検索</div>
                     </li>
                     <?php if ($uid == false || '') : ?>
-                        <li class='log'><a href="/view/login.php" class='hlink'>Login</a></li>
+                        <li class='log'><a href="/login.php" class='hlink'>Login</a></li>
                     <?php else : ?>
-                        <li class='log'><a href="/view/logout.php" class='hlink'>Logout</a></li>
+                        <li class='log'><a href="/logout.php" class='hlink'>Logout</a></li>
                     <?php endif; ?>
                     <li class='account_img'>
-                        <a href="/view/mypage.php">
+                        <a href="/mypage.php">
                             <?php if ($uid) { ?>
                                 <?php if ($item['account_img'] === null) : ?>
                                     <img src="/public/images/account3.png" class='aimg' alt="">
@@ -115,7 +115,7 @@ if ($status == false) {
 
 
         <div class='link1'>
-            <h1><a href="/view/shops.php"><span class='underbar topTitle'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
+            <h1><a href="/shops.php"><span class='underbar topTitle'>&nbsp;&nbsp;&nbsp;Check Shops→&nbsp;&nbsp;</span></a></h1>
         </div>
 
         <div class='title3'>
@@ -154,7 +154,7 @@ if ($status == false) {
         </footer>
     </div>
     <!-- フッターナビ -->
-    <?php include('view/common/footer.html') ?>
+    <?php include('common/footer.html') ?>
 
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

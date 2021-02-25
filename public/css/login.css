@@ -38,7 +38,7 @@ header{
 grid-area:loginimg;
 background: rgba(18, 100, 163, 0.3);
 
-background-image: url(/images/loginimg1.jpg);
+background-image: url(/public/images/loginimg1.jpg);
 background-size: cover;
 
 }

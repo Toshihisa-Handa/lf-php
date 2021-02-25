@@ -64,7 +64,7 @@ if (!$_POST) {
     exit("SQLError:" . $error[2]);
   } else {
 
-    header("Location: /view/flower.php/? id=$id");
+    header("Location: /flower.php/? id=$id");
     exit();
   }
 }
