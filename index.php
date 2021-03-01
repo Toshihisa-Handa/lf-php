@@ -1,13 +1,12 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include('app/config.php');
+include('funcs.php');
 $uid = $_SESSION['uid'];
 $name = $_SESSION['name'];
 
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 
@@ -38,8 +37,11 @@ if ($status == false) {
     <div class="grid-box">
         <header>
             <ul>
-                <li><a href="/index.php"><img src="/public/images/lf-logo-gray.png" alt="" class='logo'></a></li>
-                <?php include('common/header-nav.html') ?>
+                <li><a href="/index.php"><img src="/images/lf-logo-gray.png" alt="" class='logo'></a></li>
+                <li class='hnav'><a href="/map/" class='hlink'>Map</a></li>
+                <li class='hnav'><a href="/shops/" class='hlink'>Shop</a></li>
+                <li class='hnav'><a href="/diarys/" class='hlink'>Diary</a></li>
+                <li class='hnav'><a href="/flowers/" class='hlink'>Flower</a></li>
                 <div class='nav-right'>
                     <li>
                         <div id='search'>検索</div>
@@ -53,9 +55,9 @@ if ($status == false) {
                         <a href="/mypage/">
                             <?php if ($uid) { ?>
                                 <?php if ($item['account_img'] === null) : ?>
-                                    <img src="/public/images/account3.png" class='aimg' alt="">
+                                    <img src="/images/account3.png" class='aimg' alt="">
                                 <?php else : ?>
-                                    <img src="/public/upload/<?= $item['account_img']; ?>" class='aimg' alt="">
+                                    <img src="/upload/<?= $item['account_img']; ?>" class='aimg' alt="">
                                 <?php endif; ?>
                             <?php } ?>
                         </a>
@@ -89,7 +91,7 @@ if ($status == false) {
     <div class="glid-box2">
 
         <div class='img1'>
-            <img src="./public/images/images/1-1.png" alt="">
+            <img src="./images/images/1-1.png" alt="">
         </div>
 
         <div class='title2'>
@@ -109,7 +111,7 @@ if ($status == false) {
 
 
         <div class='img2'>
-            <img src="/public/images/img2.png" alt="">
+            <img src="/images/img2.png" alt="">
 
         </div>
 
@@ -127,7 +129,7 @@ if ($status == false) {
     <div class="glid-box3">
 
         <div class='left1'>
-            <img src="/public/images/topimg6.png" alt="">
+            <img src="/images/topimg6.png" alt="">
         </div>
 
         <div class="right1">
@@ -143,7 +145,7 @@ if ($status == false) {
         </div>
 
         <div class="right2">
-            <img src="/public/images/topimg5.jpg" alt="">
+            <img src="/images/topimg5.jpg" alt="">
         </div>
 
 

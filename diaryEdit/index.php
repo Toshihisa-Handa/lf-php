@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $id = $_GET['id'];
@@ -36,7 +35,7 @@ include('../common/favicon.html')
 <title>日記編集</title>
 </head>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/diaryEdit.css">
+<link rel="stylesheet" href="/css/diaryEdit.css">
 
 <body>
   <div class="grid-box">

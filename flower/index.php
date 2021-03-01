@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $name = $_POST['name'];
@@ -51,7 +50,7 @@ if (!$_POST) {
   $sql = 'INSERT INTO fcomment (flower_id, fcomment, created_at, user_id) VALUES (:flower_id,:fcomment,sysdate(),:uid)';
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':flower_id', $id, PDO::PARAM_INT);
-  $stmt->bindValue(':fcomment', Utils::h($fcomment), PDO::PARAM_STR);
+  $stmt->bindValue(':fcomment', h($fcomment), PDO::PARAM_STR);
   if ($uid == null) {
     $stmt->bindValue(':uid', 0, PDO::PARAM_INT);
   } else {
@@ -74,7 +73,7 @@ if (!$_POST) {
 <?php include('../common/favicon.html') ?>
 <title>花詳細</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/flower.css">
+<link rel="stylesheet" href="/css/flower.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 <script src="https://js.stripe.com/v3/"></script>
 </head>
@@ -97,7 +96,7 @@ if (!$_POST) {
     <div class="container">
       <main class="main">
         <!-- メインコンテンツ -->
-        <div><img src="/public/upload/<?= $item['image']; ?>" alt="" class='diaryImg'></div>
+        <div><img src="/upload/<?= $item['image']; ?>" alt="" class='diaryImg'></div>
         <h3 class='dfont'><?= $item['name'] ?></h3>
         <p class='dfont2'>店舗：<?= $item['shopname'] ?></p>
         <p class='dfont2'>価格：<?= number_format($item['price']) ?>円（税込）</p>

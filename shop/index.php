@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //DBs接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
@@ -36,12 +35,12 @@ $floweritems = $stmt->fetchAll();
 <?php include('../common/favicon.html') ?>
 <title>店舗</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/shop.css">
-<link rel="stylesheet" href="/public/css/Rshop.css">
+<link rel="stylesheet" href="/css/shop.css">
+<link rel="stylesheet" href="/css/Rshop.css">
 
 <!-- glide.jsの読み込み -->
-<link rel="stylesheet" href="/public/css/glide.core.min.css">
-<link rel="stylesheet" href="/public/css/glide.theme.min.css">
+<link rel="stylesheet" href="/css/glide.core.min.css">
+<link rel="stylesheet" href="/css/glide.theme.min.css">
 </head>
 
 <body>
@@ -54,7 +53,7 @@ $floweritems = $stmt->fetchAll();
         </div>
       </ul>
     </header>
-    <div class='main' style='background-image: url(/public/upload/<?= $item['shop_img'] ?>)'>
+    <div class='main' style='background-image: url(/upload/<?= $item['shop_img'] ?>)'>
       <p class='mainTitle'><span class='mainspan1'>&nbsp;<?= $item['name'] ?> &nbsp;</span></p>
       <p class='mainSubtitle'><span class='mainspan2'>&nbsp;<?= $item['title'] ?>&nbsp;</span></p>
     </div>
@@ -69,7 +68,7 @@ $floweritems = $stmt->fetchAll();
   </div>
   <div class="img-glid">
     <div class='img1'>
-      <img src="/public/upload/<?= $item['img1'] ?>" alt="">
+      <img src="/upload/<?= $item['img1'] ?>" alt="">
     </div>
   </div>
   <div class="flower-glid">
@@ -87,7 +86,7 @@ $floweritems = $stmt->fetchAll();
                 <div class="glide__slide">
                   <div class="flower-box">
                     <a href="/flower/? id=<?= $fitem['id'] ?>">
-                      <div class="flower"><img src="/public/upload/<?= $fitem['image'] ?>" alt=""></div>
+                      <div class="flower"><img src="/upload/<?= $fitem['image'] ?>" alt=""></div>
                       <h3 class='fname'><?= $fitem['name'] ?></h3>
                       <p class='fprice'><?= number_format($fitem['price']) ?>円（税込）</p>
                       <p class='ffeature'><?= $fitem['feature'] ?></p>
@@ -118,7 +117,7 @@ $floweritems = $stmt->fetchAll();
                 <div class="glide__slide">
                   <div class="diary-box">
                     <a href="/diary/? id=<?= $ditem['id'] ?>">
-                      <div class="diary"><img src="/public/upload/<?= $ditem['image'] ?>" alt=""></div>
+                      <div class="diary"><img src="/upload/<?= $ditem['image'] ?>" alt=""></div>
                       <div class='dtitle'><?= $ditem['title'] ?></div>
                       <div class='dtext'><?= $ditem['text'] ?></div>
                     </a>
@@ -154,7 +153,7 @@ $floweritems = $stmt->fetchAll();
   <div class="map-glid">
     <div class="img3">
       <div class="imgBox">
-        <img src="/public/upload/<?= $item['img2'] ?>" alt="">
+        <img src="/upload/<?= $item['img2'] ?>" alt="">
       </div>
     </div>
     <div class="access">

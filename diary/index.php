@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $title = $_POST['title'];
@@ -41,7 +40,7 @@ if (!$_POST) {
   $sql = 'INSERT INTO dcomment (diary_id, dcomment, created_at, user_id) VALUES (:diary_id,:dcomment,sysdate(),:uid)';
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':diary_id', $id, PDO::PARAM_INT);
-  $stmt->bindValue(':dcomment', Utils::h($dcomment), PDO::PARAM_STR);
+  $stmt->bindValue(':dcomment', h($dcomment), PDO::PARAM_STR);
   $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
   $status = $stmt->execute();
 
@@ -59,7 +58,7 @@ if (!$_POST) {
 <?php include('../common/favicon.html') ?>
 <title>日記詳細</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/diary.css">
+<link rel="stylesheet" href="/css/diary.css">
 </head>
 
 <body>
@@ -80,7 +79,7 @@ if (!$_POST) {
     <div class="container">
       <main class="main">
         <!-- メインコンテンツ -->
-        <div><img class='diaryImg' src="/public/upload/<?= $item['image']; ?>"></div>
+        <div><img class='diaryImg' src="/upload/<?= $item['image']; ?>"></div>
         <h2 class='dfont'><?= $item['title'] ?></h2>
         <p class='diaryText dfont2'><?= $item['text'] ?></p>
         <div id='cbtn'><span class='btnClick'></span>コメント（<?= count($commentitems) ?>）</div>

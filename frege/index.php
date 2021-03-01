@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 $name = $_POST['name'];
 $price = $_POST['price'];
@@ -14,6 +13,23 @@ $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 include('../common/header-icon.php');
+
+
+//削除
+if ($_POST['delete_id']) {
+  $delete_id = $_POST['delete_id'];
+
+  //データ登録SQL作成
+  $sql = 'DELETE FROM flower WHERE id=:id';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':id', $delete_id, PDO::PARAM_INT); //ここの：idは3-1の:idと同じ
+  $status = $stmt->execute(); //このexecuteで上で処理した内容を実行している
+
+  //データ登録処理後
+  redirectCheck('/frege/');
+}
+
+
 
 //画像処理
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -39,12 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     //データ登録SQL作成
     $stmt = $pdo->prepare("INSERT INTO flower(name, price, feature, tag, text, created_at, user_id, image)VALUES(:name,:price,:feature,:tag,:text,sysdate(),:uid,:imgname);
   ");
-    $stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
-    $stmt->bindValue(':price', Utils::h($price), PDO::PARAM_INT);
-    $stmt->bindValue(':feature', Utils::h($feature), PDO::PARAM_STR);
-    $stmt->bindValue(':tag', Utils::h($tag), PDO::PARAM_STR);
-    $stmt->bindValue(':text', Utils::h($text), PDO::PARAM_STR);
-    $stmt->bindValue(':imgname', Utils::h($imgname), PDO::PARAM_STR);
+    $stmt->bindValue(':name', h($name), PDO::PARAM_STR);
+    $stmt->bindValue(':price', h($price), PDO::PARAM_INT);
+    $stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);
+    $stmt->bindValue(':tag', h($tag), PDO::PARAM_STR);
+    $stmt->bindValue(':text', h($text), PDO::PARAM_STR);
+    $stmt->bindValue(':imgname', h($imgname), PDO::PARAM_STR);
     $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
     $status = $stmt->execute();
 
@@ -67,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 <?php include('../common/favicon.html') ?>
 <title>花登録</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/frege.css">
+<link rel="stylesheet" href="/css/frege.css">
 </head>
 
 <body>
@@ -120,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           <div class="fcard">
             <div class='flower-card'>
               <a href="/flower/? id=<?= $images[$i]['id']; ?>">
-                <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
+                <img src="/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['name']; ?></h3>
                 <div class='fprice'><?= number_format($images[$i]['price']); ?>円（税別）</div>
                 <div class='ffeature'><?= $images[$i]['feature']; ?></div>
@@ -129,7 +145,10 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             </div>
             <div class="option">
               <div class="update"><a href="/flowerEdit/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-              <div class="delete"><a href="/action/flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
+              <form method="POST">
+                <input type="hidden" name='delete_id' value="<?= $images[$i]['id']; ?>">
+                <input type="submit" value='削除'>
+              </form>
             </div>
           </div>
         <?php endfor; ?>

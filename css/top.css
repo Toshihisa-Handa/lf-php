@@ -26,7 +26,7 @@ header{
 .main{
     grid-area:main;
     /* background: rgb(155, 153, 153); */
-    background-image: url(/public/images/top0.jpg);
+    background-image: url(/images/top0.jpg);
     background-size: cover;
     background-position:center; 
 

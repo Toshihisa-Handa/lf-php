@@ -3,7 +3,7 @@ session_start();
 include('../common/favicon.html')
 ?>
 <title>ログインエラー</title>
-<link rel="stylesheet" href="/public/css/stripe.css">
+<link rel="stylesheet" href="/css/stripe.css">
 </head>
 
 <body>

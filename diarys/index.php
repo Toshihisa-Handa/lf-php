@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
@@ -43,7 +42,7 @@ if (!$_GET) {
 <?php include('../common/favicon.html') ?>
 <title>日記一覧</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/diarys.css">
+<link rel="stylesheet" href="/css/diarys.css">
 </head>
 
 <body>
@@ -62,7 +61,7 @@ if (!$_GET) {
       </ul>
     </header>
     <div class="img1">
-      <img src="/public/images/diaryimg2.png" alt="">
+      <img src="/images/diaryimg2.png" alt="">
     </div>
     <div class="title1">
       <h1 class='topTitle'>Diary List</h1>
@@ -75,7 +74,7 @@ if (!$_GET) {
           <div class="dcard">
             <div class='diary-card'>
               <a href="/diary.php/? id=<?= $item['id']; ?>">
-                <img src="/public/upload/<?= $item['image']; ?>" alt="">
+                <img src="/upload/<?= $item['image']; ?>" alt="">
                 <h3><?= $item['title']; ?></h3>
                 <p class='dtext'><?= $item['text']; ?></p>
               </a>

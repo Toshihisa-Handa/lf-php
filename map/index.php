@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
@@ -63,7 +62,7 @@ $items = $stmt->fetchAll();
     <?php include('../common/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
     <script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AmJSmi0DfSGMPQNbHQ7GSRPBRvWKZHpsv13mLTVUyr-EEQpqyk2I-d4tHVYiGw88' async defer></script>
-    <script src="/public/js/BmapQuery.js"></script>
+    <script src="/map/BmapQuery.js"></script>
     <script>
         //init
         function GetMap() {
@@ -95,7 +94,7 @@ $items = $stmt->fetchAll();
                         "pinColor": "<?= $item['pincolor'] ?>",
                         "height": 220,
                         "width": 200,
-                        "description": '<a href="/shop/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
+                        "description": '<a href="/shop/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/upload/<?= $item['shop_img'] ?>" width="180"></a>',
                         "show": false
                     };
                     i++

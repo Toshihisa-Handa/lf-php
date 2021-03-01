@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //loginCheck()
 
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
@@ -16,7 +15,7 @@ include('../common/header-icon.php');
 <?php include('../common/favicon.html') ?>
 <title>マイページ</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/mypage.css">
+<link rel="stylesheet" href="/css/mypage.css">
 </head>
 
 <body>

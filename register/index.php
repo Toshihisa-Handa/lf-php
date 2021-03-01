@@ -1,12 +1,11 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 unset($_SESSION['chk_regi']); //登録セッションの初期化
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 
@@ -39,8 +38,8 @@ if (!empty($_POST)) {
   if (empty($errors)) {
     $sql = "INSERT INTO user(name, email, password, created_at)VALUES(:name,:email,:password,sysdate())";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
-    $stmt->bindValue(':email', Utils::h($email), PDO::PARAM_STR);
+    $stmt->bindValue(':name', h($name), PDO::PARAM_STR);
+    $stmt->bindValue(':email', h($email), PDO::PARAM_STR);
     $stmt->bindValue(':password', $hash, PDO::PARAM_STR);
     $status = $stmt->execute();
     $id = $pdo->lastInsertId();
@@ -72,7 +71,7 @@ if (!empty($_POST)) {
 <?php include('../common/favicon.html') ?>
 <title>新規登録</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/login.css">
+<link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -93,7 +92,7 @@ if (!empty($_POST)) {
     </div>
     <div class="loginList2">
       <div class='login-card'>
-        <form  method="post" class="board-form">
+        <form method="post" class="board-form">
           <span class="label ">User Name</span><input type="text" name="name" class="input linput2" placeholder="日本語、アルファベット対応" required value='<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : ''; ?>'>
           <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
           <br>

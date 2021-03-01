@@ -1,12 +1,11 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $title = $_POST['title'];
@@ -29,7 +28,7 @@ $item = $stmt->fetch();
 <?php include('../common/favicon.html') ?>
 <title>マップ情報</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/mapinfo.css">
+<link rel="stylesheet" href="/css/mapinfo.css">
 </head>
 
 <body>
@@ -46,7 +45,7 @@ $item = $stmt->fetch();
       <h2>マップ情報</h2>
       <div class='inframe'>
         <div>表示画像</div>
-        <div class='inputs'> <img src="/public/upload/<?= $item['account_img']; ?>" class='mapimg' alt=""></div><br>
+        <div class='inputs'> <img src="/upload/<?= $item['account_img']; ?>" class='mapimg' alt=""></div><br>
       </div>
       <div class='inframe'>
         <div>　　緯度</div>

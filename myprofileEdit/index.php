@@ -1,12 +1,11 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
@@ -21,7 +20,7 @@ if ($_FILES) {
     if ($_FILES['account_img']['name']) {
 
         $account_img = date("Ymd") . random_int(1, 999999) . $_FILES['account_img']['name']; //ここのnameはアップロードされたファイルのファイル名
-        $save1 = '../public/upload/' . basename($account_img);
+        $save1 = '../upload/' . basename($account_img);
         move_uploaded_file($_FILES['account_img']['tmp_name'], $save1);
         $sql = "UPDATE shop SET account_img=:account_img WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
@@ -32,7 +31,7 @@ if ($_FILES) {
     //shop_img
     if ($_FILES['shop_img']['name']) {
         $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name'];
-        $save2 = '../public/upload/' . basename($shop_img); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+        $save2 = '../upload/' . basename($shop_img); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         move_uploaded_file($_FILES['shop_img']['tmp_name'], $save2);
         $sql = "UPDATE shop SET shop_img=:shop_img WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
@@ -43,7 +42,7 @@ if ($_FILES) {
     //img1
     if ($_FILES['img1']['name']) {
         $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
-        $save3 = '../public/upload/' . basename($img1); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+        $save3 = '../upload/' . basename($img1); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         move_uploaded_file($_FILES['img1']['tmp_name'], $save3);
         $sql = "UPDATE shop SET img1=:img1 WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
@@ -54,7 +53,7 @@ if ($_FILES) {
     //img2
     if ($_FILES['img2']['name']) {
         $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name'];
-        $save4 = '../public/upload/' . basename($img2); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+        $save4 = '../upload/' . basename($img2); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         move_uploaded_file($_FILES['img2']['tmp_name'], $save4);
         $sql = "UPDATE shop SET img2=:img2 WHERE user_id=:uid";
         $stmt = $pdo->prepare($sql);
@@ -95,7 +94,7 @@ if ($status == false) {
 <?php include('../common/favicon.html') ?>
 <title>店舗情報編集</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/myprofileEdit.css">
+<link rel="stylesheet" href="/css/myprofileEdit.css">
 </head>
 
 <body>
@@ -228,7 +227,7 @@ if ($status == false) {
         <div class="line"></div>
         <div class="main2">
             <h2>画像情報編集</h2>
-            <img class='formimg' src="/public/upload/<?= $item["account_img"] ?>" alt="">
+            <img class='formimg' src="/upload/<?= $item["account_img"] ?>" alt="">
             <form class='editform' method="post" enctype="multipart/form-data">
                 <div id='attachment'>
                     <label>
@@ -238,7 +237,7 @@ if ($status == false) {
                 </div><br>
                 <input class='sends' type="submit" value="送信">
             </form>
-            <img class='formimg' src="/public/upload/<?= $item["shop_img"] ?>" alt="">
+            <img class='formimg' src="/upload/<?= $item["shop_img"] ?>" alt="">
             <form class='editform' method="post" enctype="multipart/form-data">
                 <div id='attachment'>
                     <label>
@@ -248,7 +247,7 @@ if ($status == false) {
                 </div><br>
                 <input class='sends' type="submit" value="送信">
             </form>
-            <img class='formimg' src="/public/upload/<?= $item["img1"] ?>" alt="">
+            <img class='formimg' src="/upload/<?= $item["img1"] ?>" alt="">
             <form class='editform' method="post" enctype="multipart/form-data">
                 <div id='attachment'>
                     <label>
@@ -258,7 +257,7 @@ if ($status == false) {
                 </div><br>
                 <input class='sends' type="submit" value="送信">
             </form>
-            <img class='formimg' src="/public/upload/<?= $item["img2"] ?>" alt="">
+            <img class='formimg' src="/upload/<?= $item["img2"] ?>" alt="">
             <form class='editform' method="post" enctype="multipart/form-data">
                 <div id='attachment'>
                     <label>

@@ -7,9 +7,9 @@
     <a href="/mypage/">
         <?php if ($uid) { ?>
             <?php if ($aimg === null) : ?>
-                <img src="/public/images/account3.png" class='aimg' alt="">
+                <img src="/images/account3.png" class='aimg' alt="">
             <?php else : ?>
-                <img src="/public/upload/<?= $aimg; ?>" class='aimg' alt="">
+                <img src="/upload/<?= $aimg; ?>" class='aimg' alt="">
             <?php endif; ?>
         <?php } ?>
     </a>

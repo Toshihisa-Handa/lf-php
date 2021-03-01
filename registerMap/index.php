@@ -1,7 +1,6 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //regiCheck();
 
@@ -14,7 +13,7 @@ $description = $_POST['description'];
 
 if ($_POST) {
   //db接続
-  $pdo = Database::dbcon();
+  $pdo = dbcon();
 
 
   docFilter($maptitle, 'maptitle');
@@ -22,10 +21,10 @@ if ($_POST) {
   if (empty($errors)) { //$errorsが空の時
     //sql作成
     $stmt = $pdo->prepare("INSERT INTO map(lat,lon,maptitle,description,created_at,user_id)VALUES(:lat,:lon,:maptitle,:description,sysdate(),:user_id)");
-    $stmt->bindValue(':lat', Utils::h($lat), PDO::PARAM_INT);
-    $stmt->bindValue(':lon', Utils::h($lon), PDO::PARAM_INT);
-    $stmt->bindValue(':maptitle', Utils::h($maptitle), PDO::PARAM_STR);
-    $stmt->bindValue(':description', Utils::h($description), PDO::PARAM_STR);
+    $stmt->bindValue(':lat', h($lat), PDO::PARAM_INT);
+    $stmt->bindValue(':lon', h($lon), PDO::PARAM_INT);
+    $stmt->bindValue(':maptitle', h($maptitle), PDO::PARAM_STR);
+    $stmt->bindValue(':description', h($description), PDO::PARAM_STR);
     $stmt->bindValue(':user_id', $uid, PDO::PARAM_INT);
     $status = $stmt->execute();
 
@@ -47,7 +46,7 @@ if ($_POST) {
 <?php include('../common/favicon.html') ?>
 <title>マップ情報編集</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/mapEdit.css">
+<link rel="stylesheet" href="/css/mapEdit.css">
 </head>
 
 <body>

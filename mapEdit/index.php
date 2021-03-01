@@ -1,13 +1,12 @@
 <?php
 
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $id = $_GET['id'];
@@ -29,7 +28,6 @@ if (!$_POST) {
   $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
   $status = $stmt->execute();
   $item = $stmt->fetch();
-  
 } else {
 
   //バリデーション
@@ -41,10 +39,10 @@ if (!$_POST) {
 
     $sql = 'UPDATE map SET lat=:lat,lon=:lon,maptitle=:maptitle,description=:description WHERE id=:id';
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':lat', Utils::h($lat), PDO::PARAM_INT);
-    $stmt->bindValue(':lon', Utils::h($lon), PDO::PARAM_INT);
-    $stmt->bindValue(':maptitle', Utils::h($maptitle), PDO::PARAM_STR);
-    $stmt->bindValue(':description', Utils::h($description), PDO::PARAM_STR);
+    $stmt->bindValue(':lat', h($lat), PDO::PARAM_INT);
+    $stmt->bindValue(':lon', h($lon), PDO::PARAM_INT);
+    $stmt->bindValue(':maptitle', h($maptitle), PDO::PARAM_STR);
+    $stmt->bindValue(':description', h($description), PDO::PARAM_STR);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $status = $stmt->execute();
 
@@ -53,12 +51,12 @@ if (!$_POST) {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
-//           echo $lat;
-//           echo $id;
-//     echo $lon;
-//     echo $maptitle;
-//     echo $description;
-//  return;
+      //           echo $lat;
+      //           echo $id;
+      //     echo $lon;
+      //     echo $maptitle;
+      //     echo $description;
+      //  return;
       header('Location: /mapinfo/');
       exit();
     }
@@ -70,7 +68,7 @@ if (!$_POST) {
 <?php include('../common/favicon.html') ?>
 <title>マップ情報編集</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/mapEdit.css">
+<link rel="stylesheet" href="/css/mapEdit.css">
 </head>
 
 <body>
@@ -109,7 +107,7 @@ if (!$_POST) {
       <p><a href="/drege/">日記の登録</a></p>
       <p><a href="/mapinfo/">マップ情報</a></p>
       <p>
-      <!-- <h2>住所変換</h2><button id='exec'>変換</button>
+        <!-- <h2>住所変換</h2><button id='exec'>変換</button>
       </p>
       <p id='lat' value='<?= $item['lat'] ?>'><?= $item['lat'] ?></p>
       <p id='lon' value='<?= $item['lon'] ?>'><?= $item['lon'] ?></p> -->

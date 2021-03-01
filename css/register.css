@@ -36,7 +36,7 @@ header{
   grid-area:loginimg;
   background: rgba(18, 100, 163, 0.3);
 
-  background-image: url(/public/images/registerimg2.png);
+  background-image: url(/images/registerimg2.png);
   background-size: cover;
 
 }

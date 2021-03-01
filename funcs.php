@@ -1,8 +1,20 @@
 <?php
 //共通に使う関数を記述
+function h($str)
+{
+  return htmlspecialchars($str, ENT_QUOTES);
+}
 
-
-
+function dbcon()
+{
+  try {
+    $pdo = new PDO('mysql:host=localhost;dbname=lf', 'root', 'root');
+  } catch (PDOException $e) {
+    print "エラー！" . $e->getMessage() . "<br/>";
+    exit('終了します');
+  }
+  return $pdo;
+}
 
 //手打ち入力でログイン後のページにログインせずに行ってもエラーになるようにしている） 
 function regiCheck()
@@ -24,16 +36,7 @@ function loginCheck()
   }
 }
 
-function test()
-{
-  global $errors;
-  return $errors['name'] = 'ttthogte';
-}
-function test2()
-{
-  global $errors;
-  return $errors['email'] = 'emai';
-}
+
 
 function docFilter($a, $b)
 {
@@ -77,7 +80,7 @@ function filein($imgname)
   $imgname = date("Ymd") . random_int(1, 999999) . $_FILES['image']['name']; //ここのnameはアップロードされたファイルのファイル名
 
   //指定フォルダに画像を保存
-  $save = '../public/upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
+  $save = '../upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
   move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
   return $imgname;
 }

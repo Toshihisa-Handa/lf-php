@@ -1,12 +1,11 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $id = $_GET['id'];
@@ -33,7 +32,7 @@ if ($status == false) {
 <title>花編集</title>
 </head>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/flowerEdit.css">
+<link rel="stylesheet" href="/css/flowerEdit.css">
 
 <body>
   <div class="grid-box">

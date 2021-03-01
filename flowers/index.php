@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
@@ -46,7 +45,7 @@ if (!$_GET) {
 <?php include('../common/favicon.html'); ?>
 <title>花一覧</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/flowers.css">
+<link rel="stylesheet" href="/css/flowers.css">
 </head>
 
 <body>
@@ -65,7 +64,7 @@ if (!$_GET) {
       </ul>
     </header>
     <div class="img1">
-      <img src="/public/images/flowerimg2.png" alt="">
+      <img src="/images/flowerimg2.png" alt="">
     </div>
     <div class="title1">
       <h1 class='topTitle'>Flower List </h1>
@@ -78,7 +77,7 @@ if (!$_GET) {
           <div class="fcard">
             <div class='flower-card'>
               <a href="flower.php/? id=<?= $item['id']; ?>">
-                <img src="/public/upload/<?= $item['image']; ?>" alt="">
+                <img src="/upload/<?= $item['image']; ?>" alt="">
                 <h3 class='fsname'><?= $item['name']; ?></h3>
                 <div class='fprice'><?= number_format($item['price']); ?>円（税込）</div>
                 <div class='ffeature'><?= $item['feature']; ?></div>

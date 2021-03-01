@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 $uid = $_SESSION['uid'];
 $title = $_POST['title'];
@@ -41,7 +40,7 @@ if (!$_GET) {
 <?php include('../common/favicon.html') ?>
 <title>店舗一覧</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/shops.css">
+<link rel="stylesheet" href="/css/shops.css">
 </head>
 
 <body>
@@ -60,7 +59,7 @@ if (!$_GET) {
       </ul>
     </header>
     <div class="img1">
-      <img src="/public/images/shopsimg1.png" alt="">
+      <img src="/images/shopsimg1.png" alt="">
     </div>
     <div class="title1">
       <div class='topTitle'>Shop List</div>
@@ -72,7 +71,7 @@ if (!$_GET) {
         <?php foreach ($items as $item) : ?>
           <div class="shop-card">
             <a href="/shop/? id=<?= $item['id']; ?>">
-              <img src="/public/upload/<?= $item['shop_img']; ?>" alt="">
+              <img src="/upload/<?= $item['shop_img']; ?>" alt="">
               <div class='shopTitle'><?= $item['name'] ?></div>
               <div class='shopSub'>営業時間：<?= $item['open'] ?>~<?= $item['close'] ?></div>
               <div class='shopSub'>休業日：<?= $item['holiday'] ?></div>

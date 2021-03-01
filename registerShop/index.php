@@ -1,7 +1,6 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 regiCheck();
 
@@ -29,7 +28,7 @@ $uname = $_SESSION['uname'];
 
 if ($_POST) {
     //DB接続
-    $pdo = Database::dbcon();
+    $pdo = dbcon();
 
 
     //バリデーション処理
@@ -88,20 +87,20 @@ if ($_POST) {
         //データ登録SQL作成
         $stmt = $pdo->prepare("INSERT INTO shop(user_id,name,title,account_name,web,email,tell,open,close,holiday,location,map,message,comment,created_at,feature)VALUES(:uid,:name,:title,:account_name,:web,:email,:tell,:open,:close,:holiday,:location,:map,:message,:comment,sysdate(),:feature)");
         $stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
-        $stmt->bindValue(':name', Utils::h($name), PDO::PARAM_STR);
-        $stmt->bindValue(':title', Utils::h($title), PDO::PARAM_STR);
-        $stmt->bindValue(':account_name', Utils::h($account_name), PDO::PARAM_STR);
-        $stmt->bindValue(':web', Utils::h($web), PDO::PARAM_STR);
-        $stmt->bindValue(':email', Utils::h($email), PDO::PARAM_STR);
-        $stmt->bindValue(':tell', Utils::h($tell), PDO::PARAM_INT);
-        $stmt->bindValue(':open', Utils::h($open), PDO::PARAM_STR);
-        $stmt->bindValue(':close', Utils::h($close), PDO::PARAM_STR);
-        $stmt->bindValue(':holiday', Utils::h($holiday), PDO::PARAM_STR);
-        $stmt->bindValue(':location', Utils::h($location), PDO::PARAM_STR);
+        $stmt->bindValue(':name', h($name), PDO::PARAM_STR);
+        $stmt->bindValue(':title', h($title), PDO::PARAM_STR);
+        $stmt->bindValue(':account_name', h($account_name), PDO::PARAM_STR);
+        $stmt->bindValue(':web', h($web), PDO::PARAM_STR);
+        $stmt->bindValue(':email', h($email), PDO::PARAM_STR);
+        $stmt->bindValue(':tell', h($tell), PDO::PARAM_INT);
+        $stmt->bindValue(':open', h($open), PDO::PARAM_STR);
+        $stmt->bindValue(':close', h($close), PDO::PARAM_STR);
+        $stmt->bindValue(':holiday', h($holiday), PDO::PARAM_STR);
+        $stmt->bindValue(':location', h($location), PDO::PARAM_STR);
         $stmt->bindValue(':map', $map, PDO::PARAM_STR);
-        $stmt->bindValue(':message', Utils::h($message), PDO::PARAM_STR);
-        $stmt->bindValue(':comment', Utils::h($comment), PDO::PARAM_STR);
-        $stmt->bindValue(':feature', Utils::h($feature), PDO::PARAM_STR);
+        $stmt->bindValue(':message', h($message), PDO::PARAM_STR);
+        $stmt->bindValue(':comment', h($comment), PDO::PARAM_STR);
+        $stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);
         $status = $stmt->execute();
         //====================================================================
 
@@ -122,7 +121,7 @@ if ($_POST) {
 <?php include('../common/favicon.html'); ?>
 <title>店舗情報編集</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/myprofileEdit.css">
+<link rel="stylesheet" href="/css/myprofileEdit.css">
 </head>
 
 <body>

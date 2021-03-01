@@ -1,12 +1,11 @@
 <?php
 session_start();
-include('../app/funcs/funcs.php');
-include(__DIR__ . '/../app/config.php');
+include('../funcs.php');
 
 //loginCheck()
 
 //DB接続
-$pdo = Database::dbcon();
+$pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
@@ -30,7 +29,7 @@ if ($status == false) {
 <?php include('../common/favicon.html'); ?>
 <title>登録情報</title>
 <?php include('../common/style.html') ?>
-<link rel="stylesheet" href="/public/css/myprofile.css">
+<link rel="stylesheet" href="/css/myprofile.css">
 </head>
 
 <body>
@@ -47,9 +46,9 @@ if ($status == false) {
       <?php foreach ($items as $item) : ?>
         <div class='pimg'>
           <?php if ($aimg == null) : ?>
-            <div class='pbox1'><img src="/public/images/account3.png" alt=""></div>
+            <div class='pbox1'><img src="/images/account3.png" alt=""></div>
           <?php else : ?>
-            <div class='pbox1'><img src="/public/upload/<?= $aimg; ?>" alt=""></div>
+            <div class='pbox1'><img src="/upload/<?= $aimg; ?>" alt=""></div>
           <?php endif; ?>
           <div class="pbox2">
             <div class='shopname'><?= $item['name']; ?></div>
@@ -69,15 +68,15 @@ if ($status == false) {
       <div class="imgs">
         <div class="img1">
           <p>メイン画像</p>
-          <img src="/public/upload/<?= $item['shop_img']; ?>" alt="">
+          <img src="/upload/<?= $item['shop_img']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真①</p>
-          <img src="/public/upload/<?= $item['img1']; ?>" alt="">
+          <img src="/upload/<?= $item['img1']; ?>" alt="">
         </div>
         <div class="img1">
           <p>店舗写真②</p>
-          <img src="/public/upload/<?= $item['img2']; ?>" alt="">
+          <img src="/upload/<?= $item['img2']; ?>" alt="">
         </div>
       </div>
       <h3>店舗タイトル：<br>&nbsp;<?= $item['message']; ?></h3>
