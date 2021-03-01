@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //DBs接続
 $pdo = Database::dbcon();
@@ -9,7 +9,7 @@ $pdo = Database::dbcon();
 
 $uid = $_SESSION['uid'];
 $id = $_GET['id'];
-include('common/header-icon.php');
+include('../common/header-icon.php');
 
 //データ登録SQL作成(3種類)
 //1
@@ -33,9 +33,9 @@ $floweritems = $stmt->fetchAll();
 ?>
 
 
-<?php include('common/favicon.html') ?>
+<?php include('../common/favicon.html') ?>
 <title>店舗</title>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/shop.css">
 <link rel="stylesheet" href="/public/css/Rshop.css">
 
@@ -48,9 +48,9 @@ $floweritems = $stmt->fetchAll();
   <div class="main-glid">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('common/header-nav-rightIcon.php') ?>
+          <?php include('../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -86,7 +86,7 @@ $floweritems = $stmt->fetchAll();
               <?php foreach ($floweritems as $fitem) : ?>
                 <div class="glide__slide">
                   <div class="flower-box">
-                    <a href="/flower.php/? id=<?= $fitem['id'] ?>">
+                    <a href="/flower/? id=<?= $fitem['id'] ?>">
                       <div class="flower"><img src="/public/upload/<?= $fitem['image'] ?>" alt=""></div>
                       <h3 class='fname'><?= $fitem['name'] ?></h3>
                       <p class='fprice'><?= number_format($fitem['price']) ?>円（税込）</p>
@@ -117,7 +117,7 @@ $floweritems = $stmt->fetchAll();
               <?php foreach ($diaryitems as $ditem) : ?>
                 <div class="glide__slide">
                   <div class="diary-box">
-                    <a href="/diary.php/? id=<?= $ditem['id'] ?>">
+                    <a href="/diary/? id=<?= $ditem['id'] ?>">
                       <div class="diary"><img src="/public/upload/<?= $ditem['image'] ?>" alt=""></div>
                       <div class='dtitle'><?= $ditem['title'] ?></div>
                       <div class='dtext'><?= $ditem['text'] ?></div>
@@ -176,7 +176,7 @@ $floweritems = $stmt->fetchAll();
       <h3 class='StopsubTitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?> -->
+    <?php include('../common/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

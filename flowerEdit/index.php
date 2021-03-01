@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -11,7 +11,7 @@ $pdo = Database::dbcon();
 
 $id = $_GET['id'];
 $uid = $_SESSION['uid'];
-include('common/header-icon.php');
+include('../common/header-icon.php');
 
 //sql作成
 $sql = "SELECT * FROM flower WHERE id=:id";
@@ -29,25 +29,25 @@ if ($status == false) {
 }
 ?>
 
-<?php include('common/favicon.html') ?>
+<?php include('../common/favicon.html') ?>
 <title>花編集</title>
 </head>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/flowerEdit.css">
 
 <body>
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('common/header-nav-rightIcon.php') ?>
+          <?php include('../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
     <div class="main">
       <h2>花編集</h2>
-      <form action='/flowerEditUpdate.php' method="post">
+      <form action='/action/flowerEditUpdate.php' method="post">
         <div class='inframe'>
           <div>　　品名</div><input class='inputs' type="text" name="name" value='<?= $item["name"] ?>'><br>
         </div>
@@ -82,7 +82,7 @@ if ($status == false) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

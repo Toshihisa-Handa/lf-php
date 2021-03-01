@@ -1,6 +1,6 @@
 <?php
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -33,6 +33,6 @@ if ($status == false) {
   $error = $stmt->errorInfo();
   exit("SQLError:" . $error[2]);
 } else {
-  header('Location: /frege.php');
+  header('Location: /frege/');
   exit;
 }

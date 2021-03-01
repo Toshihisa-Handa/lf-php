@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -10,7 +10,7 @@ $pdo = Database::dbcon();
 
 
 $uid = $_SESSION['uid'];
-include('common/header-icon.php');
+include('../common/header-icon.php');
 
 //データ登録SQL作成
 $stmt = $pdo->prepare("SELECT * FROM shop where user_id=:uid");
@@ -27,9 +27,9 @@ if ($status == false) {
 
 ?>
 
-<?php include('common/favicon.html'); ?>
+<?php include('../common/favicon.html'); ?>
 <title>登録情報</title>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/myprofile.css">
 </head>
 
@@ -37,9 +37,9 @@ if ($status == false) {
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('common/header-nav-rightIcon.php') ?>
+          <?php include('../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -101,7 +101,7 @@ if ($status == false) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   </div>

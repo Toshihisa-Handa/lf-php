@@ -31,8 +31,8 @@ $checkout_session = \Stripe\Checkout\Session::create([
     'quantity' => 1,
   ]],
   'mode' => 'payment',
-  'success_url' => $YOUR_DOMAIN . '/src/error/f_success.php',
-  'cancel_url' => $YOUR_DOMAIN . '/src/error/f_error.php',
+  'success_url' => $YOUR_DOMAIN . '/f_success/',
+  'cancel_url' => $YOUR_DOMAIN . '/f_error/',
 ]);
 
 echo json_encode(['id' => $checkout_session->id]);

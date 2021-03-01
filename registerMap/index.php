@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //regiCheck();
 
@@ -36,7 +36,7 @@ if ($_POST) {
     } else {
       $_SESSION['chk_ssid']  = session_id(); //ここは自由に好きな名前を振るのもOK
       unset($_SESSION['chk_regi']);
-      header('Location: /index.php'); //Location:の後ろの半角スペースは必ず入れる。
+      header('Location: /'); //Location:の後ろの半角スペースは必ず入れる。
       exit();
     }
   }
@@ -44,9 +44,9 @@ if ($_POST) {
 
 ?>
 
-<?php include('common/favicon.html') ?>
+<?php include('../common/favicon.html') ?>
 <title>マップ情報編集</title>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/mapEdit.css">
 </head>
 
@@ -54,7 +54,7 @@ if ($_POST) {
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
         </div>
       </ul>
@@ -91,7 +91,7 @@ if ($_POST) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <!-- <?php include('common/footer.html') ?> -->
+    <!-- <?php include('../common/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

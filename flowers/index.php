@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 
 //DB接続
@@ -15,7 +15,7 @@ $feature = $_POST['feature'];
 $tag = $_POST['tag'];
 $title = $_POST['title'];
 $text = $_POST['text'];
-include('common/header-icon.php');
+include('../common/header-icon.php');
 
 if (!$_GET) {
   $sql = "SELECT 
@@ -43,9 +43,9 @@ if (!$_GET) {
 
 ?>
 
-<?php include('common/favicon.html'); ?>
+<?php include('../common/favicon.html'); ?>
 <title>花一覧</title>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/flowers.css">
 </head>
 
@@ -53,14 +53,14 @@ if (!$_GET) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
           <li class='searchNav'>
             <form method='get'>
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <?php include('common/header-nav-rightIcon.php') ?>
+          <?php include('../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -96,7 +96,7 @@ if (!$_GET) {
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <script>

@@ -1,7 +1,7 @@
 <?php
 session_start(); //セッション変数を使うよという意味。これで他のファイルでも$_SESSION[];で指定した変数が使用できる
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //DB接続
 $pdo = Database::dbcon();
@@ -22,7 +22,7 @@ if (!empty($_POST)) {
     $_SESSION['chk_ssid']  = session_id();
     $_SESSION['name']  = $val['name'];
     $_SESSION['uid']  = $val['user_id'];
-    header('Location: /index.php');
+    header('Location: /');
     exit();
   } else {
     $errors['errorLog'] = 'メールアドレスとパスワードが一致しませんでした。';
@@ -32,9 +32,9 @@ if (!empty($_POST)) {
 ?>
 
 
-<?php include('common/favicon.html') ?>
+<?php include('../common/favicon.html') ?>
 <title>ログイン</title>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/login.css">
 </head>
 
@@ -42,7 +42,7 @@ if (!empty($_POST)) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
       </ul>
     </header>
     <div class="img1">
@@ -56,7 +56,7 @@ if (!empty($_POST)) {
     </div>
     <div class="loginList">
       <div class='login-card'>
-        <form action="/login.php" method="post">
+        <form  method="post">
           <span class="label">E-mail</span><input class='linput' type="email" name="email" class="input" required><br>
           <br>
           <span class="label">Password</span><input class='linput' type="password" name="password" class="input" required><br>
@@ -65,7 +65,7 @@ if (!empty($_POST)) {
           <button class="lbutton" type="submit" class="submit">login</button>
         </form>
         <div class="rlink">
-          <a href="register.php"><span class='underbar'>&nbsp;&nbsp;新規御登録の方はこちらへ</span></a>
+          <a href="/register/"><span class='underbar'>&nbsp;&nbsp;新規御登録の方はこちらへ</span></a>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@ if (!empty($_POST)) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
 

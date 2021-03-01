@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //loginCheck()
 
@@ -115,12 +115,12 @@ message=:message,comment=:comment,feature=:feature WHERE id=:id';
   } else {
     $_SESSION['errors'] = [];
     unset($_SESSION['posted']);
-    header('Location: /myprofile.php');
+    header('Location: /myprofile/');
     exit;
   }
 } else {
   $_SESSION['errors'] = $errors;
   $_SESSION['posted'] = $_POST;
 
-  header('Location: /myprofileEdit.php');
+  header('Location: /myprofileEdit/');
 }

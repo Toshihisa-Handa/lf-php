@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('common/favicon.html')
+include('../common/favicon.html')
 ?>
 <title>決済完了</title>
 <link rel="stylesheet" href="/public/css/stripe.css">

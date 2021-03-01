@@ -1,14 +1,14 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 //DB接続
 $pdo = Database::dbcon();
 
 
 $uid = $_SESSION['uid'];
-include('common/header-icon.php');
+include('../common/header-icon.php');
 
 $sql = "SELECT map.lat,map.lon,map.maptitle,map.pincolor,map.description,shop.id,shop.shop_img 
         FROM map JOIN shop on map.user_id = shop.user_id";
@@ -19,7 +19,7 @@ $items = $stmt->fetchAll();
 ?>
 
 
-<?php include('common/favicon.html') ?>
+<?php include('../common/favicon.html') ?>
 <title>マップ</title>
 <style>
     html,
@@ -38,15 +38,15 @@ $items = $stmt->fetchAll();
         font-size: 50%;
     }
 </style>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 </head>
 
 <body>
     <header style="max-height: 70px;">
         <ul>
-            <?php include('common/header-nav-leftIcon.html') ?>
+            <?php include('../common/header-nav-leftIcon.html') ?>
             <div class='nav-right'>
-                <?php include('common/header-nav-rightIcon.php') ?>
+                <?php include('../common/header-nav-rightIcon.php') ?>
             </div>
         </ul>
     </header>
@@ -60,7 +60,7 @@ $items = $stmt->fetchAll();
         }
     </style>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
     <script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AmJSmi0DfSGMPQNbHQ7GSRPBRvWKZHpsv13mLTVUyr-EEQpqyk2I-d4tHVYiGw88' async defer></script>
     <script src="/public/js/BmapQuery.js"></script>
@@ -95,7 +95,7 @@ $items = $stmt->fetchAll();
                         "pinColor": "<?= $item['pincolor'] ?>",
                         "height": 220,
                         "width": 200,
-                        "description": '<a href="/shop.php/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
+                        "description": '<a href="/shop/? id=<?= $item['id'] ?>"><?= $item['description'] ?><br><img src="/public/upload/<?= $item['shop_img'] ?>" width="180"></a>',
                         "show": false
                     };
                     i++

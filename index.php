@@ -45,12 +45,12 @@ if ($status == false) {
                         <div id='search'>検索</div>
                     </li>
                     <?php if ($uid == false || '') : ?>
-                        <li class='log'><a href="/login.php" class='hlink'>Login</a></li>
+                        <li class='log'><a href="/login/" class='hlink'>Login</a></li>
                     <?php else : ?>
-                        <li class='log'><a href="/logout.php" class='hlink'>Logout</a></li>
+                        <li class='log'><a href="/action/logout.php" class='hlink'>Logout</a></li>
                     <?php endif; ?>
                     <li class='account_img'>
-                        <a href="/mypage.php">
+                        <a href="/mypage/">
                             <?php if ($uid) { ?>
                                 <?php if ($item['account_img'] === null) : ?>
                                     <img src="/public/images/account3.png" class='aimg' alt="">

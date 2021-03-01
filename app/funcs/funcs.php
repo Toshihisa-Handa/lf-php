@@ -8,7 +8,7 @@
 function regiCheck()
 {
   if (!isset($_SESSION['chk_regi'])) {
-    header('Location: /src/error/session_regi_error.php');
+    header('Location: /session_regi_error/');
     exit();
   }
 }
@@ -16,7 +16,7 @@ function regiCheck()
 function loginCheck()
 {
   if (!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid'] != session_id()) {
-    header('Location: /src/error/session_error.php');
+    header('Location: /session_error/');
     exit();
   } else {
     session_regenerate_id(true);

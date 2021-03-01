@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 unset($_SESSION['chk_regi']); //登録セッションの初期化
 
@@ -61,7 +61,7 @@ if (!empty($_POST)) {
       }
 
       $_SESSION['chk_regi']  = $res . $email;
-      header('Location: /registerShop.php');
+      header('Location: /registerShop/');
       exit();
     }
   }
@@ -69,9 +69,9 @@ if (!empty($_POST)) {
 
 ?>
 
-<?php include('common/favicon.html') ?>
+<?php include('../common/favicon.html') ?>
 <title>新規登録</title>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/login.css">
 </head>
 
@@ -79,7 +79,7 @@ if (!empty($_POST)) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
       </ul>
     </header>
     <div class="img1">
@@ -93,7 +93,7 @@ if (!empty($_POST)) {
     </div>
     <div class="loginList2">
       <div class='login-card'>
-        <form action="/register.php" method="post" class="board-form">
+        <form  method="post" class="board-form">
           <span class="label ">User Name</span><input type="text" name="name" class="input linput2" placeholder="日本語、アルファベット対応" required value='<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : ''; ?>'>
           <span style='color:red;'> <?php echo isset($errors['name']) ? $errors['name'] : ''; ?></span>
           <br>
@@ -111,7 +111,7 @@ if (!empty($_POST)) {
           <button type="submit" class="submit lbutton2">SignUp</button>
         </form>
         <div class="rlink">
-          <a href="/login.php"><span class='underbar'>&nbsp;&nbsp;ログインの方はこちらへ</span></a>
+          <a href="/login/"><span class='underbar'>&nbsp;&nbsp;ログインの方はこちらへ</span></a>
         </div>
       </div>
     </div>
@@ -122,7 +122,7 @@ if (!empty($_POST)) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

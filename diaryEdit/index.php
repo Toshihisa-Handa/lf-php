@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '//app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 //loginCheck()
 
 //DB接続
@@ -10,7 +10,7 @@ $pdo = Database::dbcon();
 
 $id = $_GET['id'];
 $uid = $_SESSION['uid'];
-include('common/header-icon.php');
+include('../common/header-icon.php');
 
 //sql作成
 $sql = "SELECT * FROM diary WHERE id=:id";
@@ -31,26 +31,26 @@ if ($status == false) {
 
 
 <?php
-include('common/favicon.html')
+include('../common/favicon.html')
 ?>
 <title>日記編集</title>
 </head>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/diaryEdit.css">
 
 <body>
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('common/header-nav-leftIcon.html') ?>
+        <?php include('../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('common/header-nav-rightIcon.php') ?>
+          <?php include('../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
     <div class="main">
       <h2>日記編集</h2>
-      <form action='/diaryEditUpdate.php' method="post">
+      <form action='/action/diaryEditUpdate.php' method="post">
         <div class='inframe'>
           <div>タイトル</div><input class='inputs' type="text" name="title" value='<?= $item["title"] ?>'><br>
         </div>
@@ -66,10 +66,10 @@ include('common/favicon.html')
     </div>
     <br>
     <div class="nav">
-      <p><a href="/drege.php">日記の登録</a></p>
-      <p><a href="/myprofile.php">店舗情報</a></p>
-      <p><a href="/frege.php">花の登録</a></p>
-      <p><a href="/mapinfo.php">マップ情報</a></p>
+      <p><a href="/drege/">日記の登録</a></p>
+      <p><a href="/myprofile/">店舗情報</a></p>
+      <p><a href="/frege/">花の登録</a></p>
+      <p><a href="/mapinfo/">マップ情報</a></p>
     </div>
   </div>
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
@@ -78,7 +78,7 @@ include('common/favicon.html')
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('app/funcs/funcs.php');
-include(__DIR__ . '/app/config.php');
+include('../app/funcs/funcs.php');
+include(__DIR__ . '/../app/config.php');
 
 regiCheck();
 
@@ -111,7 +111,7 @@ if ($_POST) {
             exit("SQLError:" . $error[2]);
         } else {
 
-            header('Location: /registerMap.php'); //Location:の後ろの半角スペースは必ず入れる。
+            header('Location: /registerMap/'); //Location:の後ろの半角スペースは必ず入れる。
             exit();
         }
     }
@@ -119,9 +119,9 @@ if ($_POST) {
 
 ?>
 
-<?php include('common/favicon.html'); ?>
+<?php include('../common/favicon.html'); ?>
 <title>店舗情報編集</title>
-<?php include('common/style.html') ?>
+<?php include('../common/style.html') ?>
 <link rel="stylesheet" href="/public/css/myprofileEdit.css">
 </head>
 
@@ -154,7 +154,7 @@ if ($_POST) {
                     <span style='color:red;'> <?php echo isset($errors['email']) ? $errors['email'] : ''; ?></span>
                 </div>
                 <div class='inframe'>
-                    <div>　　　電話番号</div><input type="text" class='inputs' name="tell" placeholder="「–」なし半角数字で入力して下さい"><br>
+                    <div>　　　電話番号</div><input type="text" class='inputs' name="tell" value="" placeholder="「–」なし半角数字で入力して下さい"><br>
                     <span style='color:red;'> <?php echo isset($errors['tell']) ? $errors['tell'] : ''; ?></span>
                     <span style='color:red;'> <?php echo isset($errors['tell2']) ? $errors['tell2'] : ''; ?></span>
                 </div>
@@ -163,31 +163,31 @@ if ($_POST) {
                     <div>　　　オープン</div>
                     <select name="open-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('common/select0-23.html') ?>
+                        <?php include('../common/select0-23.html') ?>
                     </select>
                     <div>:</div>
                     <select name="open-time">
                         <option value="">選択して下さい</option>
-                        <?php include('common/select00-59.html') ?>
+                        <?php include('../common/select00-59.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
                     <div>　　　クローズ</div>
                     <select name="close-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('common/select0-23.html') ?>
+                        <?php include('../common/select0-23.html') ?>
                     </select>
                     <div>:</div>
                     <select name="close-time">
                         <option value="">選択して下さい</option>
-                        <?php include('common/select00-59.html') ?>
+                        <?php include('../common/select00-59.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
                     <div>　　　　定休日</div>
                     <select name="holiday">
                         <option value="">選択して下さい</option>
-                        <?php include('common/selectMon-Sun.html') ?>
+                        <?php include('../common/selectMon-Sun.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
@@ -219,7 +219,7 @@ if ($_POST) {
             <h3>Copyright second-cube</h3>
         </footer>
         <!-- フッターナビ -->
-        <!-- <?php include('common/footer.html') ?> -->
+        <!-- <?php include('../common/footer.html') ?> -->
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
