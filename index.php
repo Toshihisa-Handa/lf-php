@@ -49,7 +49,7 @@ if ($status == false) {
                     <?php if ($uid == false || '') : ?>
                         <li class='log'><a href="/login/" class='hlink'>Login</a></li>
                     <?php else : ?>
-                        <li class='log'><a href="/action/logout.php" class='hlink'>Logout</a></li>
+                        <li class='log'><a href="/logout.php" class='hlink'>Logout</a></li>
                     <?php endif; ?>
                     <li class='account_img'>
                         <a href="/mypage/">
