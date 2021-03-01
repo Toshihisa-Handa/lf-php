@@ -20,7 +20,7 @@ function dbcon()
 function regiCheck()
 {
   if (!isset($_SESSION['chk_regi'])) {
-    header('Location: /session_regi_error/');
+    header('Location: /register_request/');
     exit();
   }
 }
@@ -28,7 +28,7 @@ function regiCheck()
 function loginCheck()
 {
   if (!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid'] != session_id()) {
-    header('Location: /session_error/');
+    header('Location: /login_error/');
     exit();
   } else {
     session_regenerate_id(true);
