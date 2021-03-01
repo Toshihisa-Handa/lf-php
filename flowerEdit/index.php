@@ -12,6 +12,8 @@ $id = $_GET['id'];
 $uid = $_SESSION['uid'];
 include('../common/header-icon.php');
 
+if(!$_POST){
+
 //sql作成
 $sql = "SELECT * FROM flower WHERE id=:id";
 $stmt = $pdo->prepare($sql);
@@ -26,6 +28,41 @@ if ($status == false) {
 } else {
   $item = $stmt->fetch();
 }
+
+}else{
+
+  $id = $_POST['id'];
+  $name = $_POST['name'];
+  $price = $_POST['price'];
+  $feature = $_POST['feature'];
+  $tag = $_POST['tag'];
+  $text = $_POST['text'];
+  
+  //データ登録SQL作成
+  $sql = 'UPDATE flower SET name=:name,price=:price,feature=:feature,tag=:tag,text=:text WHERE id=:id';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':name', h($name), PDO::PARAM_STR);
+  $stmt->bindValue(':price', h($price), PDO::PARAM_INT);
+  $stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);
+  $stmt->bindValue(':tag', h($tag), PDO::PARAM_STR);
+  $stmt->bindValue(':text', h($text), PDO::PARAM_STR);
+  $stmt->bindValue(':id',   $id,     PDO::PARAM_INT);
+  $status = $stmt->execute();
+  
+  
+  //データ登録処理後
+  if ($status == false) {
+    $error = $stmt->errorInfo();
+    exit("SQLError:" . $error[2]);
+  } else {
+    header('Location: /frege/');
+    exit;
+  }
+  
+
+
+}
+
 ?>
 
 <?php include('../common/favicon.html') ?>
@@ -46,7 +83,7 @@ if ($status == false) {
     </header>
     <div class="main">
       <h2>花編集</h2>
-      <form action='/action/flowerEditUpdate.php' method="post">
+      <form  method="post">
         <div class='inframe'>
           <div>　　品名</div><input class='inputs' type="text" name="name" value='<?= $item["name"] ?>'><br>
         </div>

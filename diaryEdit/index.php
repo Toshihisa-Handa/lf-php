@@ -11,6 +11,9 @@ $id = $_GET['id'];
 $uid = $_SESSION['uid'];
 include('../common/header-icon.php');
 
+
+if(!$_POST){
+
 //sql作成
 $sql = "SELECT * FROM diary WHERE id=:id";
 $stmt = $pdo->prepare($sql);
@@ -24,6 +27,35 @@ if ($status == false) {
   exit("SQLError:" . $error[2]);
 } else {
   $item = $stmt->fetch();
+}
+
+}else{
+  $id = $_POST['id'];
+  $title = $_POST['title'];
+  $tag = $_POST['tag'];
+  $text = $_POST['text'];
+
+
+//データ登録SQL作成
+$sql = 'UPDATE diary SET title=:title,tag=:tag,text=:text WHERE id=:id';
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':title', h($title), PDO::PARAM_STR);
+$stmt->bindValue(':tag', h($tag), PDO::PARAM_STR);
+$stmt->bindValue(':text', h($text), PDO::PARAM_STR);
+$stmt->bindValue(':id',   $id,     PDO::PARAM_INT);
+$status = $stmt->execute();
+
+
+//データ登録処理後
+if ($status == false) {
+  $error = $stmt->errorInfo();
+  exit("SQLError:" . $error[2]);
+} else {
+  header('Location: /drege/');
+  exit;
+}
+
+
 }
 
 ?>
@@ -49,7 +81,7 @@ include('../common/favicon.html')
     </header>
     <div class="main">
       <h2>日記編集</h2>
-      <form action='/action/diaryEditUpdate.php' method="post">
+      <form  method="post">
         <div class='inframe'>
           <div>タイトル</div><input class='inputs' type="text" name="title" value='<?= $item["title"] ?>'><br>
         </div>
