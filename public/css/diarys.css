@@ -20,7 +20,7 @@ header{
 .img1{
     grid-area:img1;
     /* background: rgba(18, 100, 163, 0.3); */
-    /* background-image: url(/images/diaryimg2.png);
+    /* background-image: url(/public/images/diaryimg2.png);
      background-size: cover; */
      width: 100%;
 

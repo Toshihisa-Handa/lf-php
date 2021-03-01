@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include('../app/funcs/funcs.php');
 include(__DIR__ . '/../app/config.php');
@@ -9,13 +10,14 @@ include(__DIR__ . '/../app/config.php');
 $pdo = Database::dbcon();
 
 
-$id = $_POST['id'];
+$id = $_GET['id'];
 $uid = $_SESSION['uid'];
 $lat = $_POST['lat'];
 $lon = $_POST['lon'];
 $maptitle = $_POST['maptitle'];
 $description = $_POST['description'];
 include('../common/header-icon.php');
+
 
 //画像処理
 if (!$_POST) {
@@ -27,6 +29,7 @@ if (!$_POST) {
   $stmt = $pdo->prepare($sql); //日付で登録が新しいものが上になる様に抽出
   $status = $stmt->execute();
   $item = $stmt->fetch();
+  
 } else {
 
   //バリデーション
@@ -34,6 +37,8 @@ if (!$_POST) {
 
   if (empty($errors)) { //$errorsが空の時
     //データ登録SQL作成
+    $id = $_POST['id'];
+
     $sql = 'UPDATE map SET lat=:lat,lon=:lon,maptitle=:maptitle,description=:description WHERE id=:id';
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':lat', Utils::h($lat), PDO::PARAM_INT);
@@ -48,6 +53,12 @@ if (!$_POST) {
       $error = $stmt->errorInfo();
       exit("SQLError:" . $error[2]);
     } else {
+//           echo $lat;
+//           echo $id;
+//     echo $lon;
+//     echo $maptitle;
+//     echo $description;
+//  return;
       header('Location: /mapinfo/');
       exit();
     }
@@ -93,15 +104,15 @@ if (!$_POST) {
       </form>
     </div>
     <div class="nav">
-      <p><a href="/mapinfo.php">マップ情報</a></p>
-      <p><a href="/myprofile.php">店舗情報</a></p>
-      <p><a href="/drege.php">日記の登録</a></p>
-      <p><a href="/mapinfo.php">マップ情報</a></p>
+      <p><a href="/mapinfo/">マップ情報</a></p>
+      <p><a href="/myprofile/">店舗情報</a></p>
+      <p><a href="/drege/">日記の登録</a></p>
+      <p><a href="/mapinfo/">マップ情報</a></p>
       <p>
-      <h2>住所変換</h2><button id='exec'>変換</button>
+      <!-- <h2>住所変換</h2><button id='exec'>変換</button>
       </p>
       <p id='lat' value='<?= $item['lat'] ?>'><?= $item['lat'] ?></p>
-      <p id='lon' value='<?= $item['lon'] ?>'><?= $item['lon'] ?></p>
+      <p id='lon' value='<?= $item['lon'] ?>'><?= $item['lon'] ?></p> -->
     </div>
   </div>
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->

@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         <?php for ($i = 0; $i < count($images); $i++) : ?>
           <div class="fcard">
             <div class='flower-card'>
-              <a href="/flower.php/? id=<?= $images[$i]['id']; ?>">
+              <a href="/flower/? id=<?= $images[$i]['id']; ?>">
                 <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['name']; ?></h3>
                 <div class='fprice'><?= number_format($images[$i]['price']); ?>円（税別）</div>
@@ -128,17 +128,17 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
               </a>
             </div>
             <div class="option">
-              <div class="update"><a href="/flowerEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-              <div class="delete"><a href="/flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
+              <div class="update"><a href="/flowerEdit/? id=<?= $images[$i]['id']; ?>">編集</a></div>
+              <div class="delete"><a href="/action/flowerDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
             </div>
           </div>
         <?php endfor; ?>
       </div>
     </div>
     <div class="nav">
-      <p><a href="/myprofile.php">店舗情報</a></p>
-      <p><a href="/drege.php">日記の登録</a></p>
-      <p><a href="/mapinfo.php">マップ情報</a></p>
+      <p><a href="/myprofile/">店舗情報</a></p>
+      <p><a href="/drege/">日記の登録</a></p>
+      <p><a href="/mapinfo/">マップ情報</a></p>
     </div>
   </div>
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->

@@ -101,14 +101,14 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         <?php for ($i = 0; $i < count($images); $i++) : ?>
           <div class="dcard">
             <div class='diary-card'>
-              <a href="/diary.php/? id=<?= $images[$i]['id']; ?>">
+              <a href="/diary/? id=<?= $images[$i]['id']; ?>">
                 <img src="/public/upload/<?= $images[$i]['image']; ?>" alt="">
                 <h3><?= $images[$i]['title']; ?></h3>
                 <p class='dtext'><?= $images[$i]['text']; ?></p>
               </a>
               <div class="option">
-                <div class="update"><a href="/diaryEdit.php/? id=<?= $images[$i]['id']; ?>">編集</a></div>
-                <div class="delete"><a href="/diaryDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
+                <div class="update"><a href="/diaryEdit/? id=<?= $images[$i]['id']; ?>">編集</a></div>
+                <div class="delete"><a href="/action/diaryDelete.php/? id=<?= $images[$i]['id']; ?>">削除</a></div>
               </div>
             </div>
           </div>
@@ -117,9 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     </div>
     <br>
     <div class="nav">
-      <p><a href="/myprofile.php">店舗情報</a></p>
-      <p><a href="/frege.php">花の登録</a></p>
-      <p><a href="/mapinfo.php">マップ情報</a></p>
+      <p><a href="/myprofile/">店舗情報</a></p>
+      <p><a href="/frege/">花の登録</a></p>
+      <p><a href="/mapinfo/">マップ情報</a></p>
     </div>
   </div>
   <!-- フッター ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->

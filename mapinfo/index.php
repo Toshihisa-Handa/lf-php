@@ -70,10 +70,10 @@ $item = $stmt->fetch();
       </div>
     </div>
     <div class="nav">
-      <p><a class='maplink' href="/mapEdit.php/<?= $item['id'] ?>">マップ情報編集</a></p>
-      <p><a href="/myprofile.php">店舗情報</a></p>
-      <p><a href="/drege.php">日記の登録</a></p>
-      <p><a href="/mapinfo.php">マップ情報</a></p>
+      <p><a class='maplink' href="/mapEdit/?=<?= $item['id'] ?>">マップ情報編集</a></p>
+      <p><a href="/myprofile/">店舗情報</a></p>
+      <p><a href="/drege/">日記の登録</a></p>
+      <p><a href="/mapinfo/">マップ情報</a></p>
     </div>
   </div>
 
