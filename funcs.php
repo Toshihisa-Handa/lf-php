@@ -1,10 +1,14 @@
 <?php
 //共通に使う関数を記述
+
+//特殊文字対策
 function h($str)
 {
   return htmlspecialchars($str, ENT_QUOTES);
 }
 
+
+//db接続
 function dbcon()
 {
   try {
@@ -16,7 +20,8 @@ function dbcon()
   return $pdo;
 }
 
-//手打ち入力でログイン後のページにログインせずに行ってもエラーになるようにしている） 
+
+//手打ち入力でログイン後のページにログインせずに行ってもエラーになるようにしている
 function regiCheck()
 {
   if (!isset($_SESSION['chk_regi'])) {
@@ -41,6 +46,8 @@ function regiCheck()
   }
 }
 
+
+//未ログインで管理画面へ入るとエラー画面が表示されるようにしている
 function loginCheck()
 {
   if (!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid'] != session_id()) {
@@ -69,7 +76,7 @@ function loginCheck()
 }
 
 
-
+//バリデーション用関数１
 function docFilter($a, $b)
 {
   global $errors;
@@ -81,6 +88,7 @@ if (preg_match($filter, $a) === 0 || preg_match($filter, $a) === false) {
   }
 }
 
+//バリデーション用関数２
 function docFilterDF($a, $b)
 {
   global $errors;
@@ -91,7 +99,7 @@ function docFilterDF($a, $b)
   }
 }
 
-
+//リダイレクトの関数化
 function redirectCheck($url)
 {
   global $status, $stmt;
@@ -105,7 +113,7 @@ function redirectCheck($url)
 }
 
 
-
+//ファイルアップロード の関数化
 function filein($imgname)
 {
   //POSTデータ取得
@@ -115,10 +123,4 @@ function filein($imgname)
   $save = '../upload/' . basename($imgname); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
   move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
   return $imgname;
-}
-
-
-function hoge()
-{
-  echo 'hoge';
 }
