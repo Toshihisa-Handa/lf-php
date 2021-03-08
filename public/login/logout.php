@@ -1,6 +1,7 @@
 <?php 
 session_start();
 
+
 //SESSIONを初期化
 $_SESSION = array();
 
