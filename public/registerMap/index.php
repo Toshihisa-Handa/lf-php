@@ -2,7 +2,7 @@
 session_start();
 include('../../funcs.php');
 
-//regiCheck();
+regiCheck();
 
 $uid = $_SESSION['uid'];
 $uname = $_SESSION['uname'];

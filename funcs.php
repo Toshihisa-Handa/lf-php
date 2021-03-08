@@ -20,16 +20,48 @@ function dbcon()
 function regiCheck()
 {
   if (!isset($_SESSION['chk_regi'])) {
-    header('Location: /register_request/');
-    exit();
+    // header('Location: /register_request/');
+    exit('
+    <title>会員登録エラー</title>
+<link rel="stylesheet" href="/css/stripe.css">
+</head>
+
+<body>
+  <section>
+    <p>
+      新規登録ページからお入り下さい
+      <br>
+      下記リンクから新規登録ページへ戻れます。
+    </p>
+    <p><a href="/register/">戻る</a></p>
+  </section>
+</body>
+
+</html>');
   }
 }
 
 function loginCheck()
 {
   if (!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid'] != session_id()) {
-    header('Location: /login_error/');
-    exit();
+
+    //   header('Location: /login_error/');
+    exit('<title>ログインエラー</title>
+    <link rel="stylesheet" href="/css/stripe.css">
+    </head>
+    
+    <body>
+      <section>
+        <p>
+          ログインしていません
+          <br>
+          下記リンクからログインページへ戻れます。
+        </p>
+        <p><a href="/login/">戻る</a></p>
+      </section>
+    </body>
+    
+    </html>');
   } else {
     session_regenerate_id(true);
     $_SESSION['chk_ssid'] = session_id();
@@ -86,25 +118,7 @@ function filein($imgname)
 }
 
 
-function hoge(){
+function hoge()
+{
   echo 'hoge';
-}
-
-function logout(){
-  session_start();
-
-//SESSIONを初期化
-$_SESSION = array();
-
-//Cookieに保存してある'SessionIDの保存期間を過去にして破棄
-if(isset($_COOKIE[session_name()])){//session_name()はセッションIDを返す関数
-  setcookie(session_name(), '', time()-42000,'/');
-}
-
-//サーバー側での、セッションIDの破棄(セッションのファイルをこの記述で削除している)
-session_destroy();
-
-//処理後、リダイレクト
-header('Location: /login/');
-
 }

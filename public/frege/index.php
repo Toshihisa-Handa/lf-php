@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../../funcs.php');
-//loginCheck()
+loginCheck();
 
 //DB接続
 $pdo = dbcon();
