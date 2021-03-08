@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 
 $pdo = dbcon();
@@ -9,7 +9,7 @@ $uid = $_SESSION['uid'];
 $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
 if (!$_GET) {
   //データ登録SQL作成
@@ -37,9 +37,9 @@ if (!$_GET) {
 
 ?>
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>店舗一覧</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/shops.css">
 </head>
 
@@ -47,14 +47,14 @@ if (!$_GET) {
   <div class="shops-glid">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
           <li class='searchNav'>
             <form method='get'>
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <?php include('../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -88,7 +88,7 @@ if (!$_GET) {
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <script>

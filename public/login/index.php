@@ -1,6 +1,6 @@
 <?php
 session_start(); //セッション変数を使うよという意味。これで他のファイルでも$_SESSION[];で指定した変数が使用できる
-include('../funcs.php');
+include('../../funcs.php');
 
 //DB接続
 $pdo = dbcon();
@@ -31,9 +31,9 @@ if (!empty($_POST)) {
 ?>
 
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>ログイン</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/login.css">
 </head>
 
@@ -41,7 +41,7 @@ if (!empty($_POST)) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
       </ul>
     </header>
     <div class="img1">
@@ -75,7 +75,7 @@ if (!empty($_POST)) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 //loginCheck()
 
@@ -8,13 +8,13 @@ $pdo = dbcon();
 
 
 $uid = $_SESSION['uid'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
 ?>
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>マイページ</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/mypage.css">
 </head>
 
@@ -22,9 +22,9 @@ include('../common/header-icon.php');
     <div class="grid-box">
         <header>
             <ul>
-                <?php include('../common/header-nav-leftIcon.html') ?>
+                <?php include('../../common/header-nav-leftIcon.html') ?>
                 <div class='nav-right'>
-                    <?php include('../common/header-nav-rightIcon.php') ?>
+                    <?php include('../../common/header-nav-rightIcon.php') ?>
                 </div>
             </ul>
         </header>
@@ -41,7 +41,7 @@ include('../common/header-icon.php');
             <h3 class='topSubtitle'>Copyright second-cube</h3>
         </footer>
         <!-- フッターナビ -->
-        <?php include('../common/footer.html') ?>
+        <?php include('../../common/footer.html') ?>
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
     </div>

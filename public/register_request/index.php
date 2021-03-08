@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../common/favicon.html')
+include('../../common/favicon.html')
 ?>
 <title>会員登録エラー</title>
 <link rel="stylesheet" href="/css/stripe.css">

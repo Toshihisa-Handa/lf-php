@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 //loginCheck()
 
@@ -12,7 +12,7 @@ $title = $_POST['title'];
 $tag = $_POST['tag'];
 $text = $_POST['text'];
 $uid = $_SESSION['uid'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
 //データ登録SQL作成
 $sql = "SELECT map.id,map.lat,map.lon,map.pincolor,map.maptitle,
@@ -25,9 +25,9 @@ $item = $stmt->fetch();
 
 ?>
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>マップ情報</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/mapinfo.css">
 </head>
 
@@ -35,9 +35,9 @@ $item = $stmt->fetch();
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -82,7 +82,7 @@ $item = $stmt->fetch();
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

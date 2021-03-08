@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 regiCheck();
 
@@ -118,9 +118,9 @@ if ($_POST) {
 
 ?>
 
-<?php include('../common/favicon.html'); ?>
+<?php include('../../common/favicon.html'); ?>
 <title>店舗情報編集</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/myprofileEdit.css">
 </head>
 
@@ -162,31 +162,31 @@ if ($_POST) {
                     <div>　　　オープン</div>
                     <select name="open-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('../common/select0-23.html') ?>
+                        <?php include('../../common/select0-23.html') ?>
                     </select>
                     <div>:</div>
                     <select name="open-time">
                         <option value="">選択して下さい</option>
-                        <?php include('../common/select00-59.html') ?>
+                        <?php include('../../common/select00-59.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
                     <div>　　　クローズ</div>
                     <select name="close-hour">
                         <option value="">選択して下さい</option>
-                        <?php include('../common/select0-23.html') ?>
+                        <?php include('../../common/select0-23.html') ?>
                     </select>
                     <div>:</div>
                     <select name="close-time">
                         <option value="">選択して下さい</option>
-                        <?php include('../common/select00-59.html') ?>
+                        <?php include('../../common/select00-59.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
                     <div>　　　　定休日</div>
                     <select name="holiday">
                         <option value="">選択して下さい</option>
-                        <?php include('../common/selectMon-Sun.html') ?>
+                        <?php include('../../common/selectMon-Sun.html') ?>
                     </select>
                 </div>
                 <div class='inframe'>
@@ -218,7 +218,7 @@ if ($_POST) {
             <h3>Copyright second-cube</h3>
         </footer>
         <!-- フッターナビ -->
-        <!-- <?php include('../common/footer.html') ?> -->
+        <!-- <?php include('../../common/footer.html') ?> -->
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

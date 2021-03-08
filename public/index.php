@@ -1,9 +1,8 @@
 <?php
 session_start();
-include('funcs.php');
+include('../funcs.php');
 $uid = $_SESSION['uid'];
 $name = $_SESSION['name'];
-
 
 //DB接続
 $pdo = dbcon();
@@ -27,17 +26,17 @@ if ($status == false) {
 ?>
 
 
-<?php include('common/favicon.html'); ?>
+<?php include('../common/favicon.html'); ?>
 <title>Life flower</title>
-<?php include('common/style.html') ?>
-<link rel="stylesheet" href="public/css/top.css">
+<?php include('../common/style.html') ?>
+<link rel="stylesheet" href="/css/top.css">
 </head>
 
 <body>
     <div class="grid-box">
         <header>
             <ul>
-                <li><a href="/index.php"><img src="/images/lf-logo-gray.png" alt="" class='logo'></a></li>
+                <li><a href="/"><img src="/images/lf-logo-gray.png" alt="" class='logo'></a></li>
                 <li class='hnav'><a href="/map/" class='hlink'>Map</a></li>
                 <li class='hnav'><a href="/shops/" class='hlink'>Shop</a></li>
                 <li class='hnav'><a href="/diarys/" class='hlink'>Diary</a></li>
@@ -49,7 +48,7 @@ if ($status == false) {
                     <?php if ($uid == false || '') : ?>
                         <li class='log'><a href="/login/" class='hlink'>Login</a></li>
                     <?php else : ?>
-                        <li class='log'><a href="/logout.php" class='hlink'>Logout</a></li>
+                        <li class='log'><a href="../logout.php" class='hlink'>Logout</a></li>
                     <?php endif; ?>
                     <li class='account_img'>
                         <a href="/mypage/">
@@ -156,7 +155,7 @@ if ($status == false) {
         </footer>
     </div>
     <!-- フッターナビ -->
-    <?php include('common/footer.html') ?>
+    <?php include('../common/footer.html') ?>
 
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

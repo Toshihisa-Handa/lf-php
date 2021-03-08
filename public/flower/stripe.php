@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 $price = $_SESSION['price'];
 $name = $_SESSION['name'];
@@ -8,7 +8,7 @@ $image = $_SESSION['image'];
 
 
 //stripeの記述
-require 'vendor/autoload.php';
+require '../../modules/libralys/vendor/autoload.php';
 \Stripe\Stripe::setApiKey('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 header('Content-Type: application/json');
@@ -36,3 +36,8 @@ $checkout_session = \Stripe\Checkout\Session::create([
 ]);
 
 echo json_encode(['id' => $checkout_session->id]);
+
+
+
+
+?>

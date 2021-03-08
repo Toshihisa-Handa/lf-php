@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 //loginCheck()
 
@@ -11,7 +11,7 @@ $pdo = dbcon();
 $uid = $_SESSION['uid'];
 $posted = $_SESSION['posted'];
 $errors = $_SESSION['errors'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
 if ($_POST) {
     $id = $_POST['id'];
@@ -208,9 +208,9 @@ if ($status == false) {
 ?>
 
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>店舗情報編集</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/myprofileEdit.css">
 </head>
 
@@ -218,9 +218,9 @@ if ($status == false) {
     <div class="grid-box">
         <header>
             <ul>
-                <?php include('../common/header-nav-leftIcon.html') ?>
+                <?php include('../../common/header-nav-leftIcon.html') ?>
                 <div class='nav-right'>
-                    <?php include('../common/header-nav-rightIcon.php') ?>
+                    <?php include('../../common/header-nav-rightIcon.php') ?>
                 </div>
             </ul>
         </header>
@@ -260,22 +260,22 @@ if ($status == false) {
                     <?php if ($item['open'] == null) : ?>
                         <select name="open-hour">
                             <option value="">選択して下さい</option>
-                            <?php include('../common/select0-23.html') ?>
+                            <?php include('../../common/select0-23.html') ?>
                         </select>
                         <div>:</div>
                         <select name="open-time">
                             <option value="">選択して下さい</option>
-                            <?php include('../common/select00-59.html') ?>
+                            <?php include('../../common/select00-59.html') ?>
                         </select>
                     <?php else : ?>
                         <select name="open-hour">
                             <option value="<?= isset($posted['open-hour']) ? $posted['open-hour'] :  explode(":", $item['open'])[0] ?>"><?= isset($posted['open-hour']) ? $posted['open-hour'] :  explode(":", $item['open'])[0] ?></option>
-                            <?php include('../common/select0-23.html') ?>
+                            <?php include('../../common/select0-23.html') ?>
                         </select>
                         <div>:</div>
                         <select name="open-time">
                             <option value="<?= isset($posted['open-time']) ? $posted['open-time'] :  explode(":", $item['open'])[1] ?>"><?= isset($posted['open-time']) ? $posted['open-time'] :  explode(":", $item['open'])[1] ?></option>
-                            <?php include('../common/select00-59.html') ?>
+                            <?php include('../../common/select00-59.html') ?>
                         </select>
                     <?php endif; ?>
                 </div>
@@ -284,22 +284,22 @@ if ($status == false) {
                     <?php if ($item['close'] == null) : ?>
                         <select name="close-hour">
                             <option value="">選択して下さい</option>
-                            <?php include('../common/select0-23.html') ?>
+                            <?php include('../../common/select0-23.html') ?>
                         </select>
                         <div>:</div>
                         <select name="close-time">
                             <option value="">選択して下さい</option>
-                            <?php include('../common/select00-59.html') ?>
+                            <?php include('../../common/select00-59.html') ?>
                         </select>
                     <?php else : ?>
                         <select name="close-hour">
                             <option value="<?= isset($posted['close-hour']) ? $posted['close-hour'] :  explode(":", $item['close'])[0] ?>"><?= isset($posted['close-hour']) ? $posted['close-hour'] :  explode(":", $item['close'])[0] ?></option>
-                            <?php include('../common/select0-23.html') ?>
+                            <?php include('../../common/select0-23.html') ?>
                         </select>
                         <div>:</div>
                         <select name="close-time">
                             <option value="<?= isset($posted['close-time']) ? $posted['close-time'] :  explode(":", $item['close'])[1] ?>"><?= isset($posted['close-time']) ? $posted['close-time'] :  explode(":", $item['close'])[1] ?></option>
-                            <?php include('../common/select00-59.html') ?>
+                            <?php include('../../common/select00-59.html') ?>
                         </select>
                     <?php endif; ?>
                 </div>
@@ -308,13 +308,13 @@ if ($status == false) {
                     <?php if ($item['holiday'] == null) : ?>
                         <select name="holiday">
                             <option value="">選択して下さい</option>
-                            <?php include('../common/selectMon-Sun.html') ?>
+                            <?php include('../../common/selectMon-Sun.html') ?>
                         </select>
                     <?php else : ?>
                         <select name="holiday">
                             <option value="<?= isset($posted['holiday']) ? $posted['holiday'] : $item["holiday"] ?>"><?= isset($posted['holiday']) ? $posted['holiday'] : $item["holiday"] ?></option>
                             <option value="<?= $item['holiday'] ?>"><?= $item['holiday'] ?></option>
-                            <?php include('../common/selectMon-Sun.html') ?>
+                            <?php include('../../common/selectMon-Sun.html') ?>
                         </select>
                     <?php endif; ?>
                 </div>
@@ -398,7 +398,7 @@ if ($status == false) {
             <h3>Copyright second-cube</h3>
         </footer>
         <!-- フッターナビ -->
-        <?php include('../common/footer.html') ?>
+        <?php include('../../common/footer.html') ?>
     </div>
     <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

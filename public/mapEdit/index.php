@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 //loginCheck()
 
@@ -15,7 +15,7 @@ $lat = $_POST['lat'];
 $lon = $_POST['lon'];
 $maptitle = $_POST['maptitle'];
 $description = $_POST['description'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
 
 //画像処理
@@ -65,9 +65,9 @@ if (!$_POST) {
 
 ?>
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>マップ情報編集</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/mapEdit.css">
 </head>
 
@@ -75,9 +75,9 @@ if (!$_POST) {
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -119,7 +119,7 @@ if (!$_POST) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 //regiCheck();
 
@@ -43,9 +43,9 @@ if ($_POST) {
 
 ?>
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>マップ情報編集</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/mapEdit.css">
 </head>
 
@@ -53,7 +53,7 @@ if ($_POST) {
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
         </div>
       </ul>
@@ -90,7 +90,7 @@ if ($_POST) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <!-- <?php include('../common/footer.html') ?> -->
+    <!-- <?php include('../../common/footer.html') ?> -->
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

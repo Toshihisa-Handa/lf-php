@@ -84,3 +84,8 @@ function filein($imgname)
   move_uploaded_file($_FILES['image']['tmp_name'], $save); //指定した保存先へ保存
   return $imgname;
 }
+
+
+function hoge(){
+  echo 'hoge';
+}

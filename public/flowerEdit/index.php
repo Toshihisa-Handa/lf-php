@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 //loginCheck()
 
@@ -10,26 +10,25 @@ $pdo = dbcon();
 
 $id = $_GET['id'];
 $uid = $_SESSION['uid'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
-if(!$_POST){
+if (!$_POST) {
 
-//sql作成
-$sql = "SELECT * FROM flower WHERE id=:id";
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue('id', $id, PDO::PARAM_INT);
-$status = $stmt->execute();
+  //sql作成
+  $sql = "SELECT * FROM flower WHERE id=:id";
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue('id', $id, PDO::PARAM_INT);
+  $status = $stmt->execute();
 
-//データ登録処理後
-$view = '';
-if ($status == false) {
-  $error = $stmt->errorInfo();
-  exit("SQLError:" . $error[2]);
+  //データ登録処理後
+  $view = '';
+  if ($status == false) {
+    $error = $stmt->errorInfo();
+    exit("SQLError:" . $error[2]);
+  } else {
+    $item = $stmt->fetch();
+  }
 } else {
-  $item = $stmt->fetch();
-}
-
-}else{
 
   $id = $_POST['id'];
   $name = $_POST['name'];
@@ -37,7 +36,7 @@ if ($status == false) {
   $feature = $_POST['feature'];
   $tag = $_POST['tag'];
   $text = $_POST['text'];
-  
+
   //データ登録SQL作成
   $sql = 'UPDATE flower SET name=:name,price=:price,feature=:feature,tag=:tag,text=:text WHERE id=:id';
   $stmt = $pdo->prepare($sql);
@@ -48,8 +47,8 @@ if ($status == false) {
   $stmt->bindValue(':text', h($text), PDO::PARAM_STR);
   $stmt->bindValue(':id',   $id,     PDO::PARAM_INT);
   $status = $stmt->execute();
-  
-  
+
+
   //データ登録処理後
   if ($status == false) {
     $error = $stmt->errorInfo();
@@ -58,32 +57,29 @@ if ($status == false) {
     header('Location: /frege/');
     exit;
   }
-  
-
-
 }
 
 ?>
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>花編集</title>
 </head>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/flowerEdit.css">
 
 <body>
   <div class="grid-box">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
     <div class="main">
       <h2>花編集</h2>
-      <form  method="post">
+      <form method="post">
         <div class='inframe'>
           <div>　　品名</div><input class='inputs' type="text" name="name" value='<?= $item["name"] ?>'><br>
         </div>
@@ -118,7 +114,7 @@ if ($status == false) {
       <h3>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 </body>

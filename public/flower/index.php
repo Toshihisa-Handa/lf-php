@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 //DB接続
 $pdo = dbcon();
@@ -14,7 +14,7 @@ $text = $_POST['text'];
 $uid = $_SESSION['uid'];
 $id = $_GET['id']; //flowerのid
 $fcomment = $_POST['fcomment'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
 if (!$_POST) {
   //データ登録SQL作成
@@ -70,9 +70,9 @@ if (!$_POST) {
 
 ?>
 
-<?php include('../common/favicon.html') ?>
+<?php include('../../common/favicon.html') ?>
 <title>花詳細</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/flower.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 <script src="https://js.stripe.com/v3/"></script>
@@ -82,9 +82,9 @@ if (!$_POST) {
   <div class="main-glid">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
-          <?php include('../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -138,7 +138,7 @@ if (!$_POST) {
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <!-- 購入ページボタンのアクション↓ -->
@@ -147,7 +147,7 @@ if (!$_POST) {
     var stripe = Stripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
     var checkoutButton = document.getElementById("checkout-button");
     checkoutButton.addEventListener("click", function() {
-      fetch("/modules/libralys/stripe-app.php/<?= $item['id'] ?>", {
+      fetch("stripe.php/<?= $item['id'] ?>", {
           method: "POST",
         })
         .then(function(response) {

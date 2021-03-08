@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../funcs.php');
+include('../../funcs.php');
 
 
 //DB接続
@@ -14,7 +14,7 @@ $feature = $_POST['feature'];
 $tag = $_POST['tag'];
 $title = $_POST['title'];
 $text = $_POST['text'];
-include('../common/header-icon.php');
+include('../../common/header-icon.php');
 
 if (!$_GET) {
   $sql = "SELECT 
@@ -42,9 +42,9 @@ if (!$_GET) {
 
 ?>
 
-<?php include('../common/favicon.html'); ?>
+<?php include('../../common/favicon.html'); ?>
 <title>花一覧</title>
-<?php include('../common/style.html') ?>
+<?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/flowers.css">
 </head>
 
@@ -52,14 +52,14 @@ if (!$_GET) {
   <div class="flowers-glid">
     <header>
       <ul>
-        <?php include('../common/header-nav-leftIcon.html') ?>
+        <?php include('../../common/header-nav-leftIcon.html') ?>
         <div class='nav-right'>
           <li class='searchNav'>
             <form method='get'>
               <span class='search-bar'>Search</span><input class='search t-search' type="text" name='kensaku' placeholder="検索ワード入力" required>
             </form>
           </li>
-          <?php include('../common/header-nav-rightIcon.php') ?>
+          <?php include('../../common/header-nav-rightIcon.php') ?>
         </div>
       </ul>
     </header>
@@ -76,7 +76,7 @@ if (!$_GET) {
         <?php foreach ($items as $item) : ?>
           <div class="fcard">
             <div class='flower-card'>
-              <a href="flower.php/? id=<?= $item['id']; ?>">
+              <a href="/flower/? id=<?= $item['id']; ?>">
                 <img src="/upload/<?= $item['image']; ?>" alt="">
                 <h3 class='fsname'><?= $item['name']; ?></h3>
                 <div class='fprice'><?= number_format($item['price']); ?>円（税込）</div>
@@ -95,7 +95,7 @@ if (!$_GET) {
       <h3 class='topSubtitle'>Copyright second-cube</h3>
     </footer>
     <!-- フッターナビ -->
-    <?php include('../common/footer.html') ?>
+    <?php include('../../common/footer.html') ?>
   </div>
   <!-- フッターここまで ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
   <script>
