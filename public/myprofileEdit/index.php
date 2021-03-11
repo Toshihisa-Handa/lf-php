@@ -2,6 +2,7 @@
 session_start();
 include('../../funcs.php');
 
+
 //loginCheck()
 
 //DB接続
@@ -133,9 +134,25 @@ if ($_POST) {
 
 // 画像投稿の項目＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 if ($_FILES) {
+    $sql = "SELECT account_img,shop_img,img1,img2 FROM shop WHERE user_id=:uid";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue('uid', $uid, PDO::PARAM_INT);
+    $status = $stmt->execute();
+    $images = $stmt->fetch();
+    $oldAccount_img = $images['account_img'];
+    $oldShop_img = $images['shop_img'];
+    $oldImg1 = $images['img1'];
+    $oldImg2 = $images['img2'];
+    //     echo $oldAccount_img.'<br>';
+    //     echo $$oldShop_img.'<br>';
+    //     echo $$oldImg2.'<br>';
+    //     echo $oldImg1.'<br>';
+
+    // return;
+
     //account_img
     if ($_FILES['account_img']['name']) {
-
+        unlink("../upload/$oldAccount_img"); //ファイル削除
         $account_img = date("Ymd") . random_int(1, 999999) . $_FILES['account_img']['name']; //ここのnameはアップロードされたファイルのファイル名
         $save1 = '../upload/' . basename($account_img);
         move_uploaded_file($_FILES['account_img']['tmp_name'], $save1);
@@ -147,6 +164,7 @@ if ($_FILES) {
     }
     //shop_img
     if ($_FILES['shop_img']['name']) {
+        unlink("../upload/$oldShop_img"); //ファイル削除
         $shop_img = date("Ymd") . random_int(1, 999999) . $_FILES['shop_img']['name'];
         $save2 = '../upload/' . basename($shop_img); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         move_uploaded_file($_FILES['shop_img']['tmp_name'], $save2);
@@ -158,6 +176,7 @@ if ($_FILES) {
     }
     //img1
     if ($_FILES['img1']['name']) {
+        unlink("../upload/$oldImg1"); //ファイル削除
         $img1 = date("Ymd") . random_int(1, 999999) . $_FILES['img1']['name'];
         $save3 = '../upload/' . basename($img1); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         move_uploaded_file($_FILES['img1']['tmp_name'], $save3);
@@ -169,6 +188,7 @@ if ($_FILES) {
     }
     //img2
     if ($_FILES['img2']['name']) {
+        unlink("../upload/$oldImg2"); //ファイル削除
         $img2 = date("Ymd") . random_int(1, 999999) . $_FILES['img2']['name'];
         $save4 = '../upload/' . basename($img2); //保存先作成://ファイル名を使用して保存先ディレクトリを指定 basename()でファイルシステムトラバーサル攻撃を防ぐ
         move_uploaded_file($_FILES['img2']['tmp_name'], $save4);
@@ -203,7 +223,6 @@ if ($status == false) {
 } else {
     $item = $stmt->fetch();
 }
-
 
 ?>
 
