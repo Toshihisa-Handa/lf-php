@@ -19,6 +19,17 @@ include('../../common/header-icon.php');
 if ($_POST['delete_id']) {
   $delete_id = $_POST['delete_id'];
 
+  $img_name_sql = 'SELECT image FROM flower WHERE id = :id';
+  $stmt= $pdo->prepare($img_name_sql);
+  $stmt->bindValue(':id', $delete_id, PDO::PARAM_INT); 
+  $status = $stmt->execute(); 
+  $result = $stmt->fetch();//$img_name['image']で削除する画像の名前を取得出来る
+  $img_name = $result['image'];
+  unlink("../upload/$img_name");//ファイル削除
+
+
+
+
   //データ登録SQL作成
   $sql = 'DELETE FROM flower WHERE id=:id';
   $stmt = $pdo->prepare($sql);
