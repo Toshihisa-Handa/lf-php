@@ -18,7 +18,7 @@ $items = $stmt->fetchAll();
 ?>
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/metas.html') ?>
 <title>マップ</title>
 <style>
     html,

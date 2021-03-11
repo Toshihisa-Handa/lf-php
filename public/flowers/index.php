@@ -42,7 +42,7 @@ if (!$_GET) {
 
 ?>
 
-<?php include('../../common/favicon.html'); ?>
+<?php include('../../common/metas.html'); ?>
 <title>花一覧</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/flowers.css">

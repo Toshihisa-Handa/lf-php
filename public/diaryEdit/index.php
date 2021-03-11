@@ -59,7 +59,7 @@ if (!$_POST) {
 
 
 <?php
-include('../../common/favicon.html')
+include('../../common/metas.html')
 ?>
 <title>日記編集</title>
 </head>

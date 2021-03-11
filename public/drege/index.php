@@ -18,6 +18,15 @@ include('../../common/header-icon.php');
 if ($_POST['delete_id']) {
   $delete_id = $_POST['delete_id'];
 
+  $img_name_sql = 'SELECT image FROM diary WHERE id = :id';
+  $stmt= $pdo->prepare($img_name_sql);
+  $stmt->bindValue(':id', $delete_id, PDO::PARAM_INT); 
+  $status = $stmt->execute(); 
+  $result = $stmt->fetch();//$img_name['image']で削除する画像の名前を取得出来る
+  $img_name = $result['image'];
+  unlink("../upload/$img_name");//ファイル削除
+  
+
   //データ登録SQL作成
   $sql = 'DELETE FROM diary WHERE id=:id';
   $stmt = $pdo->prepare($sql);
@@ -68,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 ?>
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/metas.html') ?>
 <title>日記登録</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/drege.css">

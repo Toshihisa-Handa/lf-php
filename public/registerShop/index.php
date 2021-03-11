@@ -118,7 +118,7 @@ if ($_POST) {
 
 ?>
 
-<?php include('../../common/favicon.html'); ?>
+<?php include('../../common/metas.html'); ?>
 <title>店舗情報編集</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/myprofileEdit.css">

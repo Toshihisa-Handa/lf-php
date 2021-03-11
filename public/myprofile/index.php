@@ -26,7 +26,7 @@ if ($status == false) {
 
 ?>
 
-<?php include('../../common/favicon.html'); ?>
+<?php include('../../common/metas.html'); ?>
 <title>登録情報</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/myprofile.css">

@@ -31,7 +31,7 @@ if (!empty($_POST)) {
 ?>
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/metas.html') ?>
 <title>ログイン</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/login.css">

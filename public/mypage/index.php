@@ -12,7 +12,7 @@ include('../../common/header-icon.php');
 
 ?>
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/metas.html') ?>
 <title>マイページ</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/mypage.css">

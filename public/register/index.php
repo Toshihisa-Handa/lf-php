@@ -1,12 +1,14 @@
 <?php
 session_start();
+require(__DIR__ . '../../../app/Database.php');
 include('../../funcs.php');
 
 unset($_SESSION['chk_regi']); //登録セッションの初期化
+$db = new Database;
 
 //DB接続
-$pdo = dbcon();
-
+// $pdo = dbcon();
+$pdo = $db->dbconnect();
 
 
 $uid = $_SESSION['user_id'];
@@ -68,7 +70,7 @@ if (!empty($_POST)) {
 
 ?>
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/metas.html') ?>
 <title>新規登録</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/login.css">

@@ -61,7 +61,7 @@ if (!$_POST) {
 
 ?>
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/metas.html') ?>
 <title>花編集</title>
 </head>
 <?php include('../../common/style.html') ?>

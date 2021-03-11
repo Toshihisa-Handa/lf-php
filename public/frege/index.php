@@ -53,8 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
   if (empty($errors)) { //$errorsが空の時
     //データ登録SQL作成
-    $stmt = $pdo->prepare("INSERT INTO flower(name, price, feature, tag, text, created_at, user_id, image)VALUES(:name,:price,:feature,:tag,:text,sysdate(),:uid,:imgname);
-  ");
+    $stmt = $pdo->prepare("INSERT INTO flower(name, price, feature, tag, text, created_at, user_id, image)VALUES(:name,:price,:feature,:tag,:text,sysdate(),:uid,:imgname)");
     $stmt->bindValue(':name', h($name), PDO::PARAM_STR);
     $stmt->bindValue(':price', h($price), PDO::PARAM_INT);
     $stmt->bindValue(':feature', h($feature), PDO::PARAM_STR);
@@ -80,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
 
-<?php include('../../common/favicon.html') ?>
+<?php include('../../common/metas.html') ?>
 <title>花登録</title>
 <?php include('../../common/style.html') ?>
 <link rel="stylesheet" href="/css/frege.css">
